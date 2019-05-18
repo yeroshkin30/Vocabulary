@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lBK-jE-kYz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v2m-ro-ajM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,9 +19,9 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AYS-sc-Rgv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4120" y="1928"/>
+            <point key="canvasLocation" x="-2084" y="1876"/>
         </scene>
-        <!--Word Collections-->
+        <!--Collections-->
         <scene sceneID="rhU-2C-6Rb">
             <objects>
                 <tableViewController storyboardIdentifier="WordCollectionsTableViewController" clearsSelectionOnViewWillAppear="NO" id="wdb-Cg-3hj" customClass="WordCollectionsTableViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
@@ -29,6 +29,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="dwx-99-L6a">
+                            <rect key="frame" x="0.0" y="94" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="UITableViewCell" textLabel="Ee3-rD-FIG" detailTextLabel="Sim-E2-PVI" rowHeight="66" style="IBUITableViewCellStyleSubtitle" id="Ix0-f9-Sav">
                                 <rect key="frame" x="0.0" y="28" width="375" height="66"/>
@@ -53,6 +58,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="sJA-K2-zW6" kind="show" identifier="home" id="1oh-N6-T4K"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -60,15 +68,15 @@
                             <outlet property="delegate" destination="wdb-Cg-3hj" id="RvZ-yb-zQx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Word Collections" largeTitleDisplayMode="always" id="Or3-jA-tpO">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="U88-ct-sEc">
-                            <connections>
-                                <action selector="closeButtonAction" destination="wdb-Cg-3hj" id="YBd-gC-aJ5"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="hSB-8K-gSU">
+                    <navigationItem key="navigationItem" title="Collections" largeTitleDisplayMode="always" id="Or3-jA-tpO">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="hSB-8K-gSU">
                             <connections>
                                 <segue destination="MJN-Mz-a2o" kind="show" identifier="createCollection" id="2Ak-hZ-fYl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Learning" id="iUL-fR-dgN">
+                            <connections>
+                                <segue destination="sJA-K2-zW6" kind="show" identifier="home" id="btb-Td-HCY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -78,7 +86,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ew-bQ-pdS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2337" y="1450"/>
+            <point key="canvasLocation" x="-3274" y="1450"/>
         </scene>
         <!--EditTextViewController-->
         <scene sceneID="GAC-7z-BQo">
@@ -86,23 +94,7 @@
                 <viewControllerPlaceholder storyboardName="Words" referencedIdentifier="EditTextViewController" id="MJN-Mz-a2o" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="54y-iC-hhx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1490" y="1449"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="VZt-JG-KJa">
-            <objects>
-                <navigationController storyboardIdentifier="WordCollectionsNavigationViewController" id="uwJ-j5-WTL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="NUm-Sl-7bS">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="wdb-Cg-3hj" kind="relationship" relationship="rootViewController" id="DDN-H6-sTT"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DOv-PF-4Iu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3273" y="1450"/>
+            <point key="canvasLocation" x="-3274" y="1876"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="tMK-Th-uC5">
@@ -130,21 +122,16 @@
                     </view>
                     <navigationItem key="navigationItem" id="ACP-6d-QNq">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Collections" id="JKT-Iv-4HF">
-                            <connections>
-                                <segue destination="uwJ-j5-WTL" kind="presentation" identifier="wordCollections" id="ikJ-BT-nR3"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Words" id="SKf-QP-h33">
                             <connections>
-                                <segue destination="Vtt-li-WKT" kind="show" identifier="wordCollection" id="zOO-eW-OPK"/>
+                                <segue destination="Vtt-li-WKT" kind="show" identifier="words" id="zOO-eW-OPK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D4u-iM-IO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4295" y="1450"/>
+            <point key="canvasLocation" x="-2327" y="1450"/>
         </scene>
         <!--Learning-->
         <scene sceneID="bmi-Wp-SXY">
@@ -152,25 +139,7 @@
                 <viewControllerPlaceholder storyboardName="Learning" id="ovj-kZ-znb" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r9t-Tn-T0y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4460" y="1928"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="nZg-KA-ZBe">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lBK-jE-kYz" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="yIQ-Yh-5fc">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="sJA-K2-zW6" kind="relationship" relationship="rootViewController" id="mWU-5y-ew5"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="faz-mf-M2F" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-5234" y="1450"/>
+            <point key="canvasLocation" x="-2559" y="1876"/>
         </scene>
         <!--Search Definitions Table View Controller-->
         <scene sceneID="Dso-cG-bRu">
@@ -218,7 +187,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1eT-jn-ah2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3274" y="2329"/>
+            <point key="canvasLocation" x="-1364" y="1450"/>
         </scene>
         <!--Entry Collection View Controller-->
         <scene sceneID="Ldu-6l-qoP">
@@ -470,7 +439,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTg-NJ-aKF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cTN-LQ-0B7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-2327" y="2329"/>
+            <point key="canvasLocation" x="-417" y="1450"/>
         </scene>
         <!--EditWordNavigationViewController-->
         <scene sceneID="ckd-0g-6Bx">
@@ -478,13 +447,32 @@
                 <viewControllerPlaceholder storyboardIdentifier="NavigationControllerOfEditWordViewController" storyboardName="Words" referencedIdentifier="EditWordNavigationViewController" id="pIv-h1-N5R" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3zM-Em-M4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1491" y="2328"/>
+            <point key="canvasLocation" x="-419" y="1876"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="07c-dx-X6D">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="v2m-ro-ajM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="jPV-6d-st7">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wdb-Cg-3hj" kind="relationship" relationship="rootViewController" id="as0-mw-rot"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eby-H7-vnd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4214" y="1450"/>
         </scene>
     </scenes>
     <resources>
         <image name="Speaker" width="30" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2Ak-hZ-fYl"/>
+        <segue reference="1oh-N6-T4K"/>
+        <segue reference="hKu-fS-jdE"/>
     </inferredMetricsTieBreakers>
 </document>

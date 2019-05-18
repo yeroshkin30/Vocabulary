@@ -9,11 +9,7 @@
 import UIKit
 import CoreData
 
-protocol WordCollectionsTableViewControllerDelegate: AnyObject {
-	
-	func wordCollectionsTableViewController(_ controller: WordCollectionsTableViewController,
-											didSelect wordCollection: WordCollection?)
-}
+private(set) var currentWordCollection: WordCollection?
 
 class WordCollectionsTableViewController: UITableViewController, SegueHandlerType {
 	
@@ -21,29 +17,40 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 	
 	var vocabularyStore: VocabularyStore!
 	
-	weak var delegate: WordCollectionsTableViewControllerDelegate?
-	
 	var dataChanges: [DataChange] = []
 	
 	// MARK: - Private properties
 	
-	private lazy var wordCollectionsDataSource = WordCollectionsDataSource(context: vocabularyStore.context)
+	private lazy var wordCollectionsDataSource = WordCollectionsDataSource(
+		context: vocabularyStore.context
+	)
 	
-	//MARK: - IBActions
-	
-	@IBAction private func closeButtonAction() {
-		dismiss(animated: true)
-	}
+	private var isJustLaunched = false
 	
 	// MARK: - Life Cycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		vocabularyStore.context.undoManager = UndoManager()
+		if vocabularyStore == nil {
+			vocabularyStore = VocabularyStore()
+			isJustLaunched = true
+		}
 		wordCollectionsDataSource.delegate = self
-		tableView.tableFooterView = UIView()
 		tableView.dataSource = wordCollectionsDataSource
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		wordCollectionToRename = nil
+		
+		if vocabularyStore.context.undoManager == nil {
+			vocabularyStore.context.undoManager = UndoManager()
+		}
+		if isJustLaunched {
+			performSegue(with: .home, sender: nil)
+		}
 	}
 	
 	override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
@@ -53,7 +60,7 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 	// MARK: - Navigation
 	
 	enum SegueIdentifier: String {
-		case createCollection, renameCollection
+		case home, createCollection, renameCollection
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -73,6 +80,11 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 			viewController.delegate = self
 			viewController.initialText = wordCollection.name
 			viewController.charactersCapacity = .verySmall
+			
+		case .home:
+			let viewController = segue.destination as! HomeViewController
+			viewController.vocabularyStore = vocabularyStore
+			isJustLaunched = false
 		}
 	}
 	
@@ -91,14 +103,13 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 			if let indexPath = wordCollectionsDataSource.indexPath(for: wordCollection) {
 				tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
 			}
-			delegate?.wordCollectionsTableViewController(self, didSelect: wordCollection)
-			closeButtonAction()
+			currentWordCollection = wordCollection
 			
 		} else {
 			if let indexPath = wordCollectionsDataSource.indexPath(for: wordCollection) {
 				tableView.cellForRow(at: indexPath)?.accessoryType = .none
 			}
-			delegate?.wordCollectionsTableViewController(self, didSelect: nil)
+			currentWordCollection = nil
 		}
 	}
 	
@@ -187,7 +198,6 @@ extension WordCollectionsTableViewController: EditTextViewControllerDelegate {
 	func editTextViewController(_ controller: EditTextViewController, saveEditedText text: String) {
 		if let wordCollection = wordCollectionToRename {
 			wordCollection.name = text
-			wordCollectionToRename = nil
 		} else {
 			let newCollection = WordCollection(context: vocabularyStore.context)
 			newCollection.name = text

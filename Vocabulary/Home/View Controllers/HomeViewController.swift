@@ -10,9 +10,11 @@ import UIKit
 
 class HomeViewController: UIViewController, SegueHandlerType {
 	
-	// MARK: - Private properties
+	// MARK: - Public properties -
 	
-	private var vocabularyStore = VocabularyStore()
+	var vocabularyStore: VocabularyStore!
+	
+	// MARK: - Private properties
 	
 	private lazy var searchDefinitionsViewController = UIStoryboard(storyboard: .home)
 		.instantiateViewController() as SearchDefinitionsTableViewController
@@ -31,7 +33,6 @@ class HomeViewController: UIViewController, SegueHandlerType {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		vocabularyStore.discardChanges()
 		vocabularyStore.context.undoManager = nil
 		
 		navigationItem.title = "\(currentWordCollection?.name ?? "Vocabulary")"
@@ -40,7 +41,7 @@ class HomeViewController: UIViewController, SegueHandlerType {
 	// MARK: - Navigation
 	
 	enum SegueIdentifier: String {
-		case learningTypes, wordCollections, wordCollection
+		case learningTypes, words
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -50,14 +51,7 @@ class HomeViewController: UIViewController, SegueHandlerType {
 			let viewController = segue.destination as! LearningTypesViewController
 			viewController.vocabularyStore = vocabularyStore
 			
-		case .wordCollections:
-			let navVC = segue.destination as! UINavigationController
-			let viewController = navVC.viewControllers.first as! WordCollectionsTableViewController
-			
-			viewController.vocabularyStore = vocabularyStore
-			viewController.delegate = vocabularyStore
-			
-		case .wordCollection:
+		case .words:
 			let viewController = segue.destination as! ListOfWordsViewController
 			viewController.vocabularyStore = vocabularyStore
 		}

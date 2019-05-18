@@ -7,9 +7,6 @@
 //
 
 import CoreData
-import UIKit
-
-fileprivate(set) var currentWordCollection: WordCollection?
 
 class VocabularyStore {
 	
@@ -66,12 +63,5 @@ class VocabularyStore {
 		} catch let error {
 			fatalError("Unable to fetch words with error: \(error.localizedDescription)")
 		}
-	}
-}
-
-extension VocabularyStore: WordCollectionsTableViewControllerDelegate {
-	func wordCollectionsTableViewController(_ controller: WordCollectionsTableViewController,
-											didSelect wordCollection: WordCollection?) {
-		currentWordCollection = wordCollection
 	}
 }
