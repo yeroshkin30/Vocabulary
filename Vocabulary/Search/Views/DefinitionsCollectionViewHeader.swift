@@ -18,12 +18,6 @@ class DefinitionsCollectionViewHeader: UICollectionReusableView {
 	
 	var viewData: ViewData? { didSet { viewDataDidChanged() } }
 	
-	override func awakeFromNib() {
-		super.awakeFromNib()
-		
-		layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
-	}
-	
 	private func viewDataDidChanged() {
 		guard let viewData = viewData else { return }
 		
@@ -39,9 +33,7 @@ class DefinitionsCollectionViewHeader: UICollectionReusableView {
 
 extension DefinitionsCollectionViewHeader {
 	struct ViewData {
-		let title: String
-		let subtitle: String
-		let buttonText: String
+		let title, subtitle, buttonText: String
 		
 		init(entry: Entry) {
 			title = ""

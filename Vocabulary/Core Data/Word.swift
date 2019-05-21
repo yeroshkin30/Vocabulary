@@ -55,8 +55,8 @@ extension Word {
 	@NSManaged public var dateCreated: Date
 	@NSManaged public var examplesText: String
 	@NSManaged public var nextTrainingDate: Date?
-	@NSManaged public var learningStageValue: Int16
-	@NSManaged public var learningStageDetailValue: Int16
+	@NSManaged private(set) var learningStageValue: Int16
+	@NSManaged private(set) var learningStageDetailValue: Int16
 	@NSManaged public var wordCollection: WordCollection?
 }
 
@@ -111,8 +111,8 @@ extension Word {
 	
 	func increaseLearningStage() {
 		switch (learningStage, learningStageDetail) {
-		case (.unknown, _):			assignLearningStage(.repeating)
-		case (.repeating, .select):	learningStageDetail = .construct
+		case (.unknown, _):				assignLearningStage(.repeating)
+		case (.repeating, .select):		learningStageDetail = .construct
 		case (.repeating, .construct):	learningStageDetail = .input
 		case (.repeating, .input):		assignLearningStage(.reminding)
 			

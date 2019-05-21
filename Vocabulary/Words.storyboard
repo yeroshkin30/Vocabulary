@@ -61,7 +61,6 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="tbb-37-CIH" id="ROS-QQ-La7"/>
                             <outlet property="delegate" destination="tbb-37-CIH" id="MvI-Qo-VhV"/>
                         </connections>
                     </tableView>

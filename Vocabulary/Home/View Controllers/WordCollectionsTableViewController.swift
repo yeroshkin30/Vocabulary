@@ -19,23 +19,27 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 	
 	var dataChanges: [DataChange] = []
 	
+	var didFinishSelectionHandler: (() -> Void)?
+	
 	// MARK: - Private properties
 	
 	private lazy var wordCollectionsDataSource = WordCollectionsDataSource(
 		context: vocabularyStore.context
 	)
 	
-	private var isJustLaunched = false
+	private var wordCollectionToRename: WordCollection?
+	
+	// MARK: - Actions -
+	
+	@IBAction private func showLearningsTypesContorller() {
+		didFinishSelectionHandler?()
+	}
 	
 	// MARK: - Life Cycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if vocabularyStore == nil {
-			vocabularyStore = VocabularyStore()
-			isJustLaunched = true
-		}
 		wordCollectionsDataSource.delegate = self
 		tableView.dataSource = wordCollectionsDataSource
 	}
@@ -48,9 +52,6 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 		if vocabularyStore.context.undoManager == nil {
 			vocabularyStore.context.undoManager = UndoManager()
 		}
-		if isJustLaunched {
-			performSegue(with: .home, sender: nil)
-		}
 	}
 	
 	override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
@@ -60,7 +61,7 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 	// MARK: - Navigation
 	
 	enum SegueIdentifier: String {
-		case home, createCollection, renameCollection
+		case createCollection, renameCollection
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -80,17 +81,49 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 			viewController.delegate = self
 			viewController.initialText = wordCollection.name
 			viewController.charactersCapacity = .verySmall
-			
-		case .home:
-			let viewController = segue.destination as! HomeViewController
-			viewController.vocabularyStore = vocabularyStore
-			isJustLaunched = false
 		}
 	}
 	
-	// MARK: - Helpers
+	// MARK: - UITableViewDelegate
 	
-	private func selectWordCollection(at indexPath: IndexPath) {
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		selectWordCollection(at: indexPath)
+		tableView.deselectRow(at: indexPath, animated: true)
+	}
+	
+	override func tableView(_ tableView: UITableView,
+							trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+		) -> UISwipeActionsConfiguration? {
+		
+		
+		let renameAction = UIContextualAction(style: .normal,
+											  title: "Rename") { (_, _, handler) in
+			self.wordCollectionToRename = self.wordCollectionsDataSource.wordCollection(indexPath)
+			self.performSegue(with: .renameCollection, sender: nil)
+			handler(true)
+		}
+		
+		let deleteAction = UIContextualAction(style: .destructive,
+											  title: "Delete") { (_, _, handler) in
+			let wordCollectionToDelete = self.wordCollectionsDataSource.wordCollection(indexPath)
+			
+			if wordCollectionToDelete.words?.count == 0 {
+				self.deleteWordCollection(at: indexPath)
+				handler(true)
+			} else {
+				self.sowAlertForWordCollectionDeletion(at: indexPath)
+				handler(false)
+			}
+		}
+		
+		return UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
+	}
+}
+
+// MARK: - Private -
+private extension WordCollectionsTableViewController {
+	
+	func selectWordCollection(at indexPath: IndexPath) {
 		let wordCollection = wordCollectionsDataSource.wordCollection(indexPath)
 		
 		if wordCollection != currentWordCollection {
@@ -104,16 +137,18 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 				tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
 			}
 			currentWordCollection = wordCollection
+			didFinishSelectionHandler?()
 			
 		} else {
 			if let indexPath = wordCollectionsDataSource.indexPath(for: wordCollection) {
 				tableView.cellForRow(at: indexPath)?.accessoryType = .none
 			}
 			currentWordCollection = nil
+			didFinishSelectionHandler?()
 		}
 	}
 	
-	private func deleteWordCollection(at indexPath: IndexPath) {
+	func deleteWordCollection(at indexPath: IndexPath) {
 		let wordCollection = wordCollectionsDataSource.wordCollection(indexPath)
 		
 		if currentWordCollection == wordCollection {
@@ -122,7 +157,7 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 		vocabularyStore.deleteAndSave(wordCollection)
 	}
 	
-	private func sowAlertForWordCollectionDeletion(at indexPath: IndexPath) {
+	func sowAlertForWordCollectionDeletion(at indexPath: IndexPath) {
 		let wordCollection = wordCollectionsDataSource.wordCollection(indexPath)
 		
 		let title = "Delete \"\(wordCollection.name)\" collectioin?"
@@ -141,55 +176,6 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 		
 		present(alert, animated: true, completion: nil)
-	}
-	
-	// MARK: - Table View Cell Actions -
-	
-	private var wordCollectionToRename: WordCollection?
-	
-	private lazy var renameAction = UIContextualAction(
-		style: .normal, title: "Rename", handler: handleAction
-	)
-	
-	private lazy var deleteAction = UIContextualAction(
-		style: .destructive, title: "Delete", handler: handleAction
-	)
-	
-	private func handleAction(_ action: UIContextualAction, view: UIView, handler: (Bool) -> Void) {
-		guard let indexPath = tableView.indexPathForRow(with: view) else { return }
-		
-		switch action {
-		case renameAction:
-			wordCollectionToRename = wordCollectionsDataSource.wordCollection(indexPath)
-			performSegue(with: .renameCollection, sender: nil)
-			handler(true)
-			
-		case deleteAction:
-			let wordCollectionToDelete = wordCollectionsDataSource.wordCollection(indexPath)
-			
-			if wordCollectionToDelete.words?.count == 0 {
-				deleteWordCollection(at: indexPath)
-				handler(true)
-			} else {
-				sowAlertForWordCollectionDeletion(at: indexPath)
-				handler(false)
-			}
-		default: break
-		}
-		
-	}
-	
-	// MARK: - UITableViewDelegate
-	
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		selectWordCollection(at: indexPath)
-		tableView.deselectRow(at: indexPath, animated: true)
-	}
-	
-	override func tableView(_ tableView: UITableView,
-							trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
-		) -> UISwipeActionsConfiguration? {
-		return UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
 	}
 }
 

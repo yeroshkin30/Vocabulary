@@ -68,10 +68,7 @@ class DefinitionCollectionViewCell: CardCollectionView {
 
 extension DefinitionCollectionViewCell {
 	struct ViewData {
-		let category: String
-		let definition: String
-		let examples: String
-		let seeAlso: String
+		let category, definition, examples, seeAlso: String
 		
 		init(definition: Definition) {
 			self.category = definition.category

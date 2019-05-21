@@ -37,10 +37,7 @@ class SearchDefinitionsTableViewController: UITableViewController, SegueHandlerT
 		super.viewDidLoad()
 		
 		viewMode = .prompts
-		
 		setupNotifications()
-		
-		tableView.tableFooterView = UIView()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -110,8 +107,10 @@ class SearchDefinitionsTableViewController: UITableViewController, SegueHandlerT
 private extension SearchDefinitionsTableViewController {
 	
 	func setupNotifications() {
-		NotificationCenter.default.addObserver(self, selector: #selector(updatePrompts),
-												name: UIApplication.willEnterForegroundNotification, object: nil)
+		let name = UIApplication.willEnterForegroundNotification
+		NotificationCenter.default.addObserver(
+			self, selector: #selector(updatePrompts), name: name, object: nil
+		)
 	}
 	
 	func removeNotifications() {
@@ -119,6 +118,8 @@ private extension SearchDefinitionsTableViewController {
 	}
 	
 	@objc func updatePrompts() {
+		guard case .prompts = viewMode else { return }
+		
 		promptsDataSource.updatePrompts()
 		tableView.reloadData()
 	}
@@ -139,7 +140,7 @@ private extension SearchDefinitionsTableViewController {
 			
 		case .noSearchResultFor(let request):
 			messageView.message = MessageView.Message(
-				title: "No Results", text: "There is no definition for \"\(request)\"", actionTitle: nil, actionClosure: nil
+				title: "No Results", text: "There is no definition for \"\(request)\""
 			)
 			tableView.backgroundView = messageView
 			
@@ -153,23 +154,24 @@ private extension SearchDefinitionsTableViewController {
 	}
 	
 	func requestEntries(for word: String) {
-		
 		searchBar.text = word.capitalized
-		
 		viewMode = .loading
-		
 		entriesLoader.requestEntriesFor(word, with: { [weak self] (requestResult) in
 			guard self?.viewMode == .loading else { return }
 			
 			DispatchQueue.main.async {
-				self?.historyManager.saveWord(word)
-				if let result = requestResult {
-					self?.viewMode = .searchResult(result)
-				} else {
-					self?.viewMode = .noSearchResultFor(request: word)
-				}
+				self?.handleResult(requestResult, for: word)
 			}
 		})
+	}
+	
+	func handleResult(_ result: EntriesParsingResult?, for word: String) {
+		if let result = result {
+			historyManager.saveWord(word)
+			viewMode = .searchResult(result)
+		} else {
+			viewMode = .noSearchResultFor(request: word)
+		}
 	}
 	
 	func checkSingleEntryResultComdition() {

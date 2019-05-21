@@ -45,9 +45,6 @@ class SelectHeadwordViewProvider: HeadwordInputViewProvider {
 		fetchRequest.resultType = .dictionaryResultType
 		fetchRequest.returnsDistinctResults = true
 		fetchRequest.fetchLimit = 30
-		fetchRequest.sortDescriptors = [
-			NSSortDescriptor(key: #keyPath(Word.learningStageValue), ascending: true)
-		]
 		return fetchRequest
 	}()
 	

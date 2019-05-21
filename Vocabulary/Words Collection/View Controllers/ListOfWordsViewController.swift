@@ -56,17 +56,7 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	
 	private var needShowEditingTolbarButtons = true
 	
-	// MARK: - Table View Cell Actions -
-	
 	private var editingWordIndexPath: IndexPath?
-	
-	private lazy var editAction = UIContextualAction(
-		style: .normal, title: "Edit", handler: handleAction
-	)
-	
-	private lazy var deleteAction = UIContextualAction(
-		style: .destructive, title: "Delete", handler: handleAction
-	)
 	
 	// MARK: - Life Cycle -
 	
@@ -107,7 +97,6 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		let navigationController = segue.destination as! UINavigationController
-		
 		
 		switch segueIdentifier(for: segue) {
 		case .createWord, .editWord:
@@ -201,7 +190,7 @@ private extension ListOfWordsViewController {
 			
 			let hasSelectedRows = (tableView.indexPathForSelectedRow?.count ?? 0) > 0
 			
-			let wordsNumber = wordsDataSource.tableView(tableView, numberOfRowsInSection: 0)
+			let wordsNumber = tableView(tableView, numberOfRowsInSection: 0)
 			selectAllButton.isEnabled = wordsNumber > 0
 			moveButton.isEnabled = hasSelectedRows
 			deleteButton.isEnabled = hasSelectedRows
@@ -258,35 +247,19 @@ private extension ListOfWordsViewController {
 		setEditing(false, animated: true)
 		vocabularyStore.saveChanges()
 	}
-	
-	func handleAction(_ action: UIContextualAction, view: UIView, handler: (Bool) -> Void) {
-		guard let indexPath = tableView.indexPathForRow(with: view) else { return }
-		
-		switch action {
-		case editAction:
-			editingWordIndexPath = indexPath
-			performSegue(with: .editWord, sender: nil)
-			
-		case deleteAction:
-			let word = wordsDataSource.wordAt(indexPath)
-			vocabularyStore.deleteAndSave(word)
-		default: break
-		}
-		handler(true)
-	}
 }
 
 // MARK: - Cells Selection -
 private extension ListOfWordsViewController {
 	
 	var isAllCellsSelected: Bool {
-		let wordsNumber = wordsDataSource.tableView(tableView, numberOfRowsInSection: 0)
+		let wordsNumber = tableView.numberOfRows(inSection: 0)
 		let selectedCellsNumber = tableView.indexPathsForSelectedRows?.count ?? 0
 		return selectedCellsNumber > 0 && selectedCellsNumber == wordsNumber
 	}
 	
 	func selectAllCells() {
-		let wordsNumber = wordsDataSource.tableView(tableView, numberOfRowsInSection: 0)
+		let wordsNumber = tableView(tableView, numberOfRowsInSection: 0)
 		
 		for index in 0..<wordsNumber {
 			let indexPath = IndexPath(row: index, section: 0)
@@ -327,6 +300,18 @@ extension ListOfWordsViewController {
 	override func tableView(
 		_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
 		) -> UISwipeActionsConfiguration? {
+		
+		let editAction = UIContextualAction(style: .normal, title: "Edit") { (_, _, handler) in
+			self.editingWordIndexPath = indexPath
+			self.performSegue(with: .editWord, sender: nil)
+			handler(true)
+		}
+		
+		let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, handler) in
+			let word = self.wordsDataSource.wordAt(indexPath)
+			self.vocabularyStore.deleteAndSave(word)
+			handler(true)
+		}
 		
 		return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
 	}

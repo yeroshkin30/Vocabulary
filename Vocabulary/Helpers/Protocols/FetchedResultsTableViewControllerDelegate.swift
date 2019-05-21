@@ -26,7 +26,7 @@ extension FetchedResultsTableViewControllerDelegate where Self: UITableViewContr
 				case .insert:	tableView.insertRows(at: [change.newIndexPath!], with: .automatic)
 				case .delete:	tableView.deleteRows(at: [change.indexPath!], with: .automatic)
 				case .update:	tableView.reloadRows(at: [change.indexPath!], with: .automatic)
-				case .move:	tableView.moveRow(at: change.indexPath!, to: change.newIndexPath!)
+				case .move:		tableView.moveRow(at: change.indexPath!, to: change.newIndexPath!)
 				@unknown default: fatalError()
 				}
 			}

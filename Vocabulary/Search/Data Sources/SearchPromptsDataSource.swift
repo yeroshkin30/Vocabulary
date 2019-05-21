@@ -74,8 +74,7 @@ private extension SearchPromptsDataSource {
 // MARK: - Types -
 private extension SearchPromptsDataSource {
 	enum Section: Int, CaseIterable {
-		case clipboard
-		case history
+		case clipboard, history
 		
 		var title: String {
 			switch self {

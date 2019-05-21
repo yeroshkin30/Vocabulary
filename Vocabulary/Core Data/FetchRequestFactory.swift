@@ -49,29 +49,17 @@ enum LearningTypeFetchRequest {
 	
 	func request() -> NSFetchRequest<Word> {
 		let parameters: WordsRequestParameter
-		let fetchRequest: NSFetchRequest<Word>
 		
 		switch self {
-		case .unknown:
-			parameters = (.unknown, currentWordCollection, false)
-			fetchRequest = FetchRequestFactory.requestForWords(with: parameters)
-			fetchRequest.sortDescriptors = [
-				NSSortDescriptor(key: #keyPath(Word.nextTrainingDate), ascending: true)
-			]
-		case .repetition:
-			parameters = (.repeating, currentWordCollection, true)
-			fetchRequest = FetchRequestFactory.requestForWords(with: parameters)
-			fetchRequest.sortDescriptors = [
-				NSSortDescriptor(key: #keyPath(Word.nextTrainingDate), ascending: true)
-			]
-		case .remind:
-			parameters = (.reminding, currentWordCollection, true)
-			fetchRequest = FetchRequestFactory.requestForWords(with: parameters)
-			fetchRequest.sortDescriptors = [
-				NSSortDescriptor(key: #keyPath(Word.nextTrainingDate), ascending: true)
-			]
+		case .unknown:		parameters = (.unknown, currentWordCollection, false)
+		case .repetition:	parameters = (.repeating, currentWordCollection, true)
+		case .remind:		parameters = (.reminding, currentWordCollection, true)
 		}
 		
+		let fetchRequest = FetchRequestFactory.requestForWords(with: parameters)
+		fetchRequest.sortDescriptors = [
+			NSSortDescriptor(key: #keyPath(Word.nextTrainingDate), ascending: true)
+		]
 		return fetchRequest
 	}
 }

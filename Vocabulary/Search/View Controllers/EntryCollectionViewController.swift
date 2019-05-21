@@ -78,7 +78,6 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 		
 		switch segueIdentifier(for: segue) {
 		case .requestDefinitions:
-			
 			if let button = sender as? UIButton {
 				wordToRequest = button.title(for: .normal)
 			}
@@ -132,7 +131,6 @@ private extension EntryCollectionViewController {
 			viewModeSegmentedControl.selectedSegmentIndex = viewMode.rawValue
 			viewModeSegmentedControl.setEnabled(false, forSegmentAt: ViewMode.expressions.rawValue)
 		}
-		viewModeDidChange()
 	}
 	
 	func viewModeDidChange() {
@@ -161,10 +159,10 @@ private extension EntryCollectionViewController {
 		}
 		
 		return CollectWordDataViewController.ViewData(headword: headword,
-														sentencePart: entry.sentencePart,
-														definition: definition.text,
-														examples: definition.examples,
-														mode: .create)
+													  sentencePart: entry.sentencePart,
+													  definition: definition.text,
+													  examples: definition.examples,
+													  mode: .create)
 	}
 }
 

@@ -34,11 +34,6 @@ class VocabularyStore {
 		}
 	}
 	
-	func discardChanges() {
-		guard context.hasChanges else { return }
-		context.rollback()
-	}
-	
 	func deleteAndSave(_ word: Word) {
 		context.delete(word)
 		saveChanges()

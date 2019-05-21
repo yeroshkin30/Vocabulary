@@ -29,26 +29,17 @@ class LearningTypesViewController: UIViewController, SegueHandlerType {
 
 	// MARK: - Life cycle
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		
-	}
-	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		updateLearningTypeTitles()
-		
-		let name = UIApplication.willEnterForegroundNotification
-		NotificationCenter.default.addObserver(
-			self, selector: #selector(updateLearningTypeTitles), name: name, object: nil
-		)
+		setupNotifications()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		
-		NotificationCenter.default.removeObserver(self)
+		removeNotifications()
 	}
 	
 	// MARK: - Navigation
@@ -83,11 +74,18 @@ class LearningTypesViewController: UIViewController, SegueHandlerType {
 // MARK: - Private -
 private extension LearningTypesViewController {
 	
-	private func removeNotifications() {
+	func setupNotifications() {
+		let name = UIApplication.willEnterForegroundNotification
+		NotificationCenter.default.addObserver(
+			self, selector: #selector(updateLearningTypeTitles), name: name, object: nil
+		)
+	}
+	
+	func removeNotifications() {
 		NotificationCenter.default.removeObserver(self)
 	}
 	
-	@objc private func updateLearningTypeTitles() {
+	@objc func updateLearningTypeTitles() {
 		
 		for (index, titleView) in learningTypeTitles.enumerated() {
 			
@@ -100,20 +98,14 @@ private extension LearningTypesViewController {
 		}
 	}
 	
-	private func numberOfWords(for learningType: LearningType) -> Int {
-		let fetchRequest: NSFetchRequest<Word>
+	func numberOfWords(for learningType: LearningType) -> Int {
+		let fetchRequest: LearningTypeFetchRequest
 		
 		switch learningType {
-		case .rememberWords:
-			fetchRequest = LearningTypeFetchRequest.unknown.request()
-			
-		case .repeatWords:
-			fetchRequest = LearningTypeFetchRequest.repetition.request()
-			
-		case .remindWords:
-			fetchRequest = LearningTypeFetchRequest.remind.request()
-			
+		case .rememberWords:	fetchRequest = .unknown
+		case .repeatWords:		fetchRequest = .repetition
+		case .remindWords:		fetchRequest = .remind
 		}
-		return vocabularyStore.numberOfWordsFrom(fetchRequest)
+		return vocabularyStore.numberOfWordsFrom(fetchRequest.request())
 	}
 }
