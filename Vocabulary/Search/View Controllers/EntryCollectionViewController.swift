@@ -183,6 +183,9 @@ extension EntryCollectionViewController: CollectWordDataViewControllerDelegate {
 		case .save:
 			let word = Word(context: vocabularyStore.context)
 			fill(word, with: viewController.viewData)
+			if let objectID = currentWordCollectionInfo?.objectID {
+				word.wordCollection = vocabularyStore.context.object(with: objectID) as? WordCollection
+			}
 			vocabularyStore.saveChanges()
 			navigationController?.popViewController(animated: true)
 			

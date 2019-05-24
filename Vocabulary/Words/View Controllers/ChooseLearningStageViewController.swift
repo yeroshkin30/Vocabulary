@@ -75,7 +75,9 @@ private extension ChooseLearningStageViewController {
 	}
 	
 	func numberOfWords(at learningStage: Word.LearningStage?) -> Int {
-		let parameters: WordsRequestParameter = (learningStage, currentWordCollection, false)
+		let parameters: WordsRequestParameters = (
+			learningStage, currentWordCollectionInfo?.objectID, false
+		)
 		let request = FetchRequestFactory.requestForWords(with: parameters)
 		return vocabularyStore.numberOfWordsFrom(request)
 	}

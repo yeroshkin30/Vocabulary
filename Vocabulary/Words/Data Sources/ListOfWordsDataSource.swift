@@ -22,8 +22,8 @@ class ListOfWordsDataSource: NSObject {
 		self.context = context
 	}
 	
-	private var parameters: WordsRequestParameter {
-		return (learningStage, currentWordCollection, false)
+	private var parameters: WordsRequestParameters {
+		return (learningStage, currentWordCollectionInfo?.objectID, false)
 	}
 	
 	private lazy var fetchedResultsController = initializeFetchedResultsController()

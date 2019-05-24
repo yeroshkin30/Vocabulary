@@ -19,8 +19,8 @@ class WordCollectionsDataSource: NSObject {
 		self.context = context
 	}
 	
-	private var parameters: WordsRequestParameter {
-		return (nil, currentWordCollection, false)
+	private var parameters: WordsRequestParameters {
+		return (nil, currentWordCollectionInfo?.objectID, false)
 	}
 	
 	private lazy var fetchedResultsController = initializeFetchedResultsController()
@@ -66,7 +66,7 @@ extension WordCollectionsDataSource: UITableViewDataSource {
 	}
 	
 	private func configureCell(_ cell: UITableViewCell, for wordCollection: WordCollection) {
-		let parameters: WordsRequestParameter = (.unknown, wordCollection, false)
+		let parameters: WordsRequestParameters = (.unknown, wordCollection.objectID, false)
 		let fetchRequest = FetchRequestFactory.requestForWords(with: parameters)
 		
 		let allWordsNumber = wordCollection.words?.count ?? 0
@@ -76,7 +76,8 @@ extension WordCollectionsDataSource: UITableViewDataSource {
 		cell.detailTextLabel?.text = cellDetailTextFor(
 			allWordsNumber: allWordsNumber, unknownWordsNumber: unknownWordsNumber
 		)
-		cell.accessoryType = currentWordCollection == wordCollection ? .checkmark : .none
+		cell.accessoryType = currentWordCollectionInfo?.objectID == wordCollection.objectID
+			? .checkmark : .none
 	}
 	
 	private func cellDetailTextFor(allWordsNumber: Int, unknownWordsNumber: Int) -> String {

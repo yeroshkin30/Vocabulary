@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-private(set) var currentWordCollection: WordCollection?
+private(set) var currentWordCollectionInfo: WordCollectionInfo?
 
 class WordCollectionsTableViewController: UITableViewController, SegueHandlerType {
 	
@@ -26,6 +26,11 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 	private lazy var wordCollectionsDataSource = WordCollectionsDataSource(
 		context: vocabularyStore.context
 	)
+	
+	private var currentWordCollection: WordCollection? {
+		guard let objectID = currentWordCollectionInfo?.objectID else { return nil }
+		return vocabularyStore.context.object(with: objectID) as? WordCollection
+	}
 	
 	private var wordCollectionToRename: WordCollection?
 	
@@ -124,26 +129,26 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 private extension WordCollectionsTableViewController {
 	
 	func selectWordCollection(at indexPath: IndexPath) {
-		let wordCollection = wordCollectionsDataSource.wordCollection(indexPath)
+		let selectedWordCollection = wordCollectionsDataSource.wordCollection(indexPath)
 		
-		if wordCollection != currentWordCollection {
+		if selectedWordCollection == currentWordCollection {
+			if let indexPath = wordCollectionsDataSource.indexPath(for: selectedWordCollection) {
+				tableView.cellForRow(at: indexPath)?.accessoryType = .none
+			}
+			currentWordCollectionInfo = nil
+			
+		} else {
 			if let oldWordCollection = currentWordCollection,
 				let currentIndexPath = wordCollectionsDataSource.indexPath(for: oldWordCollection) {
 				
 				tableView.cellForRow(at: currentIndexPath)?.accessoryType = .none
 			}
 			
-			if let indexPath = wordCollectionsDataSource.indexPath(for: wordCollection) {
+			if let indexPath = wordCollectionsDataSource.indexPath(for: selectedWordCollection) {
 				tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
 			}
-			currentWordCollection = wordCollection
+			currentWordCollectionInfo = WordCollectionInfo(selectedWordCollection)
 			didFinishSelectionHandler?()
-			
-		} else {
-			if let indexPath = wordCollectionsDataSource.indexPath(for: wordCollection) {
-				tableView.cellForRow(at: indexPath)?.accessoryType = .none
-			}
-			currentWordCollection = nil
 		}
 	}
 	
@@ -151,7 +156,7 @@ private extension WordCollectionsTableViewController {
 		let wordCollection = wordCollectionsDataSource.wordCollection(indexPath)
 		
 		if currentWordCollection == wordCollection {
-			currentWordCollection = nil
+			currentWordCollectionInfo = nil
 		}
 		vocabularyStore.deleteAndSave(wordCollection)
 	}

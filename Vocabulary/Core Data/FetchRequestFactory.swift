@@ -8,8 +8,8 @@
 
 import CoreData
 
-typealias WordsRequestParameter = (
-	learningStage: Word.LearningStage?, wordCollection: WordCollection?, regardNextTrainingDate: Bool
+typealias WordsRequestParameters = (
+	learningStage: Word.LearningStage?, wordCollectionID: NSManagedObjectID?, regardNextTrainingDate: Bool
 )
 
 struct FetchRequestFactory {
@@ -18,7 +18,7 @@ struct FetchRequestFactory {
 		case remembering, repetition, reminding
 	}
 	
-	static func requestForWords(with parameters: WordsRequestParameter) -> NSFetchRequest<Word> {
+	static func requestForWords(with parameters: WordsRequestParameters) -> NSFetchRequest<Word> {
 		let fetchRequest = Word.createFetchRequest()
 		fetchRequest.fetchBatchSize = 10
 		fetchRequest.returnsObjectsAsFaults = false
@@ -28,7 +28,7 @@ struct FetchRequestFactory {
 		return fetchRequest
 	}
 	
-	static func predicateForWords(with parameters: WordsRequestParameter) -> NSPredicate {
+	static func predicateForWords(with parameters: WordsRequestParameters) -> NSPredicate {
 		
 		var predicates: [NSPredicate] = []
 		
@@ -36,9 +36,9 @@ struct FetchRequestFactory {
 			let stageFormat = "\(#keyPath(Word.learningStageValue)) == \(String(stage.rawValue))"
 			predicates.append(NSPredicate(format: stageFormat))
 		}
-		if let wordCollection = parameters.wordCollection {
-			let format = "\(#keyPath(Word.wordCollection.dateCreated)) == %@"
-			predicates.append(NSPredicate(format: format, wordCollection.dateCreated as NSDate))
+		if let wordCollectionID = parameters.wordCollectionID {
+			let format = "\(#keyPath(Word.wordCollection)) == %@"
+			predicates.append(NSPredicate(format: format, wordCollectionID))
 		}
 		if parameters.regardNextTrainingDate {
 			let nextTrainingDateFormat = "\(#keyPath(Word.nextTrainingDate)) < %@"
@@ -48,12 +48,14 @@ struct FetchRequestFactory {
 	}
 	
 	static func fetchRequest(for learningType: LearningType) -> NSFetchRequest<Word> {
-		let parameters: WordsRequestParameter
+		let parameters: WordsRequestParameters
+		
+		let objectID = currentWordCollectionInfo?.objectID
 		
 		switch learningType {
-		case .remembering:		parameters = (.unknown, currentWordCollection, false)
-		case .repetition:		parameters = (.repeating, currentWordCollection, true)
-		case .reminding:		parameters = (.reminding, currentWordCollection, true)
+		case .remembering:		parameters = (.unknown, objectID, false)
+		case .repetition:		parameters = (.repeating, objectID, true)
+		case .reminding:		parameters = (.reminding, objectID, true)
 		}
 		
 		let fetchRequest = requestForWords(with: parameters)

@@ -35,7 +35,7 @@ class HomeViewController: UIViewController, SegueHandlerType {
 		
 		vocabularyStore.context.undoManager = nil
 		
-		navigationItem.title = "\(currentWordCollection?.name ?? "Vocabulary")"
+		navigationItem.title = "\(currentWordCollectionInfo?.name ?? "Vocabulary")"
 	}
 	
 	// MARK: - Navigation

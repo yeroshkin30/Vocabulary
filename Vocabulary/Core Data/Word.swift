@@ -16,7 +16,6 @@ public class Word: NSManagedObject {
 		examplesText = ""
 		dateCreated = Date()
 		nextTrainingDate = Date()
-		wordCollection = currentWordCollection
 	}
 	
 	var learningStage: LearningStage {

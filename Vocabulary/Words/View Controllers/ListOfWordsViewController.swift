@@ -166,7 +166,7 @@ private extension ListOfWordsViewController {
 		navigationItem.hidesSearchBarWhenScrolling = false
 		navigationItem.searchController = searchController
 		
-		navigationItem.title = "\(currentWordCollection?.name ?? "Vocabulary")"
+		navigationItem.title = "\(currentWordCollectionInfo?.name ?? "Vocabulary")"
 	}
 	
 	func configureSearchController() {
