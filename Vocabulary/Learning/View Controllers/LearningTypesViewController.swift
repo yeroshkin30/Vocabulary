@@ -14,9 +14,7 @@ class LearningTypesViewController: UIViewController, SegueHandlerType {
 	// MARK: - Types
 	
 	enum LearningType: Int {
-		case rememberWords
-		case repeatWords
-		case remindWords
+		case rememberWords, repeatWords, remindWords
 	}
 	
 	// MARK: - Public propertis -
@@ -52,14 +50,14 @@ class LearningTypesViewController: UIViewController, SegueHandlerType {
 		
 		switch segueIdentifier(for: segue) {
 		case .remembering:
-			let viewController = segue.destination as! UnknownWordsCollectionViewController
+			let viewController = segue.destination as! WordsToRememberingCollectionViewController
 			viewController.vocabularyStore = vocabularyStore
 			
 		case .repetition:
 			let viewController = segue.destination as! LearningProcessViewController
 			viewController.vocabularyStore = vocabularyStore
 			
-			let fetchRequest = LearningTypeFetchRequest.repetition.request()
+			let fetchRequest = FetchRequestFactory.fetchRequest(for: .repetition)
 			let words = vocabularyStore.wordsFrom(fetchRequest)
 			
 			viewController.learningMode = .repetition(words)
@@ -99,13 +97,13 @@ private extension LearningTypesViewController {
 	}
 	
 	func numberOfWords(for learningType: LearningType) -> Int {
-		let fetchRequest: LearningTypeFetchRequest
+		let fetchRequest: NSFetchRequest<Word>
 		
 		switch learningType {
-		case .rememberWords:	fetchRequest = .unknown
-		case .repeatWords:		fetchRequest = .repetition
-		case .remindWords:		fetchRequest = .remind
+		case .rememberWords:	fetchRequest = FetchRequestFactory.fetchRequest(for: .remembering)
+		case .repeatWords:		fetchRequest = FetchRequestFactory.fetchRequest(for: .repetition)
+		case .remindWords:		fetchRequest = FetchRequestFactory.fetchRequest(for: .reminding)
 		}
-		return vocabularyStore.numberOfWordsFrom(fetchRequest.request())
+		return vocabularyStore.numberOfWordsFrom(fetchRequest)
 	}
 }

@@ -46,17 +46,19 @@ class SearchDefinitionsTableViewController: UITableViewController, SegueHandlerT
 		searchBar.resignFirstResponder()
 	}
 	
+	override var textInputContextIdentifier: String? {
+		return SearchDefinitionsTableViewController.stringIdentifier
+	}
+	
 	deinit {
 		removeNotifications()
 	}
 	
-	// MARK: - Segue Types
+	// MARK: - Navigation -
 	
 	enum SegueIdentifier: String {
 		case entry
 	}
-	
-	// MARK: - Navigation -
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 		if case .searchResult(let result) = viewMode, case .entries(_) = result {

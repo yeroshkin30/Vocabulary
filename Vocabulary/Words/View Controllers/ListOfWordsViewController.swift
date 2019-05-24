@@ -78,6 +78,10 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 		navigationController?.isToolbarHidden = true
 	}
 	
+	override var textInputContextIdentifier: String? {
+		return ListOfWordsViewController.stringIdentifier
+	}
+	
 	override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
 		showUndoAlert()
 	}
@@ -190,7 +194,7 @@ private extension ListOfWordsViewController {
 			
 			let hasSelectedRows = (tableView.indexPathForSelectedRow?.count ?? 0) > 0
 			
-			let wordsNumber = tableView(tableView, numberOfRowsInSection: 0)
+			let wordsNumber = tableView.numberOfRows(inSection: 0)
 			selectAllButton.isEnabled = wordsNumber > 0
 			moveButton.isEnabled = hasSelectedRows
 			deleteButton.isEnabled = hasSelectedRows
@@ -259,7 +263,7 @@ private extension ListOfWordsViewController {
 	}
 	
 	func selectAllCells() {
-		let wordsNumber = tableView(tableView, numberOfRowsInSection: 0)
+		let wordsNumber = tableView.numberOfRows(inSection: 0)
 		
 		for index in 0..<wordsNumber {
 			let indexPath = IndexPath(row: index, section: 0)

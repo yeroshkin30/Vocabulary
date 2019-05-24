@@ -57,6 +57,10 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
 		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
 	}
 	
+	override var textInputContextIdentifier: String? {
+		return EditTextViewController.stringIdentifier
+	}
+	
 	// MARK: - Helpers
 	
 	private func setup() {

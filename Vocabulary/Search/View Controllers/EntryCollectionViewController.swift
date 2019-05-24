@@ -184,7 +184,7 @@ extension EntryCollectionViewController: CollectWordDataViewControllerDelegate {
 			let word = Word(context: vocabularyStore.context)
 			fill(word, with: viewController.viewData)
 			vocabularyStore.saveChanges()
-			navigationController?.popToRootViewController(animated: true)
+			navigationController?.popViewController(animated: true)
 			
 		default: break
 		}

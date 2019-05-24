@@ -65,6 +65,10 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 		NotificationCenter.default.removeObserver(self)
 	}
 	
+	override var textInputContextIdentifier: String? {
+		return LearningProcessViewController.stringIdentifier
+	}
+	
 	// MARK: - BaseWordsLearningViewController -
 	
 	override func instantiateDataSource(with words: [Word]) -> WordsLearningCollectionViewDataSource {

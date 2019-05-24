@@ -64,7 +64,7 @@
 		3D87C184207EBB5700BBEAE6 /* MessageCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D87C183207EBB5700BBEAE6 /* MessageCollectionViewHeader.swift */; };
 		3D87C188207EBCBD00BBEAE6 /* RememberingCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D87C187207EBCBD00BBEAE6 /* RememberingCompletionViewController.swift */; };
 		3D9238C921380597002A3598 /* CardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9238C821380597002A3598 /* CardCollectionViewFlowLayout.swift */; };
-		3D976F03221C713E00DB5796 /* UnknownWordsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D976F02221C713D00DB5796 /* UnknownWordsCollectionViewController.swift */; };
+		3D976F03221C713E00DB5796 /* WordsToRememberingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D976F02221C713D00DB5796 /* WordsToRememberingCollectionViewController.swift */; };
 		3DA370E52091E5C70087746C /* VocabularyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA370E42091E5C70087746C /* VocabularyStore.swift */; };
 		3DA538AA205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA538A9205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift */; };
 		3DA61BF5227A55630056EAFA /* DefaultDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA61BF4227A55630056EAFA /* DefaultDataProvider.swift */; };
@@ -150,7 +150,7 @@
 		3D87C183207EBB5700BBEAE6 /* MessageCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewHeader.swift; sourceTree = "<group>"; };
 		3D87C187207EBCBD00BBEAE6 /* RememberingCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberingCompletionViewController.swift; sourceTree = "<group>"; };
 		3D9238C821380597002A3598 /* CardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
-		3D976F02221C713D00DB5796 /* UnknownWordsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownWordsCollectionViewController.swift; sourceTree = "<group>"; };
+		3D976F02221C713D00DB5796 /* WordsToRememberingCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsToRememberingCollectionViewController.swift; sourceTree = "<group>"; };
 		3DA370E42091E5C70087746C /* VocabularyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyStore.swift; sourceTree = "<group>"; };
 		3DA538A9205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsCollectionViewHeader.swift; sourceTree = "<group>"; };
 		3DA61BF4227A55630056EAFA /* DefaultDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDataProvider.swift; sourceTree = "<group>"; };
@@ -201,6 +201,34 @@
 			path = "Input Answer Controllers";
 			sourceTree = "<group>";
 		};
+		3D150FBA229418250060A531 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3D150FBB2294182C0060A531 /* View */,
+				3D150FBC229418320060A531 /* View Controllers */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		3D150FBB2294182C0060A531 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3DAEB0BA20A9A7F80017083F /* CardCollectionView.swift */,
+				3D2EE31421F0A3DD00E7AB52 /* MessageView.swift */,
+				3D2EE31621F0A3F700E7AB52 /* MessageView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3D150FBC229418320060A531 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3D4620E020800C87006C3694 /* CollectWordDataViewController.swift */,
+				3D4620E220806B72006C3694 /* EditTextViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		3D24CF8F20715DF2006EF57B /* Custom Input Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,15 +239,6 @@
 				3D11A701207263FC0004D465 /* LetterCollectionViewCell.xib */,
 			);
 			path = "Custom Input Views";
-			sourceTree = "<group>";
-		};
-		3D2EE31C21F0A56200E7AB52 /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-				3D2EE31621F0A3F700E7AB52 /* MessageView.xib */,
-				3D2EE31821F0A52F00E7AB52 /* LoadingView.xib */,
-			);
-			path = Xibs;
 			sourceTree = "<group>";
 		};
 		3D516C72204531E600B6A715 /* Helpers */ = {
@@ -233,21 +252,9 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		3D516C73204531E800B6A715 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				3DAEB0BA20A9A7F80017083F /* CardCollectionView.swift */,
-				3D2EE31421F0A3DD00E7AB52 /* MessageView.swift */,
-				3D2EE31A21F0A54D00E7AB52 /* LoadingView.swift */,
-				3D2EE31C21F0A56200E7AB52 /* Xibs */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		3D516C74204531EA00B6A715 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				3D516C73204531E800B6A715 /* Views */,
 				3DB218882160CBE400F6367A /* View Controllers */,
 				3D80F19422813A0A00B1C66A /* Data Sources */,
 			);
@@ -329,7 +336,8 @@
 				3D516C74204531EA00B6A715 /* Home */,
 				3DD3177E2064A8AA00D11F44 /* Search */,
 				3DD3177F2064A8C300D11F44 /* Learning */,
-				3DD317802064A8D100D11F44 /* Words Collection */,
+				3DD317802064A8D100D11F44 /* Words */,
+				3D150FBA229418250060A531 /* Common */,
 				3D516C72204531E600B6A715 /* Helpers */,
 				3DA61BF3227A54FA0056EAFA /* Default data */,
 				3D0C96702286F2E500E9F64E /* Vocabulary.xcdatamodeld */,
@@ -387,6 +395,8 @@
 			children = (
 				3DA538A9205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift */,
 				3D516C5E20452F1700B6A715 /* DefinitionCollectionViewCell.swift */,
+				3D2EE31A21F0A54D00E7AB52 /* LoadingView.swift */,
+				3D2EE31821F0A52F00E7AB52 /* LoadingView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -405,8 +415,6 @@
 				3D818940204EF7C5006ECE30 /* ListOfWordsViewController.swift */,
 				3DCAEC56227E6EC600535062 /* ChooseLearningStageViewController.swift */,
 				3D52FB032083BE1200CDD6A1 /* WordDestinationsViewController.swift */,
-				3D4620E020800C87006C3694 /* CollectWordDataViewController.swift */,
-				3D4620E220806B72006C3694 /* EditTextViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -468,13 +476,13 @@
 			path = Learning;
 			sourceTree = "<group>";
 		};
-		3DD317802064A8D100D11F44 /* Words Collection */ = {
+		3DD317802064A8D100D11F44 /* Words */ = {
 			isa = PBXGroup;
 			children = (
 				3DB218842160CBAE00F6367A /* View Controllers */,
 				3DB218832160CBAC00F6367A /* Data Sources */,
 			);
-			path = "Words Collection";
+			path = Words;
 			sourceTree = "<group>";
 		};
 		3DDF4C082160C88F00FA9CD6 /* View Controllers */ = {
@@ -482,7 +490,7 @@
 			children = (
 				3DCF6D112065DDC300635743 /* LearningTypesViewController.swift */,
 				3D834C0F2270BDAE000F6CB7 /* BaseWordsLearningViewController.swift */,
-				3D976F02221C713D00DB5796 /* UnknownWordsCollectionViewController.swift */,
+				3D976F02221C713D00DB5796 /* WordsToRememberingCollectionViewController.swift */,
 				3D508A02226F804E00BAFC4A /* LearningProcessViewController.swift */,
 				3D87C187207EBCBD00BBEAE6 /* RememberingCompletionViewController.swift */,
 				3DAE5687207A80E800AED999 /* RemindWordsViewController.swift */,
@@ -616,7 +624,7 @@
 				3DCAEC57227E6EC600535062 /* ChooseLearningStageViewController.swift in Sources */,
 				3DDC4887205350420023FDD9 /* UICollectionView+extension.swift in Sources */,
 				3D4620E320806B73006C3694 /* EditTextViewController.swift in Sources */,
-				3D976F03221C713E00DB5796 /* UnknownWordsCollectionViewController.swift in Sources */,
+				3D976F03221C713E00DB5796 /* WordsToRememberingCollectionViewController.swift in Sources */,
 				3DB4A0842069F53C00B7DDED /* UIStoryboard+extension.swift in Sources */,
 				3DEB988D227341B6003912FF /* RepeatWordsCollectionViewDataSource.swift in Sources */,
 				3D834C0E227085EC000F6CB7 /* FullCardCollectionViewCell.swift in Sources */,

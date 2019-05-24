@@ -14,6 +14,10 @@ typealias WordsRequestParameter = (
 
 struct FetchRequestFactory {
 	
+	enum LearningType {
+		case remembering, repetition, reminding
+	}
+	
 	static func requestForWords(with parameters: WordsRequestParameter) -> NSFetchRequest<Word> {
 		let fetchRequest = Word.createFetchRequest()
 		fetchRequest.fetchBatchSize = 10
@@ -42,21 +46,17 @@ struct FetchRequestFactory {
 		}
 		return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
 	}
-}
-
-enum LearningTypeFetchRequest {
-	case unknown, repetition, remind
 	
-	func request() -> NSFetchRequest<Word> {
+	static func fetchRequest(for learningType: LearningType) -> NSFetchRequest<Word> {
 		let parameters: WordsRequestParameter
 		
-		switch self {
-		case .unknown:		parameters = (.unknown, currentWordCollection, false)
-		case .repetition:	parameters = (.repeating, currentWordCollection, true)
-		case .remind:		parameters = (.reminding, currentWordCollection, true)
+		switch learningType {
+		case .remembering:		parameters = (.unknown, currentWordCollection, false)
+		case .repetition:		parameters = (.repeating, currentWordCollection, true)
+		case .reminding:		parameters = (.reminding, currentWordCollection, true)
 		}
 		
-		let fetchRequest = FetchRequestFactory.requestForWords(with: parameters)
+		let fetchRequest = requestForWords(with: parameters)
 		fetchRequest.sortDescriptors = [
 			NSSortDescriptor(key: #keyPath(Word.nextTrainingDate), ascending: true)
 		]

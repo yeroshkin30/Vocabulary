@@ -1,5 +1,5 @@
 //
-//	UnknownWordsCollectionViewController.swift
+//	WordsToRememberingCollectionViewController.swift
 //	Vocabulary
 //
 //	Created by Alexander Baraley on 2/18/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class UnknownWordsCollectionViewController: BaseWordsLearningViewController, SegueHandlerType {
+final class WordsToRememberingCollectionViewController: BaseWordsLearningViewController, SegueHandlerType {
 	
 	// MARK: - Private properties
 	
@@ -28,14 +28,14 @@ final class UnknownWordsCollectionViewController: BaseWordsLearningViewControlle
 		super.viewWillAppear(animated)
 		
 		if numberOfWords == 0 || !wordsToRemember.isEmpty {
-			navigationController?.popToRootViewController(animated: true)
+			navigationController?.popViewController(animated: false)
 		}
 	}
 	
 	// MARK: - BaseWordsLearningViewController -
 	
 	override func instantiateDataSource(with words: [Word]) -> WordsLearningCollectionViewDataSource {
-		let fetchRequest = LearningTypeFetchRequest.unknown.request()
+		let fetchRequest = FetchRequestFactory.fetchRequest(for: .remembering)
 		let words = vocabularyStore.wordsFrom(fetchRequest)
 		return UnknownWordsCollectionViewDataSource(words: words)
 	}
@@ -79,7 +79,7 @@ final class UnknownWordsCollectionViewController: BaseWordsLearningViewControlle
 }
 
 // MARK: - Private -
-private extension UnknownWordsCollectionViewController {
+private extension WordsToRememberingCollectionViewController {
 	
 	func startRememberingIfNeeds() {
 		if numberOfWords == 0 || wordsToRemember.count == maxNumberOfWordsToRemembering {

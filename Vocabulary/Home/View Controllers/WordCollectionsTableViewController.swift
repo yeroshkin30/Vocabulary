@@ -144,7 +144,6 @@ private extension WordCollectionsTableViewController {
 				tableView.cellForRow(at: indexPath)?.accessoryType = .none
 			}
 			currentWordCollection = nil
-			didFinishSelectionHandler?()
 		}
 	}
 	
@@ -152,7 +151,7 @@ private extension WordCollectionsTableViewController {
 		let wordCollection = wordCollectionsDataSource.wordCollection(indexPath)
 		
 		if currentWordCollection == wordCollection {
-			selectWordCollection(at: indexPath)
+			currentWordCollection = nil
 		}
 		vocabularyStore.deleteAndSave(wordCollection)
 	}
