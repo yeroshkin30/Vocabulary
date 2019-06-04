@@ -77,7 +77,6 @@ class FullCardCollectionViewCell: CardCollectionView {
 		negativeOptionButton.setTitle(viewData.negativeTitle, for: .normal)
 		
 		scrollToTop()
-		setupShadowPath(for: frame.size)
 	}
 	
 	func optionsModeDidChange() {

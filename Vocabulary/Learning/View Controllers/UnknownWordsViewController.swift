@@ -1,5 +1,5 @@
 //
-//	WordsToRememberingCollectionViewController.swift
+//	UnknownWordsViewController.swift
 //	Vocabulary
 //
 //	Created by Alexander Baraley on 2/18/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class WordsToRememberingCollectionViewController: BaseWordsLearningViewController, SegueHandlerType {
+final class UnknownWordsViewController: BaseWordsLearningViewController, SegueHandlerType {
 	
 	// MARK: - Private properties
 	
@@ -79,7 +79,7 @@ final class WordsToRememberingCollectionViewController: BaseWordsLearningViewCon
 }
 
 // MARK: - Private -
-private extension WordsToRememberingCollectionViewController {
+private extension UnknownWordsViewController {
 	
 	func startRememberingIfNeeds() {
 		if numberOfWords == 0 || wordsToRemember.count == maxNumberOfWordsToRemembering {

@@ -12,13 +12,14 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 	
 	// MARK: - Types
 	
-	enum LearningMode {
-		case remembering([Word]), repetition([Word])
+	enum Mode {
+		case remembering([Word])
+		case repetition([Word])
 	}
 	
 	// MARK: - Public properties
 	
-	var learningMode: LearningMode = .repetition([])
+	var learningMode: Mode = .repetition([])
 	
 	// MARK: - Private properties
 	
@@ -54,8 +55,6 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 		super.viewDidLoad()
 		
 		initialSetup()
-		
-		additionalSafeAreaInsets.bottom = UIScreen.main.bounds.height / 3
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -73,16 +72,12 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 	
 	override func instantiateDataSource(with words: [Word]) -> WordsLearningCollectionViewDataSource {
 		switch learningMode {
-		case .remembering(let words):
-			return RememberWordsCollectionViewDataSource(words: words)
-			
-		case .repetition(let words):
-			return RepeatWordsCollectionViewDataSource(words: words)
+		case .remembering(let words):	return RememberWordsCollectionViewDataSource(words: words)
+		case .repetition(let words):	return RepeatWordsCollectionViewDataSource(words: words)
 		}
 	}
 	
 	override func autoPronounceButtonTapped() {
-		
 		if autoPronounceButton.isSelected {
 			stopPronouncing()
 		} else if answersHandler.state == .finish, let word = dataSource.currentWord {
@@ -123,6 +118,8 @@ private extension LearningProcessViewController {
 		NotificationCenter.default.addObserver(
 			self, selector: #selector(keyboardDidShow), name: name, object: nil
 		)
+		
+		additionalSafeAreaInsets.bottom = UIScreen.main.bounds.height / 2
 	}
 	
 	@objc func keyboardDidShow(_ notification: Notification) {

@@ -109,9 +109,14 @@ class SearchDefinitionsTableViewController: UITableViewController, SegueHandlerT
 private extension SearchDefinitionsTableViewController {
 	
 	func setupNotifications() {
-		let name = UIApplication.willEnterForegroundNotification
+		let enterForground = UIApplication.willEnterForegroundNotification
+		let pastboarChanged = UIPasteboard.changedNotification
+		
 		NotificationCenter.default.addObserver(
-			self, selector: #selector(updatePrompts), name: name, object: nil
+			self, selector: #selector(updatePrompts), name: enterForground, object: nil
+		)
+		NotificationCenter.default.addObserver(
+			self, selector: #selector(updatePrompts), name: pastboarChanged, object: nil
 		)
 	}
 	
@@ -142,7 +147,7 @@ private extension SearchDefinitionsTableViewController {
 			
 		case .noSearchResultFor(let request):
 			messageView.message = MessageView.Message(
-				title: "No Results", text: "There is no definition for \"\(request)\""
+				title: "No Results", text: "for \"\(request)\""
 			)
 			tableView.backgroundView = messageView
 			

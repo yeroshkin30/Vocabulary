@@ -50,7 +50,7 @@ class LearningTypesViewController: UIViewController, SegueHandlerType {
 		
 		switch segueIdentifier(for: segue) {
 		case .remembering:
-			let viewController = segue.destination as! WordsToRememberingCollectionViewController
+			let viewController = segue.destination as! UnknownWordsViewController
 			viewController.vocabularyStore = vocabularyStore
 			
 		case .repetition:

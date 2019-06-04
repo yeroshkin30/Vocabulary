@@ -48,6 +48,7 @@
 		3D56382021D1F8D900281C07 /* EntryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D56381F21D1F8D900281C07 /* EntryCollectionViewController.swift */; };
 		3D5E21D92272044600EE6D34 /* BaseWordsLearningCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E21D82272044600EE6D34 /* BaseWordsLearningCollectionViewDataSource.swift */; };
 		3D5E21DC22721E6700EE6D34 /* AnswersReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E21DB22721E6700EE6D34 /* AnswersReceiver.swift */; };
+		3D6A33E0229C22E600695A0F /* Learning.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D6A33DF229C22E600695A0F /* Learning.storyboard */; };
 		3D6AD8D820EB9B1A004716DF /* WordCollectionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6AD8D720EB9B1A004716DF /* WordCollectionsTableViewController.swift */; };
 		3D71552D2293BCAC00F3E949 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D71552C2293BCAC00F3E949 /* RootViewController.swift */; };
 		3D80F1912281270300B1C66A /* FetchedResultsTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D80F1902281270300B1C66A /* FetchedResultsTableViewControllerDelegate.swift */; };
@@ -65,7 +66,7 @@
 		3D87C188207EBCBD00BBEAE6 /* RememberingCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D87C187207EBCBD00BBEAE6 /* RememberingCompletionViewController.swift */; };
 		3D9143EB2297E21D008637E5 /* WordCollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9143EA2297E21D008637E5 /* WordCollectionInfo.swift */; };
 		3D9238C921380597002A3598 /* CardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9238C821380597002A3598 /* CardCollectionViewFlowLayout.swift */; };
-		3D976F03221C713E00DB5796 /* WordsToRememberingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D976F02221C713D00DB5796 /* WordsToRememberingCollectionViewController.swift */; };
+		3D976F03221C713E00DB5796 /* UnknownWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D976F02221C713D00DB5796 /* UnknownWordsViewController.swift */; };
 		3DA370E52091E5C70087746C /* VocabularyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA370E42091E5C70087746C /* VocabularyStore.swift */; };
 		3DA538AA205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA538A9205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift */; };
 		3DA61BF5227A55630056EAFA /* DefaultDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA61BF4227A55630056EAFA /* DefaultDataProvider.swift */; };
@@ -83,12 +84,10 @@
 		3DD51A3C215E18ED0099BADB /* ListOfWordsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD51A3B215E18ED0099BADB /* ListOfWordsDataSource.swift */; };
 		3DD6DA8921D96A0500F76B61 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD6DA8821D96A0500F76B61 /* Home.storyboard */; };
 		3DDBEE1C20E88240009FADC2 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DDBEE1B20E88240009FADC2 /* Words.storyboard */; };
-		3DDBEE1E20E8846E009FADC2 /* Learning.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DDBEE1D20E8846E009FADC2 /* Learning.storyboard */; };
 		3DDC4885205350290023FDD9 /* UITableView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDC4884205350290023FDD9 /* UITableView+extension.swift */; };
 		3DDC4887205350420023FDD9 /* UICollectionView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDC4886205350420023FDD9 /* UICollectionView+extension.swift */; };
 		3DE8D82E2280B729001A3096 /* Swift+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE8D82D2280B729001A3096 /* Swift+extension.swift */; };
 		3DEB988D227341B6003912FF /* RepeatWordsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB988C227341B6003912FF /* RepeatWordsCollectionViewDataSource.swift */; };
-		3DF8E9572066339500983E07 /* WordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8E9562066339500983E07 /* WordCollectionViewCell.swift */; };
 		3DF8E959206635CE00983E07 /* LearningCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8E958206635CE00983E07 /* LearningCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +134,7 @@
 		3D56381F21D1F8D900281C07 /* EntryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCollectionViewController.swift; sourceTree = "<group>"; };
 		3D5E21D82272044600EE6D34 /* BaseWordsLearningCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWordsLearningCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		3D5E21DB22721E6700EE6D34 /* AnswersReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersReceiver.swift; sourceTree = "<group>"; };
+		3D6A33DF229C22E600695A0F /* Learning.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Learning.storyboard; sourceTree = "<group>"; };
 		3D6AD8D720EB9B1A004716DF /* WordCollectionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCollectionsTableViewController.swift; sourceTree = "<group>"; };
 		3D71552C2293BCAC00F3E949 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		3D80F1902281270300B1C66A /* FetchedResultsTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultsTableViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 		3D87C187207EBCBD00BBEAE6 /* RememberingCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberingCompletionViewController.swift; sourceTree = "<group>"; };
 		3D9143EA2297E21D008637E5 /* WordCollectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCollectionInfo.swift; sourceTree = "<group>"; };
 		3D9238C821380597002A3598 /* CardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
-		3D976F02221C713D00DB5796 /* WordsToRememberingCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsToRememberingCollectionViewController.swift; sourceTree = "<group>"; };
+		3D976F02221C713D00DB5796 /* UnknownWordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownWordsViewController.swift; sourceTree = "<group>"; };
 		3DA370E42091E5C70087746C /* VocabularyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyStore.swift; sourceTree = "<group>"; };
 		3DA538A9205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsCollectionViewHeader.swift; sourceTree = "<group>"; };
 		3DA61BF4227A55630056EAFA /* DefaultDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDataProvider.swift; sourceTree = "<group>"; };
@@ -172,12 +172,10 @@
 		3DD51A3B215E18ED0099BADB /* ListOfWordsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfWordsDataSource.swift; sourceTree = "<group>"; };
 		3DD6DA8821D96A0500F76B61 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		3DDBEE1B20E88240009FADC2 /* Words.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
-		3DDBEE1D20E8846E009FADC2 /* Learning.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Learning.storyboard; sourceTree = "<group>"; };
 		3DDC4884205350290023FDD9 /* UITableView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+extension.swift"; sourceTree = "<group>"; };
 		3DDC4886205350420023FDD9 /* UICollectionView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+extension.swift"; sourceTree = "<group>"; };
 		3DE8D82D2280B729001A3096 /* Swift+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+extension.swift"; sourceTree = "<group>"; };
 		3DEB988C227341B6003912FF /* RepeatWordsCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatWordsCollectionViewDataSource.swift; sourceTree = "<group>"; };
-		3DF8E9562066339500983E07 /* WordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCollectionViewCell.swift; sourceTree = "<group>"; };
 		3DF8E958206635CE00983E07 /* LearningCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -286,6 +284,27 @@
 			path = "Data Sources";
 			sourceTree = "<group>";
 		};
+		3D5F383C229BE640006FD548 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3DD6DA8821D96A0500F76B61 /* Home.storyboard */,
+				3D6A33DF229C22E600695A0F /* Learning.storyboard */,
+				3DDBEE1B20E88240009FADC2 /* Words.storyboard */,
+				3DA9DFBE2031D6910098A162 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3D5F383D229BE7AB006FD548 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3DA61BF3227A54FA0056EAFA /* Default data */,
+				3D27AA00209C17DB009C5B95 /* Assets.xcassets */,
+				3DA9DFC12031D6910098A162 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		3D80F19422813A0A00B1C66A /* Data Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +320,7 @@
 				3D2CF0F920876FF600F955CA /* WordCollection.swift */,
 				3D0B98E920EE73E000D8ABD1 /* FetchRequestFactory.swift */,
 				3DA370E42091E5C70087746C /* VocabularyStore.swift */,
+				3D0C96702286F2E500E9F64E /* Vocabulary.xcdatamodeld */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -345,19 +365,13 @@
 				3DA9DFB22031D6910098A162 /* AppDelegate.swift */,
 				3D81893F204EF785006ECE30 /* Core Data */,
 				3D516C74204531EA00B6A715 /* Home */,
-				3DD3177E2064A8AA00D11F44 /* Search */,
 				3DD3177F2064A8C300D11F44 /* Learning */,
+				3DD3177E2064A8AA00D11F44 /* Search */,
 				3DD317802064A8D100D11F44 /* Words */,
 				3D150FBA229418250060A531 /* Common */,
+				3D5F383C229BE640006FD548 /* Storyboards */,
 				3D516C72204531E600B6A715 /* Helpers */,
-				3DA61BF3227A54FA0056EAFA /* Default data */,
-				3D0C96702286F2E500E9F64E /* Vocabulary.xcdatamodeld */,
-				3D27AA00209C17DB009C5B95 /* Assets.xcassets */,
-				3DD6DA8821D96A0500F76B61 /* Home.storyboard */,
-				3DDBEE1D20E8846E009FADC2 /* Learning.storyboard */,
-				3DDBEE1B20E88240009FADC2 /* Words.storyboard */,
-				3DA9DFBE2031D6910098A162 /* LaunchScreen.storyboard */,
-				3DA9DFC12031D6910098A162 /* Info.plist */,
+				3D5F383D229BE7AB006FD548 /* Resources */,
 			);
 			path = Vocabulary;
 			sourceTree = "<group>";
@@ -501,7 +515,7 @@
 			children = (
 				3DCF6D112065DDC300635743 /* LearningTypesViewController.swift */,
 				3D834C0F2270BDAE000F6CB7 /* BaseWordsLearningViewController.swift */,
-				3D976F02221C713D00DB5796 /* WordsToRememberingCollectionViewController.swift */,
+				3D976F02221C713D00DB5796 /* UnknownWordsViewController.swift */,
 				3D508A02226F804E00BAFC4A /* LearningProcessViewController.swift */,
 				3D87C187207EBCBD00BBEAE6 /* RememberingCompletionViewController.swift */,
 				3DAE5687207A80E800AED999 /* RemindWordsViewController.swift */,
@@ -513,7 +527,6 @@
 			isa = PBXGroup;
 			children = (
 				3D17E3FF2064F3800083DD45 /* LearningTypeTitleView.swift */,
-				3DF8E9562066339500983E07 /* WordCollectionViewCell.swift */,
 				3D834C0D227085EC000F6CB7 /* FullCardCollectionViewCell.swift */,
 				3DAE5689207ACA8200AED999 /* RemindWordCollectionViewCell.swift */,
 				3DB218782160C97800F6367A /* Remember and Repeat */,
@@ -591,10 +604,10 @@
 				3DA9DFC02031D6910098A162 /* LaunchScreen.storyboard in Resources */,
 				3D24CF8E20713229006EF57B /* SelectHeadwordInputView.xib in Resources */,
 				3DD6DA8921D96A0500F76B61 /* Home.storyboard in Resources */,
-				3DDBEE1E20E8846E009FADC2 /* Learning.storyboard in Resources */,
 				3D2EE31921F0A52F00E7AB52 /* LoadingView.xib in Resources */,
 				3D11A702207263FC0004D465 /* LetterCollectionViewCell.xib in Resources */,
 				3D27AA01209C17DC009C5B95 /* Assets.xcassets in Resources */,
+				3D6A33E0229C22E600695A0F /* Learning.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,7 +648,7 @@
 				3DCAEC57227E6EC600535062 /* ChooseLearningStageViewController.swift in Sources */,
 				3DDC4887205350420023FDD9 /* UICollectionView+extension.swift in Sources */,
 				3D4620E320806B73006C3694 /* EditTextViewController.swift in Sources */,
-				3D976F03221C713E00DB5796 /* WordsToRememberingCollectionViewController.swift in Sources */,
+				3D976F03221C713E00DB5796 /* UnknownWordsViewController.swift in Sources */,
 				3DB4A0842069F53C00B7DDED /* UIStoryboard+extension.swift in Sources */,
 				3DEB988D227341B6003912FF /* RepeatWordsCollectionViewDataSource.swift in Sources */,
 				3D834C0E227085EC000F6CB7 /* FullCardCollectionViewCell.swift in Sources */,
@@ -665,7 +678,6 @@
 				3D0C96732286F2E500E9F64E /* Vocabulary.xcdatamodeld in Sources */,
 				3D4620E120800C87006C3694 /* CollectWordDataViewController.swift in Sources */,
 				3DAE5688207A80E800AED999 /* RemindWordsViewController.swift in Sources */,
-				3DF8E9572066339500983E07 /* WordCollectionViewCell.swift in Sources */,
 				3D516C7020452FCC00B6A715 /* IdentifiableByString+protocol.swift in Sources */,
 				3D516C6A20452F9900B6A715 /* EntriesParserDelegate.swift in Sources */,
 				3DCD3E232271FA8C000E7AC8 /* RememberWordsCollectionViewDataSource.swift in Sources */,
@@ -810,7 +822,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A76X2FNZ47;
-				INFOPLIST_FILE = Vocabulary/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Vocabulary/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
@@ -827,7 +839,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A76X2FNZ47;
-				INFOPLIST_FILE = Vocabulary/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Vocabulary/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
