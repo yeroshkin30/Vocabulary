@@ -30,4 +30,4 @@ For more convenient testing the app has default data.
 	* Word pronunciation
 	* Undo management
 
-![](screenshots.jpeg)
+![](screenshots.jpg)

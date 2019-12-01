@@ -55,7 +55,7 @@ class CollectWordDataViewController: UITableViewController, SegueHandlerType {
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 		if let indexPath = tableView.indexPathForSelectedRow,
-			Section(at: indexPath) == .deletition {
+			Section(at: indexPath) == .deletion {
 			
 			delegate?.collectWordDataViewController(self, didFinishWith: .delete)
 			return false
@@ -106,7 +106,7 @@ private extension CollectWordDataViewController {
 		case .sentencePart: return viewData.sentencePart
 		case .definition:	return viewData.definition
 		case .examples:	return viewData.examples[indexPath.row]
-		case .deletition:	return "Delete Word"
+		case .deletion:	return "Delete Word"
 		}
 	}
 	
@@ -150,8 +150,8 @@ extension CollectWordDataViewController {
 		let cell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
 		
 		cell.textLabel?.text = textForCell(at: indexPath)
-		cell.textLabel?.textColor = Section(at: indexPath) == .deletition ? .red : .black
-		cell.textLabel?.textAlignment = Section(at: indexPath) == .deletition ? .center : .left
+		cell.textLabel?.textColor = Section(at: indexPath) == .deletion ? .red : .black
+		cell.textLabel?.textAlignment = Section(at: indexPath) == .deletion ? .center : .left
 		
 		return cell
 	}
@@ -204,7 +204,7 @@ extension CollectWordDataViewController {
 							toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
 		
 		switch Section(at: proposedDestinationIndexPath) {
-		case .deletition:
+		case .deletion:
 			return IndexPath(row: viewData.examples.count - 1, section: Section.examples.rawValue)
 		case .examples:
 			return proposedDestinationIndexPath
@@ -243,7 +243,7 @@ extension CollectWordDataViewController {
 	}
 	
 	enum Section: Int {
-		case headword, sentencePart, definition, examples, deletition
+		case headword, sentencePart, definition, examples, deletion
 		
 		static let count = 5
 		
@@ -261,7 +261,7 @@ extension CollectWordDataViewController {
 			case .sentencePart:	return "Sentence part"
 			case .definition:	return "Definiton"
 			case .examples:		return "Examples"
-			case .deletition:	return ""
+			case .deletion:	return ""
 			}
 		}
 		

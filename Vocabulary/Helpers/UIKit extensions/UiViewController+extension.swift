@@ -20,10 +20,7 @@ extension UIViewController {
 	func pronounce(_ text: String) {
 		guard !text.isEmpty else { return }
 		let utterance = AVSpeechUtterance(string: text)
-		let voice = AVSpeechSynthesisVoice.speechVoices().first {
-			$0.identifier == "com.apple.ttsbundle.Samantha-premium"
-		}
-		utterance.voice = voice ?? AVSpeechSynthesisVoice(language: "en-US")
+		utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
 		stopPronouncing()
 		UIViewController.speechSynthesizer.speak(utterance)
 	}

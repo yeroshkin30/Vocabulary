@@ -30,7 +30,7 @@ class EntriesLoader {
 	
 	func requestEntriesFor(_ word: String, with completion: @escaping (EntriesParsingResult?) -> ()) {
 		let url = entriesRequestURL(for: word)
-		let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 5.0)
+		let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
 		
 		let dataTask = URLSession.shared.dataTask(with: request, completionHandler: {
 			(data, _, error) in
