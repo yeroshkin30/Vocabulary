@@ -747,10 +747,10 @@ She keeps a list of books for future reading.</string>
         <!--Navigation Controller-->
         <scene sceneID="WQz-BT-OFP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iyz-Bb-tbU" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="iyz-Bb-tbU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bRY-vz-bM6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1045,6 +1045,6 @@ She keeps a list of books for future reading.</string>
         <image name="Speaker" width="30" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Nyf-fH-wu3"/>
+        <segue reference="YGs-tb-OPe"/>
     </inferredMetricsTieBreakers>
 </document>
