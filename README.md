@@ -29,5 +29,15 @@ For more convenient testing the app has default data.
 * Global
 	* Word pronunciation
 	* Undo management
+	
+
+## Used
+
+* Table and collection views
+* Auto layout 
+* Storyboards
+* Core Data
+* XML parsing
+
 
 ![](screenshots.jpg)

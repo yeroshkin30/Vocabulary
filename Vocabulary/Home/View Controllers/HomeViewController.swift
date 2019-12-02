@@ -19,7 +19,7 @@ class HomeViewController: UIViewController, SegueHandlerType {
 	private lazy var searchDefinitionsViewController = UIStoryboard(storyboard: .home)
 		.instantiateViewController() as SearchDefinitionsTableViewController
 	
-	private lazy var searchController = UISearchController(searchResultsController: nil)
+	private lazy var searchController = UISearchController(searchResultsController: searchDefinitionsViewController)
 	
 	// MARK: - Life cycle
 	
@@ -64,26 +64,13 @@ private extension HomeViewController {
 	func setupSearchController() {
 		searchController.obscuresBackgroundDuringPresentation = false
 		searchController.hidesNavigationBarDuringPresentation = false
+		searchController.showsSearchResultsController = true
 		searchController.searchBar.placeholder = "Search Definitions"
 		searchController.searchBar.autocorrectionType = .yes
-		
-		searchController.delegate = self
-		
+
 		navigationItem.hidesSearchBarWhenScrolling = false
 		navigationItem.searchController = searchController
 		
 		searchDefinitionsViewController.searchBar = searchController.searchBar
-	}
-}
-
-// MARK: - UISearchControllerDelegate -
-extension HomeViewController: UISearchControllerDelegate {
-	
-	func willPresentSearchController(_ searchController: UISearchController) {
-		add(searchDefinitionsViewController)
-	}
-	
-	func willDismissSearchController(_ searchController: UISearchController) {
-		searchDefinitionsViewController.remove()
 	}
 }

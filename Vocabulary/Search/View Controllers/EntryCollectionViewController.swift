@@ -90,6 +90,7 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 			
 			if let indexPath = collectionView?.indexPathsForSelectedItems?.first {
 				viewController.viewData = wordDataForDefinition(at: indexPath)
+				collectionView.deselectItem(at: indexPath, animated: true)
 			}
 			
 			addToLearningButton.isEnabled = false

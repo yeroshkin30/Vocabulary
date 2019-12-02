@@ -12,7 +12,7 @@ protocol DefinitionsRequestProvider {
 	var wordToRequest: String? { get }
 }
 
-class SearchDefinitionsTableViewController: UITableViewController, SegueHandlerType {
+class SearchDefinitionsTableViewController: UITableViewController {
 	
 	var vocabularyStore: VocabularyStore!
 	
@@ -56,30 +56,6 @@ class SearchDefinitionsTableViewController: UITableViewController, SegueHandlerT
 	
 	// MARK: - Navigation -
 	
-	enum SegueIdentifier: String {
-		case entry
-	}
-	
-	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-		if case .searchResult(let result) = viewMode, case .entries(_) = result {
-			return true
-		}
-		return false
-	}
-	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		
-		switch segueIdentifier(for: segue) {
-		case .entry:
-			let viewController = segue.destination as! EntryCollectionViewController
-			
-			viewController.vocabularyStore = vocabularyStore
-			if let entries = viewMode.resultEntries, let indexPath = tableView.indexPathForSelectedRow {
-				viewController.entry = entries[indexPath.row]
-			}
-		}
-	}
-	
 	@IBAction func unwindWithWordToRequest(_ segue: UIStoryboardSegue) {
 		if let provider = segue.source as? DefinitionsRequestProvider,
 			let word = provider.wordToRequest {
@@ -98,10 +74,24 @@ class SearchDefinitionsTableViewController: UITableViewController, SegueHandlerT
 		case .searchResult(_):
 			if let suggestions = viewMode.resultSuggestions {
 				requestEntries(for: suggestions[indexPath.row])
+
+			} else if let entries = viewMode.resultEntries {
+				showEntryController(with: entries[indexPath.row])
+				tableView.deselectRow(at: indexPath, animated: true)
 			}
 		default:
 			break
 		}
+	}
+
+	private func showEntryController(with entry: Entry) {
+		let entryViewController = UIStoryboard(storyboard: .home)
+			.instantiateViewController() as EntryCollectionViewController
+
+		entryViewController.vocabularyStore = vocabularyStore
+		entryViewController.entry = entry
+
+		presentingViewController?.navigationController?.pushViewController(entryViewController, animated: true)
 	}
 }
 
@@ -109,14 +99,14 @@ class SearchDefinitionsTableViewController: UITableViewController, SegueHandlerT
 private extension SearchDefinitionsTableViewController {
 	
 	func setupNotifications() {
-		let enterForground = UIApplication.willEnterForegroundNotification
-		let pastboarChanged = UIPasteboard.changedNotification
+		let enterForeground = UIApplication.willEnterForegroundNotification
+		let pasteboardChanged = UIPasteboard.changedNotification
 		
 		NotificationCenter.default.addObserver(
-			self, selector: #selector(updatePrompts), name: enterForground, object: nil
+			self, selector: #selector(updatePrompts), name: enterForeground, object: nil
 		)
 		NotificationCenter.default.addObserver(
-			self, selector: #selector(updatePrompts), name: pastboarChanged, object: nil
+			self, selector: #selector(updatePrompts), name: pasteboardChanged, object: nil
 		)
 	}
 	
@@ -186,7 +176,7 @@ private extension SearchDefinitionsTableViewController {
 			
 			let firstCellIndexPath = IndexPath.first
 			tableView.selectRow(at: firstCellIndexPath, animated: false, scrollPosition: .none)
-			performSegue(with: .entry, sender: nil)
+			showEntryController(with: entries[0])
 		}
 	}
 }
