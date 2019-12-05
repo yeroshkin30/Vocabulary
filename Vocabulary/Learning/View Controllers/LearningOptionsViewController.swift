@@ -1,5 +1,5 @@
 //
-//	LearningTypesViewController.swift
+//	LearningOptionsViewController.swift
 //	Vocabulary
 //
 //	Created by Alexander Baraley on 3/24/18.
@@ -7,19 +7,12 @@
 //
 
 import UIKit
-import CoreData
 
-class LearningTypesViewController: UIViewController, SegueHandlerType {
-	
-	// MARK: - Types
-	
-	enum LearningType: Int {
-		case rememberWords, repeatWords, remindWords
-	}
+class LearningOptionsViewController: UIViewController, SegueHandlerType {
 
-	// MARK: - Outlets -
+	// MARK: - Properties -
 
-	@IBOutlet private var learningTypeTitles: [LearningTypeTitleView]!
+	@IBOutlet private var learningOptionsView: LearningOptionsView!
 
 	// MARK: - Initialization
 
@@ -39,7 +32,7 @@ class LearningTypesViewController: UIViewController, SegueHandlerType {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		updateLearningTypeTitles()
+		updateLearningOptionsView()
 		setupNotifications()
 	}
 	
@@ -79,12 +72,14 @@ class LearningTypesViewController: UIViewController, SegueHandlerType {
 }
 
 // MARK: - Private -
-private extension LearningTypesViewController {
+private extension LearningOptionsViewController {
+
+	// MARK: - Methods
 	
 	func setupNotifications() {
 		let name = UIApplication.willEnterForegroundNotification
 		NotificationCenter.default.addObserver(
-			self, selector: #selector(updateLearningTypeTitles), name: name, object: nil
+			self, selector: #selector(updateLearningOptionsView), name: name, object: nil
 		)
 	}
 	
@@ -92,27 +87,16 @@ private extension LearningTypesViewController {
 		NotificationCenter.default.removeObserver(self)
 	}
 	
-	@objc func updateLearningTypeTitles() {
-		
-		for (index, titleView) in learningTypeTitles.enumerated() {
-			
-			let learningType = LearningType(rawValue: index)!
-			
-			let number = numberOfWords(for: learningType)
-			titleView.wordsNumberLable.text = String(number)
-			titleView.titleButton.isEnabled = number == 0 ? false : true
-			titleView.alpha = number == 0 ? 0.5 : 1.0
-		}
-	}
-	
-	func numberOfWords(for learningType: LearningType) -> Int {
-		let fetchRequest: NSFetchRequest<Word>
-		
-		switch learningType {
-		case .rememberWords:	fetchRequest = FetchRequestFactory.fetchRequest(for: .remembering)
-		case .repeatWords:		fetchRequest = FetchRequestFactory.fetchRequest(for: .repetition)
-		case .remindWords:		fetchRequest = FetchRequestFactory.fetchRequest(for: .reminding)
-		}
-		return vocabularyStore.numberOfWordsFrom(fetchRequest)
+	@objc func updateLearningOptionsView() {
+
+		let rememberWordsNumber = vocabularyStore.numberOfWordsFrom(FetchRequestFactory.fetchRequest(for: .remembering))
+		let repeatWordsNumber = vocabularyStore.numberOfWordsFrom(FetchRequestFactory.fetchRequest(for: .repetition))
+		let remindWordsNumber = vocabularyStore.numberOfWordsFrom(FetchRequestFactory.fetchRequest(for: .reminding))
+
+		learningOptionsView.viewData = LearningOptionsView.ViewData(
+			rememberWordsNumber: rememberWordsNumber,
+			repeatWordsNumber: repeatWordsNumber,
+			remindWordsNumber: remindWordsNumber
+		)
 	}
 }

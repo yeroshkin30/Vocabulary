@@ -48,7 +48,7 @@ class HomeViewController: UIViewController, SegueHandlerType {
 		
 		switch segueIdentifier(for: segue) {
 		case .learningTypes:
-			let viewController = segue.destination as! LearningTypesViewController
+			let viewController = segue.destination as! LearningOptionsViewController
 //			viewController.vocabularyStore = vocabularyStore
 			
 		case .words:

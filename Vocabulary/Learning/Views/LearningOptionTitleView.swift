@@ -1,5 +1,5 @@
 //
-//	LearningTypeTitleView.swift
+//	LearningOptionTitleView.swift
 //	Vocabulary
 //
 //	Created by Alexander Baraley on 3/23/18.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class LearningTypeTitleView: UIView {
+class LearningOptionTitleView: UIView {
 	
 	@IBOutlet var titleButton: UIButton!
-	@IBOutlet var wordsNumberLable: UILabel!
+	@IBOutlet var wordsNumberLabel: UILabel!
 }

@@ -29,7 +29,7 @@ class AppRootViewController: UITabBarController {
 		let learningStoryboard = UIStoryboard.storyboard(storyboard: .learning)
 
 		guard let learningTypesViewController = learningStoryboard.instantiateInitialViewController(creator: {
-			LearningTypesViewController(coder: $0, vocabularyStore: self.vocabularyStore)
+			LearningOptionsViewController(coder: $0, vocabularyStore: self.vocabularyStore)
 		}) else {
 			fatalError()
 		}

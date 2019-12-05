@@ -11,160 +11,177 @@
         <!--Vocabulary-->
         <scene sceneID="Mht-YW-SEA">
             <objects>
-                <viewController storyboardIdentifier="LearningTabViewController" id="g6H-Xg-LGg" customClass="LearningTypesViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LearningTabViewController" id="g6H-Xg-LGg" customClass="LearningOptionsViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Maf-44-xIT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="hO8-0F-HLN">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxA-sI-Qkj" customClass="LearningOptionsView" customModule="Vocabulary" customModuleProvider="target">
                                 <rect key="frame" x="20" y="20" width="335" height="578"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMU-yJ-Zv3" userLabel="Remembering Title View" customClass="LearningTypeTitleView" customModule="Vocabulary" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="hO8-0F-HLN">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="578"/>
                                         <subviews>
-                                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDZ-Ci-Rbl">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMU-yJ-Zv3" userLabel="Remembering Title View" customClass="LearningOptionTitleView" customModule="Vocabulary" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
-                                                <color key="backgroundColor" red="0.9137254901960784" green="0.46666666666666667" blue="0.41568627450980394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                                <state key="normal" title="Remember">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
+                                                <subviews>
+                                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDZ-Ci-Rbl">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
+                                                        <color key="backgroundColor" red="0.9137254901960784" green="0.46666666666666667" blue="0.41568627450980394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                        <state key="normal" title="Remember">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <segue destination="2tA-eO-ztS" kind="show" identifier="remembering" id="7wG-dG-ME1"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ge1-Fj-60h">
+                                                        <rect key="frame" x="309.5" y="13" width="12.5" height="24"/>
+                                                        <color key="backgroundColor" red="0.91394579410552979" green="0.46850448846817017" blue="0.41584432125091553" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstItem="Ge1-Fj-60h" firstAttribute="top" secondItem="mMU-yJ-Zv3" secondAttribute="topMargin" constant="5" id="3xc-cP-dq9"/>
+                                                    <constraint firstItem="lDZ-Ci-Rbl" firstAttribute="leading" secondItem="mMU-yJ-Zv3" secondAttribute="leading" id="6GU-oL-ebV"/>
+                                                    <constraint firstItem="lDZ-Ci-Rbl" firstAttribute="top" secondItem="mMU-yJ-Zv3" secondAttribute="top" id="6ge-nz-Zwt"/>
+                                                    <constraint firstAttribute="trailing" secondItem="lDZ-Ci-Rbl" secondAttribute="trailing" id="ZMY-Yr-Epr"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="Ge1-Fj-60h" secondAttribute="trailing" constant="5" id="bzl-a1-Sva"/>
+                                                    <constraint firstAttribute="bottom" secondItem="lDZ-Ci-Rbl" secondAttribute="bottom" id="zZ4-Ru-HfA"/>
+                                                </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="0.0"/>
+                                                        <real key="value" value="20"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <segue destination="2tA-eO-ztS" kind="show" identifier="remembering" id="7wG-dG-ME1"/>
+                                                    <outlet property="titleButton" destination="lDZ-Ci-Rbl" id="uyU-3M-Ptp"/>
+                                                    <outlet property="wordsNumberLabel" destination="Ge1-Fj-60h" id="i1g-t7-mDW"/>
                                                 </connections>
-                                            </button>
-                                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ge1-Fj-60h">
-                                                <rect key="frame" x="309.5" y="13" width="12.5" height="24"/>
-                                                <color key="backgroundColor" red="0.91394579410552979" green="0.46850448846817017" blue="0.41584432125091553" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstItem="Ge1-Fj-60h" firstAttribute="top" secondItem="mMU-yJ-Zv3" secondAttribute="topMargin" constant="5" id="3xc-cP-dq9"/>
-                                            <constraint firstItem="lDZ-Ci-Rbl" firstAttribute="leading" secondItem="mMU-yJ-Zv3" secondAttribute="leading" id="6GU-oL-ebV"/>
-                                            <constraint firstItem="lDZ-Ci-Rbl" firstAttribute="top" secondItem="mMU-yJ-Zv3" secondAttribute="top" id="6ge-nz-Zwt"/>
-                                            <constraint firstAttribute="trailing" secondItem="lDZ-Ci-Rbl" secondAttribute="trailing" id="ZMY-Yr-Epr"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="Ge1-Fj-60h" secondAttribute="trailing" constant="5" id="bzl-a1-Sva"/>
-                                            <constraint firstAttribute="bottom" secondItem="lDZ-Ci-Rbl" secondAttribute="bottom" id="zZ4-Ru-HfA"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="20"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="titleButton" destination="lDZ-Ci-Rbl" id="uyU-3M-Ptp"/>
-                                            <outlet property="wordsNumberLable" destination="Ge1-Fj-60h" id="i1g-t7-mDW"/>
-                                        </connections>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mgp-cV-bOJ" userLabel="Select Title View" customClass="LearningTypeTitleView" customModule="Vocabulary" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="201" width="335" height="176"/>
-                                        <subviews>
-                                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kr3-8i-GXQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
-                                                <color key="backgroundColor" red="0.55686274509803924" green="0.75294117647058822" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                                <state key="normal" title="Repeat">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mgp-cV-bOJ" userLabel="Select Title View" customClass="LearningOptionTitleView" customModule="Vocabulary" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="201" width="335" height="176"/>
+                                                <subviews>
+                                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kr3-8i-GXQ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
+                                                        <color key="backgroundColor" red="0.55686274509803924" green="0.75294117647058822" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                        <state key="normal" title="Repeat">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <segue destination="cYq-TG-4ba" kind="show" identifier="repetition" id="Nyf-fH-wu3"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDZ-ad-TXu">
+                                                        <rect key="frame" x="309.5" y="13" width="12.5" height="24"/>
+                                                        <color key="backgroundColor" red="0.55567562580108643" green="0.75428664684295654" blue="0.3850540816783905" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstItem="kr3-8i-GXQ" firstAttribute="top" secondItem="Mgp-cV-bOJ" secondAttribute="top" id="E8K-JN-kpw"/>
+                                                    <constraint firstItem="kr3-8i-GXQ" firstAttribute="leading" secondItem="Mgp-cV-bOJ" secondAttribute="leading" id="Z4N-2m-2bu"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="jDZ-ad-TXu" secondAttribute="trailing" constant="5" id="jAe-T3-51x"/>
+                                                    <constraint firstItem="jDZ-ad-TXu" firstAttribute="top" secondItem="Mgp-cV-bOJ" secondAttribute="topMargin" constant="5" id="tJu-2b-3dp"/>
+                                                    <constraint firstAttribute="bottom" secondItem="kr3-8i-GXQ" secondAttribute="bottom" id="x1K-B9-Iem"/>
+                                                    <constraint firstAttribute="trailing" secondItem="kr3-8i-GXQ" secondAttribute="trailing" id="xki-6b-4Wz"/>
+                                                </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="10"/>
+                                                        <real key="value" value="20"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <segue destination="cYq-TG-4ba" kind="show" identifier="repetition" id="Nyf-fH-wu3"/>
+                                                    <outlet property="titleButton" destination="kr3-8i-GXQ" id="hvG-wo-F53"/>
+                                                    <outlet property="wordsNumberLabel" destination="jDZ-ad-TXu" id="OeK-cB-jGp"/>
                                                 </connections>
-                                            </button>
-                                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDZ-ad-TXu">
-                                                <rect key="frame" x="309.5" y="13" width="12.5" height="24"/>
-                                                <color key="backgroundColor" red="0.55567562580108643" green="0.75428664684295654" blue="0.3850540816783905" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstItem="kr3-8i-GXQ" firstAttribute="top" secondItem="Mgp-cV-bOJ" secondAttribute="top" id="E8K-JN-kpw"/>
-                                            <constraint firstItem="kr3-8i-GXQ" firstAttribute="leading" secondItem="Mgp-cV-bOJ" secondAttribute="leading" id="Z4N-2m-2bu"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="jDZ-ad-TXu" secondAttribute="trailing" constant="5" id="jAe-T3-51x"/>
-                                            <constraint firstItem="jDZ-ad-TXu" firstAttribute="top" secondItem="Mgp-cV-bOJ" secondAttribute="topMargin" constant="5" id="tJu-2b-3dp"/>
-                                            <constraint firstAttribute="bottom" secondItem="kr3-8i-GXQ" secondAttribute="bottom" id="x1K-B9-Iem"/>
-                                            <constraint firstAttribute="trailing" secondItem="kr3-8i-GXQ" secondAttribute="trailing" id="xki-6b-4Wz"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="20"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="titleButton" destination="kr3-8i-GXQ" id="hvG-wo-F53"/>
-                                            <outlet property="wordsNumberLable" destination="jDZ-ad-TXu" id="OeK-cB-jGp"/>
-                                        </connections>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lK3-xf-Zo7" userLabel="Remind Word Title View" customClass="LearningTypeTitleView" customModule="Vocabulary" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="402" width="335" height="176"/>
-                                        <subviews>
-                                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0P-DW-gca">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
-                                                <color key="backgroundColor" red="0.42352941176470588" green="0.55686274509803924" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                                <state key="normal" title="Remind">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <state key="disabled">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lK3-xf-Zo7" userLabel="Remind Word Title View" customClass="LearningOptionTitleView" customModule="Vocabulary" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="402" width="335" height="176"/>
+                                                <subviews>
+                                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0P-DW-gca">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
+                                                        <color key="backgroundColor" red="0.42352941176470588" green="0.55686274509803924" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                        <state key="normal" title="Remind">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <state key="disabled">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <segue destination="jhV-t9-YKw" kind="show" identifier="remindWord" id="BzY-wa-tRf"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wig-jR-hvF">
+                                                        <rect key="frame" x="309.5" y="13" width="12.5" height="24"/>
+                                                        <color key="backgroundColor" red="0.42513942718505859" green="0.55710518360137939" blue="0.8890194296836853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="wig-jR-hvF" secondAttribute="trailing" constant="5" id="Tdv-EY-0IW"/>
+                                                    <constraint firstAttribute="trailing" secondItem="P0P-DW-gca" secondAttribute="trailing" id="XqZ-gC-d3v"/>
+                                                    <constraint firstItem="wig-jR-hvF" firstAttribute="top" secondItem="lK3-xf-Zo7" secondAttribute="topMargin" constant="5" id="YmK-k6-Zfy"/>
+                                                    <constraint firstItem="P0P-DW-gca" firstAttribute="leading" secondItem="lK3-xf-Zo7" secondAttribute="leading" id="dTx-dJ-LpC"/>
+                                                    <constraint firstAttribute="bottom" secondItem="P0P-DW-gca" secondAttribute="bottom" id="qJX-cB-c8l"/>
+                                                    <constraint firstItem="P0P-DW-gca" firstAttribute="top" secondItem="lK3-xf-Zo7" secondAttribute="top" id="xMb-ee-NIv"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <segue destination="jhV-t9-YKw" kind="show" identifier="remindWord" id="BzY-wa-tRf"/>
+                                                    <outlet property="titleButton" destination="P0P-DW-gca" id="x1k-Ac-67E"/>
+                                                    <outlet property="wordsNumberLabel" destination="wig-jR-hvF" id="Qjq-Ma-LST"/>
                                                 </connections>
-                                            </button>
-                                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wig-jR-hvF">
-                                                <rect key="frame" x="309.5" y="13" width="12.5" height="24"/>
-                                                <color key="backgroundColor" red="0.42513942718505859" green="0.55710518360137939" blue="0.8890194296836853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            </view>
                                         </subviews>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailingMargin" secondItem="wig-jR-hvF" secondAttribute="trailing" constant="5" id="Tdv-EY-0IW"/>
-                                            <constraint firstAttribute="trailing" secondItem="P0P-DW-gca" secondAttribute="trailing" id="XqZ-gC-d3v"/>
-                                            <constraint firstItem="wig-jR-hvF" firstAttribute="top" secondItem="lK3-xf-Zo7" secondAttribute="topMargin" constant="5" id="YmK-k6-Zfy"/>
-                                            <constraint firstItem="P0P-DW-gca" firstAttribute="leading" secondItem="lK3-xf-Zo7" secondAttribute="leading" id="dTx-dJ-LpC"/>
-                                            <constraint firstAttribute="bottom" secondItem="P0P-DW-gca" secondAttribute="bottom" id="qJX-cB-c8l"/>
-                                            <constraint firstItem="P0P-DW-gca" firstAttribute="top" secondItem="lK3-xf-Zo7" secondAttribute="top" id="xMb-ee-NIv"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="20"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="titleButton" destination="P0P-DW-gca" id="x1k-Ac-67E"/>
-                                            <outlet property="wordsNumberLable" destination="wig-jR-hvF" id="Qjq-Ma-LST"/>
-                                        </connections>
-                                    </view>
+                                    </stackView>
                                 </subviews>
-                            </stackView>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="hO8-0F-HLN" firstAttribute="top" secondItem="GxA-sI-Qkj" secondAttribute="top" id="ejw-uB-ej4"/>
+                                    <constraint firstAttribute="trailing" secondItem="hO8-0F-HLN" secondAttribute="trailing" id="mRl-3E-Fct"/>
+                                    <constraint firstItem="hO8-0F-HLN" firstAttribute="leading" secondItem="GxA-sI-Qkj" secondAttribute="leading" id="u3t-mw-yxl"/>
+                                    <constraint firstAttribute="bottom" secondItem="hO8-0F-HLN" secondAttribute="bottom" id="xVv-VV-204"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="rememberTypeTitles" destination="mMU-yJ-Zv3" id="cHC-CS-Bhz"/>
+                                    <outlet property="remindTypeTitles" destination="Mgp-cV-bOJ" id="BQp-cW-3v8"/>
+                                    <outlet property="repeatTypeTitles" destination="lK3-xf-Zo7" id="yqc-pO-zoW"/>
+                                </connections>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="8eM-38-D1v" firstAttribute="bottom" secondItem="hO8-0F-HLN" secondAttribute="bottom" constant="20" id="CFR-5P-2sh"/>
-                            <constraint firstItem="hO8-0F-HLN" firstAttribute="leading" secondItem="8eM-38-D1v" secondAttribute="leading" constant="20" id="GSR-k1-RtH"/>
-                            <constraint firstItem="hO8-0F-HLN" firstAttribute="top" secondItem="8eM-38-D1v" secondAttribute="top" constant="20" id="LVH-Xh-pAA"/>
-                            <constraint firstItem="8eM-38-D1v" firstAttribute="trailing" secondItem="hO8-0F-HLN" secondAttribute="trailing" constant="20" id="YPw-1v-XVw"/>
+                            <constraint firstItem="GxA-sI-Qkj" firstAttribute="leading" secondItem="8eM-38-D1v" secondAttribute="leading" constant="20" id="3IJ-Jx-27K"/>
+                            <constraint firstItem="8eM-38-D1v" firstAttribute="bottom" secondItem="GxA-sI-Qkj" secondAttribute="bottom" constant="20" id="mh1-hi-8Fa"/>
+                            <constraint firstItem="8eM-38-D1v" firstAttribute="trailing" secondItem="GxA-sI-Qkj" secondAttribute="trailing" constant="20" id="upB-vQ-sOk"/>
+                            <constraint firstItem="GxA-sI-Qkj" firstAttribute="top" secondItem="8eM-38-D1v" secondAttribute="top" constant="20" id="xuz-lM-sZH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8eM-38-D1v"/>
                     </view>
@@ -175,9 +192,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outletCollection property="learningTypeTitles" destination="mMU-yJ-Zv3" collectionClass="NSMutableArray" id="Rfd-lF-vSM"/>
-                        <outletCollection property="learningTypeTitles" destination="Mgp-cV-bOJ" collectionClass="NSMutableArray" id="h3e-mG-t6u"/>
-                        <outletCollection property="learningTypeTitles" destination="lK3-xf-Zo7" collectionClass="NSMutableArray" id="CW0-3p-xqI"/>
+                        <outlet property="learningOptionsView" destination="GxA-sI-Qkj" id="qnN-cB-Gpc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NaI-uw-hcr" userLabel="First Responder" sceneMemberID="firstResponder"/>
