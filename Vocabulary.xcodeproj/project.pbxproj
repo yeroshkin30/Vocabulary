@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11364EE923956FD900A0C334 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 11364EE823956FD900A0C334 /* README.md */; };
+		1168E16E23993DF6008CFA33 /* AppRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168E16D23993DF6008CFA33 /* AppRootViewController.swift */; };
 		3D04AFC3204C69E200E89E10 /* UiViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D04AFC2204C69E200E89E10 /* UiViewController+extension.swift */; };
 		3D0B98EA20EE73E000D8ABD1 /* FetchRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0B98E920EE73E000D8ABD1 /* FetchRequestFactory.swift */; };
 		3D0C96732286F2E500E9F64E /* Vocabulary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D0C96702286F2E500E9F64E /* Vocabulary.xcdatamodeld */; };
@@ -83,7 +84,7 @@
 		3DCF6D1020650BFC00635743 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCF6D0F20650BFC00635743 /* UIView+extension.swift */; };
 		3DCF6D122065DDC300635743 /* LearningTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCF6D112065DDC300635743 /* LearningTypesViewController.swift */; };
 		3DD51A3C215E18ED0099BADB /* ListOfWordsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD51A3B215E18ED0099BADB /* ListOfWordsDataSource.swift */; };
-		3DD6DA8921D96A0500F76B61 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD6DA8821D96A0500F76B61 /* Home.storyboard */; };
+		3DD6DA8921D96A0500F76B61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD6DA8821D96A0500F76B61 /* Main.storyboard */; };
 		3DDBEE1C20E88240009FADC2 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DDBEE1B20E88240009FADC2 /* Words.storyboard */; };
 		3DDC4885205350290023FDD9 /* UITableView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDC4884205350290023FDD9 /* UITableView+extension.swift */; };
 		3DDC4887205350420023FDD9 /* UICollectionView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDC4886205350420023FDD9 /* UICollectionView+extension.swift */; };
@@ -94,6 +95,7 @@
 
 /* Begin PBXFileReference section */
 		11364EE823956FD900A0C334 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1168E16D23993DF6008CFA33 /* AppRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootViewController.swift; sourceTree = "<group>"; };
 		3D04AFC2204C69E200E89E10 /* UiViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiViewController+extension.swift"; sourceTree = "<group>"; };
 		3D0B98E920EE73E000D8ABD1 /* FetchRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestFactory.swift; sourceTree = "<group>"; };
 		3D0C96712286F2E500E9F64E /* Vocabulary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vocabulary.xcdatamodel; sourceTree = "<group>"; };
@@ -172,7 +174,7 @@
 		3DCF6D0F20650BFC00635743 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
 		3DCF6D112065DDC300635743 /* LearningTypesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningTypesViewController.swift; sourceTree = "<group>"; };
 		3DD51A3B215E18ED0099BADB /* ListOfWordsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfWordsDataSource.swift; sourceTree = "<group>"; };
-		3DD6DA8821D96A0500F76B61 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		3DD6DA8821D96A0500F76B61 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3DDBEE1B20E88240009FADC2 /* Words.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
 		3DDC4884205350290023FDD9 /* UITableView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+extension.swift"; sourceTree = "<group>"; };
 		3DDC4886205350420023FDD9 /* UICollectionView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+extension.swift"; sourceTree = "<group>"; };
@@ -289,7 +291,7 @@
 		3D5F383C229BE640006FD548 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				3DD6DA8821D96A0500F76B61 /* Home.storyboard */,
+				3DD6DA8821D96A0500F76B61 /* Main.storyboard */,
 				3D6A33DF229C22E600695A0F /* Learning.storyboard */,
 				3DDBEE1B20E88240009FADC2 /* Words.storyboard */,
 				3DA9DFBE2031D6910098A162 /* LaunchScreen.storyboard */,
@@ -450,6 +452,7 @@
 		3DB218882160CBE400F6367A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1168E16D23993DF6008CFA33 /* AppRootViewController.swift */,
 				3D71552C2293BCAC00F3E949 /* RootViewController.swift */,
 				3D2D824D21E71F18005E365E /* HomeViewController.swift */,
 				3D6AD8D720EB9B1A004716DF /* WordCollectionsTableViewController.swift */,
@@ -607,7 +610,7 @@
 				3D80F19F2281790A00B1C66A /* Vocabulary.sqlite-shm in Resources */,
 				3DA9DFC02031D6910098A162 /* LaunchScreen.storyboard in Resources */,
 				3D24CF8E20713229006EF57B /* SelectHeadwordInputView.xib in Resources */,
-				3DD6DA8921D96A0500F76B61 /* Home.storyboard in Resources */,
+				3DD6DA8921D96A0500F76B61 /* Main.storyboard in Resources */,
 				3D2EE31921F0A52F00E7AB52 /* LoadingView.xib in Resources */,
 				3D11A702207263FC0004D465 /* LetterCollectionViewCell.xib in Resources */,
 				3D27AA01209C17DC009C5B95 /* Assets.xcassets in Resources */,
@@ -668,6 +671,7 @@
 				3DE8D82E2280B729001A3096 /* Swift+extension.swift in Sources */,
 				3D80F19322812C5E00B1C66A /* WordCollectionsDataSource.swift in Sources */,
 				3DAEB0BB20A9A7F80017083F /* CardCollectionView.swift in Sources */,
+				1168E16E23993DF6008CFA33 /* AppRootViewController.swift in Sources */,
 				3D87C188207EBCBD00BBEAE6 /* RememberingCompletionViewController.swift in Sources */,
 				3D14D19B20C821BA005947AF /* LearningKeyboardAccessoryView.swift in Sources */,
 				3D2EE32321F0CF5D00E7AB52 /* SearchPromptsDataSource.swift in Sources */,

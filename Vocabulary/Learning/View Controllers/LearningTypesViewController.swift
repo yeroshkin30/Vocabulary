@@ -16,14 +16,23 @@ class LearningTypesViewController: UIViewController, SegueHandlerType {
 	enum LearningType: Int {
 		case rememberWords, repeatWords, remindWords
 	}
-	
-	// MARK: - Public propertis -
-	
-	var vocabularyStore: VocabularyStore!
-	
+
 	// MARK: - Outlets -
-	
+
 	@IBOutlet private var learningTypeTitles: [LearningTypeTitleView]!
+
+	// MARK: - Initialization
+
+	private let vocabularyStore: VocabularyStore
+
+	init?(coder: NSCoder, vocabularyStore: VocabularyStore) {
+		self.vocabularyStore = vocabularyStore
+		super.init(coder: coder)
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 
 	// MARK: - Life cycle
 	

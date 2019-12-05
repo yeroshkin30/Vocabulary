@@ -12,10 +12,10 @@ class RootViewController: UIViewController {
 	
 	private lazy var navigationVC = UINavigationController(nibName: nil, bundle: nil)
 	
-	private lazy var wordCollectionsVC = UIStoryboard(storyboard: .home)
+	private lazy var wordCollectionsVC = UIStoryboard(storyboard: .main)
 		.instantiateViewController() as WordCollectionsTableViewController
 	
-	private lazy var homeVC = UIStoryboard(storyboard: .home)
+	private lazy var homeVC = UIStoryboard(storyboard: .main)
 		.instantiateViewController() as HomeViewController
 	
 	override func viewDidLoad() {

@@ -85,7 +85,7 @@ class SearchDefinitionsTableViewController: UITableViewController {
 	}
 
 	private func showEntryController(with entry: Entry) {
-		let entryViewController = UIStoryboard(storyboard: .home)
+		let entryViewController = UIStoryboard(storyboard: .main)
 			.instantiateViewController() as EntryCollectionViewController
 
 		entryViewController.vocabularyStore = vocabularyStore

@@ -11,7 +11,7 @@ import UIKit
 extension UIStoryboard {
 	
 	enum Storyboard: String {
-		case home = "Home"
+		case main = "Main"
 		case learning = "Learning"
 		case wordsCollection = "Words"
 	}
@@ -25,9 +25,9 @@ extension UIStoryboard {
 	}
 
 	func instantiateViewController<T: UIViewController>() -> T {
-		let idenrifier = T.stringIdentifier
-		guard let viewController = instantiateViewController(withIdentifier: idenrifier) as? T else {
-			fatalError("Could not find view controller with name \(idenrifier)")
+		let identifier = T.stringIdentifier
+		guard let viewController = instantiateViewController(withIdentifier: identifier) as? T else {
+			fatalError("Could not find view controller with name \(identifier)")
 		}
 		return viewController
 	}

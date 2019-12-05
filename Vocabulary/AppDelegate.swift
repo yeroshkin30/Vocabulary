@@ -20,7 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		if DefaultDataProvider.isVocabularyEmpty() {
 			DefaultDataProvider.loadDefaultVocabulary()
 		}
-		
+
+		let appRootViewController = AppRootViewController(nibName: nil, bundle: nil)
+
+		window = UIWindow(frame: UIScreen.main.bounds)
+		window?.rootViewController = appRootViewController
+		window?.makeKeyAndVisible()
+
 		return true
 	}
 }

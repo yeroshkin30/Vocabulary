@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Learning Types View Controller-->
+        <!--Vocabulary-->
         <scene sceneID="Mht-YW-SEA">
             <objects>
                 <viewController storyboardIdentifier="LearningTabViewController" id="g6H-Xg-LGg" customClass="LearningTypesViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="hO8-0F-HLN">
-                                <rect key="frame" x="20" y="20" width="335" height="627"/>
+                                <rect key="frame" x="20" y="20" width="335" height="578"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMU-yJ-Zv3" userLabel="Remembering Title View" customClass="LearningTypeTitleView" customModule="Vocabulary" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="192.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
                                         <subviews>
                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDZ-Ci-Rbl">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="192.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
                                                 <color key="backgroundColor" red="0.9137254901960784" green="0.46666666666666667" blue="0.41568627450980394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <state key="normal" title="Remember">
@@ -67,10 +67,10 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mgp-cV-bOJ" userLabel="Select Title View" customClass="LearningTypeTitleView" customModule="Vocabulary" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="217.5" width="335" height="192"/>
+                                        <rect key="frame" x="0.0" y="201" width="335" height="176"/>
                                         <subviews>
                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kr3-8i-GXQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="192"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
                                                 <color key="backgroundColor" red="0.55686274509803924" green="0.75294117647058822" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <state key="normal" title="Repeat">
@@ -113,10 +113,10 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lK3-xf-Zo7" userLabel="Remind Word Title View" customClass="LearningTypeTitleView" customModule="Vocabulary" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="434.5" width="335" height="192.5"/>
+                                        <rect key="frame" x="0.0" y="402" width="335" height="176"/>
                                         <subviews>
                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0P-DW-gca">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="192.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
                                                 <color key="backgroundColor" red="0.42352941176470588" green="0.55686274509803924" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <state key="normal" title="Remind">
@@ -168,7 +168,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8eM-38-D1v"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Learning" image="Learinig Icon - Inactive" selectedImage="Learinig Icon - Active" id="4gb-MW-B1g"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Vocabulary" largeTitleDisplayMode="always" id="1xF-nf-agS">
+                        <barButtonItem key="leftBarButtonItem" title="Sets" id="G3S-Ah-Pfa"/>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outletCollection property="learningTypeTitles" destination="mMU-yJ-Zv3" collectionClass="NSMutableArray" id="Rfd-lF-vSM"/>
                         <outletCollection property="learningTypeTitles" destination="Mgp-cV-bOJ" collectionClass="NSMutableArray" id="h3e-mG-t6u"/>
@@ -177,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NaI-uw-hcr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1924" y="-340.47976011994007"/>
+            <point key="canvasLocation" x="-984.79999999999995" y="-340.47976011994007"/>
         </scene>
         <!--Repeat words-->
         <scene sceneID="vne-kM-Wh0">
@@ -328,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g0q-kS-7R9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-884" y="92"/>
+            <point key="canvasLocation" x="55.200000000000003" y="91.304347826086968"/>
         </scene>
         <!--Remembering Completion View Controller-->
         <scene sceneID="Py2-aw-a09">
@@ -465,7 +470,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6zE-1a-BfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129" y="92"/>
+            <point key="canvasLocation" x="1068" y="91.304347826086968"/>
         </scene>
         <!--Remind words-->
         <scene sceneID="QdI-ra-PuD">
@@ -742,7 +747,7 @@ She keeps a list of books for future reading.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqh-uR-bm3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1924" y="460"/>
+            <point key="canvasLocation" x="-985" y="470"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WQz-BT-OFP">
@@ -760,7 +765,7 @@ She keeps a list of books for future reading.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mHp-Ac-F9b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130" y="-681"/>
+            <point key="canvasLocation" x="1068" y="-681.40929535232385"/>
         </scene>
         <!--Unknown words-->
         <scene sceneID="vbS-bI-zyX">
@@ -1038,13 +1043,15 @@ She keeps a list of books for future reading.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n3n-oh-Ltr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-884" y="-681"/>
+            <point key="canvasLocation" x="55.200000000000003" y="-681.40929535232385"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Learinig Icon - Active" width="47" height="30"/>
+        <image name="Learinig Icon - Inactive" width="47" height="30"/>
         <image name="Speaker" width="30" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YGs-tb-OPe"/>
+        <segue reference="Nyf-fH-wu3"/>
     </inferredMetricsTieBreakers>
 </document>

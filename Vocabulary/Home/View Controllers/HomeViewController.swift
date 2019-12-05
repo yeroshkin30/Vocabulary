@@ -16,7 +16,7 @@ class HomeViewController: UIViewController, SegueHandlerType {
 	
 	// MARK: - Private properties
 	
-	private lazy var searchDefinitionsViewController = UIStoryboard(storyboard: .home)
+	private lazy var searchDefinitionsViewController = UIStoryboard(storyboard: .main)
 		.instantiateViewController() as SearchDefinitionsTableViewController
 	
 	private lazy var searchController = UISearchController(searchResultsController: searchDefinitionsViewController)
@@ -49,7 +49,7 @@ class HomeViewController: UIViewController, SegueHandlerType {
 		switch segueIdentifier(for: segue) {
 		case .learningTypes:
 			let viewController = segue.destination as! LearningTypesViewController
-			viewController.vocabularyStore = vocabularyStore
+//			viewController.vocabularyStore = vocabularyStore
 			
 		case .words:
 			let viewController = segue.destination as! ListOfWordsViewController
