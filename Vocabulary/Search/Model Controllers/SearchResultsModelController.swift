@@ -1,5 +1,5 @@
 //
-//	SearchResultsDataSource.swift
+//	SearchResultsModelController.swift
 //	Vocabulary
 //
 //	Created by Alexander Baraley on 1/17/19.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SearchResultsDataSource: NSObject {
+class SearchResultsModelController: NSObject {
 	
-	private let searchResult: EntriesParsingResult
+	var searchResult: EntriesParsingResult
 	
 	// MARK: - Initialization -
 	
@@ -22,7 +22,7 @@ class SearchResultsDataSource: NSObject {
 }
 
 // MARK: - Helpers -
-private extension SearchResultsDataSource {
+private extension SearchResultsModelController {
 	
 	func configureCell(_ cell: UITableViewCell, at indexPath: IndexPath) {
 		
@@ -43,7 +43,7 @@ private extension SearchResultsDataSource {
 }
 
 // MARK: - UITableViewDataSource -
-extension SearchResultsDataSource: UITableViewDataSource {
+extension SearchResultsModelController: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		switch searchResult {

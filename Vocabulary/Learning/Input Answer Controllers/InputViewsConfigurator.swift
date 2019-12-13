@@ -60,10 +60,10 @@ class InputViewsConfigurator: NSObject {
 	
 	private lazy var keyboardAccessoryView: LearningKeyboardAccessoryView = {
 		let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 44.0)
-		let accessoryVeiw = LearningKeyboardAccessoryView(frame: frame)
-		accessoryVeiw.isTranslucent = false
-		accessoryVeiw.actionHandler = textFieldDelegate
-		return accessoryVeiw
+		let accessoryView = LearningKeyboardAccessoryView(frame: frame)
+		accessoryView.isTranslucent = false
+		accessoryView.actionHandler = textFieldDelegate
+		return accessoryView
 	}()
 	
 	private func inputView(for word: Word) -> UIView? {
@@ -112,7 +112,7 @@ class InputViewsConfigurator: NSObject {
 		case constructHeadword
 		case keyboard
 		
-		init(_ stage: Word.LearnigStageDetail) {
+		init(_ stage: Word.LearningStageDetail) {
 			switch stage {
 			case .select:		self = .selectHeadword
 			case .construct:	self = .constructHeadword

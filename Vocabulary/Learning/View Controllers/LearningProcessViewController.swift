@@ -31,7 +31,7 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 		return handler
 	}()
 	
-	private var currentAnswerCorrenctness: AnswerCorrectness?
+	private var currentAnswerCorrectness: AnswerCorrectness?
 	
 	private lazy var endRepetitionMessageView: MessageView = {
 		let view: MessageView = MessageView.instantiate()
@@ -49,7 +49,7 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 		showCloseButtonActionSheet()
 	}
 	
-	// MARK: - Life cicle
+	// MARK: - Life cycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -61,7 +61,6 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 		super.viewWillDisappear(animated)
 		
 		currentCell?.answerTextField.resignFirstResponder()
-		NotificationCenter.default.removeObserver(self)
 	}
 	
 	override var textInputContextIdentifier: String? {
@@ -204,7 +203,7 @@ extension LearningProcessViewController: LearningWordsAnswersHandlerDelegate {
 	func answersReceiver(_ handler: AnswersReceiver,
 						didAcceptAnswer answer: AnswerCorrectness) {
 		
-		currentAnswerCorrenctness = answer
+		currentAnswerCorrectness = answer
 		currentCell?.selectToAnswer(answer)
 		
 		if autoPronounceButton.isSelected {
@@ -221,7 +220,7 @@ extension LearningProcessViewController: LearningWordsAnswersHandlerDelegate {
 	}
 	
 	func answersReceiverReadyForNextQuestion(_ handler: AnswersReceiver) {
-		guard let answer = currentAnswerCorrenctness else { return }
+		guard let answer = currentAnswerCorrectness else { return }
 		
 		switch answer {
 		case .correct:

@@ -45,10 +45,10 @@ class EntriesParserDelegate: NSObject {
 	var anExample = ""
 	
 	func parseEntriesFrom(_ data: Data) -> EntriesParsingResult? {
-		let parcer = XMLParser(data: data)
-		parcer.delegate = self
+		let parser = XMLParser(data: data)
+		parser.delegate = self
 		
-		guard parcer.parse() else { return nil }
+		guard parser.parse() else { return nil }
 		
 		if let entries = entries, !entries.isEmpty {
 			return .entries(entries)

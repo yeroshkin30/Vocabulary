@@ -23,11 +23,11 @@ public class Word: NSManagedObject {
 		set { assignLearningStage(newValue)	}
 	}
 	
-	var learningStageDetail: LearnigStageDetail {
+	var learningStageDetail: LearningStageDetail {
 		get {
 			switch learningStage {
 			case .reminding:	return .numberOfReminders(Int(learningStageDetailValue))
-			default:			return LearnigStageDetail(value: learningStageDetailValue)
+			default:			return LearningStageDetail(value: learningStageDetailValue)
 			}
 		}
 		set {
@@ -74,7 +74,7 @@ extension Word {
 		var name: String { return LearningStage.names[Int(self.rawValue)] }
 	}
 	
-	enum LearnigStageDetail {
+	enum LearningStageDetail {
 		
 		case none, select, construct, input, numberOfReminders(Int)
 		

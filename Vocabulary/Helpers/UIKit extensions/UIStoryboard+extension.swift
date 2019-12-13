@@ -13,6 +13,7 @@ extension UIStoryboard {
 	enum Storyboard: String {
 		case main = "Main"
 		case learning = "Learning"
+		case search = "Search"
 		case wordsCollection = "Words"
 	}
 	

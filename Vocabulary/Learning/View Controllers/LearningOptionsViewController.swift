@@ -36,12 +36,6 @@ class LearningOptionsViewController: UIViewController, SegueHandlerType {
 		setupNotifications()
 	}
 	
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
-		
-		removeNotifications()
-	}
-	
 	// MARK: - Navigation
 	
 	enum SegueIdentifier: String {
@@ -81,10 +75,6 @@ private extension LearningOptionsViewController {
 		NotificationCenter.default.addObserver(
 			self, selector: #selector(updateLearningOptionsView), name: name, object: nil
 		)
-	}
-	
-	func removeNotifications() {
-		NotificationCenter.default.removeObserver(self)
 	}
 	
 	@objc func updateLearningOptionsView() {

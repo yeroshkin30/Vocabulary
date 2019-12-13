@@ -38,7 +38,7 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 		pronounce(entry.headword)
 	}
 	
-	// MARK: - Life cicle
+	// MARK: - Life cycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -50,13 +50,14 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		navigationController?.isToolbarHidden = false
+		navigationController?.setToolbarHidden(false, animated: false)
 		navigationItem.title = entry.headword
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-		navigationController?.isToolbarHidden = true
+
+		navigationController?.setToolbarHidden(true, animated: false)
 		stopPronouncing()
 	}
 	

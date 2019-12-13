@@ -25,12 +25,12 @@ extension String {
 		var words: [String] = []
 		
 		let englishWordCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'-"
-		let forbidenCharactersSet = CharacterSet(charactersIn: englishWordCharacters).inverted
+		let forbiddenCharactersSet = CharacterSet(charactersIn: englishWordCharacters).inverted
 		
 		enumerateSubstrings(in: startIndex..<endIndex, options: [.byWords]) { (optionalWord, _, _, stop) in
 			
 			if let word = optionalWord,
-				word.rangeOfCharacter(from: forbidenCharactersSet) == nil {
+				word.rangeOfCharacter(from: forbiddenCharactersSet) == nil {
 				if word.count > 2 {
 					words.append(word)
 				}
@@ -53,12 +53,5 @@ extension String {
 			NSAttributedString.Key.strikethroughStyle, value: strikethroughStyleValue, range: range
 		)
 		return text
-	}
-}
-
-// MARK: - IndexPath -
-extension IndexPath {
-	static var first: IndexPath {
-		return IndexPath(row: 0, section: 0)
 	}
 }

@@ -20,9 +20,7 @@ class AppRootViewController: UITabBarController {
 	}
 
 	private func setupViewControllers() {
-		viewControllers = [
-			learningTabViewController()
-		]
+		setViewControllers([searchTabViewController(), learningTabViewController()], animated: false)
 	}
 
 	private func learningTabViewController() -> UIViewController {
@@ -35,6 +33,24 @@ class AppRootViewController: UITabBarController {
 		}
 
 		let viewController = UINavigationController(rootViewController: learningTypesViewController)
+		viewController.navigationBar.prefersLargeTitles = true
+		return viewController
+	}
+
+	private func searchTabViewController() -> UIViewController {
+		let searchStoryboard = UIStoryboard.storyboard(storyboard: .search)
+
+		guard let searchViewController = searchStoryboard.instantiateInitialViewController(creator: {
+			SearchTabViewController(
+				coder: $0,
+				vocabularyStore: self.vocabularyStore,
+				searchStateModelController: SearchStateModelController()
+			)
+		}) else {
+			fatalError()
+		}
+
+		let viewController = UINavigationController(rootViewController: searchViewController)
 		viewController.navigationBar.prefersLargeTitles = true
 		return viewController
 	}

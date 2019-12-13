@@ -17,7 +17,7 @@ class HomeViewController: UIViewController, SegueHandlerType {
 	// MARK: - Private properties
 	
 	private lazy var searchDefinitionsViewController = UIStoryboard(storyboard: .main)
-		.instantiateViewController() as SearchDefinitionsTableViewController
+		.instantiateViewController() as SearchTabViewController
 	
 	private lazy var searchController = UISearchController(searchResultsController: searchDefinitionsViewController)
 	
@@ -26,7 +26,7 @@ class HomeViewController: UIViewController, SegueHandlerType {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		searchDefinitionsViewController.vocabularyStore = vocabularyStore
+//		searchDefinitionsViewController.vocabularyStore = vocabularyStore
 		setupSearchController()
 	}
 	
@@ -71,6 +71,6 @@ private extension HomeViewController {
 		navigationItem.hidesSearchBarWhenScrolling = false
 		navigationItem.searchController = searchController
 		
-		searchDefinitionsViewController.searchBar = searchController.searchBar
+//		searchDefinitionsViewController.searchBar = searchController.searchBar
 	}
 }
