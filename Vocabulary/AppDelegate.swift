@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			DefaultDataProvider.loadDefaultVocabulary()
 		}
 
-		let appRootViewController = AppRootViewController(nibName: nil, bundle: nil)
+		let appRootViewController = AppRootViewController()
 
 		window = UIWindow(frame: UIScreen.main.bounds)
 		window?.rootViewController = appRootViewController

@@ -10,19 +10,31 @@ import UIKit
 import CoreData
 
 class ListOfWordsViewController: UITableViewController, SegueHandlerType {
+
+	// MARK: - Initialization
+
+	let vocabularyStore: VocabularyStore
+	private let learningStage: Word.LearningStage?
+
+	init?(coder: NSCoder, vocabularyStore: VocabularyStore, learningStage: Word.LearningStage?) {
+		self.vocabularyStore = vocabularyStore
+		self.learningStage = learningStage
+
+		super.init(coder: coder)
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 	
 	// MARK: - Public properties -
-	
-	var vocabularyStore: VocabularyStore!
 	
 	var dataChanges: [DataChange] = []
 	
 	// MARK: - Outlets -
 	
 	@IBOutlet private var editButton: UIBarButtonItem!
-	
-	@IBOutlet private var learningStageHeaderButton: UIButton!
-	
+
 	@IBOutlet private var createButton: UIBarButtonItem!
 	@IBOutlet private var moveButton: UIBarButtonItem!
 	@IBOutlet private var selectAllButton: UIBarButtonItem!
@@ -35,26 +47,17 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	
 	private let searchController = UISearchController(searchResultsController: nil)
 	
-	private lazy var wordsDataSource = ListOfWordsDataSource(context: vocabularyStore.context)
+	private lazy var wordsDataSource = ListOfWordsDataSource(context: vocabularyStore.context, learningStage: learningStage)
 	
-	private lazy var learningStagesPopover: ChooseLearningStageViewController = {
-		let vc = ChooseLearningStageViewController(style: .plain)
-		vc.vocabularyStore = vocabularyStore
-		vc.learningStageChangeHandler = { [weak self] stage in
-			self?.updateLearinigStage(with: stage)
-		}
-		return vc
-	}()
-	
-	private lazy var editingTolbarItems: [UIBarButtonItem] = [
+	private lazy var editingToolbarItems: [UIBarButtonItem] = [
 		moveButton, leftFlexibleSpace, selectAllButton, rightFlexibleSpace, deleteButton
 	]
 	
-	private lazy var dafaultTolbarItems: [UIBarButtonItem] = [
+	private lazy var defaultToolbarItems: [UIBarButtonItem] = [
 		leftFlexibleSpace, createButton, rightFlexibleSpace
 	]
 	
-	private var needShowEditingTolbarButtons = true
+	private var needShowEditingToolbarButtons = true
 	
 	private var editingWordIndexPath: IndexPath?
 	
@@ -63,19 +66,19 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		initialConfiguretion()
+		initialConfiguration()
 	}
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		
-		navigationController?.isToolbarHidden = false
+
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+
+		navigationController?.setToolbarHidden(false, animated: false)
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		stopPronouncing()
-		navigationController?.isToolbarHidden = true
+		navigationController?.setToolbarHidden(true, animated: false)
 	}
 	
 	override var textInputContextIdentifier: String? {
@@ -104,12 +107,12 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 		
 		switch segueIdentifier(for: segue) {
 		case .createWord, .editWord:
-			let viewController = navigationController.viewControllers.first as! CollectWordDataViewController
+			let viewController = navigationController.viewControllers.first as! EditWordViewController
 			viewController.delegate = self
 			
 			if let indexPath = editingWordIndexPath {
 				let word = wordsDataSource.wordAt(indexPath)
-				viewController.viewData = CollectWordDataViewController.ViewData(word: word)
+				viewController.viewData = EditWordViewController.ViewData(word: word)
 			}
 			
 		case .moveWords:
@@ -153,20 +156,27 @@ private extension ListOfWordsViewController {
 		let word = wordsDataSource.wordAt(indexPath).headword
 		pronounce(word)
 	}
-	
-	@IBAction func chooseLearningStageButtonAction(_ sender: UIButton) {
-		showLearningStagesPopover()
-	}
 }
 
 // MARK: - Configuration -
 private extension ListOfWordsViewController {
+
+	func initialConfiguration() {
+		vocabularyStore.context.undoManager = UndoManager()
+
+		wordsDataSource.delegate = self
+		tableView.dataSource = wordsDataSource
+
+		configureSearchController()
+		configureNavigationBar()
+		updateToolBar()
+	}
 	
 	func configureNavigationBar() {
 		navigationItem.hidesSearchBarWhenScrolling = false
 		navigationItem.searchController = searchController
 		
-		navigationItem.title = "\(currentWordCollectionInfo?.name ?? "Vocabulary")"
+		navigationItem.title = learningStage?.name ?? "All Words"
 	}
 	
 	func configureSearchController() {
@@ -177,20 +187,9 @@ private extension ListOfWordsViewController {
 		definesPresentationContext = true
 	}
 	
-	func initialConfiguretion() {
-		vocabularyStore.context.undoManager = UndoManager()
-		
-		wordsDataSource.delegate = self
-		tableView.dataSource = wordsDataSource
-		
-		configureSearchController()
-		configureNavigationBar()
-		updateToolBar()
-	}
-	
 	func updateToolBar() {
-		if isEditing && needShowEditingTolbarButtons {
-			toolbarItems = editingTolbarItems
+		if isEditing && needShowEditingToolbarButtons {
+			toolbarItems = editingToolbarItems
 			
 			let hasSelectedRows = (tableView.indexPathForSelectedRow?.count ?? 0) > 0
 			
@@ -199,34 +198,14 @@ private extension ListOfWordsViewController {
 			moveButton.isEnabled = hasSelectedRows
 			deleteButton.isEnabled = hasSelectedRows
 		} else {
-			toolbarItems = dafaultTolbarItems
+			toolbarItems = defaultToolbarItems
 		}
 		selectAllButton.title = isAllCellsSelected ? "Deselect All" : "Select All"
-	}
-	
-	func updateLearinigStage(with learningStage: Word.LearningStage?) {
-		guard wordsDataSource.learningStage != learningStage else { return }
-		
-		wordsDataSource.learningStage = learningStage
-		let learningStageName = learningStage?.name ?? "All Words"
-		learningStageHeaderButton.setTitle(learningStageName + " ▼", for: .normal)
-		learningStageHeaderButton.sizeToFit()
-		tableView.reloadData()
 	}
 }
 
 // MARK: - Helpers -
 private extension ListOfWordsViewController {
-	
-	func showLearningStagesPopover() {
-		let sourceRect = learningStageHeaderButton.bounds
-		learningStagesPopover.modalPresentationStyle = .popover
-		learningStagesPopover.popoverPresentationController?.sourceView = learningStageHeaderButton
-		learningStagesPopover.popoverPresentationController?.sourceRect = sourceRect
-		learningStagesPopover.popoverPresentationController?.delegate = self
-		
-		present(learningStagesPopover, animated: true)
-	}
 	
 	func deleteWords(at indexPaths: [IndexPath]) {
 		indexPaths.forEach {
@@ -292,12 +271,12 @@ extension ListOfWordsViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-		needShowEditingTolbarButtons = false
+		needShowEditingToolbarButtons = false
 		super.tableView(tableView, willBeginEditingRowAt: indexPath)
 	}
 	
 	override func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
-		needShowEditingTolbarButtons = true
+		needShowEditingToolbarButtons = true
 		super.tableView(tableView, didEndEditingRowAt: indexPath)
 	}
 	
@@ -334,10 +313,10 @@ extension ListOfWordsViewController: UISearchResultsUpdating {
 }
 
 // MARK: - EditWordViewControllerDelegate -
-extension ListOfWordsViewController: CollectWordDataViewControllerDelegate {
+extension ListOfWordsViewController: EditWordViewControllerDelegate {
 	
-	func collectWordDataViewController(_ viewController: CollectWordDataViewController,
-										didFinishWith action: CollectWordDataViewController.ResultAction) {		
+	func editWordViewController(_ viewController: EditWordViewController,
+										didFinishWith action: EditWordViewController.ResultAction) {		
 		switch action {
 		case .save:
 			vocabularyStore.context.undoManager?.beginUndoGrouping()
@@ -378,15 +357,5 @@ extension ListOfWordsViewController: FetchedResultsTableViewControllerDelegate {
 	
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		handleWordsChanges()
-	}
-}
-
-// MARK: - UIPopoverPresentationControllerDelegate -
-extension ListOfWordsViewController: UIPopoverPresentationControllerDelegate {
-	
-	func adaptivePresentationStyle(
-		for controller: UIPresentationController) -> UIModalPresentationStyle {
-		
-		return UIModalPresentationStyle.none
 	}
 }

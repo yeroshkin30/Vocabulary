@@ -12,14 +12,25 @@ import CoreData
 private(set) var currentWordCollectionInfo: WordCollectionInfo?
 
 class WordCollectionsTableViewController: UITableViewController, SegueHandlerType {
+
+	// MARK: - Initialization
+
+	let vocabularyStore: VocabularyStore
+
+	init?(coder: NSCoder, vocabularyStore: VocabularyStore) {
+		self.vocabularyStore = vocabularyStore
+		super.init(coder: coder)
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 	
 	// MARK: - Public properties -
 	
-	var vocabularyStore: VocabularyStore!
-	
 	var dataChanges: [DataChange] = []
 	
-	var didFinishSelectionHandler: (() -> Void)?
+	var wordCollectionDidSelectHandler: (() -> Void)?
 	
 	// MARK: - Private properties
 	
@@ -33,12 +44,6 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 	}
 	
 	private var wordCollectionToRename: WordCollection?
-	
-	// MARK: - Actions -
-	
-	@IBAction private func showLearningsTypesContorller() {
-		didFinishSelectionHandler?()
-	}
 	
 	// MARK: - Life Cycle
 	
@@ -142,6 +147,7 @@ private extension WordCollectionsTableViewController {
 				tableView.cellForRow(at: indexPath)?.accessoryType = .none
 			}
 			currentWordCollectionInfo = nil
+			wordCollectionDidSelectHandler?()
 			
 		} else {
 			if let oldWordCollection = currentWordCollection,
@@ -154,7 +160,7 @@ private extension WordCollectionsTableViewController {
 				tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
 			}
 			currentWordCollectionInfo = WordCollectionInfo(selectedWordCollection)
-			didFinishSelectionHandler?()
+			wordCollectionDidSelectHandler?()
 		}
 	}
 	
@@ -191,6 +197,7 @@ private extension WordCollectionsTableViewController {
 
 // MARK: - EditTextViewControllerDelegate
 extension WordCollectionsTableViewController: EditTextViewControllerDelegate {
+
 	func editTextViewController(_ controller: EditTextViewController, saveEditedText text: String) {
 		if let wordCollection = wordCollectionToRename {
 			wordCollection.name = text

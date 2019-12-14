@@ -10,18 +10,18 @@ import UIKit
 
 extension UIStoryboard {
 	
-	enum Storyboard: String {
+	enum StoryboardName: String {
 		case main = "Main"
 		case learning = "Learning"
 		case search = "Search"
-		case wordsCollection = "Words"
+		case words = "Words"
 	}
 	
-	convenience init(storyboard: Storyboard, bundle: Bundle? = nil) {
+	convenience init(storyboard: StoryboardName, bundle: Bundle? = nil) {
 		self.init(name: storyboard.rawValue, bundle: bundle)
 	}
 	
-	class func storyboard(storyboard: Storyboard, bundle: Bundle? = nil) -> UIStoryboard {
+	class func storyboard(storyboard: StoryboardName, bundle: Bundle? = nil) -> UIStoryboard {
 		return UIStoryboard(name: storyboard.rawValue, bundle: bundle)
 	}
 

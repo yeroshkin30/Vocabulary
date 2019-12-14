@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JjI-Iz-pje">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wdb-Cg-3hj">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
@@ -81,11 +81,6 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="hSB-8K-gSU">
                             <connections>
                                 <segue destination="MJN-Mz-a2o" kind="show" identifier="createCollection" id="2Ak-hZ-fYl"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Learning" id="iUL-fR-dgN">
-                            <connections>
-                                <action selector="showLearningsTypesContorller" destination="wdb-Cg-3hj" id="ie8-cJ-t5Y"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

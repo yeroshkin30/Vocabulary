@@ -1,18 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tbb-37-CIH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ldM-V1-KVZ">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Vocabulary-->
+        <scene sceneID="3ef-dY-K9O">
+            <objects>
+                <tableViewController id="ldM-V1-KVZ" customClass="WordsTabViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="eLj-VE-sfX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="UITableViewCell" textLabel="Uru-qV-3zP" detailTextLabel="a9U-XF-Ps2" style="IBUITableViewCellStyleValue1" id="DHL-7N-q9I">
+                                <rect key="frame" x="16" y="55.5" width="343" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DHL-7N-q9I" id="oVp-rL-v35">
+                                    <rect key="frame" x="0.0" y="0.0" width="317" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uru-qV-3zP">
+                                            <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a9U-XF-Ps2">
+                                            <rect key="frame" x="291" y="12" width="18" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="tbb-37-CIH" kind="show" identifier="showListOfWords" destinationCreationSelector="makeListOfWordsViewControllerWithCoder:sender:segueIdentifier:" id="wi2-oL-DpH"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ldM-V1-KVZ" id="M6a-ST-hrP"/>
+                            <outlet property="delegate" destination="ldM-V1-KVZ" id="dQE-Pw-5Z6"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Words" image="Words Icon" id="QIm-sW-Edj"/>
+                    <navigationItem key="navigationItem" title="Vocabulary" largeTitleDisplayMode="always" id="AKv-md-a5l"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nj8-EJ-EMN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2838" y="1483"/>
+        </scene>
         <!--List Of Words View Controller-->
         <scene sceneID="Tb7-5s-aAI">
             <objects>
-                <tableViewController storyboardIdentifier="ListOfWordsViewController" clearsSelectionOnViewWillAppear="NO" id="tbb-37-CIH" customClass="ListOfWordsViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ListOfWordsViewController" hidesBottomBarWhenPushed="YES" clearsSelectionOnViewWillAppear="NO" id="tbb-37-CIH" customClass="ListOfWordsViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wWD-i9-ZBM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="kHA-TL-T8N">
@@ -64,15 +113,6 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="ump-vO-gZC">
                         <nil key="title"/>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ve3-FX-I0h">
-                            <rect key="frame" x="136.5" y="4" width="102" height="36"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                            <state key="normal" title="All words ▼"/>
-                            <connections>
-                                <action selector="chooseLearningStageButtonAction:" destination="tbb-37-CIH" eventType="touchUpInside" id="IfK-CJ-iE6"/>
-                            </connections>
-                        </button>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="7RU-SG-Zyy">
                             <connections>
                                 <action selector="editButtonAction:" destination="tbb-37-CIH" id="Yj5-H5-KXC"/>
@@ -84,7 +124,6 @@
                         <outlet property="createButton" destination="WVE-4C-tLT" id="tnY-NT-aAB"/>
                         <outlet property="deleteButton" destination="C6G-M0-X7v" id="1Tj-hs-fN2"/>
                         <outlet property="editButton" destination="7RU-SG-Zyy" id="cXE-e9-VzZ"/>
-                        <outlet property="learningStageHeaderButton" destination="ve3-FX-I0h" id="aHa-F7-a5t"/>
                         <outlet property="leftFlexibleSpace" destination="gN0-CK-9kY" id="mcc-C4-koX"/>
                         <outlet property="moveButton" destination="CF3-eZ-JCU" id="As3-r4-cPC"/>
                         <outlet property="rightFlexibleSpace" destination="ZOT-7L-Mln" id="FsZ-qP-94z"/>
@@ -199,7 +238,7 @@
         <!--Edit word-->
         <scene sceneID="COZ-1f-Unw">
             <objects>
-                <tableViewController storyboardIdentifier="EditWordViewController" id="Lgi-Dd-Pa6" customClass="CollectWordDataViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditWordViewController" id="Lgi-Dd-Pa6" customClass="EditWordViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="hfM-Uc-6Rd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -335,6 +374,7 @@
     </scenes>
     <resources>
         <image name="Speaker" width="30" height="25"/>
+        <image name="Words Icon" width="37" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QRg-st-dhV"/>

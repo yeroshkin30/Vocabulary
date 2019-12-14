@@ -10,7 +10,7 @@ import UIKit
 
 class SearchResultsModelController: NSObject {
 	
-	var searchResult: EntriesParsingResult
+	private let searchResult: EntriesParsingResult
 	
 	// MARK: - Initialization -
 	

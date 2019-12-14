@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g6H-Xg-LGg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g6H-Xg-LGg">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -185,11 +185,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8eM-38-D1v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Learning" image="Learinig Icon - Inactive" selectedImage="Learinig Icon - Active" id="4gb-MW-B1g"/>
+                    <tabBarItem key="tabBarItem" title="Learning" image="Learinig Icon" id="4gb-MW-B1g"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Vocabulary" largeTitleDisplayMode="always" id="1xF-nf-agS">
-                        <barButtonItem key="leftBarButtonItem" title="Sets" id="G3S-Ah-Pfa"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Vocabulary" largeTitleDisplayMode="always" id="1xF-nf-agS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="learningOptionsView" destination="GxA-sI-Qkj" id="qnN-cB-Gpc"/>
@@ -1062,8 +1060,7 @@ She keeps a list of books for future reading.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="Learinig Icon - Active" width="47" height="30"/>
-        <image name="Learinig Icon - Inactive" width="47" height="30"/>
+        <image name="Learinig Icon" width="47" height="30"/>
         <image name="Speaker" width="30" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>

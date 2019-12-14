@@ -12,46 +12,89 @@ class AppRootViewController: UITabBarController {
 
 	private let vocabularyStore = VocabularyStore()
 
+	private let showWordCollectionsBarButton = UIBarButtonItem(
+		title: "Collections", style: .plain, target: self, action: #selector(showWordCollections)
+	)
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		view.backgroundColor = .white
 		setupViewControllers()
 	}
+}
 
-	private func setupViewControllers() {
-		setViewControllers([searchTabViewController(), learningTabViewController()], animated: false)
-	}
+// MARK: - Private
+private extension AppRootViewController {
 
-	private func learningTabViewController() -> UIViewController {
+	var learningTabInitialViewController: LearningOptionsViewController {
 		let learningStoryboard = UIStoryboard.storyboard(storyboard: .learning)
 
-		guard let learningTypesViewController = learningStoryboard.instantiateInitialViewController(creator: {
+		guard let learningOptionsViewController = learningStoryboard.instantiateInitialViewController(creator: {
 			LearningOptionsViewController(coder: $0, vocabularyStore: self.vocabularyStore)
-		}) else {
-			fatalError()
-		}
+		}) else { fatalError() }
 
-		let viewController = UINavigationController(rootViewController: learningTypesViewController)
-		viewController.navigationBar.prefersLargeTitles = true
-		return viewController
+		return learningOptionsViewController
 	}
 
-	private func searchTabViewController() -> UIViewController {
+	var searchTabInitialViewController: SearchTabViewController {
 		let searchStoryboard = UIStoryboard.storyboard(storyboard: .search)
 
 		guard let searchViewController = searchStoryboard.instantiateInitialViewController(creator: {
-			SearchTabViewController(
-				coder: $0,
-				vocabularyStore: self.vocabularyStore,
-				searchStateModelController: SearchStateModelController()
-			)
-		}) else {
-			fatalError()
+			SearchTabViewController(coder: $0,
+									vocabularyStore: self.vocabularyStore,
+									searchStateModelController: SearchStateModelController())
+		}) else { fatalError() }
+
+		return searchViewController
+	}
+
+	var wordsTabInitialViewController: WordsTabViewController {
+		let wordsStoryboard = UIStoryboard.storyboard(storyboard: .words)
+
+		guard let wordsViewController = wordsStoryboard.instantiateInitialViewController(creator: {
+			WordsTabViewController(coder: $0, vocabularyStore: self.vocabularyStore)
+		}) else { fatalError() }
+
+		return wordsViewController
+	}
+
+	func setupViewControllers() {
+		let learningTabVC = tabNavigationController(with: learningTabInitialViewController)
+		let searchTabVC = tabNavigationController(with: searchTabInitialViewController)
+		let wordsTabVC = tabNavigationController(with: wordsTabInitialViewController)
+
+		viewControllers = [learningTabVC, searchTabVC, wordsTabVC]
+	}
+
+	func tabNavigationController(with viewController: UIViewController) -> UINavigationController {
+		let navVC = UINavigationController(rootViewController: viewController)
+		navVC.navigationBar.prefersLargeTitles = true
+
+		viewController.navigationItem.setLeftBarButton(showWordCollectionsBarButton, animated: false)
+
+		return navVC
+	}
+
+	@objc
+	func showWordCollections() {
+		let mainStoryboard = UIStoryboard.storyboard(storyboard: .main)
+
+		guard let wordCollectionsViewController = mainStoryboard.instantiateInitialViewController(creator: {
+			WordCollectionsTableViewController(coder: $0, vocabularyStore: self.vocabularyStore)
+		}) else { fatalError() }
+
+		wordCollectionsViewController.wordCollectionDidSelectHandler = { [unowned self] in
+			self.viewControllers?.forEach({
+				if let navVC = $0 as? UINavigationController {
+					navVC.viewControllers.first?.navigationItem.title = "\(currentWordCollectionInfo?.name ?? "Vocabulary")"
+					wordCollectionsViewController.dismiss(animated: true, completion: nil)
+				}
+			})
 		}
 
-		let viewController = UINavigationController(rootViewController: searchViewController)
-		viewController.navigationBar.prefersLargeTitles = true
-		return viewController
+		let navVC = UINavigationController(rootViewController: wordCollectionsViewController)
+
+		present(navVC, animated: true, completion: nil)
 	}
 }

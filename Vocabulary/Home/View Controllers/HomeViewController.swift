@@ -53,7 +53,7 @@ class HomeViewController: UIViewController, SegueHandlerType {
 			
 		case .words:
 			let viewController = segue.destination as! ListOfWordsViewController
-			viewController.vocabularyStore = vocabularyStore
+//			viewController.vocabularyStore = vocabularyStore
 		}
 	}
 }

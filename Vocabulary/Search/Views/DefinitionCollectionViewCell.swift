@@ -20,7 +20,7 @@ class DefinitionCollectionViewCell: CardCollectionView {
 	@IBOutlet private var seeAlsoButton: UIButton!
 	@IBOutlet private var widthConstraint: NSLayoutConstraint!
 	
-	override var isSelected: Bool { didSet { updataSelection() } }
+	override var isSelected: Bool { didSet { updateSelection() } }
 	
 	var viewData: ViewData? { didSet { viewDataDidChanged() } }
 	
@@ -37,14 +37,14 @@ class DefinitionCollectionViewCell: CardCollectionView {
 	
 	override func prepareForReuse() {
 		super.prepareForReuse()
-		updataSelection()
+		updateSelection()
 	}
 	
 	private var fittingSize: CGSize {
 		return contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 	}
 	
-	private func updataSelection() {
+	private func updateSelection() {
 		if isSelected {
 			select(with: #colorLiteral(red: 0, green: 0.4793452024, blue: 0.9990863204, alpha: 1))
 		} else {

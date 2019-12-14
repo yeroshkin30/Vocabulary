@@ -53,10 +53,8 @@
                             <outlet property="delegate" destination="uuW-Ja-yr6" id="fwE-mm-D3H"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" systemItem="search" id="hQB-tu-dY4"/>
-                    <navigationItem key="navigationItem" title="Vocabulary" largeTitleDisplayMode="always" id="OAb-1w-8Pc">
-                        <barButtonItem key="leftBarButtonItem" title="Sets" id="auk-M9-IkT"/>
-                    </navigationItem>
+                    <tabBarItem key="tabBarItem" title="Search" image="Search Icon" id="hQB-tu-dY4"/>
+                    <navigationItem key="navigationItem" title="Vocabulary" largeTitleDisplayMode="always" id="OAb-1w-8Pc"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wkh-R1-cNk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -322,6 +320,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Search Icon" width="30" height="30"/>
         <image name="Speaker" width="30" height="25"/>
     </resources>
 </document>

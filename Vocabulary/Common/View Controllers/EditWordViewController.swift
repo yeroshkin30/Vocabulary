@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol CollectWordDataViewControllerDelegate: AnyObject {
-	func collectWordDataViewController(_ viewController: CollectWordDataViewController,
-										didFinishWith action: CollectWordDataViewController.ResultAction)
+protocol EditWordViewControllerDelegate: AnyObject {
+	func editWordViewController(_ viewController: EditWordViewController,
+										didFinishWith action: EditWordViewController.ResultAction)
 }
 
-class CollectWordDataViewController: UITableViewController, SegueHandlerType {
+class EditWordViewController: UITableViewController, SegueHandlerType {
 	
 	enum ResultAction {
 		case cancel, save, delete
@@ -21,7 +21,7 @@ class CollectWordDataViewController: UITableViewController, SegueHandlerType {
 	
 	var viewData = ViewData() { didSet { updateSaveButton() } }
 	
-	weak var delegate: CollectWordDataViewControllerDelegate?
+	weak var delegate: EditWordViewControllerDelegate?
 	
 	@IBOutlet private var saveButton: UIBarButtonItem!
 	@IBOutlet private var addNewExampleButton: UIButton!
@@ -29,11 +29,11 @@ class CollectWordDataViewController: UITableViewController, SegueHandlerType {
 	// MARK: - Actions
 	
 	@IBAction private func saveButtonAction(_ sender: UIBarButtonItem) {
-		delegate?.collectWordDataViewController(self, didFinishWith: .save)
+		delegate?.editWordViewController(self, didFinishWith: .save)
 	}
 	
 	@IBAction private func cancelButtonAction(_ sender: UIBarButtonItem) {
-		delegate?.collectWordDataViewController(self, didFinishWith: .cancel)
+		delegate?.editWordViewController(self, didFinishWith: .cancel)
 	}
 	
 	// MARK: - Life Cycle
@@ -57,7 +57,7 @@ class CollectWordDataViewController: UITableViewController, SegueHandlerType {
 		if let indexPath = tableView.indexPathForSelectedRow,
 			Section(at: indexPath) == .deletion {
 			
-			delegate?.collectWordDataViewController(self, didFinishWith: .delete)
+			delegate?.editWordViewController(self, didFinishWith: .delete)
 			return false
 		}
 		return true
@@ -82,7 +82,7 @@ class CollectWordDataViewController: UITableViewController, SegueHandlerType {
 }
 
 // MARK: - Private
-private extension CollectWordDataViewController {
+private extension EditWordViewController {
 	
 	var examplesHeaderView: UITableViewHeaderFooterView {
 		let headerView = UITableViewHeaderFooterView(frame: .zero)
@@ -135,7 +135,7 @@ private extension CollectWordDataViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension CollectWordDataViewController {
+extension EditWordViewController {
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		return viewData.mode == .create ? Section.count - 1 : Section.count
@@ -186,7 +186,7 @@ extension CollectWordDataViewController {
 }
 
 // MARK: - UITableViewDelegate
-extension CollectWordDataViewController {
+extension EditWordViewController {
 	
 	override func tableView(_ tableView: UITableView,
 							editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
@@ -215,7 +215,7 @@ extension CollectWordDataViewController {
 }
 
 // MARK: - EditTextViewControllerDelegate -
-extension CollectWordDataViewController: EditTextViewControllerDelegate {
+extension EditWordViewController: EditTextViewControllerDelegate {
 	func editTextViewController(_ controller: EditTextViewController, saveEditedText text: String) {
 		
 		if let indexPath = tableView.indexPathForSelectedRow {
@@ -228,7 +228,7 @@ extension CollectWordDataViewController: EditTextViewControllerDelegate {
 }
 
 // MARK: - Types -
-extension CollectWordDataViewController {
+extension EditWordViewController {
 	
 	enum ViewMode {
 		case create, edit
@@ -274,9 +274,9 @@ extension CollectWordDataViewController {
 	}
 }
 
-extension CollectWordDataViewControllerDelegate {
+extension EditWordViewControllerDelegate {
 	
-	func fill(_ word: Word, with viewData: CollectWordDataViewController.ViewData) {
+	func fill(_ word: Word, with viewData: EditWordViewController.ViewData) {
 		word.headword		= viewData.headword
 		word.sentencePart	= viewData.sentencePart
 		word.definition		= viewData.definition
@@ -284,7 +284,7 @@ extension CollectWordDataViewControllerDelegate {
 	}
 }
 
-extension CollectWordDataViewController.ViewData {
+extension EditWordViewController.ViewData {
 	
 	init(word: Word) {
 		headword		= word.headword

@@ -43,15 +43,20 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		setupCollectionView()
+		collectionView?.dataSource = dataSource
 		setupSegmentControl()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		
-		navigationController?.setToolbarHidden(false, animated: false)
+
 		navigationItem.title = entry.headword
+	}
+
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+
+		navigationController?.setToolbarHidden(false, animated: false)
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -85,7 +90,7 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 			
 		case .addToLearning:
 			let editWordNavController = segue.destination as! UINavigationController
-			let viewController = editWordNavController.viewControllers.first as! CollectWordDataViewController
+			let viewController = editWordNavController.viewControllers.first as! EditWordViewController
 			
 			viewController.delegate = self
 			
@@ -113,15 +118,6 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 // MARK: - Helpers
 private extension EntryCollectionViewController {
 	
-	func setupCollectionView() {
-		collectionView?.dataSource = dataSource
-		
-		if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-			let width = UIScreen.main.bounds.size.width
-			layout.estimatedItemSize = CGSize(width: width, height: 100)
-		}
-	}
-	
 	func setupSegmentControl() {
 		if entry.definitions.isEmpty {
 			viewMode = .expressions
@@ -145,7 +141,7 @@ private extension EntryCollectionViewController {
 		collectionView?.reloadData()
 	}
 	
-	func wordDataForDefinition(at indexPath: IndexPath) -> CollectWordDataViewController.ViewData {
+	func wordDataForDefinition(at indexPath: IndexPath) -> EditWordViewController.ViewData {
 		let headword: String
 		let definition: Definition
 		
@@ -160,7 +156,7 @@ private extension EntryCollectionViewController {
 			definition = expression.definitions[indexPath.item]
 		}
 		
-		return CollectWordDataViewController.ViewData(headword: headword,
+		return EditWordViewController.ViewData(headword: headword,
 													  sentencePart: entry.sentencePart,
 													  definition: definition.text,
 													  examples: definition.examples,
@@ -170,16 +166,17 @@ private extension EntryCollectionViewController {
 
 // MARK: - Types -
 extension EntryCollectionViewController {
+
 	enum ViewMode: Int {
 		case definitions, expressions
 	}
 }
 
 // MARK: - EditWordViewControllerDelegate -
-extension EntryCollectionViewController: CollectWordDataViewControllerDelegate {
+extension EntryCollectionViewController: EditWordViewControllerDelegate {
 	
-	func collectWordDataViewController(_ viewController: CollectWordDataViewController,
-										didFinishWith action: CollectWordDataViewController.ResultAction) {
+	func editWordViewController(_ viewController: EditWordViewController,
+										didFinishWith action: EditWordViewController.ResultAction) {
 		
 		switch action {
 		case .save:

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol UndoAlertPresenter where Self: UIViewController {
-	var vocabularyStore: VocabularyStore! { get set }
+	var vocabularyStore: VocabularyStore { get }
 }
 
 extension UndoAlertPresenter {

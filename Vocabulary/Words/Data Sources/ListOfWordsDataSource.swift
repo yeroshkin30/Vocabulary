@@ -11,15 +11,16 @@ import CoreData
 
 class ListOfWordsDataSource: NSObject {
 	
-	var learningStage: Word.LearningStage?	{ didSet { predicateParameterDidChange() } }
 	var searchQuery: String?				{ didSet { predicateParameterDidChange() } }
 	
 	weak var delegate: NSFetchedResultsControllerDelegate?
 	
 	private let context: NSManagedObjectContext
+	private let learningStage: Word.LearningStage?
 	
-	init(context: NSManagedObjectContext) {
+	init(context: NSManagedObjectContext, learningStage: Word.LearningStage?) {
 		self.context = context
+		self.learningStage = learningStage
 	}
 	
 	private var parameters: WordsRequestParameters {

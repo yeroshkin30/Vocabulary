@@ -30,11 +30,6 @@ class RootViewController: UIViewController {
 		
 		homeVC.vocabularyStore = vocabularyStore
 		
-		wordCollectionsVC.vocabularyStore = vocabularyStore
-		wordCollectionsVC.didFinishSelectionHandler = { [weak self] in
-			self?.showHomeViewController()
-		}
-		
 		navigationVC.navigationBar.prefersLargeTitles = true
 		navigationVC.setViewControllers([wordCollectionsVC, homeVC], animated: false)
 	}
