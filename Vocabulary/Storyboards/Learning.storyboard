@@ -171,8 +171,8 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="rememberTypeTitles" destination="mMU-yJ-Zv3" id="cHC-CS-Bhz"/>
-                                    <outlet property="remindTypeTitles" destination="Mgp-cV-bOJ" id="BQp-cW-3v8"/>
-                                    <outlet property="repeatTypeTitles" destination="lK3-xf-Zo7" id="yqc-pO-zoW"/>
+                                    <outlet property="remindTypeTitles" destination="lK3-xf-Zo7" id="Ett-9N-ZCy"/>
+                                    <outlet property="repeatTypeTitles" destination="Mgp-cV-bOJ" id="dtT-Aj-GjA"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -185,7 +185,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8eM-38-D1v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Learning" image="Learinig Icon" id="4gb-MW-B1g"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Vocabulary" largeTitleDisplayMode="always" id="1xF-nf-agS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -1060,7 +1059,6 @@ She keeps a list of books for future reading.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="Learinig Icon" width="47" height="30"/>
         <image name="Speaker" width="30" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>

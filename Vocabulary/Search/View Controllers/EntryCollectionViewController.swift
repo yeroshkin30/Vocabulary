@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreData.NSManagedObjectID
 
 class EntryCollectionViewController: UICollectionViewController, DefinitionsRequestProvider, SegueHandlerType {
 	
 	var entry: Entry!
 	var vocabularyStore: VocabularyStore!
+	var currentWordCollectionID: NSManagedObjectID?
 	
 	// MARK: - DefinitionsRequestProvider -
 	
@@ -182,7 +184,7 @@ extension EntryCollectionViewController: EditWordViewControllerDelegate {
 		case .save:
 			let word = Word(context: vocabularyStore.context)
 			fill(word, with: viewController.viewData)
-			if let objectID = currentWordCollectionInfo?.objectID {
+			if let objectID = currentWordCollectionID {
 				word.wordCollection = vocabularyStore.context.object(with: objectID) as? WordCollection
 			}
 			vocabularyStore.saveChanges()

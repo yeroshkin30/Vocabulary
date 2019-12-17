@@ -10,18 +10,10 @@ import UIKit
 
 class WordsTabViewController: UITableViewController, SegueHandlerType {
 
-	// MARK: - Initialization
+	// MARK: - Properties
 
-	private let vocabularyStore: VocabularyStore
-
-	init?(coder: NSCoder, vocabularyStore: VocabularyStore) {
-		self.vocabularyStore = vocabularyStore
-		super.init(coder: coder)
-	}
-
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
+	var vocabularyStore: VocabularyStore!
+	var currentWordCollectionInfoProvider: CurrentWordCollectionInfoProvider!
 
 	// MARK: - Life cycle
 
@@ -42,8 +34,14 @@ class WordsTabViewController: UITableViewController, SegueHandlerType {
 		guard let indexPath = tableView.indexPathForSelectedRow else { return nil }
 
 		let learningStage = Section(at: indexPath) == .allWords ? nil : Word.LearningStage(rawValue: Int16(indexPath.row))
+		let currentWordCollectionID = currentWordCollectionInfoProvider.wordCollectionInfo?.objectID
 
-		return ListOfWordsViewController(coder: coder, vocabularyStore: vocabularyStore, learningStage: learningStage)
+		return ListOfWordsViewController(
+			coder: coder,
+			vocabularyStore: vocabularyStore,
+			learningStage: learningStage,
+			currentWordCollectionID: currentWordCollectionID
+		)
 	}
 
 	// MARK: - UITableViewDataSource
@@ -70,7 +68,7 @@ class WordsTabViewController: UITableViewController, SegueHandlerType {
 	}
 }
 
-// MARK: - Private
+// MARK: - Types
 private extension WordsTabViewController {
 
 	enum Section: Int, CaseIterable {
@@ -110,7 +108,7 @@ private extension WordsTabViewController {
 
 	func numberOfWords(at learningStage: Word.LearningStage?) -> Int {
 		let parameters: WordsRequestParameters = (
-			learningStage, currentWordCollectionInfo?.objectID, false
+			learningStage, currentWordCollectionInfoProvider.wordCollectionInfo?.objectID, false
 		)
 		let request = FetchRequestFactory.requestForWords(with: parameters)
 		return vocabularyStore.numberOfWordsFrom(request)

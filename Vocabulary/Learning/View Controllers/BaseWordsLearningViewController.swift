@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import CoreData.NSManagedObjectID
 
 class BaseWordsLearningViewController: UIViewController {
 	
 	// MARK: - Public properties
 	
 	var vocabularyStore: VocabularyStore!
+	var currentWordCollectionID: NSManagedObjectID?
 	
 	var numberOfWords: Int {
 		return dataSource.questionsNumber

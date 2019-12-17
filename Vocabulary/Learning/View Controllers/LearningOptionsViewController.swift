@@ -7,33 +7,33 @@
 //
 
 import UIKit
+import CoreData.NSManagedObjectID
 
 class LearningOptionsViewController: UIViewController, SegueHandlerType {
 
 	// MARK: - Properties -
 
+	var vocabularyStore: VocabularyStore!
+	var currentWordCollectionInfoProvider: CurrentWordCollectionInfoProvider!
+
 	@IBOutlet private var learningOptionsView: LearningOptionsView!
 
-	// MARK: - Initialization
-
-	private let vocabularyStore: VocabularyStore
-
-	init?(coder: NSCoder, vocabularyStore: VocabularyStore) {
-		self.vocabularyStore = vocabularyStore
-		super.init(coder: coder)
-	}
-
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+	private var currentWordCollectionID: NSManagedObjectID? {
+		currentWordCollectionInfoProvider.wordCollectionInfo?.objectID
 	}
 
 	// MARK: - Life cycle
-	
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+
+		setupNotifications()
+	}
+
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		updateLearningOptionsView()
-		setupNotifications()
 	}
 	
 	// MARK: - Navigation
@@ -53,7 +53,7 @@ class LearningOptionsViewController: UIViewController, SegueHandlerType {
 			let viewController = segue.destination as! LearningProcessViewController
 			viewController.vocabularyStore = vocabularyStore
 			
-			let fetchRequest = FetchRequestFactory.fetchRequest(for: .repetition)
+			let fetchRequest = FetchRequestFactory.fetchRequest(for: .repetition, wordCollectionID: currentWordCollectionID)
 			let words = vocabularyStore.wordsFrom(fetchRequest)
 			
 			viewController.learningMode = .repetition(words)
@@ -71,17 +71,24 @@ private extension LearningOptionsViewController {
 	// MARK: - Methods
 	
 	func setupNotifications() {
-		let name = UIApplication.willEnterForegroundNotification
+		let enterForeground = UIApplication.willEnterForegroundNotification
 		NotificationCenter.default.addObserver(
-			self, selector: #selector(updateLearningOptionsView), name: name, object: nil
+			self, selector: #selector(updateLearningOptionsView), name: enterForeground, object: nil
 		)
 	}
 	
-	@objc func updateLearningOptionsView() {
+	@objc
+	func updateLearningOptionsView() {
 
-		let rememberWordsNumber = vocabularyStore.numberOfWordsFrom(FetchRequestFactory.fetchRequest(for: .remembering))
-		let repeatWordsNumber = vocabularyStore.numberOfWordsFrom(FetchRequestFactory.fetchRequest(for: .repetition))
-		let remindWordsNumber = vocabularyStore.numberOfWordsFrom(FetchRequestFactory.fetchRequest(for: .reminding))
+		let rememberWordsNumber = vocabularyStore.numberOfWordsFrom(
+			FetchRequestFactory.fetchRequest(for: .remembering, wordCollectionID: currentWordCollectionID)
+		)
+		let repeatWordsNumber = vocabularyStore.numberOfWordsFrom(
+			FetchRequestFactory.fetchRequest(for: .repetition, wordCollectionID: currentWordCollectionID)
+		)
+		let remindWordsNumber = vocabularyStore.numberOfWordsFrom(
+			FetchRequestFactory.fetchRequest(for: .reminding, wordCollectionID: currentWordCollectionID)
+		)
 
 		learningOptionsView.viewData = LearningOptionsView.ViewData(
 			rememberWordsNumber: rememberWordsNumber,

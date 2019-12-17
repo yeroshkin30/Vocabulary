@@ -21,12 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			DefaultDataProvider.loadDefaultVocabulary()
 		}
 
-		let appRootViewController = AppRootViewController()
-
-		window = UIWindow(frame: UIScreen.main.bounds)
-		window?.rootViewController = appRootViewController
-		window?.makeKeyAndVisible()
-
 		return true
 	}
 }

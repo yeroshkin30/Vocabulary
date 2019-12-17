@@ -12,7 +12,7 @@ final class RemindWordsViewController: BaseWordsLearningViewController {
 	
 	// MARK: - Private properties
 	
-	private let recomendedRemindingNumber = 5
+	private let recommendedRemindingNumber = 5
 	
 	private var currentCell: RemindWordCollectionViewCell? {
 		return collectionView.cellForItem(at: IndexPath.first) as? RemindWordCollectionViewCell
@@ -31,7 +31,7 @@ final class RemindWordsViewController: BaseWordsLearningViewController {
 	// MARK: - BaseWordsLearningViewController -
 	
 	override func instantiateDataSource(with words: [Word]) -> WordsLearningCollectionViewDataSource {
-		let fetchRequest = FetchRequestFactory.fetchRequest(for: .reminding)
+		let fetchRequest = FetchRequestFactory.fetchRequest(for: .reminding, wordCollectionID: currentWordCollectionID)
 		let words = vocabularyStore.wordsFrom(fetchRequest)
 		return RemindWordsCollectionViewDataSource(words: words)
 	}
@@ -87,7 +87,7 @@ private extension RemindWordsViewController {
 		guard let word = dataSource.currentWord else { return }
 		
 		if case .numberOfReminders(let number) = word.learningStageDetail,
-			number >= recomendedRemindingNumber {
+			number >= recommendedRemindingNumber {
 			
 			showStopRemindingSuggestion(for: word, withRemindsNumber: number)
 			

@@ -14,25 +14,14 @@ protocol DefinitionsRequestProvider {
 
 class SearchTabViewController: UITableViewController, SegueHandlerType {
 
-	// MARK: - Initialization
+	// MARK: - Properties
 
-	private let vocabularyStore: VocabularyStore
-	private let searchStateModelController: SearchStateModelController
+	var vocabularyStore: VocabularyStore!
+	var searchStateModelController: SearchStateModelController!
+	var currentWordCollectionInfoProvider: CurrentWordCollectionInfoProvider!
 
-	init?(coder: NSCoder, vocabularyStore: VocabularyStore, searchStateModelController: SearchStateModelController) {
-		self.vocabularyStore = vocabularyStore
-		self.searchStateModelController = searchStateModelController
-		super.init(coder: coder)
-	}
+	private lazy var searchController: UISearchController = .init(searchResultsController: nil)
 
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-
-	private lazy var searchController = UISearchController(searchResultsController: nil)
-
-	// MARK: - Private properties
-	
 	private lazy var loadingView: LoadingView = .instantiate()
 	private lazy var messageView: MessageView = .instantiate()
 	
@@ -46,6 +35,7 @@ class SearchTabViewController: UITableViewController, SegueHandlerType {
 			self.stateDidChange(state, currentDataSource: dataSource)
 		}
 		setupSearchController()
+		setupNotifications()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -93,6 +83,7 @@ class SearchTabViewController: UITableViewController, SegueHandlerType {
 
 			let index = tableView.indexPathForSelectedRow?.row ?? 0
 			viewController.entry = entries[index]
+			viewController.currentWordCollectionID = currentWordCollectionInfoProvider.wordCollectionInfo?.objectID
 		}
 	}
 }

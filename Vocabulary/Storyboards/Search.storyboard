@@ -10,7 +10,7 @@
         <!--Vocabulary-->
         <scene sceneID="vwr-mT-el6">
             <objects>
-                <tableViewController id="uuW-Ja-yr6" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SearchTabViewController" id="uuW-Ja-yr6" customClass="SearchTabViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Nba-rb-zPj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,7 +53,6 @@
                             <outlet property="delegate" destination="uuW-Ja-yr6" id="fwE-mm-D3H"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Search" image="Search Icon" id="hQB-tu-dY4"/>
                     <navigationItem key="navigationItem" title="Vocabulary" largeTitleDisplayMode="always" id="OAb-1w-8Pc"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -320,7 +319,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Search Icon" width="30" height="30"/>
         <image name="Speaker" width="30" height="25"/>
     </resources>
 </document>

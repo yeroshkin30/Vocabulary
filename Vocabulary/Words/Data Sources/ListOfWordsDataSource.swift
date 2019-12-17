@@ -17,14 +17,16 @@ class ListOfWordsDataSource: NSObject {
 	
 	private let context: NSManagedObjectContext
 	private let learningStage: Word.LearningStage?
+	private let currentWordCollectionID: NSManagedObjectID?
 	
-	init(context: NSManagedObjectContext, learningStage: Word.LearningStage?) {
+	init(context: NSManagedObjectContext, learningStage: Word.LearningStage?, currentWordCollectionID: NSManagedObjectID?) {
 		self.context = context
 		self.learningStage = learningStage
+		self.currentWordCollectionID = currentWordCollectionID
 	}
 	
 	private var parameters: WordsRequestParameters {
-		return (learningStage, currentWordCollectionInfo?.objectID, false)
+		return (learningStage, currentWordCollectionID, false)
 	}
 	
 	private lazy var fetchedResultsController = initializeFetchedResultsController()

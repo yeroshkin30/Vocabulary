@@ -9,16 +9,20 @@
 import UIKit
 import CoreData
 
-private(set) var currentWordCollectionInfo: WordCollectionInfo?
-
 class WordCollectionsTableViewController: UITableViewController, SegueHandlerType {
 
 	// MARK: - Initialization
 
 	let vocabularyStore: VocabularyStore
+	let currentWordCollectionModelController: CurrentWordCollectionModelController
 
-	init?(coder: NSCoder, vocabularyStore: VocabularyStore) {
+	init?(
+		coder: NSCoder,
+		vocabularyStore: VocabularyStore,
+		currentWordCollectionModelController: CurrentWordCollectionModelController
+	) {
 		self.vocabularyStore = vocabularyStore
+		self.currentWordCollectionModelController = currentWordCollectionModelController
 		super.init(coder: coder)
 	}
 
@@ -30,20 +34,26 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 	
 	var dataChanges: [DataChange] = []
 	
-	var wordCollectionDidSelectHandler: (() -> Void)?
-	
 	// MARK: - Private properties
 	
 	private lazy var wordCollectionsDataSource = WordCollectionsDataSource(
-		context: vocabularyStore.context
+		context: vocabularyStore.context,
+		currentWordCollectionID: currentWordCollectionModelController.wordCollectionInfo?.objectID
 	)
 	
 	private var currentWordCollection: WordCollection? {
-		guard let objectID = currentWordCollectionInfo?.objectID else { return nil }
+		guard let objectID = currentWordCollectionModelController.wordCollectionInfo?.objectID else { return nil }
 		return vocabularyStore.context.object(with: objectID) as? WordCollection
 	}
 	
 	private var wordCollectionToRename: WordCollection?
+
+	// MARK: - Actions
+
+	@IBAction
+	private func doneButtonDidTap() {
+		dismiss(animated: true, completion: nil)
+	}
 	
 	// MARK: - Life Cycle
 	
@@ -143,40 +153,28 @@ private extension WordCollectionsTableViewController {
 		let selectedWordCollection = wordCollectionsDataSource.wordCollection(indexPath)
 		
 		if selectedWordCollection == currentWordCollection {
-			if let indexPath = wordCollectionsDataSource.indexPath(for: selectedWordCollection) {
-				tableView.cellForRow(at: indexPath)?.accessoryType = .none
-			}
-			currentWordCollectionInfo = nil
-			wordCollectionDidSelectHandler?()
-			
+			currentWordCollectionModelController.wordCollectionInfo = nil
+
 		} else {
-			if let oldWordCollection = currentWordCollection,
-				let currentIndexPath = wordCollectionsDataSource.indexPath(for: oldWordCollection) {
-				
-				tableView.cellForRow(at: currentIndexPath)?.accessoryType = .none
-			}
-			
-			if let indexPath = wordCollectionsDataSource.indexPath(for: selectedWordCollection) {
-				tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-			}
-			currentWordCollectionInfo = WordCollectionInfo(selectedWordCollection)
-			wordCollectionDidSelectHandler?()
+			currentWordCollectionModelController.wordCollectionInfo = WordCollectionInfo(selectedWordCollection)
 		}
+
+		dismiss(animated: true, completion: nil)
 	}
 	
 	func deleteWordCollection(at indexPath: IndexPath) {
 		let wordCollection = wordCollectionsDataSource.wordCollection(indexPath)
 		
 		if currentWordCollection == wordCollection {
-			currentWordCollectionInfo = nil
+			currentWordCollectionModelController.wordCollectionInfo = nil
 		}
-		vocabularyStore.deleteAndSave(wordCollection)
+		vocabularyStore.deleteObject(wordCollection)
 	}
 	
 	func sowAlertForWordCollectionDeletion(at indexPath: IndexPath) {
 		let wordCollection = wordCollectionsDataSource.wordCollection(indexPath)
 		
-		let title = "Delete \"\(wordCollection.name)\" collectioin?"
+		let title = "Delete \"\(wordCollection.name)\" collection?"
 		
 		let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
 		

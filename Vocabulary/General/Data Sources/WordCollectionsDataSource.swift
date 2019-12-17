@@ -14,13 +14,15 @@ class WordCollectionsDataSource: NSObject {
 	weak var delegate: NSFetchedResultsControllerDelegate?
 	
 	private let context: NSManagedObjectContext
+	private let currentWordCollectionID: NSManagedObjectID?
 	
-	init(context: NSManagedObjectContext) {
+	init(context: NSManagedObjectContext, currentWordCollectionID: NSManagedObjectID?) {
 		self.context = context
+		self.currentWordCollectionID = currentWordCollectionID
 	}
 	
 	private var parameters: WordsRequestParameters {
-		return (nil, currentWordCollectionInfo?.objectID, false)
+		return (nil, currentWordCollectionID, false)
 	}
 	
 	private lazy var fetchedResultsController = initializeFetchedResultsController()
@@ -76,7 +78,7 @@ extension WordCollectionsDataSource: UITableViewDataSource {
 		cell.detailTextLabel?.text = cellDetailTextFor(
 			allWordsNumber: allWordsNumber, unknownWordsNumber: unknownWordsNumber
 		)
-		cell.accessoryType = currentWordCollectionInfo?.objectID == wordCollection.objectID
+		cell.accessoryType = currentWordCollectionID == wordCollection.objectID
 			? .checkmark : .none
 	}
 	

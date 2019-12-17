@@ -9,6 +9,7 @@
 import CoreData
 
 struct WordCollectionInfo: Equatable {
+	
 	let name: String
 	let dateCreated: Date
 	let objectID: NSManagedObjectID

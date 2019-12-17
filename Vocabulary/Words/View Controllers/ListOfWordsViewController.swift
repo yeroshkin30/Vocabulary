@@ -15,10 +15,17 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 
 	let vocabularyStore: VocabularyStore
 	private let learningStage: Word.LearningStage?
+	private let currentWordCollectionID: NSManagedObjectID?
 
-	init?(coder: NSCoder, vocabularyStore: VocabularyStore, learningStage: Word.LearningStage?) {
+	init?(
+		coder: NSCoder,
+		vocabularyStore: VocabularyStore,
+		learningStage: Word.LearningStage?,
+		currentWordCollectionID: NSManagedObjectID?
+	) {
 		self.vocabularyStore = vocabularyStore
 		self.learningStage = learningStage
+		self.currentWordCollectionID = currentWordCollectionID
 
 		super.init(coder: coder)
 	}
@@ -47,7 +54,9 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	
 	private let searchController = UISearchController(searchResultsController: nil)
 	
-	private lazy var wordsDataSource = ListOfWordsDataSource(context: vocabularyStore.context, learningStage: learningStage)
+	private lazy var wordsDataSource = ListOfWordsDataSource(
+		context: vocabularyStore.context, learningStage: learningStage, currentWordCollectionID: currentWordCollectionID
+	)
 	
 	private lazy var editingToolbarItems: [UIBarButtonItem] = [
 		moveButton, leftFlexibleSpace, selectAllButton, rightFlexibleSpace, deleteButton
@@ -292,7 +301,7 @@ extension ListOfWordsViewController {
 		
 		let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, handler) in
 			let word = self.wordsDataSource.wordAt(indexPath)
-			self.vocabularyStore.deleteAndSave(word)
+			self.vocabularyStore.deleteObject(word)
 			handler(true)
 		}
 		

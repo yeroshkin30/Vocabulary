@@ -48,7 +48,6 @@
                             <outlet property="delegate" destination="ldM-V1-KVZ" id="dQE-Pw-5Z6"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Words" image="Words Icon" id="QIm-sW-Edj"/>
                     <navigationItem key="navigationItem" title="Vocabulary" largeTitleDisplayMode="always" id="AKv-md-a5l"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -111,7 +110,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="ump-vO-gZC">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="ump-vO-gZC">
                         <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="7RU-SG-Zyy">
                             <connections>
@@ -374,7 +373,6 @@
     </scenes>
     <resources>
         <image name="Speaker" width="30" height="25"/>
-        <image name="Words Icon" width="37" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QRg-st-dhV"/>

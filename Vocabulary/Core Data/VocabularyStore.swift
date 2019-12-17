@@ -33,14 +33,9 @@ class VocabularyStore {
 			fatalError("Unable to save with error: \(error.localizedDescription)")
 		}
 	}
-	
-	func deleteAndSave(_ word: Word) {
-		context.delete(word)
-		saveChanges()
-	}
-	
-	func deleteAndSave(_ wordCollection: WordCollection) {
-		context.delete(wordCollection)
+
+	func deleteObject(_ managedObject: NSManagedObject) {
+		context.delete(managedObject)
 		saveChanges()
 	}
 	
