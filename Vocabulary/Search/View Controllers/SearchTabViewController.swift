@@ -36,6 +36,7 @@ class SearchTabViewController: UITableViewController, SegueHandlerType {
 		}
 		setupSearchController()
 		setupNotifications()
+		currentWordCollectionInfoProvider.addObserver(self)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -149,5 +150,12 @@ extension SearchTabViewController: UITabBarControllerDelegate {
 		if viewController == navigationController {
 			searchController.searchBar.becomeFirstResponder()
 		}
+	}
+}
+
+extension SearchTabViewController: CurrentWordCollectionInfoObserver {
+
+	func currentWordCollectionDidChange(_ wordCollectionInfo: WordCollectionInfo?) {
+		navigationItem.title = "\(wordCollectionInfo?.name ?? "Vocabulary")"
 	}
 }

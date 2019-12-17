@@ -17,6 +17,12 @@ class WordsTabViewController: UITableViewController, SegueHandlerType {
 
 	// MARK: - Life cycle
 
+	override func viewDidLoad() {
+		super.viewDidLoad()
+
+		currentWordCollectionInfoProvider.addObserver(self)
+	}
+
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
@@ -125,5 +131,13 @@ private extension WordsTabViewController {
 		let number = numberOfWords(at: stage)
 
 		return "\(number)"
+	}
+}
+
+extension WordsTabViewController: CurrentWordCollectionInfoObserver {
+
+	func currentWordCollectionDidChange(_ wordCollectionInfo: WordCollectionInfo?) {
+		navigationItem.title = "\(wordCollectionInfo?.name ?? "Vocabulary")"
+		tableView.reloadData()
 	}
 }

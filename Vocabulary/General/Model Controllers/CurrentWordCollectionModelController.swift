@@ -32,6 +32,7 @@ class CurrentWordCollectionModelController: CurrentWordCollectionInfoProvider {
 	func addObserver(_ observer: CurrentWordCollectionInfoObserver) {
 		let id = ObjectIdentifier(observer)
 		observations[id] = Observation(observer: observer)
+		observer.currentWordCollectionDidChange(wordCollectionInfo)
 	}
 
 	func removeObserver(_ observer: CurrentWordCollectionInfoObserver) {

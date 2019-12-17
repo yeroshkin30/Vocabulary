@@ -28,6 +28,7 @@ class LearningOptionsViewController: UIViewController, SegueHandlerType {
 		super.viewDidLoad()
 
 		setupNotifications()
+		currentWordCollectionInfoProvider.addObserver(self)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -97,3 +98,12 @@ private extension LearningOptionsViewController {
 		)
 	}
 }
+
+extension LearningOptionsViewController: CurrentWordCollectionInfoObserver {
+
+	func currentWordCollectionDidChange(_ wordCollectionInfo: WordCollectionInfo?) {
+		navigationItem.title = "\(wordCollectionInfo?.name ?? "Vocabulary")"
+		updateLearningOptionsView()
+	}
+}
+
