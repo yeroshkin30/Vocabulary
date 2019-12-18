@@ -49,10 +49,12 @@ class LearningOptionsViewController: UIViewController, SegueHandlerType {
 		case .remembering:
 			let viewController = segue.destination as! UnknownWordsViewController
 			viewController.vocabularyStore = vocabularyStore
+			viewController.currentWordCollectionID = currentWordCollectionID
 			
 		case .repetition:
 			let viewController = segue.destination as! LearningProcessViewController
 			viewController.vocabularyStore = vocabularyStore
+			viewController.currentWordCollectionID = currentWordCollectionID
 			
 			let fetchRequest = FetchRequestFactory.fetchRequest(for: .repetition, wordCollectionID: currentWordCollectionID)
 			let words = vocabularyStore.wordsFrom(fetchRequest)
@@ -62,6 +64,7 @@ class LearningOptionsViewController: UIViewController, SegueHandlerType {
 		case .remindWord:
 			let viewController = segue.destination as! RemindWordsViewController
 			viewController.vocabularyStore = vocabularyStore
+			viewController.currentWordCollectionID = currentWordCollectionID
 		}
 	}
 }

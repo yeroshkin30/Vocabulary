@@ -109,50 +109,51 @@
                             <outlet property="delegate" destination="tbb-37-CIH" id="MvI-Qo-VhV"/>
                         </connections>
                     </tableView>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="ump-vO-gZC">
-                        <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="7RU-SG-Zyy">
+                    <toolbarItems>
+                        <barButtonItem enabled="NO" systemItem="organize" id="CF3-eZ-JCU">
                             <connections>
-                                <action selector="editButtonAction:" destination="tbb-37-CIH" id="Yj5-H5-KXC"/>
+                                <segue destination="qlF-dF-wMw" kind="presentation" identifier="moveWords" id="t2m-ta-BRl"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="gN0-CK-9kY"/>
+                        <barButtonItem title="Select All" id="6zB-iI-8g8">
+                            <connections>
+                                <action selector="selectAllButtonAction:" destination="tbb-37-CIH" id="Pzv-b4-lL4"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="ZOT-7L-Mln"/>
+                        <barButtonItem enabled="NO" systemItem="trash" id="C6G-M0-X7v">
+                            <connections>
+                                <action selector="deleteWordsButtonAction:" destination="tbb-37-CIH" id="JY5-Jm-l1O"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="ump-vO-gZC">
+                        <nil key="title"/>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Edit" id="7RU-SG-Zyy">
+                                <connections>
+                                    <action selector="editButtonAction:" destination="tbb-37-CIH" id="Yj5-H5-KXC"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="WVE-4C-tLT">
+                                <connections>
+                                    <segue destination="2h0-FZ-Mo7" kind="presentation" identifier="createWord" id="i2J-dN-haE"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="createButton" destination="WVE-4C-tLT" id="tnY-NT-aAB"/>
                         <outlet property="deleteButton" destination="C6G-M0-X7v" id="1Tj-hs-fN2"/>
                         <outlet property="editButton" destination="7RU-SG-Zyy" id="cXE-e9-VzZ"/>
-                        <outlet property="leftFlexibleSpace" destination="gN0-CK-9kY" id="mcc-C4-koX"/>
                         <outlet property="moveButton" destination="CF3-eZ-JCU" id="As3-r4-cPC"/>
-                        <outlet property="rightFlexibleSpace" destination="ZOT-7L-Mln" id="FsZ-qP-94z"/>
                         <outlet property="selectAllButton" destination="6zB-iI-8g8" id="2mT-1F-bJZ"/>
                         <segue destination="2h0-FZ-Mo7" kind="presentation" identifier="editWord" id="QRg-st-dhV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bQK-mG-RtD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <barButtonItem enabled="NO" systemItem="organize" id="CF3-eZ-JCU">
-                    <connections>
-                        <segue destination="qlF-dF-wMw" kind="presentation" identifier="moveWords" id="t2m-ta-BRl"/>
-                    </connections>
-                </barButtonItem>
-                <barButtonItem title="Select All" id="6zB-iI-8g8">
-                    <connections>
-                        <action selector="selectAllButtonAction:" destination="tbb-37-CIH" id="Pzv-b4-lL4"/>
-                    </connections>
-                </barButtonItem>
-                <barButtonItem systemItem="flexibleSpace" id="gN0-CK-9kY"/>
-                <barButtonItem systemItem="flexibleSpace" id="ZOT-7L-Mln"/>
-                <barButtonItem enabled="NO" systemItem="trash" id="C6G-M0-X7v">
-                    <connections>
-                        <action selector="deleteWordsButtonAction:" destination="tbb-37-CIH" id="JY5-Jm-l1O"/>
-                    </connections>
-                </barButtonItem>
-                <barButtonItem systemItem="add" id="WVE-4C-tLT">
-                    <connections>
-                        <segue destination="2h0-FZ-Mo7" kind="presentation" identifier="createWord" id="i2J-dN-haE"/>
-                    </connections>
-                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="-1876" y="1483"/>
         </scene>
@@ -355,7 +356,7 @@
         <!--Navigation Controller-->
         <scene sceneID="uii-hd-YG0">
             <objects>
-                <navigationController storyboardIdentifier="EditWordNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="2h0-FZ-Mo7" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="EditWordNavigationViewController" modalPresentationStyle="fullScreen" id="2h0-FZ-Mo7" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Eoc-TO-sh5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>

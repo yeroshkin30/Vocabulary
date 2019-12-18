@@ -10,10 +10,23 @@ import UIKit
 import CoreData.NSManagedObjectID
 
 class EntryCollectionViewController: UICollectionViewController, DefinitionsRequestProvider, SegueHandlerType {
-	
-	var entry: Entry!
-	var vocabularyStore: VocabularyStore!
-	var currentWordCollectionID: NSManagedObjectID?
+
+	// MARK: - Initialization
+
+	private let vocabularyStore: VocabularyStore
+	private let entry: Entry
+	private let currentWordCollectionID: NSManagedObjectID?
+
+	init?(coder: NSCoder, vocabularyStore: VocabularyStore, entry: Entry, currentWordCollectionID: NSManagedObjectID?) {
+		self.vocabularyStore = vocabularyStore
+		self.entry = entry
+		self.currentWordCollectionID = currentWordCollectionID
+		super.init(coder: coder)
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 	
 	// MARK: - DefinitionsRequestProvider -
 	
@@ -22,7 +35,6 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 	// MARK: - Outlets -
 	
 	@IBOutlet private var viewModeSegmentedControl: UISegmentedControl!
-	@IBOutlet private var addToLearningButton: UIBarButtonItem!
 	
 	// MARK: - Private properties
 	
@@ -44,27 +56,15 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		collectionView?.dataSource = dataSource
-		setupSegmentControl()
-	}
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
 
 		navigationItem.title = entry.headword
-	}
-
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-
-		navigationController?.setToolbarHidden(false, animated: false)
+		collectionView?.dataSource = dataSource
+		setupSegmentControl()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 
-		navigationController?.setToolbarHidden(true, animated: false)
 		stopPronouncing()
 	}
 	
@@ -100,20 +100,7 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 				viewController.viewData = wordDataForDefinition(at: indexPath)
 				collectionView.deselectItem(at: indexPath, animated: true)
 			}
-			
-			addToLearningButton.isEnabled = false
 		}
-	}
-	
-	// MARK: - UICollectionViewDelegate -
-	override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-		if let cell = collectionView.cellForItem(at: indexPath), cell.isSelected {
-			collectionView.deselectItem(at: indexPath, animated: true)
-			addToLearningButton.isEnabled = false
-			return false
-		}
-		addToLearningButton.isEnabled = true
-		return true
 	}
 }
 
@@ -134,8 +121,6 @@ private extension EntryCollectionViewController {
 	}
 	
 	func viewModeDidChange() {
-		addToLearningButton.isEnabled = false
-		
 		dataSource = EntryCollectionViewDataSource(entry: entry, viewMode: viewMode)
 		
 		collectionView?.dataSource = dataSource

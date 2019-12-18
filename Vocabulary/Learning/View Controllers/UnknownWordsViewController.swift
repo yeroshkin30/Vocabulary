@@ -16,7 +16,7 @@ final class UnknownWordsViewController: BaseWordsLearningViewController, SegueHa
 	
 	private let maxNumberOfWordsToRemembering = 5
 	
-	// MARK: - Life cicle
+	// MARK: - Life cycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()

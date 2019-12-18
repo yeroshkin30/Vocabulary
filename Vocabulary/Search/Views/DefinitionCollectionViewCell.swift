@@ -19,9 +19,7 @@ class DefinitionCollectionViewCell: CardCollectionView {
 	@IBOutlet private var seeAlsoStackView: UIStackView!
 	@IBOutlet private var seeAlsoButton: UIButton!
 	@IBOutlet private var widthConstraint: NSLayoutConstraint!
-	
-	override var isSelected: Bool { didSet { updateSelection() } }
-	
+
 	var viewData: ViewData? { didSet { viewDataDidChanged() } }
 	
 	override func awakeFromNib() {
@@ -37,21 +35,13 @@ class DefinitionCollectionViewCell: CardCollectionView {
 	
 	override func prepareForReuse() {
 		super.prepareForReuse()
-		updateSelection()
+		layer.setAffineTransform(.identity)
 	}
 	
 	private var fittingSize: CGSize {
 		return contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 	}
-	
-	private func updateSelection() {
-		if isSelected {
-			select(with: #colorLiteral(red: 0, green: 0.4793452024, blue: 0.9990863204, alpha: 1))
-		} else {
-			deselect()
-		}
-	}
-	
+
 	private func viewDataDidChanged() {
 		guard let viewData = viewData else { return }
 		

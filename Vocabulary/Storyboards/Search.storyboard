@@ -44,7 +44,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="yAV-Q9-5NG" kind="show" identifier="showEntry" id="CoY-1R-QC5"/>
+                                    <segue destination="yAV-Q9-5NG" kind="show" identifier="showEntry" destinationCreationSelector="makeEntryCollectionViewControllerWithCoder:" id="CoY-1R-QC5"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -63,7 +63,7 @@
         <!--Entry Collection View Controller-->
         <scene sceneID="JjH-pp-dr6">
             <objects>
-                <collectionViewController storyboardIdentifier="EntryCollectionViewController" hidesBottomBarWhenPushed="YES" id="yAV-Q9-5NG" customClass="EntryCollectionViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="EntryCollectionViewController" id="yAV-Q9-5NG" customClass="EntryCollectionViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="OWq-fQ-Uw7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -200,6 +200,7 @@
                                     <outlet property="seeAlsoStackView" destination="7To-7T-Zq4" id="U1a-fK-R3J"/>
                                     <outlet property="widthConstraint" destination="uS2-x4-RFd" id="xEj-ah-pX4"/>
                                     <outlet property="wordCategoryLabel" destination="lxl-LO-Yhp" id="2Er-Z9-yxq"/>
+                                    <segue destination="gbs-4G-sRi" kind="presentation" identifier="addToLearning" modalPresentationStyle="automatic" id="bya-6j-OGw"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -271,11 +272,7 @@
                             <outlet property="delegate" destination="yAV-Q9-5NG" id="ceB-4c-CPq"/>
                         </connections>
                     </collectionView>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="6Ur-Of-vjk"/>
-                        <barButtonItem enabled="NO" title="Add to learning" id="bu1-DU-DjE"/>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="x3F-BN-Zy2"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="6wt-4K-p9z">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="RUe-5t-1py">
@@ -298,10 +295,8 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="addToLearningButton" destination="bu1-DU-DjE" id="dmB-lx-2Ss"/>
                         <outlet property="collectionView" destination="OWq-fQ-Uw7" id="Aef-BX-cqh"/>
                         <outlet property="viewModeSegmentedControl" destination="RUe-5t-1py" id="qBk-KQ-gcm"/>
-                        <segue destination="gbs-4G-sRi" kind="presentation" identifier="addToLearning" id="hyk-c4-ijw"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hi0-L3-PYi" userLabel="First Responder" sceneMemberID="firstResponder"/>

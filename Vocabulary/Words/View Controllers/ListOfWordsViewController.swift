@@ -42,13 +42,9 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	
 	@IBOutlet private var editButton: UIBarButtonItem!
 
-	@IBOutlet private var createButton: UIBarButtonItem!
 	@IBOutlet private var moveButton: UIBarButtonItem!
 	@IBOutlet private var selectAllButton: UIBarButtonItem!
 	@IBOutlet private var deleteButton: UIBarButtonItem!
-	
-	@IBOutlet private var leftFlexibleSpace: UIBarButtonItem!
-	@IBOutlet private var rightFlexibleSpace: UIBarButtonItem!
 	
 	// MARK: - Private properties -
 	
@@ -57,14 +53,6 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	private lazy var wordsDataSource = ListOfWordsDataSource(
 		context: vocabularyStore.context, learningStage: learningStage, currentWordCollectionID: currentWordCollectionID
 	)
-	
-	private lazy var editingToolbarItems: [UIBarButtonItem] = [
-		moveButton, leftFlexibleSpace, selectAllButton, rightFlexibleSpace, deleteButton
-	]
-	
-	private lazy var defaultToolbarItems: [UIBarButtonItem] = [
-		leftFlexibleSpace, createButton, rightFlexibleSpace
-	]
 	
 	private var needShowEditingToolbarButtons = true
 	
@@ -81,7 +69,7 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
-		navigationController?.setToolbarHidden(false, animated: false)
+//		navigationController?.setToolbarHidden(false, animated: true)
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -103,6 +91,7 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 		
 		editButton.title = editing ? "Done" : "Edit"
 		updateToolBar()
+		navigationController?.setToolbarHidden(!editing, animated: true)
 	}
 	
 	// MARK: - Navigation -
@@ -191,24 +180,18 @@ private extension ListOfWordsViewController {
 	func configureSearchController() {
 		searchController.obscuresBackgroundDuringPresentation = false
 		searchController.hidesNavigationBarDuringPresentation = false
-		searchController.searchBar.placeholder = "Seaech by headword"
+		searchController.searchBar.placeholder = "Search by headword"
 		searchController.searchResultsUpdater = self
 		definesPresentationContext = true
 	}
 	
 	func updateToolBar() {
-		if isEditing && needShowEditingToolbarButtons {
-			toolbarItems = editingToolbarItems
-			
-			let hasSelectedRows = (tableView.indexPathForSelectedRow?.count ?? 0) > 0
-			
-			let wordsNumber = tableView.numberOfRows(inSection: 0)
-			selectAllButton.isEnabled = wordsNumber > 0
-			moveButton.isEnabled = hasSelectedRows
-			deleteButton.isEnabled = hasSelectedRows
-		} else {
-			toolbarItems = defaultToolbarItems
-		}
+		let hasSelectedRows = (tableView.indexPathForSelectedRow?.count ?? 0) > 0
+
+		let wordsNumber = tableView.numberOfRows(inSection: 0)
+		selectAllButton.isEnabled = wordsNumber > 0
+		moveButton.isEnabled = hasSelectedRows
+		deleteButton.isEnabled = hasSelectedRows
 		selectAllButton.title = isAllCellsSelected ? "Deselect All" : "Select All"
 	}
 }

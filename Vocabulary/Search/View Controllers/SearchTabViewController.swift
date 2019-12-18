@@ -74,18 +74,20 @@ class SearchTabViewController: UITableViewController, SegueHandlerType {
 		searchStateModelController.state.resultEntries != nil
 	}
 
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		guard let entries = searchStateModelController.state.resultEntries else { return }
+	@IBSegueAction
+	private func makeEntryCollectionViewController(coder: NSCoder) -> EntryCollectionViewController? {
+		guard let entries = searchStateModelController.state.resultEntries else { return nil }
 
-		switch segueIdentifier(for: segue) {
-		case .showEntry:
-			let viewController = segue.destination as! EntryCollectionViewController
-			viewController.vocabularyStore = vocabularyStore
+		let index = tableView.indexPathForSelectedRow?.row ?? 0
+		let entry = entries[index]
+		let currentWordCollectionID = currentWordCollectionInfoProvider.wordCollectionInfo?.objectID
 
-			let index = tableView.indexPathForSelectedRow?.row ?? 0
-			viewController.entry = entries[index]
-			viewController.currentWordCollectionID = currentWordCollectionInfoProvider.wordCollectionInfo?.objectID
-		}
+		return EntryCollectionViewController(
+			coder: coder,
+			vocabularyStore: vocabularyStore,
+			entry: entry,
+			currentWordCollectionID: currentWordCollectionID
+		)
 	}
 }
 
@@ -94,8 +96,11 @@ private extension SearchTabViewController {
 
 	func setupNotifications() {
 		let name = UIApplication.willEnterForegroundNotification
+
 		NotificationCenter.default
-			.addObserver(self, selector: #selector(tableView.reloadData),  name: name, object: nil)
+			.addObserver(forName: name, object: nil, queue: .main) { [unowned self] _ in
+				self.tableView.reloadData()
+		}
 	}
 
 	func setupSearchController() {
@@ -149,6 +154,7 @@ extension SearchTabViewController: UITabBarControllerDelegate {
 	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
 		if viewController == navigationController {
 			searchController.searchBar.becomeFirstResponder()
+			searchController.searchBar.searchTextField.selectAll(nil)
 		}
 	}
 }
