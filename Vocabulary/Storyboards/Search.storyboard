@@ -73,7 +73,7 @@
         <scene sceneID="YmG-tC-zfb">
             <objects>
                 <collectionViewController id="LHg-BK-YrN" customClass="EntryCollectionViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" id="nhf-QP-eFc">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" id="nhf-QP-eFc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -208,22 +208,21 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
-                                <view contentMode="scaleToFill" id="ohF-eB-Ty6">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohF-eB-Ty6">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pfX-gL-Vt2">
-                                            <rect key="frame" x="20" y="0.0" width="335" height="50"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pfX-gL-Vt2">
+                                            <rect key="frame" x="133.5" y="0.0" width="108" height="50"/>
                                             <subviews>
                                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="752" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.89999997615814209" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xag-Qv-7S4">
-                                                    <rect key="frame" x="147" y="0.0" width="41.5" height="26.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="108" height="26.5"/>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="O0n-fd-2Hx">
-                                                    <rect key="frame" x="113.5" y="26.5" width="108" height="23.5"/>
+                                                    <rect key="frame" x="0.0" y="26.5" width="108" height="23.5"/>
                                                     <subviews>
                                                         <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFI-NV-c9C">
                                                             <rect key="frame" x="0.0" y="3" width="51" height="18"/>
@@ -247,14 +246,21 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="pfX-gL-Vt2" secondAttribute="bottom" id="IjK-lB-l1t"/>
-                                        <constraint firstAttribute="bottom" secondItem="pfX-gL-Vt2" secondAttribute="bottom" id="NG4-eM-RjU"/>
-                                        <constraint firstItem="pfX-gL-Vt2" firstAttribute="leading" secondItem="ohF-eB-Ty6" secondAttribute="leading" constant="20" id="iX5-wk-dKw"/>
-                                        <constraint firstAttribute="trailing" secondItem="pfX-gL-Vt2" secondAttribute="trailing" constant="20" id="qiR-LK-B3n"/>
+                                        <constraint firstItem="pfX-gL-Vt2" firstAttribute="bottom" secondItem="ohF-eB-Ty6" secondAttribute="bottom" id="NG4-eM-RjU"/>
+                                        <constraint firstItem="pfX-gL-Vt2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ohF-eB-Ty6" secondAttribute="leading" constant="20" id="iX5-wk-dKw"/>
+                                        <constraint firstItem="pfX-gL-Vt2" firstAttribute="centerX" secondItem="ohF-eB-Ty6" secondAttribute="centerX" id="iag-HP-rNx"/>
+                                        <constraint firstItem="pfX-gL-Vt2" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ohF-eB-Ty6" secondAttribute="trailing" constant="-20" id="qiR-LK-B3n"/>
+                                        <constraint firstItem="pfX-gL-Vt2" firstAttribute="centerY" secondItem="ohF-eB-Ty6" secondAttribute="centerY" id="t6f-QL-xge"/>
                                         <constraint firstItem="pfX-gL-Vt2" firstAttribute="top" secondItem="ohF-eB-Ty6" secondAttribute="top" id="x8f-g5-6aZ"/>
                                     </constraints>
                                 </view>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="ohF-eB-Ty6" firstAttribute="leading" secondItem="crY-Ef-9Sc" secondAttribute="leading" id="77e-fA-6wt"/>
+                                <constraint firstItem="ohF-eB-Ty6" firstAttribute="bottom" secondItem="crY-Ef-9Sc" secondAttribute="bottom" id="EVL-7S-aZf"/>
+                                <constraint firstItem="ohF-eB-Ty6" firstAttribute="trailing" secondItem="crY-Ef-9Sc" secondAttribute="trailing" id="J65-wq-lxu"/>
+                                <constraint firstItem="ohF-eB-Ty6" firstAttribute="top" secondItem="crY-Ef-9Sc" secondAttribute="top" id="s3l-8H-8dM"/>
+                            </constraints>
                             <connections>
                                 <outlet property="contentView" destination="ohF-eB-Ty6" id="vRN-tS-Xh0"/>
                                 <outlet property="seeAlsoButton" destination="rnd-gg-SRd" id="guf-Bu-Jyh"/>
@@ -289,6 +295,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="layout" destination="OX6-si-LBp" id="KNU-IJ-tO3"/>
                         <outlet property="viewModeSegmentedControl" destination="s1X-WX-ahZ" id="IaA-Id-hI4"/>
                     </connections>
                 </collectionViewController>

@@ -24,7 +24,7 @@ class DefinitionsCollectionViewHeader: UICollectionReusableView {
 		titleLabel.text = viewData.title
 		subtitleLabel.text = viewData.subtitle
 		seeAlsoButton.setTitle(viewData.buttonText, for: .normal)
-		
+
 		subtitleLabel.isHidden = viewData.subtitle.isEmpty
 		seeAlsoButton.isHidden = viewData.buttonText.isEmpty
 		seeAlsoStackView.isHidden = viewData.buttonText.isEmpty && viewData.subtitle.isEmpty
@@ -37,8 +37,8 @@ extension DefinitionsCollectionViewHeader {
 		let title, subtitle, buttonText: String
 		
 		init(entry: Entry) {
-			title = ""
-			subtitle = entry.sentencePart
+			title = entry.sentencePart
+			subtitle = ""
 			buttonText = ""
 		}
 		

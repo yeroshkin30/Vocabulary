@@ -29,7 +29,7 @@ class DefinitionCollectionViewCell: CardCollectionView {
 		layoutIfNeeded()
 		let size = contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 		var frame = layoutAttributes.frame
-		frame.size.height = ceil(size.height)
+		frame.size.height = size.height
 		layoutAttributes.frame = frame
 		return layoutAttributes
 	}

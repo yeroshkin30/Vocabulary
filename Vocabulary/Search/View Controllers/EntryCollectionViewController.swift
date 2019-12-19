@@ -28,19 +28,27 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	// MARK: - DefinitionsRequestProvider -
+	// MARK: - DefinitionsRequestProvider
 	
 	var wordToRequest: String?
 	
-	// MARK: - Outlets -
-	
+	// MARK: - Outlets
+
+	@IBOutlet private var layout: UICollectionViewFlowLayout!
 	@IBOutlet private var viewModeSegmentedControl: UISegmentedControl!
 	
 	// MARK: - Private properties
 	
 	private var viewMode: ViewMode = .definitions { didSet { viewModeDidChange() }}
-	
-	private lazy var dataSource = EntryCollectionViewDataSource(entry: entry, viewMode: viewMode)
+	private var viewData: ViewData {
+		switch viewMode {
+		case .definitions: return definitionsViewData
+		case .expressions: return expressionsViewData
+		}
+	}
+
+	private lazy var definitionsViewData = ViewData(entry: entry, viewMode: .definitions)
+	private lazy var expressionsViewData = ViewData(entry: entry, viewMode: .expressions)
 	
 	// MARK: - Actions
 	
@@ -57,23 +65,13 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		navigationItem.title = entry.headword
-		setupCollectionView()
-		setupSegmentControl()
+		initialSetup()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 
 		stopPronouncing()
-	}
-	
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(animated)
-		
-		if let indexPath = collectionView?.indexPathsForSelectedItems?.first {
-			collectionView?.deselectItem(at: indexPath, animated: false)
-		}
 	}
 	
 	// MARK: - Navigation
@@ -97,85 +95,125 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 			viewController.delegate = self
 			
 			if let indexPath = collectionView?.indexPathsForSelectedItems?.first {
-				viewController.viewData = wordDataForDefinition(at: indexPath)
-				collectionView.deselectItem(at: indexPath, animated: true)
+				viewController.viewData = .init(entry: entry, viewMode: viewMode, indexPath: indexPath)
 			}
 		}
 	}
 }
 
-// MARK: - Helpers
-private extension EntryCollectionViewController {
-	
-	func setupCollectionView() {
-		collectionView?.dataSource = dataSource
+// MARK: - UICollectionViewDataSource
+extension EntryCollectionViewController {
 
-		if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-			let width = UIScreen.main.bounds.size.width * 0.9
-			layout.estimatedItemSize = CGSize(width: width, height: 150.0)
-			layout.itemSize = UICollectionViewFlowLayout.automaticSize
-		}
+	override func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return viewData.numberOfSections
 	}
 
-	func setupSegmentControl() {
-		if entry.definitions.isEmpty {
-			viewMode = .expressions
-			viewModeSegmentedControl.selectedSegmentIndex = viewMode.rawValue
-			viewModeSegmentedControl.setEnabled(false, forSegmentAt: ViewMode.definitions.rawValue)
-		}
-		if entry.expressions.isEmpty {
-			viewMode = .definitions
-			viewModeSegmentedControl.selectedSegmentIndex = viewMode.rawValue
-			viewModeSegmentedControl.setEnabled(false, forSegmentAt: ViewMode.expressions.rawValue)
-		}
+	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return viewData.numberOfItems(inSection: section)
 	}
-	
-	func viewModeDidChange() {
-		dataSource = EntryCollectionViewDataSource(entry: entry, viewMode: viewMode)
-		
-		collectionView?.dataSource = dataSource
-		collectionView?.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
-		collectionView?.reloadData()
+
+	override func collectionView(_ collectionView: UICollectionView,
+								 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+		let cell = collectionView.dequeueCell(indexPath: indexPath) as DefinitionCollectionViewCell
+		let definition = viewData.definitionData(for: indexPath)
+		cell.viewData = DefinitionCollectionViewCell.ViewData(definition: definition)
+		return cell
 	}
-	
-	func wordDataForDefinition(at indexPath: IndexPath) -> EditWordViewController.ViewData {
-		let headword: String
-		let definition: Definition
-		
-		switch viewMode {
-		case .definitions:
-			headword = entry.headword
-			definition = entry.definitions[indexPath.item]
-		case .expressions:
-			let expression = entry.expressions[indexPath.section]
-			
-			headword = expression.text
-			definition = expression.definitions[indexPath.item]
-		}
-		
-		return EditWordViewController.ViewData(
-			headword: headword,
-			sentencePart: entry.sentencePart,
-			definition: definition.text,
-			examples: definition.examples,
-			mode: .create
-		)
+
+	override func collectionView(_ collectionView: UICollectionView,
+								 viewForSupplementaryElementOfKind kind: String,
+								 at indexPath: IndexPath) -> UICollectionReusableView {
+
+		let view = collectionView.dequeueSupplementaryView(of: kind, at: indexPath) as DefinitionsCollectionViewHeader
+		view.viewData = viewData.sectionViewData(for: indexPath.section)
+		return view
 	}
 }
 
-// MARK: - Types -
+// MARK: - Helpers
+private extension EntryCollectionViewController {
+
+	var headerSize: CGSize {
+		let height: CGFloat = viewMode == .definitions ? 25.0 : 50.0
+		return CGSize(width: collectionView.bounds.width, height: height)
+	}
+
+	func initialSetup() {
+		navigationItem.title = entry.headword
+		viewMode =  entry.definitions.isEmpty ? .expressions : .definitions
+
+		setupCollectionView()
+		setupSegmentControl()
+	}
+	
+	func setupCollectionView() {
+		let width = collectionView.bounds.width * 0.9
+		layout.estimatedItemSize = CGSize(width: width, height: 150.0)
+		layout.itemSize = UICollectionViewFlowLayout.automaticSize
+		layout.headerReferenceSize = headerSize
+	}
+
+	func setupSegmentControl() {
+		viewModeSegmentedControl.selectedSegmentIndex = viewMode.rawValue
+		viewModeSegmentedControl.setEnabled(entry.definitions.isEmpty, forSegmentAt: ViewMode.definitions.rawValue)
+		viewModeSegmentedControl.setEnabled(entry.expressions.isEmpty, forSegmentAt: ViewMode.expressions.rawValue)
+	}
+
+	func viewModeDidChange() {
+		layout.headerReferenceSize = headerSize
+		collectionView?.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+		collectionView?.reloadData()
+	}
+}
+
+// MARK: - Types
 extension EntryCollectionViewController {
 
 	enum ViewMode: Int {
 		case definitions, expressions
 	}
+
+	struct ViewData {
+		typealias SectionIndex = Int
+		typealias HeaderViewData = DefinitionsCollectionViewHeader.ViewData
+
+		private let sections: [HeaderViewData]
+		private let items: [SectionIndex: [Definition]]
+
+		init(entry: Entry, viewMode: EntryCollectionViewController.ViewMode) {
+
+			switch viewMode {
+			case .definitions:
+				sections = [HeaderViewData(entry: entry)]
+				items = [0: entry.definitions]
+
+			case .expressions:
+				var _sections: [HeaderViewData] = []
+				var _items: [SectionIndex: [Definition]] = [:]
+
+				entry.expressions.enumerated().forEach { (index, expression) in
+					_sections.append(HeaderViewData(expression: expression))
+					_items[index] = expression.definitions
+				}
+				sections = _sections
+				items = _items
+			}
+		}
+
+		var numberOfSections: Int { sections.count }
+
+		func numberOfItems(inSection section: Int) -> Int 			{ items[section]?.count ?? 0 }
+		func sectionViewData(for section: Int) -> HeaderViewData	{ sections[section] }
+		func definitionData(for indexPath: IndexPath) -> Definition { items[indexPath.section]![indexPath.item] }
+	}
 }
 
-// MARK: - EditWordViewControllerDelegate -
+// MARK: - EditWordViewControllerDelegate
 extension EntryCollectionViewController: EditWordViewControllerDelegate {
 	
 	func editWordViewController(_ viewController: EditWordViewController,
-										didFinishWith action: EditWordViewController.ResultAction) {
+								didFinishWith action: EditWordViewController.ResultAction) {
 		
 		switch action {
 		case .save:
@@ -190,5 +228,30 @@ extension EntryCollectionViewController: EditWordViewControllerDelegate {
 		default: break
 		}
 		viewController.dismiss(animated: true)
+	}
+}
+
+// MARK: - EditWordViewController
+fileprivate extension EditWordViewController.ViewData {
+
+	init(entry: Entry, viewMode: EntryCollectionViewController.ViewMode, indexPath: IndexPath) {
+		let headword: String
+		let definition: Definition
+
+		switch viewMode {
+		case .definitions:
+			headword = entry.headword
+			definition = entry.definitions[indexPath.item]
+
+		case .expressions:
+			let expression = entry.expressions[indexPath.section]
+			headword = expression.text
+			definition = expression.definitions[indexPath.item]
+		}
+
+		self.headword = headword
+		self.sentencePart = entry.sentencePart
+		self.definition = definition.text
+		self.examples = definition.examples
 	}
 }
