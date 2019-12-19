@@ -1,9 +1,9 @@
 //
-//	DefinitionCollectionViewCell.swift
-//	Vocabulary
+//  TestCell.swift
+//  Vocabulary
 //
-//	Created by Alexander Baraley on 10/4/17.
-//	Copyright © 2017 Alexander Baraley. All rights reserved.
+//  Created by Alexander Baraley on 18.12.2019.
+//  Copyright © 2019 Alexander Baraley. All rights reserved.
 //
 
 import UIKit
@@ -11,59 +11,54 @@ import UIKit
 private let numberOfExamples = 3
 private let widthMultiplier: CGFloat = 0.9
 
-class DefinitionCollectionViewCell: CardCollectionView {
-	
-	@IBOutlet private var wordCategoryLabel: UILabel!
+class TestCell: CardCollectionView {
+
 	@IBOutlet private var definitionLabel: UILabel!
 	@IBOutlet private var examplesLabel: UILabel!
-	@IBOutlet private var seeAlsoStackView: UIStackView!
-	@IBOutlet private var seeAlsoButton: UIButton!
+	@IBOutlet private var stackView: UIStackView!
 
 	var viewData: ViewData? { didSet { viewDataDidChanged() } }
+
+	override func awakeFromNib() {
+		super.awakeFromNib()
+
+//		let screeWidth = UIScreen.main.bounds.size.width
+//		widthConstraint.constant = screeWidth * widthMultiplier
+	}
 
 	override func preferredLayoutAttributesFitting(
 		_ layoutAttributes: UICollectionViewLayoutAttributes
 	) -> UICollectionViewLayoutAttributes {
+
+		let screeWidth = UIScreen.main.bounds.size.width
 
 		setNeedsLayout()
 		layoutIfNeeded()
 		let size = contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 		var frame = layoutAttributes.frame
 		frame.size.height = ceil(size.height)
+		frame.size.width = screeWidth * widthMultiplier
 		layoutAttributes.frame = frame
 		return layoutAttributes
 	}
 
 	private func viewDataDidChanged() {
 		guard let viewData = viewData else { return }
-		
-		wordCategoryLabel.text = viewData.category
 		definitionLabel.text = viewData.definition
 		examplesLabel.text = viewData.examples
-		
-		seeAlsoStackView.isHidden = viewData.seeAlso.isEmpty
-		seeAlsoButton.setTitle(viewData.seeAlso, for: .normal)
-		
 		setupShadowPath(for: bounds.size)
 	}
 }
 
-extension DefinitionCollectionViewCell {
-	
+extension TestCell {
+
 	struct ViewData {
-		let category, definition, examples, seeAlso: String
-		
+		let definition, examples: String
+
 		init(definition: Definition) {
-			self.category = definition.category
 			self.definition = definition.text
-			self.seeAlso = definition.seeAlso
-			
-			var examplesText = ""
-			if !definition.examples.isEmpty {
-				let examples = definition.examples.prefix(numberOfExamples)
-				examplesText = examples.joined(separator: "\n\n")
-			}
-			self.examples = examplesText
+			let examples = definition.examples.prefix(numberOfExamples)
+			self.examples = examples.joined(separator: "\n\n")
 		}
 	}
 }

@@ -58,7 +58,7 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 		super.viewDidLoad()
 
 		navigationItem.title = entry.headword
-		collectionView?.dataSource = dataSource
+		setupCollectionView()
 		setupSegmentControl()
 	}
 	
@@ -89,7 +89,7 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 			if let button = sender as? UIButton {
 				wordToRequest = button.title(for: .normal)
 			}
-			
+
 		case .addToLearning:
 			let editWordNavController = segue.destination as! UINavigationController
 			let viewController = editWordNavController.viewControllers.first as! EditWordViewController
@@ -107,6 +107,16 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 // MARK: - Helpers
 private extension EntryCollectionViewController {
 	
+	func setupCollectionView() {
+		collectionView?.dataSource = dataSource
+
+		if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+			let width = UIScreen.main.bounds.size.width * 0.9
+			layout.estimatedItemSize = CGSize(width: width, height: 150.0)
+			layout.itemSize = UICollectionViewFlowLayout.automaticSize
+		}
+	}
+
 	func setupSegmentControl() {
 		if entry.definitions.isEmpty {
 			viewMode = .expressions
@@ -143,11 +153,13 @@ private extension EntryCollectionViewController {
 			definition = expression.definitions[indexPath.item]
 		}
 		
-		return EditWordViewController.ViewData(headword: headword,
-													  sentencePart: entry.sentencePart,
-													  definition: definition.text,
-													  examples: definition.examples,
-													  mode: .create)
+		return EditWordViewController.ViewData(
+			headword: headword,
+			sentencePart: entry.sentencePart,
+			definition: definition.text,
+			examples: definition.examples,
+			mode: .create
+		)
 	}
 }
 

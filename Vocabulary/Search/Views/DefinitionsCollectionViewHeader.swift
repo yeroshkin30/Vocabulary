@@ -11,8 +11,8 @@ import UIKit
 class DefinitionsCollectionViewHeader: UICollectionReusableView {
 	
 	@IBOutlet private var contentView: UIView!
-	@IBOutlet private var title: UILabel!
-	@IBOutlet private var subtitle: UILabel!
+	@IBOutlet private var titleLabel: UILabel!
+	@IBOutlet private var subtitleLabel: UILabel!
 	@IBOutlet private var seeAlsoStackView: UIStackView!
 	@IBOutlet private var seeAlsoButton: UIButton!
 	
@@ -21,17 +21,18 @@ class DefinitionsCollectionViewHeader: UICollectionReusableView {
 	private func viewDataDidChanged() {
 		guard let viewData = viewData else { return }
 		
-		title.text = viewData.title
-		subtitle.text = viewData.subtitle
+		titleLabel.text = viewData.title
+		subtitleLabel.text = viewData.subtitle
 		seeAlsoButton.setTitle(viewData.buttonText, for: .normal)
 		
-		subtitle.isHidden = viewData.subtitle.isEmpty
+		subtitleLabel.isHidden = viewData.subtitle.isEmpty
 		seeAlsoButton.isHidden = viewData.buttonText.isEmpty
 		seeAlsoStackView.isHidden = viewData.buttonText.isEmpty && viewData.subtitle.isEmpty
 	}
 }
 
 extension DefinitionsCollectionViewHeader {
+	
 	struct ViewData {
 		let title, subtitle, buttonText: String
 		
