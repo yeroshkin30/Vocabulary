@@ -184,10 +184,6 @@
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="uaX-KI-zKr"/>
                                     </constraints>
                                 </collectionViewCellContentView>
-                                <constraints>
-                                    <constraint firstItem="ASq-Vj-BUv" firstAttribute="top" secondItem="66q-6X-e67" secondAttribute="top" id="Aok-Nl-Da6"/>
-                                    <constraint firstItem="ASq-Vj-BUv" firstAttribute="leading" secondItem="66q-6X-e67" secondAttribute="leading" id="VQo-gN-GWy"/>
-                                </constraints>
                                 <size key="customSize" width="330" height="231"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">

@@ -14,7 +14,6 @@
 		1168E16E23993DF6008CFA33 /* AppRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168E16D23993DF6008CFA33 /* AppRootViewController.swift */; };
 		119FA71B239CEA6E001EE177 /* SearchStateModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119FA71A239CEA6E001EE177 /* SearchStateModelController.swift */; };
 		119FA71D239CEA8D001EE177 /* SearchPromptsModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119FA71C239CEA8D001EE177 /* SearchPromptsModelController.swift */; };
-		119FC07C23AAAFFA0071AB4B /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119FC07B23AAAFFA0071AB4B /* TestCell.swift */; };
 		11A0C2CC23A26CFD00CEE1B0 /* IndexPath+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C2CB23A26CFD00CEE1B0 /* IndexPath+extensions.swift */; };
 		11F8247623A4141B00A44DA5 /* WordsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F8247523A4141B00A44DA5 /* WordsTabViewController.swift */; };
 		3D04AFC3204C69E200E89E10 /* UiViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D04AFC2204C69E200E89E10 /* UiViewController+extension.swift */; };
@@ -41,8 +40,7 @@
 		3D2EE32421F0CF5D00E7AB52 /* SearchResultsModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EE32221F0CF5D00E7AB52 /* SearchResultsModelController.swift */; };
 		3D4100B82271E48200B7EE76 /* InputViewsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4100B72271E48200B7EE76 /* InputViewsConfigurator.swift */; };
 		3D4620E120800C87006C3694 /* EditWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4620E020800C87006C3694 /* EditWordViewController.swift */; };
-		3D4620E320806B73006C3694 /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4620E220806B72006C3694 /* EditTextViewController.swift */; };
-		3D48A05821FCA477002BA8AC /* EntryCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D48A05721FCA477002BA8AC /* EntryCollectionViewDataSource.swift */; };
+		3D4620E320806B73006C3694 /* InputTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4620E220806B72006C3694 /* InputTextViewController.swift */; };
 		3D508A03226F804E00BAFC4A /* LearningProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D508A02226F804E00BAFC4A /* LearningProcessViewController.swift */; };
 		3D516C582042882000B6A715 /* SegueHandlerType+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D516C572042881F00B6A715 /* SegueHandlerType+Protocol.swift */; };
 		3D516C5A2042883400B6A715 /* HistoryModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D516C592042883400B6A715 /* HistoryModelController.swift */; };
@@ -105,7 +103,6 @@
 		1168E16D23993DF6008CFA33 /* AppRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootViewController.swift; sourceTree = "<group>"; };
 		119FA71A239CEA6E001EE177 /* SearchStateModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStateModelController.swift; sourceTree = "<group>"; };
 		119FA71C239CEA8D001EE177 /* SearchPromptsModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPromptsModelController.swift; sourceTree = "<group>"; };
-		119FC07B23AAAFFA0071AB4B /* TestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
 		11A0C2CB23A26CFD00CEE1B0 /* IndexPath+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexPath+extensions.swift"; sourceTree = "<group>"; };
 		11F8247523A4141B00A44DA5 /* WordsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTabViewController.swift; sourceTree = "<group>"; };
 		3D04AFC2204C69E200E89E10 /* UiViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiViewController+extension.swift"; sourceTree = "<group>"; };
@@ -133,8 +130,7 @@
 		3D2EE32221F0CF5D00E7AB52 /* SearchResultsModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsModelController.swift; sourceTree = "<group>"; };
 		3D4100B72271E48200B7EE76 /* InputViewsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewsConfigurator.swift; sourceTree = "<group>"; };
 		3D4620E020800C87006C3694 /* EditWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordViewController.swift; sourceTree = "<group>"; };
-		3D4620E220806B72006C3694 /* EditTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
-		3D48A05721FCA477002BA8AC /* EntryCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		3D4620E220806B72006C3694 /* InputTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTextViewController.swift; sourceTree = "<group>"; };
 		3D508A02226F804E00BAFC4A /* LearningProcessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningProcessViewController.swift; sourceTree = "<group>"; };
 		3D516C572042881F00B6A715 /* SegueHandlerType+Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SegueHandlerType+Protocol.swift"; sourceTree = "<group>"; };
 		3D516C592042883400B6A715 /* HistoryModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryModelController.swift; sourceTree = "<group>"; };
@@ -217,7 +213,6 @@
 				119FA71C239CEA8D001EE177 /* SearchPromptsModelController.swift */,
 				3D2EE32221F0CF5D00E7AB52 /* SearchResultsModelController.swift */,
 				119FA71A239CEA6E001EE177 /* SearchStateModelController.swift */,
-				3D48A05721FCA477002BA8AC /* EntryCollectionViewDataSource.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -261,7 +256,7 @@
 				1168E16D23993DF6008CFA33 /* AppRootViewController.swift */,
 				3D6AD8D720EB9B1A004716DF /* WordCollectionsTableViewController.swift */,
 				3D4620E020800C87006C3694 /* EditWordViewController.swift */,
-				3D4620E220806B72006C3694 /* EditTextViewController.swift */,
+				3D4620E220806B72006C3694 /* InputTextViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -438,7 +433,6 @@
 			children = (
 				3DA538A9205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift */,
 				3D516C5E20452F1700B6A715 /* DefinitionCollectionViewCell.swift */,
-				119FC07B23AAAFFA0071AB4B /* TestCell.swift */,
 				3D2EE31A21F0A54D00E7AB52 /* LoadingView.swift */,
 				3D2EE31821F0A52F00E7AB52 /* LoadingView.xib */,
 			);
@@ -645,7 +639,6 @@
 				3DD51A3C215E18ED0099BADB /* ListOfWordsDataSource.swift in Sources */,
 				3DA538AA205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift in Sources */,
 				3D17E4002064F3800083DD45 /* LearningOptionTitleView.swift in Sources */,
-				119FC07C23AAAFFA0071AB4B /* TestCell.swift in Sources */,
 				3D834C142270DF80000F6CB7 /* RemindWordsCollectionViewDataSource.swift in Sources */,
 				3DA61BF5227A55630056EAFA /* DefaultDataProvider.swift in Sources */,
 				3D56382021D1F8D900281C07 /* EntryCollectionViewController.swift in Sources */,
@@ -655,14 +648,13 @@
 				3D2EE31321F0A2B800E7AB52 /* SearchTabViewController.swift in Sources */,
 				3D52FB042083BE1200CDD6A1 /* WordDestinationsViewController.swift in Sources */,
 				3D516C6C20452F9900B6A715 /* Entry.swift in Sources */,
-				3D48A05821FCA477002BA8AC /* EntryCollectionViewDataSource.swift in Sources */,
 				3DC9E2E12086ECEA0010BE8D /* Word.swift in Sources */,
 				3D04AFC3204C69E200E89E10 /* UiViewController+extension.swift in Sources */,
 				11A0C2CC23A26CFD00CEE1B0 /* IndexPath+extensions.swift in Sources */,
 				3D24CF8C20711B8D006EF57B /* SelectHeadwordInputView.swift in Sources */,
 				3DCF6D1020650BFC00635743 /* UIView+extension.swift in Sources */,
 				3DDC4887205350420023FDD9 /* UICollectionView+extension.swift in Sources */,
-				3D4620E320806B73006C3694 /* EditTextViewController.swift in Sources */,
+				3D4620E320806B73006C3694 /* InputTextViewController.swift in Sources */,
 				3D976F03221C713E00DB5796 /* UnknownWordsViewController.swift in Sources */,
 				3DB4A0842069F53C00B7DDED /* UIStoryboard+extension.swift in Sources */,
 				3DEB988D227341B6003912FF /* RepeatWordsCollectionViewDataSource.swift in Sources */,

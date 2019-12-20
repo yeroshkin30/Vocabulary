@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class WordCollectionsTableViewController: UITableViewController, SegueHandlerType {
+class WordCollectionsTableViewController: UITableViewController {
 
 	// MARK: - Initialization
 
@@ -73,8 +73,6 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		wordCollectionToRename = nil
-		
 		if vocabularyStore.context.undoManager == nil {
 			vocabularyStore.context.undoManager = UndoManager()
 		}
@@ -83,67 +81,97 @@ class WordCollectionsTableViewController: UITableViewController, SegueHandlerTyp
 	override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
 		showUndoAlert()
 	}
-	
-	// MARK: - Navigation
-	
-	enum SegueIdentifier: String {
-		case createCollection, renameCollection
-	}
-	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		switch segueIdentifier(for: segue) {
-		case .createCollection:
-			let viewController = segue.destination as! EditTextViewController
-			
-			viewController.delegate = self
-			viewController.initialText = ""
-			viewController.charactersCapacity = .verySmall
-			
-		case .renameCollection:
-			guard let wordCollection = wordCollectionToRename else { return }
-			
-			let viewController = segue.destination as! EditTextViewController
-			
-			viewController.delegate = self
-			viewController.initialText = wordCollection.name
-			viewController.charactersCapacity = .verySmall
-		}
-	}
+//
+//	// MARK: - Navigation
+//
+//	enum SegueIdentifier: String {
+//		case createCollection, renameCollection
+//	}
+//
+//	@IBSegueAction
+//	private func makeInputTextViewController(
+//		coder: NSCoder, sender: Any?, segueIdentifier: String?
+//	) -> InputTextViewController? {
+//
+//		guard let identifier = segueIdentifier else { return nil }
+//
+//		switch SegueIdentifier(rawValue: identifier) {
+//		case .createCollection:
+//			return InputTextViewController(coder: coder, charactersCapacity: .verySmall) { [unowned self] (text) in
+//				self.updateNameOfWordCollection(at: nil, with: text)
+//			}
+//		case .renameCollection:
+//			return InputTextViewController(coder: coder, charactersCapacity: .verySmall) { [unowned self] (text) in
+//
+//				self.updateNameOfWordCollection(at: nil, with: text)
+//			}
+//		}
+//		guard let entries = searchStateModelController.state.resultEntries else { return nil }
+//
+//		let index = tableView.indexPathForSelectedRow?.row ?? 0
+//		let entry = entries[index]
+//		let currentWordCollectionID = currentWordCollectionInfoProvider.wordCollectionInfo?.objectID
+//
+//		return EntryCollectionViewController(
+//			coder: coder,
+//			vocabularyStore: vocabularyStore,
+//			entry: entry,
+//			currentWordCollectionID: currentWordCollectionID
+//		)
+//	}
+//
+//	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//		switch segueIdentifier(for: segue) {
+//		case .createCollection:
+//			let viewController = segue.destination as! InputTextViewController
+//
+//			viewController.delegate = self
+//			viewController.initialText = ""
+//			viewController.charactersCapacity = .verySmall
+//
+//		case .renameCollection:
+//			guard let wordCollection = wordCollectionToRename else { return }
+//
+//			let viewController = segue.destination as! InputTextViewController
+//
+//			viewController.delegate = self
+//			viewController.initialText = wordCollection.name
+//			viewController.charactersCapacity = .verySmall
+//		}
+//	}
 	
 	// MARK: - UITableViewDelegate
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		selectWordCollection(at: indexPath)
-		tableView.deselectRow(at: indexPath, animated: true)
 	}
 	
-	override func tableView(_ tableView: UITableView,
-							trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
-		) -> UISwipeActionsConfiguration? {
-		
-		
-		let renameAction = UIContextualAction(style: .normal,
-											  title: "Rename") { (_, _, handler) in
-			self.wordCollectionToRename = self.wordCollectionsDataSource.wordCollection(indexPath)
-			self.performSegue(with: .renameCollection, sender: nil)
-			handler(true)
-		}
-		
-		let deleteAction = UIContextualAction(style: .destructive,
-											  title: "Delete") { (_, _, handler) in
-			let wordCollectionToDelete = self.wordCollectionsDataSource.wordCollection(indexPath)
-			
-			if wordCollectionToDelete.words?.count == 0 {
-				self.deleteWordCollection(at: indexPath)
-				handler(true)
-			} else {
-				self.sowAlertForWordCollectionDeletion(at: indexPath)
-				handler(false)
-			}
-		}
-		
-		return UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
-	}
+//	override func tableView(_ tableView: UITableView,
+//							trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+//		) -> UISwipeActionsConfiguration? {
+//
+//		let renameAction = UIContextualAction(style: .normal,
+//											  title: "Rename") { (_, _, handler) in
+//			self.wordCollectionToRename = self.wordCollectionsDataSource.wordCollection(indexPath)
+//			self.performSegue(with: .renameCollection, sender: nil)
+//			handler(true)
+//		}
+//
+//		let deleteAction = UIContextualAction(style: .destructive,
+//											  title: "Delete") { (_, _, handler) in
+//			let wordCollectionToDelete = self.wordCollectionsDataSource.wordCollection(indexPath)
+//
+//			if wordCollectionToDelete.words?.count == 0 {
+//				self.deleteWordCollection(at: indexPath)
+//				handler(true)
+//			} else {
+//				self.sowAlertForWordCollectionDeletion(at: indexPath)
+//				handler(false)
+//			}
+//		}
+//
+//		return UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
+//	}
 }
 
 // MARK: - Private -
@@ -191,21 +219,22 @@ private extension WordCollectionsTableViewController {
 		
 		present(alert, animated: true, completion: nil)
 	}
-}
 
-// MARK: - EditTextViewControllerDelegate
-extension WordCollectionsTableViewController: EditTextViewControllerDelegate {
-
-	func editTextViewController(_ controller: EditTextViewController, saveEditedText text: String) {
-		if let wordCollection = wordCollectionToRename {
-			wordCollection.name = text
-		} else {
-			let newCollection = WordCollection(context: vocabularyStore.context)
-			newCollection.name = text
-		}
-		vocabularyStore.saveChanges()
-		navigationController?.popViewController(animated: true)
-	}
+//	func updateNameOfWordCollection(at indexPath: IndexPath?, with text: String) {
+//
+//		if let indexPath = indexPath {
+//			let wordCollection = wordCollectionsDataSource.wordCollection(indexPath)
+//			wordCollection.name = text
+//			if wordCollection == currentWordCollection {
+//				currentWordCollectionModelController.wordCollectionInfo = WordCollectionInfo(wordCollection)
+//			}
+//		} else {
+//			let newCollection = WordCollection(context: vocabularyStore.context)
+//			newCollection.name = text
+//		}
+//		vocabularyStore.saveChanges()
+//		navigationController?.popViewController(animated: true)
+//	}
 }
 
 // MARK: - NSFetchedResultsControllerDelegate

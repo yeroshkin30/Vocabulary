@@ -261,7 +261,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="lDr-Ir-YOU" kind="show" identifier="editText" id="qY0-yg-juP"/>
+                                    <segue destination="KCI-cH-nDU" kind="presentation" identifier="editText" id="qY0-yg-juP"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -294,22 +294,22 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Add New"/>
                     <connections>
-                        <segue destination="lDr-Ir-YOU" kind="show" identifier="addExample" id="qWn-uh-Gcs"/>
+                        <segue destination="KCI-cH-nDU" kind="presentation" identifier="addExample" id="qWn-uh-Gcs"/>
                     </connections>
                 </button>
             </objects>
             <point key="canvasLocation" x="-937" y="2319"/>
         </scene>
-        <!--Edit Text View Controller-->
+        <!--Input Text View Controller-->
         <scene sceneID="SOZ-M1-SpM">
             <objects>
-                <viewController storyboardIdentifier="EditTextViewController" automaticallyAdjustsScrollViewInsets="NO" id="lDr-Ir-YOU" customClass="EditTextViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditTextViewController" automaticallyAdjustsScrollViewInsets="NO" id="lDr-Ir-YOU" customClass="InputTextViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OsR-BA-ssd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Text View" translatesAutoresizingMaskIntoConstraints="NO" id="W5X-9R-mAR">
-                                <rect key="frame" x="15" y="44" width="345" height="623"/>
+                                <rect key="frame" x="15" y="56" width="345" height="591"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <viewLayoutGuide key="safeArea" id="ITH-fU-SPv"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
@@ -329,29 +329,33 @@
                         <viewLayoutGuide key="safeArea" id="gMY-cw-oiN"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="hJk-N1-ZFg">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="oaJ-JC-cQU">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="uPn-av-e9n">
                             <connections>
-                                <action selector="saveAction:" destination="lDr-Ir-YOU" id="Txb-b2-9SM"/>
+                                <action selector="cancelAction:" destination="lDr-Ir-YOU" id="AFU-ZR-M1P"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="fpd-lf-8TU">
+                            <connections>
+                                <action selector="saveAction:" destination="lDr-Ir-YOU" id="qje-RC-Z4I"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="limitOfCharactersLabel" destination="sUu-bb-2mZ" id="LaQ-td-UwK"/>
-                        <outlet property="saveButton" destination="oaJ-JC-cQU" id="B8g-9h-AUq"/>
+                        <outlet property="saveButton" destination="fpd-lf-8TU" id="kfb-pf-xH8"/>
                         <outlet property="textView" destination="W5X-9R-mAR" id="73I-8I-vJR"/>
-                        <outlet property="textViewBottmConstreint" destination="bwz-zL-HFv" id="npe-cD-FMa"/>
+                        <outlet property="textViewBottomConstraint" destination="bwz-zL-HFv" id="tGW-MJ-kgz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ya2-am-QlE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of characters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sUu-bb-2mZ">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of characters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUu-bb-2mZ">
                     <rect key="frame" x="0.0" y="0.0" width="210" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
             </objects>
-            <point key="canvasLocation" x="-1" y="2319"/>
+            <point key="canvasLocation" x="936.79999999999995" y="2318.5907046476764"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uii-hd-YG0">
@@ -371,12 +375,30 @@
             </objects>
             <point key="canvasLocation" x="-1876" y="2319"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rt3-Us-TUj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KCI-cH-nDU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5HY-o1-9lL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lDr-Ir-YOU" kind="relationship" relationship="rootViewController" destinationCreationSelector="makeInputTextViewControllerWithCoder:" id="Lhq-Pq-2sX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="04q-HU-ly5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2.3999999999999999" y="2318.5907046476764"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Speaker" width="30" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QRg-st-dhV"/>
         <segue reference="qWn-uh-Gcs"/>
+        <segue reference="QRg-st-dhV"/>
     </inferredMetricsTieBreakers>
 </document>

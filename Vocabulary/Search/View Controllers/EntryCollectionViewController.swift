@@ -156,8 +156,8 @@ private extension EntryCollectionViewController {
 
 	func setupSegmentControl() {
 		viewModeSegmentedControl.selectedSegmentIndex = viewMode.rawValue
-		viewModeSegmentedControl.setEnabled(entry.definitions.isEmpty, forSegmentAt: ViewMode.definitions.rawValue)
-		viewModeSegmentedControl.setEnabled(entry.expressions.isEmpty, forSegmentAt: ViewMode.expressions.rawValue)
+		viewModeSegmentedControl.setEnabled(!entry.definitions.isEmpty, forSegmentAt: ViewMode.definitions.rawValue)
+		viewModeSegmentedControl.setEnabled(!entry.expressions.isEmpty, forSegmentAt: ViewMode.expressions.rawValue)
 	}
 
 	func viewModeDidChange() {

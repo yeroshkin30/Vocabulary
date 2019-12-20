@@ -10,7 +10,7 @@ import UIKit
 
 protocol EditWordViewControllerDelegate: AnyObject {
 	func editWordViewController(_ viewController: EditWordViewController,
-										didFinishWith action: EditWordViewController.ResultAction)
+								didFinishWith action: EditWordViewController.ResultAction)
 }
 
 class EditWordViewController: UITableViewController, SegueHandlerType {
@@ -22,6 +22,8 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 	var viewData = ViewData() { didSet { updateSaveButton() } }
 	
 	weak var delegate: EditWordViewControllerDelegate?
+
+	// MARK: - Outlets
 	
 	@IBOutlet private var saveButton: UIBarButtonItem!
 	@IBOutlet private var addNewExampleButton: UIButton!
@@ -62,20 +64,23 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 		}
 		return true
 	}
-	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		
-		switch segueIdentifier(for: segue) {
-		case .editText, .addExample:
-			let viewController = segue.destination as! EditTextViewController
-			
-			viewController.delegate = self
-			
-			if let indexPath = tableView.indexPathForSelectedRow {
-				viewController.initialText = textForCell(at: indexPath) ?? ""
-				viewController.charactersCapacity = Section(at: indexPath).charactersCapacity
-			} else {
-				viewController.charactersCapacity = .large
+
+	@IBSegueAction
+	private func makeInputTextViewController(coder: NSCoder) -> InputTextViewController? {
+		if let indexPath = tableView.indexPathForSelectedRow {
+			tableView.deselectRow(at: indexPath, animated: false)
+
+			let title = titleForInputTextViewControllerForText(at: indexPath)
+			let text = textForCell(at: indexPath)
+			let capacity = Section(at: indexPath).charactersCapacity
+
+			return InputTextViewController(coder: coder, title: title, initialText: text, charactersCapacity: capacity) {
+				self.saveInputedText($0, at: indexPath)
+			}
+		} else {
+			let title = titleForInputTextViewControllerForText(at: nil)
+			return InputTextViewController(coder: coder, title: title, charactersCapacity: .large) { (text) in
+				self.saveInputedText(text, at: nil)
 			}
 		}
 	}
@@ -131,6 +136,27 @@ private extension EditWordViewController {
 		let newExampleIndexPath = IndexPath(row: 0, section: Section.examples.rawValue)
 		
 		tableView.insertRows(at: [newExampleIndexPath], with: .automatic)
+	}
+
+	func titleForInputTextViewControllerForText(at indexPath: IndexPath?) -> String {
+		var title = ""
+		if let indexPath = indexPath {
+			title = "Edit \(Section(at: indexPath).text.lowercased())"
+		} else {
+			title = "Enter \(Section.examples.text.lowercased())"
+		}
+
+		if title.hasSuffix("s") { title.removeLast() }
+
+		return title
+	}
+
+	func saveInputedText(_ text: String, at indexPath: IndexPath?) {
+		if let indexPath = indexPath {
+			updateText(at: indexPath, with: text)
+		} else {
+			addNewExample(with: text)
+		}
 	}
 }
 
@@ -214,19 +240,6 @@ extension EditWordViewController {
 	}
 }
 
-// MARK: - EditTextViewControllerDelegate -
-extension EditWordViewController: EditTextViewControllerDelegate {
-	func editTextViewController(_ controller: EditTextViewController, saveEditedText text: String) {
-		
-		if let indexPath = tableView.indexPathForSelectedRow {
-			updateText(at: indexPath, with: text)
-		} else {
-			addNewExample(with: text)
-		}
-		navigationController?.popViewController(animated: true)
-	}
-}
-
 // MARK: - Types -
 extension EditWordViewController {
 	
@@ -259,13 +272,13 @@ extension EditWordViewController {
 			switch self {
 			case .headword:		return "Headword"
 			case .sentencePart:	return "Sentence part"
-			case .definition:	return "Definiton"
+			case .definition:	return "Definition"
 			case .examples:		return "Examples"
-			case .deletion:	return ""
+			case .deletion:		return ""
 			}
 		}
 		
-		var charactersCapacity: EditTextViewController.CharactersCapacity {
+		var charactersCapacity: InputTextViewController.CharactersCapacity {
 			switch self {
 			case .headword, .sentencePart:	return .small
 			default:						return .large
