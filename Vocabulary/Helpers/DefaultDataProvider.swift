@@ -20,18 +20,6 @@ class DefaultDataProvider {
 	}
 	
 	static func loadDefaultVocabulary() {
-		let location = NSPersistentContainer.defaultDirectoryURL()
 		
-		let fm = FileManager.default
-		
-		let fileName = "Vocabulary"
-		let fileExtensions = ["sqlite", "sqlite-shm", "sqlite-wal"]
-		
-		for fileExtension in fileExtensions {
-			if let source = Bundle.main.url(forResource: fileName, withExtension: fileExtension) {
-				let destination = location.appendingPathComponent(source.lastPathComponent)
-				try? fm.copyItem(at: source, to: destination)
-			}
-		}
 	}
 }

@@ -368,7 +368,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Lgi-Dd-Pa6" kind="relationship" relationship="rootViewController" id="FsD-eO-jCL"/>
+                        <segue destination="Lgi-Dd-Pa6" kind="relationship" relationship="rootViewController" destinationCreationSelector="makeEditWordViewControllerWithCoder:sender:segueIdentifier:" id="FsD-eO-jCL"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ub3-Af-nPz" userLabel="First Responder" sceneMemberID="firstResponder"/>

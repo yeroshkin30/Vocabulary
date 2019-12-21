@@ -10,7 +10,7 @@ import UIKit
 
 class AppRootViewController: UITabBarController, SegueHandlerType {
 
-	private let vocabularyStore = VocabularyStore()
+	private lazy var vocabularyStore = VocabularyStore()
 	private let currentWordCollectionModelController = CurrentWordCollectionModelController()
 
 	override func viewDidLoad() {

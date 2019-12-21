@@ -15,8 +15,8 @@ protocol UndoAlertPresenter where Self: UIViewController {
 extension UndoAlertPresenter {
 	
 	func showUndoAlert() {
-		let canRedo = vocabularyStore.context.undoManager?.canRedo ?? false
-		let canUndo = vocabularyStore.context.undoManager?.canUndo ?? false
+		let canRedo = vocabularyStore.viewContext.undoManager?.canRedo ?? false
+		let canUndo = vocabularyStore.viewContext.undoManager?.canUndo ?? false
 		
 		guard canUndo || canRedo else { return }
 		
@@ -34,9 +34,9 @@ extension UndoAlertPresenter {
 	
 	private func handleAction(_ action: UIAlertAction) {
 		if action.title == "Undo" {
-			self.vocabularyStore.context.undo()
+			self.vocabularyStore.viewContext.undo()
 		} else {
-			self.vocabularyStore.context.redo()
+			self.vocabularyStore.viewContext.redo()
 		}
 		self.vocabularyStore.saveChanges()
 	}

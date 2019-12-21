@@ -25,7 +25,7 @@ class WordDestinationsViewController: UITableViewController {
 		wordCollectionsFetchRequest.sortDescriptors = [
 			NSSortDescriptor(key: #keyPath(WordCollection.dateCreated), ascending: false)
 		]
-		return (try? vocabularyStore.context.fetch(wordCollectionsFetchRequest)) ?? []
+		return (try? vocabularyStore.viewContext.fetch(wordCollectionsFetchRequest)) ?? []
 	}()
 	
 	private lazy var viewData = ViewData(wordCollections: wordCollections)

@@ -8,23 +8,23 @@
 
 import UIKit
 
+enum CharactersNumberPreset: Int {
+	case verySmall = 15, small = 50, medium = 100, large = 200
+}
+
 class InputTextViewController: UIViewController {
-	
-	enum CharactersCapacity: Int {
-		case verySmall = 15, small = 50, medium = 100, large = 200
-	}
 
 	// MARK: - Initialization
 
 	private let initialText: String?
-	private let charactersCapacity: CharactersCapacity
+	private let charactersCapacity: CharactersNumberPreset
 	private let inputTextDidFinishHandler: ((String) -> Void)
 
 	init?(
 		coder: NSCoder,
 		title: String,
 		initialText: String? = nil,
-		charactersCapacity: CharactersCapacity,
+		charactersCapacity: CharactersNumberPreset,
 		inputTextDidFinishHandler: @escaping ((String) -> Void)
 	) {
 		self.initialText = initialText
@@ -83,8 +83,7 @@ private extension InputTextViewController {
 	@IBAction
 	func saveAction(_ sender: UIBarButtonItem?) {
 		dismiss(animated: true) {
-			let inputedText = self.textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-			self.inputTextDidFinishHandler(inputedText)
+			self.inputTextDidFinishHandler(self.textView.text)
 		}
 	}
 
@@ -125,20 +124,15 @@ private extension InputTextViewController {
 	}
 
 	func showDismissAlert() {
-
-		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-		alert.addAction(UIAlertAction(title: "Discard", style: .destructive) { (_) in
+		let presenter = DismissActionSheetPresenter(discardHandler: {
 			self.cancelAction(nil)
-		})
-		alert.addAction(UIAlertAction(title: "Save", style: .default) { (_) in
+		}, saveHandler: {
 			self.saveAction(nil)
-		})
-		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+		}, cancelHandler: {
 			self.textView.becomeFirstResponder()
 		})
 
-		present(alert, animated: true)
+		presenter.present(in: self)
 	}
 }
 
@@ -149,6 +143,7 @@ extension InputTextViewController: UITextViewDelegate {
 	}
 }
 
+// MARK: - UIAdaptivePresentationControllerDelegate
 extension InputTextViewController: UIAdaptivePresentationControllerDelegate {
 
 	func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {

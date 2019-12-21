@@ -37,13 +37,13 @@ class WordCollectionsTableViewController: UITableViewController {
 	// MARK: - Private properties
 	
 	private lazy var wordCollectionsDataSource = WordCollectionsDataSource(
-		context: vocabularyStore.context,
+		context: vocabularyStore.viewContext,
 		currentWordCollectionID: currentWordCollectionModelController.wordCollectionInfo?.objectID
 	)
 	
 	private var currentWordCollection: WordCollection? {
 		guard let objectID = currentWordCollectionModelController.wordCollectionInfo?.objectID else { return nil }
-		return vocabularyStore.context.object(with: objectID) as? WordCollection
+		return vocabularyStore.viewContext.object(with: objectID) as? WordCollection
 	}
 	
 	private var wordCollectionToRename: WordCollection?
@@ -73,8 +73,8 @@ class WordCollectionsTableViewController: UITableViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		if vocabularyStore.context.undoManager == nil {
-			vocabularyStore.context.undoManager = UndoManager()
+		if vocabularyStore.viewContext.undoManager == nil {
+			vocabularyStore.viewContext.undoManager = UndoManager()
 		}
 	}
 	
@@ -208,7 +208,7 @@ private extension WordCollectionsTableViewController {
 		
 		alert.addAction(UIAlertAction(title: "Collection and Words", style: .destructive) { (_) in
 			if let words = wordCollection.words as? Set<Word> {
-				words.forEach { self.vocabularyStore.context.delete($0) }
+				words.forEach { self.vocabularyStore.viewContext.delete($0) }
 			}
 			self.deleteWordCollection(at: indexPath)
 		})
@@ -229,7 +229,7 @@ private extension WordCollectionsTableViewController {
 //				currentWordCollectionModelController.wordCollectionInfo = WordCollectionInfo(wordCollection)
 //			}
 //		} else {
-//			let newCollection = WordCollection(context: vocabularyStore.context)
+//			let newCollection = WordCollection(context: vocabularyStore.viewContext)
 //			newCollection.name = text
 //		}
 //		vocabularyStore.saveChanges()

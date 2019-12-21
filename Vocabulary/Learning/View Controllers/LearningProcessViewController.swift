@@ -23,7 +23,7 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 	
 	// MARK: - Private properties
 	
-	private lazy var textFieldConfigurator = InputViewsConfigurator(context: vocabularyStore.context)
+	private lazy var textFieldConfigurator = InputViewsConfigurator(context: vocabularyStore.viewContext)
 	
 	private lazy var answersHandler: AnswersReceiver = {
 		let handler = AnswersReceiver(textFieldConfigurator: textFieldConfigurator)

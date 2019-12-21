@@ -51,7 +51,7 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	private let searchController = UISearchController(searchResultsController: nil)
 	
 	private lazy var wordsDataSource = ListOfWordsDataSource(
-		context: vocabularyStore.context, learningStage: learningStage, currentWordCollectionID: currentWordCollectionID
+		context: vocabularyStore.viewContext, learningStage: learningStage, currentWordCollectionID: currentWordCollectionID
 	)
 	
 	private var needShowEditingToolbarButtons = true
@@ -69,7 +69,7 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
-//		navigationController?.setToolbarHidden(false, animated: true)
+		//		navigationController?.setToolbarHidden(false, animated: true)
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -90,8 +90,6 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 		super.setEditing(editing, animated: animated)
 		
 		editButton.title = editing ? "Done" : "Edit"
-		updateToolBar()
-		navigationController?.setToolbarHidden(!editing, animated: true)
 	}
 	
 	// MARK: - Navigation -
@@ -99,24 +97,38 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	enum SegueIdentifier: String {
 		case editWord, createWord, moveWords
 	}
+
+	@IBSegueAction
+	private func makeEditWordViewController(coder: NSCoder, sender: Any?, segueIdentifier: String?) -> EditWordViewController? {
+		let editWordContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		editWordContext.parent = vocabularyStore.viewContext
+
+		let word: Word
+
+		if let indexPath = editingWordIndexPath {
+			word = wordsDataSource.wordAt(indexPath)
+		} else {
+			word = Word(context: vocabularyStore.viewContext)
+		}
+
+		let editedWord = editWordContext.object(with: word.objectID) as! Word
+
+		return EditWordViewController(coder: coder, context: editWordContext, word: editedWord) { [unowned self] (action) in
+			self.handleEditing(of: word, withResultAction: action)
+		}
+	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		let navigationController = segue.destination as! UINavigationController
 		
 		switch segueIdentifier(for: segue) {
-		case .createWord, .editWord:
-			let viewController = navigationController.viewControllers.first as! EditWordViewController
-			viewController.delegate = self
-			
-			if let indexPath = editingWordIndexPath {
-				let word = wordsDataSource.wordAt(indexPath)
-				viewController.viewData = EditWordViewController.ViewData(word: word)
-			}
-			
 		case .moveWords:
 			let viewController = navigationController.viewControllers.first as! WordDestinationsViewController
 			viewController.destinationHandler = handle(_:)
 			viewController.vocabularyStore = vocabularyStore
+			
+		default:
+			break
 		}
 	}
 }
@@ -139,6 +151,8 @@ private extension ListOfWordsViewController {
 	}
 	
 	@IBAction func editButtonAction(_ sender: UIBarButtonItem) {
+		updateToolBar()
+		navigationController?.setToolbarHidden(isEditing, animated: true)
 		setEditing(!isEditing, animated: true)
 	}
 	
@@ -160,7 +174,7 @@ private extension ListOfWordsViewController {
 private extension ListOfWordsViewController {
 
 	func initialConfiguration() {
-		vocabularyStore.context.undoManager = UndoManager()
+		vocabularyStore.viewContext.undoManager = UndoManager()
 
 		wordsDataSource.delegate = self
 		tableView.dataSource = wordsDataSource
@@ -202,7 +216,7 @@ private extension ListOfWordsViewController {
 	func deleteWords(at indexPaths: [IndexPath]) {
 		indexPaths.forEach {
 			let word = wordsDataSource.wordAt($0)
-			vocabularyStore.context.delete(word)
+			vocabularyStore.viewContext.delete(word)
 		}
 		vocabularyStore.saveChanges()
 	}
@@ -221,6 +235,27 @@ private extension ListOfWordsViewController {
 		}
 		setEditing(false, animated: true)
 		vocabularyStore.saveChanges()
+	}
+
+	func handleWordEditionResultAction(_ action: EditWordViewController.ResultAction) {
+		switch action {
+		case .save, .delete:
+			vocabularyStore.saveChanges()
+
+		case .cancel:
+			vocabularyStore.viewContext.undo()
+		}
+	}
+
+
+	func handleEditing(of word: Word, withResultAction action: EditWordViewController.ResultAction) {
+		switch action {
+		case .save, .delete:
+			vocabularyStore.saveChanges()
+
+		case .cancel:
+			vocabularyStore.viewContext.refresh(word, mergeChanges: false)
+		}
 	}
 }
 
@@ -274,7 +309,7 @@ extension ListOfWordsViewController {
 	
 	override func tableView(
 		_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
-		) -> UISwipeActionsConfiguration? {
+	) -> UISwipeActionsConfiguration? {
 		
 		let editAction = UIContextualAction(style: .normal, title: "Edit") { (_, _, handler) in
 			self.editingWordIndexPath = indexPath
@@ -304,46 +339,13 @@ extension ListOfWordsViewController: UISearchResultsUpdating {
 	}
 }
 
-// MARK: - EditWordViewControllerDelegate -
-extension ListOfWordsViewController: EditWordViewControllerDelegate {
-	
-	func editWordViewController(_ viewController: EditWordViewController,
-										didFinishWith action: EditWordViewController.ResultAction) {		
-		switch action {
-		case .save:
-			vocabularyStore.context.undoManager?.beginUndoGrouping()
-			if let indexPath = editingWordIndexPath {
-				let word = wordsDataSource.wordAt(indexPath)
-				fill(word, with: viewController.viewData)
-				
-			} else {
-				let word = Word(context: vocabularyStore.context)
-				fill(word, with: viewController.viewData)
-			}
-			vocabularyStore.context.undoManager?.endUndoGrouping()
-			
-		case .delete:
-			if let indexPath = editingWordIndexPath {
-				let word = wordsDataSource.wordAt(indexPath)
-				vocabularyStore.context.delete(word)
-			}
-			
-		case .cancel:
-			break
-		}
-		
-		editingWordIndexPath = nil
-		vocabularyStore.saveChanges()
-		viewController.dismiss(animated: true)
-	}
-}
-
 // MARK: - NSFetchedResultsControllerDelegate
 extension ListOfWordsViewController: FetchedResultsTableViewControllerDelegate {
 	
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
 					didChange anObject: Any, at indexPath: IndexPath?,
 					for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+		#warning("UITableView was told to layout its visible cells and other contents without being in the view hierarchy")
 		dataChanges.append((type, indexPath, newIndexPath))
 	}
 	

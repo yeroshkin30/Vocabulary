@@ -79,6 +79,28 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 	enum SegueIdentifier: String {
 		case addToLearning, requestDefinitions
 	}
+
+	@IBSegueAction
+	private func makeEditWordViewController(coder: NSCoder, sender: Any?, segueIdentifier: String?) -> EditWordViewController? {
+		guard let cell = sender as? UICollectionViewCell,
+			let indexPath = collectionView.indexPath(for: cell)
+		else { return nil }
+
+		let editWordContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		editWordContext.parent = vocabularyStore.viewContext
+
+		let word = Word(context: vocabularyStore.viewContext)
+		word.fill(with: entry, viewMode: viewMode, at: indexPath)
+		if let objectID = currentWordCollectionID {
+			word.wordCollection = editWordContext.object(with: objectID) as? WordCollection
+		}
+
+		let editedWord = editWordContext.object(with: word.objectID) as! Word
+
+		return EditWordViewController(coder: coder, context: editWordContext, word: editedWord) { [unowned self] (action) in
+			self.handleEditing(of: word, withResultAction: action)
+		}
+	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
@@ -87,16 +109,8 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 			if let button = sender as? UIButton {
 				wordToRequest = button.title(for: .normal)
 			}
-
-		case .addToLearning:
-			let editWordNavController = segue.destination as! UINavigationController
-			let viewController = editWordNavController.viewControllers.first as! EditWordViewController
-			
-			viewController.delegate = self
-			
-			if let indexPath = collectionView?.indexPathsForSelectedItems?.first {
-				viewController.viewData = .init(entry: entry, viewMode: viewMode, indexPath: indexPath)
-			}
+		default:
+			break
 		}
 	}
 }
@@ -165,6 +179,16 @@ private extension EntryCollectionViewController {
 		collectionView?.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
 		collectionView?.reloadData()
 	}
+
+	func handleEditing(of word: Word, withResultAction action: EditWordViewController.ResultAction) {
+		switch action {
+		case .save:
+			vocabularyStore.saveChanges()
+			navigationController?.popViewController(animated: true)
+		case .delete, .cancel:
+			vocabularyStore.deleteObject(word)
+		}
+	}
 }
 
 // MARK: - Types
@@ -209,32 +233,10 @@ extension EntryCollectionViewController {
 	}
 }
 
-// MARK: - EditWordViewControllerDelegate
-extension EntryCollectionViewController: EditWordViewControllerDelegate {
-	
-	func editWordViewController(_ viewController: EditWordViewController,
-								didFinishWith action: EditWordViewController.ResultAction) {
-		
-		switch action {
-		case .save:
-			let word = Word(context: vocabularyStore.context)
-			fill(word, with: viewController.viewData)
-			if let objectID = currentWordCollectionID {
-				word.wordCollection = vocabularyStore.context.object(with: objectID) as? WordCollection
-			}
-			vocabularyStore.saveChanges()
-			navigationController?.popViewController(animated: true)
-			
-		default: break
-		}
-		viewController.dismiss(animated: true)
-	}
-}
-
 // MARK: - EditWordViewController
-fileprivate extension EditWordViewController.ViewData {
+fileprivate extension Word {
 
-	init(entry: Entry, viewMode: EntryCollectionViewController.ViewMode, indexPath: IndexPath) {
+	func fill(with entry: Entry, viewMode: EntryCollectionViewController.ViewMode, at indexPath: IndexPath) {
 		let headword: String
 		let definition: Definition
 
@@ -251,7 +253,7 @@ fileprivate extension EditWordViewController.ViewData {
 
 		self.headword = headword
 		self.sentencePart = entry.sentencePart
-		self.definition = definition.text
-		self.examples = definition.examples
+		self.definition	= definition.text
+		self.examples	= definition.examples
 	}
 }
