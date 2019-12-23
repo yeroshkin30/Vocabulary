@@ -74,7 +74,7 @@
 		3D9238C921380597002A3598 /* CardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9238C821380597002A3598 /* CardCollectionViewFlowLayout.swift */; };
 		3D976F03221C713E00DB5796 /* UnknownWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D976F02221C713D00DB5796 /* UnknownWordsViewController.swift */; };
 		3DA370E52091E5C70087746C /* VocabularyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA370E42091E5C70087746C /* VocabularyStore.swift */; };
-		3DA538AA205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA538A9205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift */; };
+		3DA538AA205CBA8A00927D8C /* EntryCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA538A9205CBA8A00927D8C /* EntryCollectionViewHeader.swift */; };
 		3DA61BF5227A55630056EAFA /* DefaultDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA61BF4227A55630056EAFA /* DefaultDataProvider.swift */; };
 		3DA9DFB32031D6910098A162 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA9DFB22031D6910098A162 /* AppDelegate.swift */; };
 		3DA9DFC02031D6910098A162 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DA9DFBE2031D6910098A162 /* LaunchScreen.storyboard */; };
@@ -165,7 +165,7 @@
 		3D9238C821380597002A3598 /* CardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		3D976F02221C713D00DB5796 /* UnknownWordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownWordsViewController.swift; sourceTree = "<group>"; };
 		3DA370E42091E5C70087746C /* VocabularyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyStore.swift; sourceTree = "<group>"; };
-		3DA538A9205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsCollectionViewHeader.swift; sourceTree = "<group>"; };
+		3DA538A9205CBA8A00927D8C /* EntryCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCollectionViewHeader.swift; sourceTree = "<group>"; };
 		3DA61BF4227A55630056EAFA /* DefaultDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDataProvider.swift; sourceTree = "<group>"; };
 		3DA9DFAF2031D6910098A162 /* Vocabulary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vocabulary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DA9DFB22031D6910098A162 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -434,7 +434,7 @@
 		3DB218822160CB1400F6367A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3DA538A9205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift */,
+				3DA538A9205CBA8A00927D8C /* EntryCollectionViewHeader.swift */,
 				3D516C5E20452F1700B6A715 /* DefinitionCollectionViewCell.swift */,
 				3D2EE31A21F0A54D00E7AB52 /* LoadingView.swift */,
 				3D2EE31821F0A52F00E7AB52 /* LoadingView.xib */,
@@ -641,7 +641,7 @@
 				119FA71B239CEA6E001EE177 /* SearchStateModelController.swift in Sources */,
 				3D834C102270BDAE000F6CB7 /* BaseWordsLearningViewController.swift in Sources */,
 				3DD51A3C215E18ED0099BADB /* ListOfWordsDataSource.swift in Sources */,
-				3DA538AA205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift in Sources */,
+				3DA538AA205CBA8A00927D8C /* EntryCollectionViewHeader.swift in Sources */,
 				3D17E4002064F3800083DD45 /* LearningOptionTitleView.swift in Sources */,
 				3D834C142270DF80000F6CB7 /* RemindWordsCollectionViewDataSource.swift in Sources */,
 				3DA61BF5227A55630056EAFA /* DefaultDataProvider.swift in Sources */,

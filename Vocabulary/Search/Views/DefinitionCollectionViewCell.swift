@@ -21,6 +21,15 @@ class DefinitionCollectionViewCell: CardCollectionView {
 
 	var viewData: ViewData? { didSet { viewDataDidChanged() } }
 
+	var seeAlsoButtonTapHandler: (() -> Void)?
+
+	override func prepareForReuse() {
+		super.prepareForReuse()
+
+		viewData = nil
+		seeAlsoButtonTapHandler = nil
+	}
+
 	override func preferredLayoutAttributesFitting(
 		_ layoutAttributes: UICollectionViewLayoutAttributes
 	) -> UICollectionViewLayoutAttributes {
@@ -45,6 +54,11 @@ class DefinitionCollectionViewCell: CardCollectionView {
 		seeAlsoButton.setTitle(viewData.seeAlso, for: .normal)
 		
 		setupShadowPath(for: bounds.size)
+	}
+
+	@IBAction
+	private func seeAlsoButtonTapAction(_ sender: UIButton) {
+		seeAlsoButtonTapHandler?()
 	}
 }
 

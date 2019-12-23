@@ -9,29 +9,34 @@
 import UIKit
 import CoreData.NSManagedObjectID
 
-class EntryCollectionViewController: UICollectionViewController, DefinitionsRequestProvider, SegueHandlerType {
+class EntryCollectionViewController: UICollectionViewController, SegueHandlerType {
 
 	// MARK: - Initialization
 
 	private let vocabularyStore: VocabularyStore
 	private let entry: Entry
-	private let currentWordCollectionID: NSManagedObjectID?
+	private let wordCollectionID: NSManagedObjectID?
+	private let definitionDidRequestHandler: ((String) -> Void)
 
-	init?(coder: NSCoder, vocabularyStore: VocabularyStore, entry: Entry, currentWordCollectionID: NSManagedObjectID?) {
+	init?(
+		coder: NSCoder,
+		vocabularyStore: VocabularyStore,
+		entry: Entry,
+		wordCollectionID: NSManagedObjectID?,
+		definitionDidRequestHandler: @escaping ((String) -> Void)
+	) {
+
 		self.vocabularyStore = vocabularyStore
 		self.entry = entry
-		self.currentWordCollectionID = currentWordCollectionID
+		self.wordCollectionID = wordCollectionID
+		self.definitionDidRequestHandler = definitionDidRequestHandler
 		super.init(coder: coder)
 	}
 
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
-	// MARK: - DefinitionsRequestProvider
-	
-	var wordToRequest: String?
-	
+		
 	// MARK: - Outlets
 
 	@IBOutlet private var layout: UICollectionViewFlowLayout!
@@ -49,16 +54,6 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 
 	private lazy var definitionsViewData = ViewData(entry: entry, viewMode: .definitions)
 	private lazy var expressionsViewData = ViewData(entry: entry, viewMode: .expressions)
-	
-	// MARK: - Actions
-	
-	@IBAction private func switchViewModeAction(_ sender: UISegmentedControl) {
-		viewMode = ViewMode(rawValue: sender.selectedSegmentIndex)!
-	}
-	
-	@IBAction private func pronounceButtonAction(_ sender: UIButton) {
-		pronounce(entry.headword)
-	}
 	
 	// MARK: - Life cycle
 	
@@ -91,7 +86,7 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 
 		let word = Word(context: vocabularyStore.viewContext)
 		word.fill(with: entry, viewMode: viewMode, at: indexPath)
-		if let objectID = currentWordCollectionID {
+		if let objectID = wordCollectionID {
 			word.wordCollection = editWordContext.object(with: objectID) as? WordCollection
 		}
 
@@ -103,17 +98,19 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 			self.handleEditing(of: word, withResultAction: action)
 		}
 	}
-	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		
-		switch segueIdentifier(for: segue) {
-		case .requestDefinitions:
-			if let button = sender as? UIButton {
-				wordToRequest = button.title(for: .normal)
-			}
-		default:
-			break
-		}
+}
+
+// MARK: - Actions
+private extension EntryCollectionViewController {
+
+	@IBAction
+	func switchViewModeAction(_ sender: UISegmentedControl) {
+		viewMode = ViewMode(rawValue: sender.selectedSegmentIndex)!
+	}
+
+	@IBAction
+	func pronounceButtonAction(_ sender: UIButton) {
+		pronounce(entry.headword)
 	}
 }
 
@@ -134,6 +131,9 @@ extension EntryCollectionViewController {
 		let cell = collectionView.dequeueCell(indexPath: indexPath) as DefinitionCollectionViewCell
 		let definition = viewData.definitionData(for: indexPath)
 		cell.viewData = DefinitionCollectionViewCell.ViewData(definition: definition)
+		cell.seeAlsoButtonTapHandler = { [unowned self] in
+			self.definitionDidRequestHandler(definition.seeAlso)
+		}
 		return cell
 	}
 
@@ -141,8 +141,11 @@ extension EntryCollectionViewController {
 								 viewForSupplementaryElementOfKind kind: String,
 								 at indexPath: IndexPath) -> UICollectionReusableView {
 
-		let view = collectionView.dequeueSupplementaryView(of: kind, at: indexPath) as DefinitionsCollectionViewHeader
+		let view = collectionView.dequeueSupplementaryView(of: kind, at: indexPath) as EntryCollectionViewHeader
 		view.viewData = viewData.sectionViewData(for: indexPath.section)
+		view.subtitleButtonTapHandler = { [weak self] in
+			self?.requestDefinitionsForWordFromHeader(at: indexPath)
+		}
 		return view
 	}
 }
@@ -191,6 +194,13 @@ private extension EntryCollectionViewController {
 			vocabularyStore.deleteObject(word)
 		}
 	}
+
+	func requestDefinitionsForWordFromHeader(at indexPath: IndexPath) {
+		guard viewMode == .expressions else { return }
+
+		let expression = entry.expressions[indexPath.section]
+		definitionDidRequestHandler(expression.seeAlso)
+	}
 }
 
 // MARK: - Types
@@ -202,7 +212,7 @@ extension EntryCollectionViewController {
 
 	struct ViewData {
 		typealias SectionIndex = Int
-		typealias HeaderViewData = DefinitionsCollectionViewHeader.ViewData
+		typealias HeaderViewData = EntryCollectionViewHeader.ViewData
 
 		private let sections: [HeaderViewData]
 		private let items: [SectionIndex: [Definition]]
@@ -229,9 +239,17 @@ extension EntryCollectionViewController {
 
 		var numberOfSections: Int { sections.count }
 
-		func numberOfItems(inSection section: Int) -> Int 			{ items[section]?.count ?? 0 }
-		func sectionViewData(for section: Int) -> HeaderViewData	{ sections[section] }
-		func definitionData(for indexPath: IndexPath) -> Definition { items[indexPath.section]![indexPath.item] }
+		func numberOfItems(inSection section: Int) -> Int {
+			items[section]?.count ?? 0
+		}
+
+		func sectionViewData(for section: Int) -> HeaderViewData {
+			sections[section]
+		}
+
+		func definitionData(for indexPath: IndexPath) -> Definition {
+			items[indexPath.section]![indexPath.item]
+		}
 	}
 }
 

@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol DefinitionsRequestProvider {
-	var wordToRequest: String? { get }
-}
-
 class SearchTabViewController: UITableViewController, SegueHandlerType {
 
 	// MARK: - Properties
@@ -61,14 +57,6 @@ class SearchTabViewController: UITableViewController, SegueHandlerType {
 	enum SegueIdentifier: String {
 		case showEntry
 	}
-	
-	@IBAction func unwindWithWordToRequest(_ segue: UIStoryboardSegue) {
-		if let provider = segue.source as? DefinitionsRequestProvider,
-			let word = provider.wordToRequest {
-			
-			searchStateModelController.requestEntries(for: word)
-		}
-	}
 
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 		searchStateModelController.state.resultEntries != nil
@@ -80,14 +68,17 @@ class SearchTabViewController: UITableViewController, SegueHandlerType {
 
 		let index = tableView.indexPathForSelectedRow?.row ?? 0
 		let entry = entries[index]
-		let currentWordCollectionID = currentWordCollectionInfoProvider.wordCollectionInfo?.objectID
+		let collectionID = currentWordCollectionInfoProvider.wordCollectionInfo?.objectID
 
 		return EntryCollectionViewController(
 			coder: coder,
 			vocabularyStore: vocabularyStore,
 			entry: entry,
-			currentWordCollectionID: currentWordCollectionID
-		)
+			wordCollectionID: collectionID) { [unowned self] word in
+
+				self.navigationController?.popViewController(animated: true)
+				self.searchStateModelController.requestEntries(for: word)
+		}
 	}
 }
 
@@ -120,7 +111,8 @@ private extension SearchTabViewController {
 		tableView.backgroundView = nil
 		
 		switch state {
-		case .prompts: break
+		case .prompts:
+			break
 
 		case .loading(let text):
 			searchController.searchBar.text = text

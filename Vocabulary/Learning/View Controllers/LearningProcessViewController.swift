@@ -36,7 +36,7 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 	private lazy var endRepetitionMessageView: MessageView = {
 		let view: MessageView = MessageView.instantiate()
 		view.message = MessageView.Message(
-			title: "Great work!", text: "You repeated all available words.", actionTitle: "Back",
+			title: "Great work!", text: "You have repeated all available words.", actionTitle: "Back",
 			actionClosure: { [weak self] in
 				self?.navigationController?.popViewController(animated: true)
 		})

@@ -161,7 +161,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                             <state key="normal" title="Button"/>
                                                             <connections>
-                                                                <segue destination="UTW-nb-noC" kind="unwind" identifier="requestDefinitions" unwindAction="unwindWithWordToRequest:" id="Ymn-bq-irw"/>
+                                                                <action selector="seeAlsoButtonTapAction:" destination="66q-6X-e67" eventType="touchUpInside" id="mYE-8t-bBd"/>
                                                             </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1xM-5c-NVQ">
@@ -200,7 +200,7 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="DefinitionsCollectionViewHeader" id="crY-Ef-9Sc" customClass="DefinitionsCollectionViewHeader" customModule="Vocabulary" customModuleProvider="target">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="EntryCollectionViewHeader" id="crY-Ef-9Sc" customClass="EntryCollectionViewHeader" customModule="Vocabulary" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
@@ -210,7 +210,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pfX-gL-Vt2">
                                             <rect key="frame" x="133.5" y="0.0" width="108" height="50"/>
                                             <subviews>
-                                                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="752" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.89999997615814209" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xag-Qv-7S4">
+                                                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="752" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xag-Qv-7S4">
                                                     <rect key="frame" x="0.0" y="0.0" width="108" height="26.5"/>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
@@ -233,7 +233,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                             <state key="normal" title="Button"/>
                                                             <connections>
-                                                                <segue destination="UTW-nb-noC" kind="unwind" identifier="requestDefinitions" unwindAction="unwindWithWordToRequest:" id="Nj7-So-Smc"/>
+                                                                <action selector="subtitleButtonTapAction:" destination="crY-Ef-9Sc" eventType="touchUpInside" id="pLI-r6-DaA"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -259,9 +259,9 @@
                             </constraints>
                             <connections>
                                 <outlet property="contentView" destination="ohF-eB-Ty6" id="vRN-tS-Xh0"/>
-                                <outlet property="seeAlsoButton" destination="rnd-gg-SRd" id="guf-Bu-Jyh"/>
-                                <outlet property="seeAlsoStackView" destination="O0n-fd-2Hx" id="0Yp-Jt-4DW"/>
+                                <outlet property="subtitleButton" destination="rnd-gg-SRd" id="guf-Bu-Jyh"/>
                                 <outlet property="subtitleLabel" destination="EFI-NV-c9C" id="ARL-dQ-1oX"/>
+                                <outlet property="subtitleStackView" destination="O0n-fd-2Hx" id="0Yp-Jt-4DW"/>
                                 <outlet property="titleLabel" destination="Xag-Qv-7S4" id="wBB-WZ-kZG"/>
                             </connections>
                         </collectionReusableView>
@@ -296,7 +296,6 @@
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="131-8n-U5l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="UTW-nb-noC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1573.5999999999999" y="26.53673163418291"/>
         </scene>
