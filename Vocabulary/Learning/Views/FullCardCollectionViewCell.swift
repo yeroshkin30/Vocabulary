@@ -55,7 +55,7 @@ class FullCardCollectionViewCell: CardCollectionView {
 		}
 	}
 	
-	// MARK: - Overriden -
+	// MARK: - Overridden -
 	
 	override func prepareForReuse() {
 		super.prepareForReuse()
@@ -112,7 +112,7 @@ extension FullCardCollectionViewCell {
 			headword = word.headword
 			sentencePart = word.sentencePart
 			definition = word.definition
-			examples = word.examplesText
+			examples = word.examples.map({ "- " + $0 }).joined(separator: "\n\n")
 			
 			singleTitle = word.learningStage == .unknown ? "Now" : "Next"
 			positiveTitle = word.learningStage == .unknown ? "Now" : "Remember"

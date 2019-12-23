@@ -104,16 +104,20 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 		editWordContext.parent = vocabularyStore.viewContext
 
 		let word: Word
+		let viewMode: EditWordViewController.ViewMode
 
 		if let indexPath = editingWordIndexPath {
 			word = wordsDataSource.wordAt(indexPath)
+			viewMode = .edit
 		} else {
 			word = Word(context: vocabularyStore.viewContext)
+			viewMode = .create
 		}
 
 		let editedWord = editWordContext.object(with: word.objectID) as! Word
 
-		return EditWordViewController(coder: coder, context: editWordContext, word: editedWord) { [unowned self] (action) in
+		return EditWordViewController(coder: coder, context: editWordContext, word: editedWord, viewMode: viewMode) {
+			[unowned self] (action) in
 			self.handleEditing(of: word, withResultAction: action)
 		}
 	}

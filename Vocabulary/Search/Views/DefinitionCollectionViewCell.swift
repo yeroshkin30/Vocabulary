@@ -60,7 +60,7 @@ extension DefinitionCollectionViewCell {
 			
 			var examplesText = ""
 			if !definition.examples.isEmpty {
-				let examples = definition.examples.prefix(numberOfExamples)
+				let examples = definition.examples.prefix(numberOfExamples).map({ "- " + $0 })
 				examplesText = examples.joined(separator: "\n\n")
 			}
 			self.examples = examplesText

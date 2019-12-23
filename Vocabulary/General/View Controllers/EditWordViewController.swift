@@ -10,6 +10,11 @@ import UIKit
 import CoreData.NSManagedObjectContext
 
 class EditWordViewController: UITableViewController, SegueHandlerType {
+
+	enum ViewMode: String {
+		case create = "Create word"
+		case edit = "Edit word"
+	}
 	
 	enum ResultAction {
 		case cancel, save, delete
@@ -19,34 +24,26 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 
 	private let context: NSManagedObjectContext
 	private let word: Word
+	private let viewMode: ViewMode
 	private let wordEditingDidFinishHandler: ((ResultAction) -> Void)
 
 	init?(
 		coder: NSCoder,
 		context: NSManagedObjectContext,
 		word: Word,
+		viewMode: ViewMode,
 		wordEditingDidFinishHandler: @escaping ((ResultAction) -> Void)
 	) {
 		self.context = context
 		self.word = word
+		self.viewMode = viewMode
 		self.wordEditingDidFinishHandler = wordEditingDidFinishHandler
 
 		super.init(coder: coder)
-
-		title = word.isInserted ? "Create word" : "Edit word"
 	}
 
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
-	}
-
-	// MARK: - States
-
-	private var savingState: SavingStateOptions = [] {
-		didSet {
-			tableView.reloadData()
-			updateSaveButton()
-		}
 	}
 
 	// MARK: - Outlets
@@ -73,10 +70,11 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+
+		title = viewMode.rawValue
 		setEditing(true, animated: false)
 		navigationController?.presentationController?.delegate = self
-		updateSavingState()
+		updateSaveButton()
 	}
 
 	// MARK: - Navigation
@@ -101,108 +99,24 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 	@IBSegueAction
 	private func makeInputTextViewController(coder: NSCoder) -> InputTextViewController? {
 		if let indexPath = tableView.indexPathForSelectedRow {
-			tableView.deselectRow(at: indexPath, animated: false)
 
-			let title = titleForInputTextViewControllerForText(at: indexPath)
+			let section = Section(at: indexPath)
+			let title = section.titleForInputTextViewController()
 			let text = textForCell(at: indexPath)
-			let capacity = Section(at: indexPath).charactersCapacity
+			let capacity = section.charactersCapacity
 
 			return InputTextViewController(coder: coder, title: title, initialText: text, charactersCapacity: capacity) {
 				self.saveInputedText($0, at: indexPath)
 			}
 		} else {
-			let title = titleForInputTextViewControllerForText(at: nil)
+			let title = "Enter new example"
 			return InputTextViewController(coder: coder, title: title, charactersCapacity: .large) { (text) in
 				self.saveInputedText(text, at: nil)
 			}
 		}
 	}
-}
 
-// MARK: - Private
-private extension EditWordViewController {
-	
-	var examplesHeaderView: UITableViewHeaderFooterView {
-		let headerView = UITableViewHeaderFooterView(frame: .zero)
-		headerView.addTrailingButton(addNewExampleButton)
-		return headerView
-	}
-
-	func updateSavingState() {
-		var options: SavingStateOptions = []
-
-		if word.headword.isEmpty 		{ options.insert(.headwordIsEmpty) }
-		if word.sentencePart.isEmpty 	{ options.insert(.sentencePartIsEmpty) }
-		if word.definition.isEmpty 		{ options.insert(.definitionIsEmpty) }
-
-		savingState = options
-	}
-	
-	func updateSaveButton() {
-		saveButton.isEnabled = savingState.isEmpty
-	}
-	
-	func textForCell(at indexPath: IndexPath) -> String? {
-		switch Section(at: indexPath) {
-		case .headword:		return word.headword
-		case .sentencePart: return word.sentencePart
-		case .definition:	return word.definition
-		case .examples:		return word.examples[indexPath.row]
-		case .deletion:		return "Delete Word"
-		}
-	}
-	
-	func updateText(at indexPath: IndexPath, with text: String) {
-		switch Section(at: indexPath) {
-		case .headword:		word.headword = text
-		case .sentencePart: word.sentencePart = text
-		case .definition:	word.definition = text
-		case .examples:		word.examples[indexPath.row] = text
-		default: break
-		}
-		updateSaveButton()
-		tableView.reloadRows(at: [indexPath], with: .automatic)
-	}
-	
-	func addNewExample(with text: String) {
-		word.examples.insert(text, at: 0)
-		let newExampleIndexPath = IndexPath(row: 0, section: Section.examples.rawValue)
-		tableView.insertRows(at: [newExampleIndexPath], with: .automatic)
-	}
-
-	func titleForInputTextViewControllerForText(at indexPath: IndexPath?) -> String {
-		guard let indexPath = indexPath else { return "Enter \(Section.examples.headerText.lowercased())" }
-
-		let currentSection = Section(at: indexPath)
-		var currentSectionText = currentSection.headerText
-
-		switch currentSection {
-		case .headword, .sentencePart, .definition:
-			return "Edit \(currentSectionText.lowercased())"
-		case .examples:
-			return "Edit \(currentSectionText.removeLast().lowercased())"
-		default:
-			fatalError()
-		}
-	}
-
-	func saveInputedText(_ InputedText: String, at indexPath: IndexPath?) {
-
-		var text = InputedText.trimmingCharacters(in: .whitespacesAndNewlines)
-
-		if let indexPath = indexPath {
-			if Section(at: indexPath) == .examples {
-				text = "- " + text
-			}
-			updateText(at: indexPath, with: text)
-		} else {
-			addNewExample(with: text)
-		}
-
-		updateSavingState()
-	}
-
-	func showDismissAlert() {
+	private func showDismissAlert() {
 		let presenter = DismissActionSheetPresenter(discardHandler: {
 			self.cancelButtonAction(nil)
 		}, saveHandler: {
@@ -213,11 +127,75 @@ private extension EditWordViewController {
 	}
 }
 
+// MARK: - Private
+private extension EditWordViewController {
+
+	func updateSaveButton() {
+
+		let isHeadwordEmpty	= word.headword.isEmpty
+		let isSentencePartEmpty = word.sentencePart.isEmpty
+		let isDefinitionEmpty	= word.definition.isEmpty
+
+		let hasEmptyField = isHeadwordEmpty || isSentencePartEmpty || isDefinitionEmpty
+
+		saveButton.isEnabled = hasEmptyField == false
+	}
+
+	func saveInputedText(_ InputedText: String, at indexPath: IndexPath?) {
+
+		let text = InputedText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+		if let indexPath = indexPath {
+			updateText(at: indexPath, with: text)
+			if Section(at: indexPath) == .examples {
+				tableView.reloadRows(at: [indexPath], with: .automatic)
+			} else {
+				tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
+			}
+		} else {
+			addNewExample(with: text)
+		}
+	}
+
+	func updateText(at indexPath: IndexPath, with text: String) {
+		switch Section(at: indexPath) {
+		case .headword:		word.headword = text
+		case .sentencePart: word.sentencePart = text
+		case .definition:	word.definition = text
+		case .examples:		word.examples[indexPath.row] = text
+		default: break
+		}
+		updateSaveButton()
+	}
+
+	func addNewExample(with text: String) {
+		word.examples.insert(text, at: 0)
+		let newExampleIndexPath = IndexPath(row: 0, section: Section.examples.rawValue)
+		tableView.insertRows(at: [newExampleIndexPath], with: .automatic)
+	}
+}
+
 // MARK: - UITableViewDataSource
 extension EditWordViewController {
+
+	private var examplesHeaderView: UITableViewHeaderFooterView {
+		let headerView = UITableViewHeaderFooterView(frame: .zero)
+		headerView.addTrailingButton(addNewExampleButton)
+		return headerView
+	}
+
+	private func textForCell(at indexPath: IndexPath) -> String? {
+		switch Section(at: indexPath) {
+		case .headword:		return word.headword
+		case .sentencePart: return word.sentencePart
+		case .definition:	return word.definition
+		case .examples:		return word.examples[indexPath.row]
+		case .deletion:		return "Delete Word"
+		}
+	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return word.isInserted ? Section.count - 1 : Section.count
+		return viewMode == .create ? Section.count - 1 : Section.count
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -242,9 +220,18 @@ extension EditWordViewController {
 	override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
 		let currentSection = Section(section)
 		switch currentSection {
-		case .headword:		if savingState.contains(.headwordIsEmpty) 		{ return currentSection.footerText }
-		case .sentencePart: if savingState.contains(.sentencePartIsEmpty)	{ return currentSection.footerText }
-		case .definition:	if savingState.contains(.definitionIsEmpty) 	{ return currentSection.footerText }
+		case .headword:
+			if word.headword.isEmpty {
+				return currentSection.footerText
+			}
+		case .sentencePart:
+			if word.sentencePart.isEmpty {
+				return currentSection.footerText
+			}
+		case .definition:
+			if word.definition.isEmpty {
+				return currentSection.footerText
+			}
 		case .examples, .deletion: 	break
 		}
 		return nil
@@ -257,6 +244,7 @@ extension EditWordViewController {
 	override func tableView(_ tableView: UITableView,
 							moveRowAt sourceIndexPath: IndexPath,
 							to destinationIndexPath: IndexPath) {
+
 		word.examples.swapAt(sourceIndexPath.row, destinationIndexPath.row)
 	}
 	
@@ -283,6 +271,10 @@ extension EditWordViewController {
 
 // MARK: - UITableViewDelegate
 extension EditWordViewController {
+
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
+	}
 	
 	override func tableView(_ tableView: UITableView,
 							editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
@@ -292,6 +284,7 @@ extension EditWordViewController {
 	
 	override func tableView(_ tableView: UITableView,
 							shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+
 		return Section(at: indexPath) == .examples
 	}
 	
@@ -317,6 +310,10 @@ extension EditWordViewController: UIAdaptivePresentationControllerDelegate {
 		return !word.hasChanges
 	}
 
+	func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+		wordEditingDidFinishHandler(.cancel)
+	}
+
 	func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
 		showDismissAlert()
 	}
@@ -324,16 +321,6 @@ extension EditWordViewController: UIAdaptivePresentationControllerDelegate {
 
 // MARK: - Types -
 extension EditWordViewController {
-
-	struct SavingStateOptions: OptionSet {
-		let rawValue: Int
-
-		static let headwordIsEmpty 		= SavingStateOptions(rawValue: 1 << 0)
-		static let sentencePartIsEmpty	= SavingStateOptions(rawValue: 1 << 1)
-		static let definitionIsEmpty 	= SavingStateOptions(rawValue: 1 << 2)
-
-		static let all: SavingStateOptions = [.headwordIsEmpty, .sentencePartIsEmpty, .definitionIsEmpty]
-	}
 	
 	enum Section: Int {
 		case headword, sentencePart, definition, examples, deletion
@@ -350,7 +337,7 @@ extension EditWordViewController {
 		
 		var headerText: String {
 			switch self {
-			case .headword:		return ""
+			case .headword:		return "Headword"
 			case .sentencePart:	return "Sentence part"
 			case .definition:	return "Definition"
 			case .examples:		return "Examples"
@@ -372,6 +359,19 @@ extension EditWordViewController {
 			case .headword, .sentencePart:	return .small
 			default:						return .large
 			}
+		}
+
+		func titleForInputTextViewController() -> String {
+			let text: String
+			switch self {
+			case .headword, .sentencePart, .definition:
+				text = headerText.lowercased()
+			case .examples:
+				text =  "example"
+			default:
+				fatalError()
+			}
+			return "Enter " + text
 		}
 	}
 }

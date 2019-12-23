@@ -178,7 +178,7 @@ extension EntriesParserDelegate: XMLParserDelegate {
 			aDefinition.examples = examples
 		case .vi:
 			if !anExample.isEmpty {
-				let example = "- " + anExample.capitalizingFirstLetter()
+				let example = anExample.capitalizingFirstLetter()
 				examples.append(example)
 			}
 		case .it:

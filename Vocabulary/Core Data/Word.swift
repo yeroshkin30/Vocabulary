@@ -52,7 +52,7 @@ extension Word {
 	@NSManaged public var sentencePart: String
 	@NSManaged public var definition: String
 	@NSManaged public var dateCreated: Date
-	@NSManaged public var examplesText: String
+	@NSManaged private(set) var examplesText: String
 	@NSManaged public var nextTrainingDate: Date?
 	@NSManaged private(set) var learningStageValue: Int16
 	@NSManaged private(set) var learningStageDetailValue: Int16

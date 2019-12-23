@@ -97,7 +97,9 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 
 		let editedWord = editWordContext.object(with: word.objectID) as! Word
 
-		return EditWordViewController(coder: coder, context: editWordContext, word: editedWord) { [unowned self] (action) in
+		return EditWordViewController(coder: coder, context: editWordContext, word: editedWord, viewMode: .create) {
+			[unowned self] (action) in
+			
 			self.handleEditing(of: word, withResultAction: action)
 		}
 	}
