@@ -39,6 +39,7 @@ class WordCollectionsModelController: NSObject {
 
 	func selectWordCollection(at indexPath: IndexPath) {
 		let wordCollection = fetchedResultsController.object(at: indexPath)
+		wordCollection.lastSelectedDate = Date()
 
 		if wordCollection.objectID == currentWordCollectionID {
 			currentWordCollectionModelController.wordCollectionInfo = nil
@@ -84,7 +85,7 @@ private extension WordCollectionsModelController {
 	func initializeFetchedResultsController() -> NSFetchedResultsController<WordCollection> {
 		let wordCollectionRequest = WordCollection.createFetchRequest()
 		wordCollectionRequest.sortDescriptors = [
-			NSSortDescriptor(key: #keyPath(WordCollection.dateCreated), ascending: false)
+			NSSortDescriptor(key: #keyPath(WordCollection.lastSelectedDate), ascending: false)
 		]
 		let controller = NSFetchedResultsController(
 			fetchRequest: wordCollectionRequest,

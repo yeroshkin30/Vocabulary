@@ -103,6 +103,7 @@
 		1168E16D23993DF6008CFA33 /* AppRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootViewController.swift; sourceTree = "<group>"; };
 		1170EB6923AEB7DA003D1555 /* DismissActionSheetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissActionSheetPresenter.swift; sourceTree = "<group>"; };
 		1195370D23B1EF5D00808E20 /* WordCollectionsModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCollectionsModelController.swift; sourceTree = "<group>"; };
+		1195370F23B264B200808E20 /* Vocabulary 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vocabulary 3.xcdatamodel"; sourceTree = "<group>"; };
 		119FA71A239CEA6E001EE177 /* SearchStateModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStateModelController.swift; sourceTree = "<group>"; };
 		119FA71C239CEA8D001EE177 /* SearchPromptsModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPromptsModelController.swift; sourceTree = "<group>"; };
 		11A0C2CB23A26CFD00CEE1B0 /* IndexPath+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexPath+extensions.swift"; sourceTree = "<group>"; };
@@ -873,10 +874,11 @@
 		3D0C96702286F2E500E9F64E /* Vocabulary.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				1195370F23B264B200808E20 /* Vocabulary 3.xcdatamodel */,
 				3D0C96712286F2E500E9F64E /* Vocabulary.xcdatamodel */,
 				3D0C96722286F2E500E9F64E /* Vocabulary 2.xcdatamodel */,
 			);
-			currentVersion = 3D0C96722286F2E500E9F64E /* Vocabulary 2.xcdatamodel */;
+			currentVersion = 1195370F23B264B200808E20 /* Vocabulary 3.xcdatamodel */;
 			path = Vocabulary.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
