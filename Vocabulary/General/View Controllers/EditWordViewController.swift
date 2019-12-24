@@ -97,7 +97,11 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 	}
 
 	@IBSegueAction
-	private func makeInputTextViewController(coder: NSCoder) -> InputTextViewController? {
+	private func makeInputTextViewController(
+		coder: NSCoder,
+		sender: Any?,
+		segueIdentifier: String?
+	) -> InputTextViewController? {
 		if let indexPath = tableView.indexPathForSelectedRow {
 
 			let section = Section(at: indexPath)

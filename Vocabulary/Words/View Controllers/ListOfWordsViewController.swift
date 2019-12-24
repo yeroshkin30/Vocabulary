@@ -34,10 +34,6 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	// MARK: - Public properties -
-	
-	var dataChanges: [DataChange] = []
-	
 	// MARK: - Outlets -
 	
 	@IBOutlet private var editButton: UIBarButtonItem!
@@ -57,6 +53,8 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	private var needShowEditingToolbarButtons = true
 	
 	private var editingWordIndexPath: IndexPath?
+
+	private var dataChanges: [FetchedDataChange] = []
 	
 	// MARK: - Life Cycle -
 	
@@ -338,7 +336,7 @@ extension ListOfWordsViewController: UISearchResultsUpdating {
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
-extension ListOfWordsViewController: FetchedResultsTableViewControllerDelegate {
+extension ListOfWordsViewController: NSFetchedResultsControllerDelegate {
 	
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
 					didChange anObject: Any, at indexPath: IndexPath?,
@@ -348,6 +346,7 @@ extension ListOfWordsViewController: FetchedResultsTableViewControllerDelegate {
 	}
 	
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		handleWordsChanges()
+		tableView.handleChanges(dataChanges)
+		dataChanges = []
 	}
 }

@@ -18,7 +18,7 @@ class AppRootViewController: UITabBarController, SegueHandlerType {
 
 		view.backgroundColor = .white
 		setupViewControllers()
-		selectedIndex = 1
+//		selectedIndex = 1
 	}
 
 	// MARK: - Navigation
@@ -28,11 +28,15 @@ class AppRootViewController: UITabBarController, SegueHandlerType {
 	}
 
 	@IBSegueAction
-	private func makeWordCollectionsController(coder: NSCoder) -> WordCollectionsTableViewController? {
-		WordCollectionsTableViewController(
-			coder: coder,
+	private func makeWordCollectionsController(coder: NSCoder) -> WordCollectionsViewController? {
+		let modelController = WordCollectionsModelController(
 			vocabularyStore: vocabularyStore,
 			currentWordCollectionModelController: currentWordCollectionModelController
+		)
+		return WordCollectionsViewController(
+			coder: coder,
+			vocabularyStore: vocabularyStore,
+			wordCollectionsModelController: modelController
 		)
 	}
 }

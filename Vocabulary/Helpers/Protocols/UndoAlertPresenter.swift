@@ -24,23 +24,20 @@ extension UndoAlertPresenter {
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 		
 		if canUndo {
-			alert.addAction(UIAlertAction(title: "Undo", style: .default, handler: handleAction(_:)))
+			alert.addAction(UIAlertAction(title: "Undo", style: .default) { _ in
+				self.vocabularyStore.viewContext.undo()
+				self.vocabularyStore.saveChanges()
+			})
 		}
 		if canRedo {
-			alert.addAction(UIAlertAction(title: "Redo", style: .default, handler: handleAction(_:)))
+			alert.addAction(UIAlertAction(title: "Redo", style: .default) { _ in
+				self.vocabularyStore.viewContext.redo()
+				self.vocabularyStore.saveChanges()
+			})
 		}
 		present(alert, animated: true)
 	}
-	
-	private func handleAction(_ action: UIAlertAction) {
-		if action.title == "Undo" {
-			self.vocabularyStore.viewContext.undo()
-		} else {
-			self.vocabularyStore.viewContext.redo()
-		}
-		self.vocabularyStore.saveChanges()
-	}
 }
 
-extension WordCollectionsTableViewController: UndoAlertPresenter {}
+extension WordCollectionsViewController: UndoAlertPresenter {}
 extension ListOfWordsViewController: UndoAlertPresenter {}

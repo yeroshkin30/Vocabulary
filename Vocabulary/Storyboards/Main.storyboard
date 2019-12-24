@@ -37,7 +37,7 @@
         <!--Collections-->
         <scene sceneID="rhU-2C-6Rb">
             <objects>
-                <tableViewController storyboardIdentifier="WordCollectionsTableViewController" clearsSelectionOnViewWillAppear="NO" id="wdb-Cg-3hj" customClass="WordCollectionsTableViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WordCollectionsViewController" clearsSelectionOnViewWillAppear="NO" id="wdb-Cg-3hj" customClass="WordCollectionsViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Bs9-VX-3bg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,7 +82,7 @@
                         <barButtonItem systemItem="flexibleSpace" id="bdk-0Z-2zj"/>
                         <barButtonItem systemItem="add" id="hSB-8K-gSU">
                             <connections>
-                                <segue destination="MJN-Mz-a2o" kind="show" identifier="createCollection" id="2Ak-hZ-fYl"/>
+                                <segue destination="MJN-Mz-a2o" kind="presentation" identifier="createCollection" id="2Ak-hZ-fYl"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="e4d-VH-HL0"/>
@@ -97,7 +97,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="MJN-Mz-a2o" kind="show" identifier="renameCollection" id="hKu-fS-jdE"/>
+                        <segue destination="MJN-Mz-a2o" kind="presentation" identifier="renameCollection" id="hKu-fS-jdE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ew-bQ-pdS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -124,10 +124,10 @@
             </objects>
             <point key="canvasLocation" x="-4082" y="1344"/>
         </scene>
-        <!--EditTextViewController-->
+        <!--EditTextNavigationController-->
         <scene sceneID="GAC-7z-BQo">
             <objects>
-                <viewControllerPlaceholder storyboardName="Words" referencedIdentifier="EditTextViewController" id="MJN-Mz-a2o" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Words" referencedIdentifier="EditTextNavigationController" id="MJN-Mz-a2o" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="fdP-Nt-zm8"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="54y-iC-hhx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -219,6 +219,6 @@
         <image name="Words Icon" width="37" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hKu-fS-jdE"/>
+        <segue reference="2Ak-hZ-fYl"/>
     </inferredMetricsTieBreakers>
 </document>

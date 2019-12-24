@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import CoreData.NSFetchedResultsController
 
+// MARK: - Reusability
 extension UITableView {
 	func registerNibForCell<T: UITableViewCell>(_: T.Type) {
 		let nib = UINib(nibName: T.stringIdentifier, bundle: nil)
@@ -25,5 +27,26 @@ extension UITableView {
 	func indexPathForRow(with view: UIView) -> IndexPath? {
 		let point = self.convert(CGPoint.zero, from: view)
 		return self.indexPathForRow(at: point)
+	}
+}
+
+// MARK: - NSFetchedResultsController
+
+typealias FetchedDataChange = (type: NSFetchedResultsChangeType, indexPath: IndexPath?, newIndexPath: IndexPath?)
+
+extension UITableView {
+
+	func handleChanges(_ changes: [FetchedDataChange]) {
+		performBatchUpdates({
+			changes.forEach() { (change) in
+				switch change.type {
+				case .insert:	insertRows(at: [change.newIndexPath!], with: .automatic)
+				case .delete:	deleteRows(at: [change.indexPath!], with: .automatic)
+				case .update:	reloadRows(at: [change.indexPath!], with: .automatic)
+				case .move:		moveRow(at: change.indexPath!, to: change.newIndexPath!)
+				@unknown default: fatalError()
+				}
+			}
+		})
 	}
 }

@@ -204,7 +204,7 @@ private extension EntryCollectionViewController {
 }
 
 // MARK: - Types
-extension EntryCollectionViewController {
+private extension EntryCollectionViewController {
 
 	enum ViewMode: Int {
 		case definitions, expressions

@@ -378,7 +378,7 @@
         <!--Navigation Controller-->
         <scene sceneID="rt3-Us-TUj">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KCI-cH-nDU" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="EditTextNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="KCI-cH-nDU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5HY-o1-9lL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
@@ -386,7 +386,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="lDr-Ir-YOU" kind="relationship" relationship="rootViewController" destinationCreationSelector="makeInputTextViewControllerWithCoder:" id="Lhq-Pq-2sX"/>
+                        <segue destination="lDr-Ir-YOU" kind="relationship" relationship="rootViewController" destinationCreationSelector="makeInputTextViewControllerWithCoder:sender:segueIdentifier:" id="Lhq-Pq-2sX"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="04q-HU-ly5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
