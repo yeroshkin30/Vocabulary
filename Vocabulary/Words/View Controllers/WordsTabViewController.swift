@@ -44,11 +44,15 @@ class WordsTabViewController: UITableViewController, SegueHandlerType {
 		let learningStage = Section(at: indexPath) == .allWords ? nil : Word.LearningStage(rawValue: Int16(indexPath.row))
 		let currentWordCollectionID = currentWordCollectionInfoProvider.wordCollectionInfo?.objectID
 
-		return ListOfWordsViewController(
-			coder: coder,
+		let modelController = ListOfWordsModelController(
 			vocabularyStore: vocabularyStore,
 			learningStage: learningStage,
 			currentWordCollectionID: currentWordCollectionID
+		)
+		return ListOfWordsViewController(
+			coder: coder,
+			vocabularyStore: vocabularyStore,
+			listOfWordsModelController: modelController
 		)
 	}
 

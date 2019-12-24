@@ -14,19 +14,15 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	// MARK: - Initialization
 
 	let vocabularyStore: VocabularyStore
-	private let learningStage: Word.LearningStage?
-	private let currentWordCollectionID: NSManagedObjectID?
+	private let listOfWordsModelController: ListOfWordsModelController
 
 	init?(
 		coder: NSCoder,
 		vocabularyStore: VocabularyStore,
-		learningStage: Word.LearningStage?,
-		currentWordCollectionID: NSManagedObjectID?
+		listOfWordsModelController: ListOfWordsModelController
 	) {
 		self.vocabularyStore = vocabularyStore
-		self.learningStage = learningStage
-		self.currentWordCollectionID = currentWordCollectionID
-
+		self.listOfWordsModelController = listOfWordsModelController
 		super.init(coder: coder)
 	}
 
@@ -35,8 +31,8 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	}
 	
 	// MARK: - Outlets -
-	
-	@IBOutlet private var editButton: UIBarButtonItem!
+
+	@IBOutlet private var addButtonItem: UIBarButtonItem!
 
 	@IBOutlet private var moveButton: UIBarButtonItem!
 	@IBOutlet private var selectAllButton: UIBarButtonItem!
@@ -45,17 +41,9 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	// MARK: - Private properties -
 	
 	private let searchController = UISearchController(searchResultsController: nil)
-	
-	private lazy var wordsDataSource = ListOfWordsDataSource(
-		context: vocabularyStore.viewContext, learningStage: learningStage, currentWordCollectionID: currentWordCollectionID
-	)
-	
-	private var needShowEditingToolbarButtons = true
-	
-	private var editingWordIndexPath: IndexPath?
 
-	private var dataChanges: [FetchedDataChange] = []
-	
+	private var isAllCellsSelected = false
+
 	// MARK: - Life Cycle -
 	
 	override func viewDidLoad() {
@@ -66,6 +54,7 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
+
 		stopPronouncing()
 		navigationController?.setToolbarHidden(true, animated: false)
 	}
@@ -80,8 +69,13 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
-		
-		editButton.title = editing ? "Done" : "Edit"
+
+		navigationItem.rightBarButtonItems = rightBarButtonItems
+
+		if !isEditing, let indexPaths = tableView.indexPathsForVisibleRows {
+			tableView.reloadRows(at: indexPaths, with: .automatic)
+		}
+		updateToolBar()
 	}
 	
 	// MARK: - Navigation -
@@ -98,8 +92,8 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 		let word: Word
 		let viewMode: EditWordViewController.ViewMode
 
-		if let indexPath = editingWordIndexPath {
-			word = wordsDataSource.wordAt(indexPath)
+		if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+			word = listOfWordsModelController.wordAt(indexPath)
 			viewMode = .edit
 		} else {
 			word = Word(context: vocabularyStore.viewContext)
@@ -113,29 +107,19 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 			self.handleEditing(of: word, withResultAction: action)
 		}
 	}
-	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		let navigationController = segue.destination as! UINavigationController
-		
-		switch segueIdentifier(for: segue) {
-		case .moveWords:
-			let viewController = navigationController.viewControllers.first as! WordDestinationsViewController
-			viewController.destinationHandler = handle(_:)
-			viewController.vocabularyStore = vocabularyStore
-			
-		default:
-			break
-		}
+
+	@IBSegueAction
+	private func makeWordDestinationsViewController(coder: NSCoder) -> WordDestinationsViewController? {
+		return WordDestinationsViewController(
+			coder: coder,
+			vocabularyStore: vocabularyStore,
+			destinationHandler: handle(_:)
+		)
 	}
 }
 
 // MARK: - Actions -
 private extension ListOfWordsViewController {
-	
-	@IBAction func closeButtonAction() {
-		searchController.isActive = false
-		dismiss(animated: true)
-	}
 	
 	@IBAction func selectAllButtonAction(_ sender: UIBarButtonItem) {
 		if isAllCellsSelected {
@@ -146,55 +130,58 @@ private extension ListOfWordsViewController {
 		updateToolBar()
 	}
 	
-	@IBAction func editButtonAction(_ sender: UIBarButtonItem) {
-		updateToolBar()
-		navigationController?.setToolbarHidden(isEditing, animated: true)
-		setEditing(!isEditing, animated: true)
-	}
-	
 	@IBAction func deleteWordsButtonAction(_ sender: UIBarButtonItem) {
 		guard let indexPaths = tableView.indexPathsForSelectedRows else { return }
 		
-		deleteWords(at: indexPaths)
+		listOfWordsModelController.deleteWords(at: indexPaths)
+
 		setEditing(false, animated: true)
 	}
 	
 	@IBAction func pronounceButtonAction(_ sender: UIButton) {
 		guard let indexPath = tableView.indexPathForRow(with: sender) else { return }
-		let word = wordsDataSource.wordAt(indexPath).headword
+		let word = listOfWordsModelController.wordAt(indexPath).headword
 		pronounce(word)
 	}
 }
 
-// MARK: - Configuration -
+// MARK: - Helpers -
 private extension ListOfWordsViewController {
+
+	// MARK: - Configuration -
+
+	var rightBarButtonItems: [UIBarButtonItem] {
+		tableView.isEditing ? [editButtonItem] : [editButtonItem, addButtonItem]
+	}
 
 	func initialConfiguration() {
 		vocabularyStore.viewContext.undoManager = UndoManager()
 
-		wordsDataSource.delegate = self
-		tableView.dataSource = wordsDataSource
+		listOfWordsModelController.dataChangesHandler = { [unowned self] changes in
+			self.tableView.handleChanges(changes)
+		}
+		tableView.dataSource = listOfWordsModelController
 
-		configureSearchController()
 		configureNavigationBar()
 		updateToolBar()
 	}
-	
+
 	func configureNavigationBar() {
-		navigationItem.hidesSearchBarWhenScrolling = false
+		configureSearchController()
+
+		navigationItem.rightBarButtonItems = rightBarButtonItems
 		navigationItem.searchController = searchController
-		
-		navigationItem.title = learningStage?.name ?? "All Words"
+
+		navigationItem.title = listOfWordsModelController.learningStage?.name ?? "All Words"
 	}
-	
+
 	func configureSearchController() {
 		searchController.obscuresBackgroundDuringPresentation = false
-		searchController.hidesNavigationBarDuringPresentation = false
 		searchController.searchBar.placeholder = "Search by headword"
 		searchController.searchResultsUpdater = self
 		definesPresentationContext = true
 	}
-	
+
 	func updateToolBar() {
 		let hasSelectedRows = (tableView.indexPathForSelectedRow?.count ?? 0) > 0
 
@@ -203,46 +190,40 @@ private extension ListOfWordsViewController {
 		moveButton.isEnabled = hasSelectedRows
 		deleteButton.isEnabled = hasSelectedRows
 		selectAllButton.title = isAllCellsSelected ? "Deselect All" : "Select All"
-	}
-}
 
-// MARK: - Helpers -
-private extension ListOfWordsViewController {
-	
-	func deleteWords(at indexPaths: [IndexPath]) {
-		indexPaths.forEach {
-			let word = wordsDataSource.wordAt($0)
-			vocabularyStore.viewContext.delete(word)
-		}
-		vocabularyStore.saveChanges()
+		navigationController?.setToolbarHidden(!isEditing, animated: true)
 	}
-	
+
+	// MARK: - Cells Selection -
+
+	func selectAllCells() {
+		let wordsNumber = tableView.numberOfRows(inSection: 0)
+
+		for index in 0..<wordsNumber {
+			let indexPath = IndexPath(row: index, section: 0)
+			tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+		}
+
+		isAllCellsSelected = true
+	}
+
+	func deselectAllCells() {
+		tableView.indexPathsForSelectedRows?.forEach {
+			tableView.deselectRow(at: $0, animated: true)
+		}
+
+		isAllCellsSelected = false
+	}
+
+	// MARK: - Handlers
+
 	func handle(_ destination: WordDestinationsViewController.Destination) {
 		guard let indexPaths = tableView.indexPathsForSelectedRows else { return }
-		
-		switch destination {
-		case .learningStage(let stage):
-			indexPaths.forEach {
-				wordsDataSource.wordAt($0).learningStage = stage
-			}
-		case .wordCollection(let wordCollection):
-			let words = indexPaths.compactMap { wordsDataSource.wordAt($0) }
-			wordCollection.addToWords(NSSet(array: words))
-		}
+
+		listOfWordsModelController.moveWords(at: indexPaths, to: destination)
+
 		setEditing(false, animated: true)
-		vocabularyStore.saveChanges()
 	}
-
-	func handleWordEditionResultAction(_ action: EditWordViewController.ResultAction) {
-		switch action {
-		case .save, .delete:
-			vocabularyStore.saveChanges()
-
-		case .cancel:
-			vocabularyStore.viewContext.undo()
-		}
-	}
-
 
 	func handleEditing(of word: Word, withResultAction action: EditWordViewController.ResultAction) {
 		switch action {
@@ -251,33 +232,6 @@ private extension ListOfWordsViewController {
 
 		case .cancel:
 			vocabularyStore.viewContext.refresh(word, mergeChanges: false)
-		}
-	}
-}
-
-// MARK: - Cells Selection -
-private extension ListOfWordsViewController {
-	
-	var isAllCellsSelected: Bool {
-		let wordsNumber = tableView.numberOfRows(inSection: 0)
-		let selectedCellsNumber = tableView.indexPathsForSelectedRows?.count ?? 0
-		return selectedCellsNumber > 0 && selectedCellsNumber == wordsNumber
-	}
-	
-	func selectAllCells() {
-		let wordsNumber = tableView.numberOfRows(inSection: 0)
-		
-		for index in 0..<wordsNumber {
-			let indexPath = IndexPath(row: index, section: 0)
-			tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
-		}
-	}
-	
-	func deselectAllCells() {
-		guard let selectedCellIndexPaths = tableView.indexPathsForSelectedRows else { return }
-		
-		for indexPath in selectedCellIndexPaths {
-			tableView.deselectRow(at: indexPath, animated: true)
 		}
 	}
 }
@@ -292,30 +246,23 @@ extension ListOfWordsViewController {
 	override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 		updateToolBar()
 	}
-	
-	override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-		needShowEditingToolbarButtons = false
-		super.tableView(tableView, willBeginEditingRowAt: indexPath)
-	}
-	
-	override func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
-		needShowEditingToolbarButtons = true
-		super.tableView(tableView, didEndEditingRowAt: indexPath)
-	}
+
+	// Default implementation of showing swipe actions will turn tableView in editing state.
+	// In order to prevent it you need to override willBeginEditingRowAt/didEndEditingRowAt delegate's methods
+	override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) { }
+	override func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) { }
 	
 	override func tableView(
 		_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
 	) -> UISwipeActionsConfiguration? {
 		
 		let editAction = UIContextualAction(style: .normal, title: "Edit") { (_, _, handler) in
-			self.editingWordIndexPath = indexPath
-			self.performSegue(with: .editWord, sender: nil)
+			self.performSegue(with: .editWord, sender: tableView.cellForRow(at: indexPath))
 			handler(true)
 		}
 		
 		let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, handler) in
-			let word = self.wordsDataSource.wordAt(indexPath)
-			self.vocabularyStore.deleteObject(word)
+			self.listOfWordsModelController.deleteWords(at: [indexPath])
 			handler(true)
 		}
 		
@@ -327,26 +274,10 @@ extension ListOfWordsViewController {
 extension ListOfWordsViewController: UISearchResultsUpdating {
 	func updateSearchResults(for searchController: UISearchController) {
 		if let searchQuery = searchController.searchBar.text, !searchQuery.isEmpty {
-			wordsDataSource.searchQuery = searchQuery
+			listOfWordsModelController.filterWordsBy(searchQuery: searchQuery)
 		} else {
-			wordsDataSource.searchQuery = nil
+			listOfWordsModelController.filterWordsBy(searchQuery: nil)
 		}
 		tableView.reloadData()
-	}
-}
-
-// MARK: - NSFetchedResultsControllerDelegate
-extension ListOfWordsViewController: NSFetchedResultsControllerDelegate {
-	
-	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-					didChange anObject: Any, at indexPath: IndexPath?,
-					for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-		#warning("UITableView was told to layout its visible cells and other contents without being in the view hierarchy")
-		dataChanges.append((type, indexPath, newIndexPath))
-	}
-	
-	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.handleChanges(dataChanges)
-		dataChanges = []
 	}
 }

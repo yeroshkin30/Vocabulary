@@ -11,7 +11,7 @@
         <scene sceneID="3ef-dY-K9O">
             <objects>
                 <tableViewController id="ldM-V1-KVZ" customClass="WordsTabViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="eLj-VE-sfX">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="eLj-VE-sfX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
@@ -76,14 +76,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="58.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udO-K0-BsT">
-                                            <rect key="frame" x="172" y="9" width="30" height="25"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="Speaker"/>
-                                            <connections>
-                                                <action selector="pronounceButtonAction:" destination="tbb-37-CIH" eventType="touchUpInside" id="aQd-dd-dcv"/>
-                                            </connections>
-                                        </button>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="yQ0-4q-Jbq">
                                             <rect key="frame" x="16" y="8" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
@@ -98,6 +90,14 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udO-K0-BsT">
+                                            <rect key="frame" x="172" y="9" width="30" height="25"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="Speaker"/>
+                                            <connections>
+                                                <action selector="pronounceButtonAction:" destination="tbb-37-CIH" eventType="touchUpInside" id="aQd-dd-dcv"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -130,27 +130,20 @@
                     </toolbarItems>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="ump-vO-gZC">
                         <nil key="title"/>
-                        <rightBarButtonItems>
-                            <barButtonItem title="Edit" id="7RU-SG-Zyy">
-                                <connections>
-                                    <action selector="editButtonAction:" destination="tbb-37-CIH" id="Yj5-H5-KXC"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="add" id="WVE-4C-tLT">
-                                <connections>
-                                    <segue destination="2h0-FZ-Mo7" kind="presentation" identifier="createWord" id="i2J-dN-haE"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="WVE-4C-tLT">
+                            <connections>
+                                <segue destination="2h0-FZ-Mo7" kind="presentation" identifier="createWord" modalPresentationStyle="automatic" id="i2J-dN-haE"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addButtonItem" destination="WVE-4C-tLT" id="4BS-n7-Cgc"/>
                         <outlet property="deleteButton" destination="C6G-M0-X7v" id="1Tj-hs-fN2"/>
-                        <outlet property="editButton" destination="7RU-SG-Zyy" id="cXE-e9-VzZ"/>
                         <outlet property="moveButton" destination="CF3-eZ-JCU" id="As3-r4-cPC"/>
                         <outlet property="selectAllButton" destination="6zB-iI-8g8" id="2mT-1F-bJZ"/>
-                        <segue destination="2h0-FZ-Mo7" kind="presentation" identifier="editWord" id="QRg-st-dhV"/>
+                        <segue destination="2h0-FZ-Mo7" kind="presentation" identifier="editWord" modalPresentationStyle="automatic" id="QRg-st-dhV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bQK-mG-RtD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -228,7 +221,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="mT0-14-mfK" kind="relationship" relationship="rootViewController" id="5bo-IF-t3j"/>
+                        <segue destination="mT0-14-mfK" kind="relationship" relationship="rootViewController" destinationCreationSelector="makeWordDestinationsViewControllerWithCoder:" id="5bo-IF-t3j"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s83-sn-y1c" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -240,7 +233,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="EditWordViewController" id="Lgi-Dd-Pa6" customClass="EditWordViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="hfM-Uc-6Rd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -363,7 +356,7 @@
                 <navigationController storyboardIdentifier="EditWordNavigationViewController" modalPresentationStyle="fullScreen" id="2h0-FZ-Mo7" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Eoc-TO-sh5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -399,6 +392,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="qWn-uh-Gcs"/>
-        <segue reference="QRg-st-dhV"/>
+        <segue reference="i2J-dN-haE"/>
     </inferredMetricsTieBreakers>
 </document>

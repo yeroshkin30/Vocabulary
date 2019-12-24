@@ -85,7 +85,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DefinitionCollectionViewCell" id="66q-6X-e67" customClass="DefinitionCollectionViewCell" customModule="Vocabulary" customModuleProvider="target">
-                                <rect key="frame" x="23" y="60" width="330" height="231"/>
+                                <rect key="frame" x="22.5" y="60" width="330" height="231"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ASq-Vj-BUv">
                                     <rect key="frame" x="0.0" y="0.0" width="330" height="231"/>

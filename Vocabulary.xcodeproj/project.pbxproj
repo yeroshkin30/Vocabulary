@@ -18,6 +18,7 @@
 		119FA71B239CEA6E001EE177 /* SearchStateModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119FA71A239CEA6E001EE177 /* SearchStateModelController.swift */; };
 		119FA71D239CEA8D001EE177 /* SearchPromptsModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119FA71C239CEA8D001EE177 /* SearchPromptsModelController.swift */; };
 		11A0C2CC23A26CFD00CEE1B0 /* IndexPath+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C2CB23A26CFD00CEE1B0 /* IndexPath+extensions.swift */; };
+		11BE9C2623B2BFCF00688B8B /* ListOfWordsModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BE9C2523B2BFCE00688B8B /* ListOfWordsModelController.swift */; };
 		11F8247623A4141B00A44DA5 /* WordsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F8247523A4141B00A44DA5 /* WordsTabViewController.swift */; };
 		3D04AFC3204C69E200E89E10 /* UiViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D04AFC2204C69E200E89E10 /* UiViewController+extension.swift */; };
 		3D0B98EA20EE73E000D8ABD1 /* FetchRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0B98E920EE73E000D8ABD1 /* FetchRequestFactory.swift */; };
@@ -84,7 +85,6 @@
 		3DCD3E232271FA8C000E7AC8 /* RememberWordsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD3E222271FA8C000E7AC8 /* RememberWordsCollectionViewDataSource.swift */; };
 		3DCF6D1020650BFC00635743 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCF6D0F20650BFC00635743 /* UIView+extension.swift */; };
 		3DCF6D122065DDC300635743 /* LearningOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCF6D112065DDC300635743 /* LearningOptionsViewController.swift */; };
-		3DD51A3C215E18ED0099BADB /* ListOfWordsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD51A3B215E18ED0099BADB /* ListOfWordsDataSource.swift */; };
 		3DD6DA8921D96A0500F76B61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD6DA8821D96A0500F76B61 /* Main.storyboard */; };
 		3DDBEE1C20E88240009FADC2 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DDBEE1B20E88240009FADC2 /* Words.storyboard */; };
 		3DDC4885205350290023FDD9 /* UITableView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDC4884205350290023FDD9 /* UITableView+extension.swift */; };
@@ -107,6 +107,7 @@
 		119FA71A239CEA6E001EE177 /* SearchStateModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStateModelController.swift; sourceTree = "<group>"; };
 		119FA71C239CEA8D001EE177 /* SearchPromptsModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPromptsModelController.swift; sourceTree = "<group>"; };
 		11A0C2CB23A26CFD00CEE1B0 /* IndexPath+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexPath+extensions.swift"; sourceTree = "<group>"; };
+		11BE9C2523B2BFCE00688B8B /* ListOfWordsModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfWordsModelController.swift; sourceTree = "<group>"; };
 		11F8247523A4141B00A44DA5 /* WordsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTabViewController.swift; sourceTree = "<group>"; };
 		3D04AFC2204C69E200E89E10 /* UiViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiViewController+extension.swift"; sourceTree = "<group>"; };
 		3D0B98E920EE73E000D8ABD1 /* FetchRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestFactory.swift; sourceTree = "<group>"; };
@@ -176,7 +177,6 @@
 		3DCD3E222271FA8C000E7AC8 /* RememberWordsCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberWordsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		3DCF6D0F20650BFC00635743 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
 		3DCF6D112065DDC300635743 /* LearningOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningOptionsViewController.swift; sourceTree = "<group>"; };
-		3DD51A3B215E18ED0099BADB /* ListOfWordsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfWordsDataSource.swift; sourceTree = "<group>"; };
 		3DD6DA8821D96A0500F76B61 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3DDBEE1B20E88240009FADC2 /* Words.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
 		3DDC4884205350290023FDD9 /* UITableView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+extension.swift"; sourceTree = "<group>"; };
@@ -213,6 +213,14 @@
 				119FA71C239CEA8D001EE177 /* SearchPromptsModelController.swift */,
 				3D2EE32221F0CF5D00E7AB52 /* SearchResultsModelController.swift */,
 				119FA71A239CEA6E001EE177 /* SearchStateModelController.swift */,
+			);
+			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		11BE9C2723B2C3CA00688B8B /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				11BE9C2523B2BFCE00688B8B /* ListOfWordsModelController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -430,14 +438,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		3DB218832160CBAC00F6367A /* Data Sources */ = {
-			isa = PBXGroup;
-			children = (
-				3DD51A3B215E18ED0099BADB /* ListOfWordsDataSource.swift */,
-			);
-			path = "Data Sources";
-			sourceTree = "<group>";
-		};
 		3DB218842160CBAE00F6367A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,8 +497,8 @@
 		3DD317802064A8D100D11F44 /* Words */ = {
 			isa = PBXGroup;
 			children = (
+				11BE9C2723B2C3CA00688B8B /* Model Controllers */,
 				3DB218842160CBAE00F6367A /* View Controllers */,
-				3DB218832160CBAC00F6367A /* Data Sources */,
 			);
 			path = Words;
 			sourceTree = "<group>";
@@ -627,7 +627,6 @@
 				110306C623AE4C0200118BDC /* EditWordViewController.swift in Sources */,
 				119FA71B239CEA6E001EE177 /* SearchStateModelController.swift in Sources */,
 				3D834C102270BDAE000F6CB7 /* BaseWordsLearningViewController.swift in Sources */,
-				3DD51A3C215E18ED0099BADB /* ListOfWordsDataSource.swift in Sources */,
 				3DA538AA205CBA8A00927D8C /* EntryCollectionViewHeader.swift in Sources */,
 				3D17E4002064F3800083DD45 /* LearningOptionTitleView.swift in Sources */,
 				3D834C142270DF80000F6CB7 /* RemindWordsCollectionViewDataSource.swift in Sources */,
@@ -678,6 +677,7 @@
 				3D516C7020452FCC00B6A715 /* IdentifiableByString+protocol.swift in Sources */,
 				3D516C6A20452F9900B6A715 /* EntriesParserDelegate.swift in Sources */,
 				3DCD3E232271FA8C000E7AC8 /* RememberWordsCollectionViewDataSource.swift in Sources */,
+				11BE9C2623B2BFCF00688B8B /* ListOfWordsModelController.swift in Sources */,
 				3DA9DFB32031D6910098A162 /* AppDelegate.swift in Sources */,
 				3D4100B82271E48200B7EE76 /* InputViewsConfigurator.swift in Sources */,
 				3D2EE32421F0CF5D00E7AB52 /* SearchResultsModelController.swift in Sources */,

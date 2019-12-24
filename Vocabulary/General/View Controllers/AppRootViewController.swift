@@ -18,7 +18,7 @@ class AppRootViewController: UITabBarController, SegueHandlerType {
 
 		view.backgroundColor = .white
 		setupViewControllers()
-//		selectedIndex = 1
+//		selectedIndex = 2
 	}
 
 	// MARK: - Navigation
