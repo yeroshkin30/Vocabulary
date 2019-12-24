@@ -12,16 +12,16 @@ class CardCollectionViewFlowLayout: UICollectionViewFlowLayout {
 	
 	override func prepare() {
 		
-		guard let sefeAreaSize = collectionView?.safeAreaLayoutGuide.layoutFrame.size else { return }
+		guard let safeAreaSize = collectionView?.safeAreaLayoutGuide.layoutFrame.size else { return }
 		
-		itemSize = CGSize(width: sefeAreaSize.width * 0.85, height: sefeAreaSize.height * 0.85)
+		itemSize = CGSize(width: safeAreaSize.width * 0.85, height: safeAreaSize.height * 0.85)
 		
-		let gorizontalInset = (sefeAreaSize.width - itemSize.width) / 2
+		let horizontalInset = (safeAreaSize.width - itemSize.width) / 2
 		
-		let heightInset = (sefeAreaSize.height - itemSize.height) / 2
+		let heightInset = (safeAreaSize.height - itemSize.height) / 2
 		
-		sectionInset = UIEdgeInsets.init(top: heightInset, left: gorizontalInset, bottom: heightInset, right: gorizontalInset)
+		sectionInset = UIEdgeInsets.init(top: heightInset, left: horizontalInset, bottom: heightInset, right: horizontalInset)
 		
-		minimumLineSpacing = gorizontalInset * 2
+		minimumLineSpacing = horizontalInset * 2
 	}
 }

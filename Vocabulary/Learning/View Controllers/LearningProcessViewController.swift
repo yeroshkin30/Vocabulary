@@ -94,8 +94,9 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
 		guard segueIdentifier(for: segue) == .completeRemembering,
-			case .remembering(let words) = learningMode
-			else { return }
+			case .remembering(let words) = learningMode	else {
+				return
+		}
 		
 		let viewController = segue.destination as! RememberingCompletionViewController
 		viewController.learnedWords = words

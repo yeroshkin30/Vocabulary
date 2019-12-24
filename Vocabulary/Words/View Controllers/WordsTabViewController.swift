@@ -37,7 +37,9 @@ class WordsTabViewController: UITableViewController, SegueHandlerType {
 
 	@IBSegueAction
 	func makeListOfWordsViewController(coder: NSCoder, sender: Any?, segueIdentifier: String?) -> ListOfWordsViewController? {
-		guard let indexPath = tableView.indexPathForSelectedRow else { return nil }
+		guard let indexPath = tableView.indexPathForSelectedRow else {
+			return nil
+		}
 
 		let learningStage = Section(at: indexPath) == .allWords ? nil : Word.LearningStage(rawValue: Int16(indexPath.row))
 		let currentWordCollectionID = currentWordCollectionInfoProvider.wordCollectionInfo?.objectID

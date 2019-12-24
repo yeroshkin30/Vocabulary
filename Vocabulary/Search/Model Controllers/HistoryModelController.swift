@@ -50,7 +50,9 @@ class HistoryModelController {
 	}
 	
 	subscript(index: Int) -> String? {
-		guard index >= 0 && index < words.count else { return nil }
+		guard index >= 0 && index < words.count else {
+			return nil
+		}
 		return words[index]
 	}
 

@@ -77,15 +77,19 @@ class EntryCollectionViewController: UICollectionViewController, SegueHandlerTyp
 
 	@IBSegueAction
 	private func makeEditWordViewController(coder: NSCoder, sender: Any?, segueIdentifier: String?) -> EditWordViewController? {
-		guard let cell = sender as? UICollectionViewCell,
+		guard
+			let cell = sender as? UICollectionViewCell,
 			let indexPath = collectionView.indexPath(for: cell)
-		else { return nil }
+		else {
+			return nil
+		}
 
 		let editWordContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		editWordContext.parent = vocabularyStore.viewContext
 
 		let word = Word(context: vocabularyStore.viewContext)
 		word.fill(with: entry, viewMode: viewMode, at: indexPath)
+
 		if let objectID = wordCollectionID {
 			word.wordCollection = editWordContext.object(with: objectID) as? WordCollection
 		}
@@ -95,7 +99,7 @@ class EntryCollectionViewController: UICollectionViewController, SegueHandlerTyp
 		return EditWordViewController(coder: coder, context: editWordContext, word: editedWord, viewMode: .create) {
 			[unowned self] (action) in
 			
-			self.handleEditing(of: word, withResultAction: action)
+			self.handleCreation(of: word, withResultAction: action)
 		}
 	}
 }
@@ -185,7 +189,7 @@ private extension EntryCollectionViewController {
 		collectionView?.reloadData()
 	}
 
-	func handleEditing(of word: Word, withResultAction action: EditWordViewController.ResultAction) {
+	func handleCreation(of word: Word, withResultAction action: EditWordViewController.ResultAction) {
 		switch action {
 		case .save:
 			vocabularyStore.saveChanges()

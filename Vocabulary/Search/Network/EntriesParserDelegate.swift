@@ -48,7 +48,9 @@ class EntriesParserDelegate: NSObject {
 		let parser = XMLParser(data: data)
 		parser.delegate = self
 		
-		guard parser.parse() else { return nil }
+		guard parser.parse() else {
+			return nil
+		}
 		
 		if let entries = entries, !entries.isEmpty {
 			return .entries(entries)

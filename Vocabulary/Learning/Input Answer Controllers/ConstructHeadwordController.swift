@@ -100,7 +100,9 @@ private extension ConstructHeadwordController {
 	}
 	
 	func randomDataForItem() -> LetterCollectionViewCell.LetterItemData? {
-		guard !headwordLetters.isEmpty else { return nil }
+		guard !headwordLetters.isEmpty else {
+			return nil
+		}
 		
 		let randomIndex = Int.random(in: 0..<headwordLetters.count)
 		
@@ -178,9 +180,11 @@ extension ConstructHeadwordController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView,
 						didUnhighlightItemAt indexPath: IndexPath) {
 		
-		guard let cell = collectionView.cellForItem(at: indexPath) as? LetterCollectionViewCell,
-			let itemData = cell.letterItemData
-			else { return }
+		guard
+			let cell = collectionView.cellForItem(at: indexPath) as? LetterCollectionViewCell,
+			let itemData = cell.letterItemData else {
+				return
+			}
 		
 		delegate?.constructHeadwordController(self, didSelectLetter: itemData.letter)
 		

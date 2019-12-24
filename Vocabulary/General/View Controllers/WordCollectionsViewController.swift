@@ -68,7 +68,11 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 		segueIdentifier: String?
 	) -> InputTextViewController? {
 
-		guard let identifier = segueIdentifier, let segue = SegueIdentifier(rawValue: identifier) else { return nil }
+		guard
+			let identifier = segueIdentifier,
+			let segue = SegueIdentifier(rawValue: identifier) else {
+				return nil
+		}
 
 		switch segue {
 		case .createCollection:
@@ -80,9 +84,8 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 		case .renameCollection:
 			guard
 				let cell = sender as? UITableViewCell,
-				let indexPath = tableView.indexPath(for: cell)
-			else {
-				return nil
+				let indexPath = tableView.indexPath(for: cell) else {
+					return nil
 			}
 
 			let initialText = wordCollectionsModelController.wordCollectionAt(indexPath).name

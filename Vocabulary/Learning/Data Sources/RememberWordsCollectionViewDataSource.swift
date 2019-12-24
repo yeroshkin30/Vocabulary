@@ -30,7 +30,9 @@ extension RememberWordsCollectionViewDataSource: WordsLearningCollectionViewData
 	}
 	
 	var currentWord: Word? {
-		guard let word = wordSections.first?.first else { return nil }
+		guard let word = wordSections.first?.first else {
+			return nil
+		}
 		
 		let sectionsNumber = wordSections.count
 		

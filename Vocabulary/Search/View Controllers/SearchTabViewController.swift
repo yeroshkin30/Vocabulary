@@ -64,7 +64,9 @@ class SearchTabViewController: UITableViewController, SegueHandlerType {
 
 	@IBSegueAction
 	private func makeEntryCollectionViewController(coder: NSCoder) -> EntryCollectionViewController? {
-		guard let entries = searchStateModelController.state.resultEntries else { return nil }
+		guard let entries = searchStateModelController.state.resultEntries else {
+			return nil
+		}
 
 		let index = tableView.indexPathForSelectedRow?.row ?? 0
 		let entry = entries[index]
