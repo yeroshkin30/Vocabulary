@@ -126,7 +126,10 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 			title: "Delete") { (_, _, handler) in
 				let wordCollectionToDelete = self.wordCollectionsModelController.wordCollectionAt(indexPath)
 
-				if wordCollectionToDelete.words?.count == 0 { #warning("Count via context")
+				let fetchRequest = FetchRequestFactory.requestForWords(from: wordCollectionToDelete)
+				let numberOfWordsToDelete = self.vocabularyStore.numberOfWordsFrom(fetchRequest)
+
+				if numberOfWordsToDelete == 0 {
 					self.wordCollectionsModelController.deleteWordCollection(at: indexPath)
 					handler(true)
 				} else {

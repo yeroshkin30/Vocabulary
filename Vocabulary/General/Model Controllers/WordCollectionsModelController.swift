@@ -85,7 +85,8 @@ private extension WordCollectionsModelController {
 	func initializeFetchedResultsController() -> NSFetchedResultsController<WordCollection> {
 		let wordCollectionRequest = WordCollection.createFetchRequest()
 		wordCollectionRequest.sortDescriptors = [
-			NSSortDescriptor(key: #keyPath(WordCollection.lastSelectedDate), ascending: false)
+			NSSortDescriptor(key: #keyPath(WordCollection.lastSelectedDate), ascending: false),
+			NSSortDescriptor(key: #keyPath(WordCollection.dateCreated), ascending: true)
 		]
 		let controller = NSFetchedResultsController(
 			fetchRequest: wordCollectionRequest,
@@ -120,12 +121,14 @@ extension WordCollectionsModelController: UITableViewDataSource {
 	}
 
 	private func configureCell(_ cell: UITableViewCell, for wordCollection: WordCollection) {
-		let parameters: WordsRequestParameters = (.unknown, wordCollection.objectID, false)
-		let fetchRequest = FetchRequestFactory.requestForWords(with: parameters)
+		let allWordsFetchRequest = FetchRequestFactory.requestForWords(from: wordCollection)
 
-		#warning("number from context")
-		let allWordsNumber = wordCollection.words?.count ?? 0
-		let unknownWordsNumber = vocabularyStore.numberOfWordsFrom(fetchRequest)
+		let parameters: WordsRequestParameters = (.unknown, wordCollection.objectID, false)
+		let unknownFetchRequest = FetchRequestFactory.requestForWords(with: parameters)
+
+
+		let allWordsNumber 		= vocabularyStore.numberOfWordsFrom(allWordsFetchRequest)
+		let unknownWordsNumber 	= vocabularyStore.numberOfWordsFrom(unknownFetchRequest)
 
 		cell.textLabel?.text = wordCollection.name
 		cell.detailTextLabel?.text = cellDetailTextFor(

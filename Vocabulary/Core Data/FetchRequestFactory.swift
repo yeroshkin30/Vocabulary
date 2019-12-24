@@ -27,6 +27,12 @@ struct FetchRequestFactory {
 		
 		return fetchRequest
 	}
+
+	static func requestForWords(from wordCollection: WordCollection) -> NSFetchRequest<Word> {
+		let parameters: WordsRequestParameters = (nil, wordCollection.objectID, false)
+
+		return requestForWords(with: parameters)
+	}
 	
 	static func predicateForWords(with parameters: WordsRequestParameters) -> NSPredicate {
 		
