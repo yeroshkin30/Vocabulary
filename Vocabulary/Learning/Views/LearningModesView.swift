@@ -1,5 +1,5 @@
 //
-//  LearningOptionsView.swift
+//  LearningModesView.swift
 //  Vocabulary
 //
 //  Created by Alexander Baraley on 06.12.2019.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class LearningOptionsView: UIView {
+class LearningModesView: UIView {
 
-	@IBOutlet private var rememberTypeTitles: LearningOptionTitleView!
-	@IBOutlet private var repeatTypeTitles: LearningOptionTitleView!
-	@IBOutlet private var remindTypeTitles: LearningOptionTitleView!
+	@IBOutlet private var rememberTypeTitles: LearningModeTitleView!
+	@IBOutlet private var repeatTypeTitles: LearningModeTitleView!
+	@IBOutlet private var remindTypeTitles: LearningModeTitleView!
 
 	var viewData: ViewData = .init(rememberWordsNumber: 0, repeatWordsNumber: 0, remindWordsNumber: 0) {
 		didSet {
@@ -28,14 +28,14 @@ class LearningOptionsView: UIView {
 		configureTitleView(remindTypeTitles, with: viewData.remindWordsNumber)
 	}
 
-	private func configureTitleView(_ view: LearningOptionTitleView, with number: Int) {
+	private func configureTitleView(_ view: LearningModeTitleView, with number: Int) {
 		view.wordsNumberLabel.text = "\(number)"
 		view.titleButton.isEnabled = number == 0 ? false : true
 		view.alpha = number == 0 ? 0.5 : 1.0
 	}
 }
 
-extension LearningOptionsView {
+extension LearningModesView {
 
 	struct ViewData {
 		let rememberWordsNumber, repeatWordsNumber, remindWordsNumber: Int

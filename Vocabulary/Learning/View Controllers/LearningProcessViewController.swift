@@ -128,8 +128,12 @@ private extension LearningProcessViewController {
 		
 		let requiredInset = view.frame.height - endFrame.origin.y
 		
-		if additionalSafeAreaInsets.bottom != requiredInset {
+		if requiredInset != 0,
+			additionalSafeAreaInsets.bottom != requiredInset {
+			
 			additionalSafeAreaInsets.bottom = requiredInset
+			collectionView.setNeedsLayout()
+			collectionView.layoutIfNeeded()
 		}
 	}
 	

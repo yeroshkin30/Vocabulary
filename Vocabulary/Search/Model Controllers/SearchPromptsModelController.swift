@@ -103,6 +103,7 @@ private extension SearchPromptsModelController {
 	}
 }
 
+// MARK: - UITableViewDataSource
 extension SearchPromptsModelController: UITableViewDataSource {
 
 	func numberOfSections(in tableView: UITableView) -> Int {

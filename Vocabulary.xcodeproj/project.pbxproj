@@ -11,7 +11,10 @@
 		11364EE923956FD900A0C334 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 11364EE823956FD900A0C334 /* README.md */; };
 		113F5EE2239AACB30084780B /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113F5EE1239AACB30084780B /* Search.storyboard */; };
 		114875B123A938C2003E5487 /* CurrentWordCollectionModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114875B023A938C2003E5487 /* CurrentWordCollectionModelController.swift */; };
-		115AEB712399BE1500CA2A49 /* LearningOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AEB702399BE1500CA2A49 /* LearningOptionsView.swift */; };
+		114A845323B681F700E5D2AE /* Vocabulary.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 11845A8E23B407A800BCC82C /* Vocabulary.sqlite */; };
+		114A845423B681F700E5D2AE /* Vocabulary.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 11845A8F23B407A800BCC82C /* Vocabulary.sqlite-shm */; };
+		114A845523B681F700E5D2AE /* Vocabulary.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 11845A8D23B407A700BCC82C /* Vocabulary.sqlite-wal */; };
+		115AEB712399BE1500CA2A49 /* LearningModesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AEB702399BE1500CA2A49 /* LearningModesView.swift */; };
 		1168E16E23993DF6008CFA33 /* AppRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168E16D23993DF6008CFA33 /* AppRootViewController.swift */; };
 		1170EB6A23AEB7DA003D1555 /* DismissActionSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170EB6923AEB7DA003D1555 /* DismissActionSheetPresenter.swift */; };
 		1195370E23B1EF5D00808E20 /* WordCollectionsModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1195370D23B1EF5D00808E20 /* WordCollectionsModelController.swift */; };
@@ -28,7 +31,7 @@
 		3D11A704207265130004D465 /* LetterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D11A703207265130004D465 /* LetterCollectionViewCell.swift */; };
 		3D14D19B20C821BA005947AF /* LearningKeyboardAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D14D19A20C821BA005947AF /* LearningKeyboardAccessoryView.swift */; };
 		3D16A417210DC0BA00EACBFF /* LearningCardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D16A416210DC0BA00EACBFF /* LearningCardTextField.swift */; };
-		3D17E4002064F3800083DD45 /* LearningOptionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E3FF2064F3800083DD45 /* LearningOptionTitleView.swift */; };
+		3D17E4002064F3800083DD45 /* LearningModeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E3FF2064F3800083DD45 /* LearningModeTitleView.swift */; };
 		3D1B9F1A228D2386003F9679 /* UndoAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1B9F19228D2386003F9679 /* UndoAlertPresenter.swift */; };
 		3D24CF8C20711B8D006EF57B /* SelectHeadwordInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D24CF8B20711B8D006EF57B /* SelectHeadwordInputView.swift */; };
 		3D24CF8E20713229006EF57B /* SelectHeadwordInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D24CF8D20713229006EF57B /* SelectHeadwordInputView.xib */; };
@@ -59,9 +62,6 @@
 		3D5E21DC22721E6700EE6D34 /* AnswersReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E21DB22721E6700EE6D34 /* AnswersReceiver.swift */; };
 		3D6A33E0229C22E600695A0F /* Learning.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D6A33DF229C22E600695A0F /* Learning.storyboard */; };
 		3D6AD8D820EB9B1A004716DF /* WordCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6AD8D720EB9B1A004716DF /* WordCollectionsViewController.swift */; };
-		3D80F19E2281790A00B1C66A /* Vocabulary.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3D80F19B2281790A00B1C66A /* Vocabulary.sqlite */; };
-		3D80F19F2281790A00B1C66A /* Vocabulary.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 3D80F19C2281790A00B1C66A /* Vocabulary.sqlite-shm */; };
-		3D80F1A02281790A00B1C66A /* Vocabulary.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 3D80F19D2281790A00B1C66A /* Vocabulary.sqlite-wal */; };
 		3D818941204EF7C5006ECE30 /* ListOfWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D818940204EF7C5006ECE30 /* ListOfWordsViewController.swift */; };
 		3D834C0E227085EC000F6CB7 /* FullCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D834C0D227085EC000F6CB7 /* FullCardCollectionViewCell.swift */; };
 		3D834C102270BDAE000F6CB7 /* BaseWordsLearningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D834C0F2270BDAE000F6CB7 /* BaseWordsLearningViewController.swift */; };
@@ -84,7 +84,7 @@
 		3DC9E2E12086ECEA0010BE8D /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC9E2E02086ECEA0010BE8D /* Word.swift */; };
 		3DCD3E232271FA8C000E7AC8 /* RememberWordsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD3E222271FA8C000E7AC8 /* RememberWordsCollectionViewDataSource.swift */; };
 		3DCF6D1020650BFC00635743 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCF6D0F20650BFC00635743 /* UIView+extension.swift */; };
-		3DCF6D122065DDC300635743 /* LearningOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCF6D112065DDC300635743 /* LearningOptionsViewController.swift */; };
+		3DCF6D122065DDC300635743 /* LearningModesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCF6D112065DDC300635743 /* LearningModesViewController.swift */; };
 		3DD6DA8921D96A0500F76B61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD6DA8821D96A0500F76B61 /* Main.storyboard */; };
 		3DDBEE1C20E88240009FADC2 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DDBEE1B20E88240009FADC2 /* Words.storyboard */; };
 		3DDC4885205350290023FDD9 /* UITableView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDC4884205350290023FDD9 /* UITableView+extension.swift */; };
@@ -98,10 +98,13 @@
 		11364EE823956FD900A0C334 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		113F5EE1239AACB30084780B /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		114875B023A938C2003E5487 /* CurrentWordCollectionModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWordCollectionModelController.swift; sourceTree = "<group>"; };
-		115AEB702399BE1500CA2A49 /* LearningOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningOptionsView.swift; sourceTree = "<group>"; };
+		115AEB702399BE1500CA2A49 /* LearningModesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningModesView.swift; sourceTree = "<group>"; };
 		11640A7323ACB6C000D0E5AF /* EditWordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWordViewController.swift; sourceTree = "<group>"; };
 		1168E16D23993DF6008CFA33 /* AppRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootViewController.swift; sourceTree = "<group>"; };
 		1170EB6923AEB7DA003D1555 /* DismissActionSheetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissActionSheetPresenter.swift; sourceTree = "<group>"; };
+		11845A8D23B407A700BCC82C /* Vocabulary.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vocabulary.sqlite-wal"; sourceTree = "<group>"; };
+		11845A8E23B407A800BCC82C /* Vocabulary.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vocabulary.sqlite; sourceTree = "<group>"; };
+		11845A8F23B407A800BCC82C /* Vocabulary.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vocabulary.sqlite-shm"; sourceTree = "<group>"; };
 		1195370D23B1EF5D00808E20 /* WordCollectionsModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCollectionsModelController.swift; sourceTree = "<group>"; };
 		1195370F23B264B200808E20 /* Vocabulary 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vocabulary 3.xcdatamodel"; sourceTree = "<group>"; };
 		119FA71A239CEA6E001EE177 /* SearchStateModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStateModelController.swift; sourceTree = "<group>"; };
@@ -118,7 +121,7 @@
 		3D11A703207265130004D465 /* LetterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterCollectionViewCell.swift; sourceTree = "<group>"; };
 		3D14D19A20C821BA005947AF /* LearningKeyboardAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningKeyboardAccessoryView.swift; sourceTree = "<group>"; };
 		3D16A416210DC0BA00EACBFF /* LearningCardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningCardTextField.swift; sourceTree = "<group>"; };
-		3D17E3FF2064F3800083DD45 /* LearningOptionTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningOptionTitleView.swift; sourceTree = "<group>"; };
+		3D17E3FF2064F3800083DD45 /* LearningModeTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningModeTitleView.swift; sourceTree = "<group>"; };
 		3D1B9F19228D2386003F9679 /* UndoAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoAlertPresenter.swift; sourceTree = "<group>"; };
 		3D24CF8B20711B8D006EF57B /* SelectHeadwordInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHeadwordInputView.swift; sourceTree = "<group>"; };
 		3D24CF8D20713229006EF57B /* SelectHeadwordInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectHeadwordInputView.xib; sourceTree = "<group>"; };
@@ -149,9 +152,6 @@
 		3D5E21DB22721E6700EE6D34 /* AnswersReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersReceiver.swift; sourceTree = "<group>"; };
 		3D6A33DF229C22E600695A0F /* Learning.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Learning.storyboard; sourceTree = "<group>"; };
 		3D6AD8D720EB9B1A004716DF /* WordCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCollectionsViewController.swift; sourceTree = "<group>"; };
-		3D80F19B2281790A00B1C66A /* Vocabulary.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vocabulary.sqlite; sourceTree = "<group>"; };
-		3D80F19C2281790A00B1C66A /* Vocabulary.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vocabulary.sqlite-shm"; sourceTree = "<group>"; };
-		3D80F19D2281790A00B1C66A /* Vocabulary.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vocabulary.sqlite-wal"; sourceTree = "<group>"; };
 		3D818940204EF7C5006ECE30 /* ListOfWordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfWordsViewController.swift; sourceTree = "<group>"; };
 		3D834C0D227085EC000F6CB7 /* FullCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		3D834C0F2270BDAE000F6CB7 /* BaseWordsLearningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWordsLearningViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		3DC9E2E02086ECEA0010BE8D /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		3DCD3E222271FA8C000E7AC8 /* RememberWordsCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberWordsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		3DCF6D0F20650BFC00635743 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
-		3DCF6D112065DDC300635743 /* LearningOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningOptionsViewController.swift; sourceTree = "<group>"; };
+		3DCF6D112065DDC300635743 /* LearningModesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningModesViewController.swift; sourceTree = "<group>"; };
 		3DD6DA8821D96A0500F76B61 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3DDBEE1B20E88240009FADC2 /* Words.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
 		3DDC4884205350290023FDD9 /* UITableView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+extension.swift"; sourceTree = "<group>"; };
@@ -359,9 +359,9 @@
 		3DA61BF3227A54FA0056EAFA /* Default data */ = {
 			isa = PBXGroup;
 			children = (
-				3D80F19B2281790A00B1C66A /* Vocabulary.sqlite */,
-				3D80F19C2281790A00B1C66A /* Vocabulary.sqlite-shm */,
-				3D80F19D2281790A00B1C66A /* Vocabulary.sqlite-wal */,
+				11845A8E23B407A800BCC82C /* Vocabulary.sqlite */,
+				11845A8F23B407A800BCC82C /* Vocabulary.sqlite-shm */,
+				11845A8D23B407A700BCC82C /* Vocabulary.sqlite-wal */,
 			);
 			path = "Default data";
 			sourceTree = "<group>";
@@ -506,7 +506,7 @@
 		3DDF4C082160C88F00FA9CD6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3DCF6D112065DDC300635743 /* LearningOptionsViewController.swift */,
+				3DCF6D112065DDC300635743 /* LearningModesViewController.swift */,
 				3D834C0F2270BDAE000F6CB7 /* BaseWordsLearningViewController.swift */,
 				3D976F02221C713D00DB5796 /* UnknownWordsViewController.swift */,
 				3D508A02226F804E00BAFC4A /* LearningProcessViewController.swift */,
@@ -519,8 +519,8 @@
 		3DDF4C092160C89D00FA9CD6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				115AEB702399BE1500CA2A49 /* LearningOptionsView.swift */,
-				3D17E3FF2064F3800083DD45 /* LearningOptionTitleView.swift */,
+				115AEB702399BE1500CA2A49 /* LearningModesView.swift */,
+				3D17E3FF2064F3800083DD45 /* LearningModeTitleView.swift */,
 				3D834C0D227085EC000F6CB7 /* FullCardCollectionViewCell.swift */,
 				3DAE5689207ACA8200AED999 /* RemindWordCollectionViewCell.swift */,
 				3DB218782160C97800F6367A /* Remember and Repeat */,
@@ -591,17 +591,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D2EE31721F0A3F700E7AB52 /* MessageView.xib in Resources */,
-				3D80F19E2281790A00B1C66A /* Vocabulary.sqlite in Resources */,
-				3D80F1A02281790A00B1C66A /* Vocabulary.sqlite-wal in Resources */,
 				3DDBEE1C20E88240009FADC2 /* Words.storyboard in Resources */,
 				113F5EE2239AACB30084780B /* Search.storyboard in Resources */,
 				11364EE923956FD900A0C334 /* README.md in Resources */,
-				3D80F19F2281790A00B1C66A /* Vocabulary.sqlite-shm in Resources */,
 				3DA9DFC02031D6910098A162 /* LaunchScreen.storyboard in Resources */,
 				3D24CF8E20713229006EF57B /* SelectHeadwordInputView.xib in Resources */,
+				114A845523B681F700E5D2AE /* Vocabulary.sqlite-wal in Resources */,
 				3DD6DA8921D96A0500F76B61 /* Main.storyboard in Resources */,
+				114A845423B681F700E5D2AE /* Vocabulary.sqlite-shm in Resources */,
 				3D2EE31921F0A52F00E7AB52 /* LoadingView.xib in Resources */,
 				3D11A702207263FC0004D465 /* LetterCollectionViewCell.xib in Resources */,
+				114A845323B681F700E5D2AE /* Vocabulary.sqlite in Resources */,
 				3D27AA01209C17DC009C5B95 /* Assets.xcassets in Resources */,
 				3D6A33E0229C22E600695A0F /* Learning.storyboard in Resources */,
 			);
@@ -628,10 +628,10 @@
 				119FA71B239CEA6E001EE177 /* SearchStateModelController.swift in Sources */,
 				3D834C102270BDAE000F6CB7 /* BaseWordsLearningViewController.swift in Sources */,
 				3DA538AA205CBA8A00927D8C /* EntryCollectionViewHeader.swift in Sources */,
-				3D17E4002064F3800083DD45 /* LearningOptionTitleView.swift in Sources */,
+				3D17E4002064F3800083DD45 /* LearningModeTitleView.swift in Sources */,
 				3D834C142270DF80000F6CB7 /* RemindWordsCollectionViewDataSource.swift in Sources */,
 				3D56382021D1F8D900281C07 /* EntryCollectionViewController.swift in Sources */,
-				115AEB712399BE1500CA2A49 /* LearningOptionsView.swift in Sources */,
+				115AEB712399BE1500CA2A49 /* LearningModesView.swift in Sources */,
 				114875B123A938C2003E5487 /* CurrentWordCollectionModelController.swift in Sources */,
 				3D834C122270D83B000F6CB7 /* UnknownWordsCollectionViewDataSource.swift in Sources */,
 				3D2EE31321F0A2B800E7AB52 /* SearchTabViewController.swift in Sources */,
@@ -666,7 +666,7 @@
 				3DAE568A207ACA8200AED999 /* RemindWordCollectionViewCell.swift in Sources */,
 				1170EB6A23AEB7DA003D1555 /* DismissActionSheetPresenter.swift in Sources */,
 				3D1B9F1A228D2386003F9679 /* UndoAlertPresenter.swift in Sources */,
-				3DCF6D122065DDC300635743 /* LearningOptionsViewController.swift in Sources */,
+				3DCF6D122065DDC300635743 /* LearningModesViewController.swift in Sources */,
 				3D2EE31B21F0A54D00E7AB52 /* LoadingView.swift in Sources */,
 				3DDC4885205350290023FDD9 /* UITableView+extension.swift in Sources */,
 				3D52418121897DF7000FB1F7 /* UITableViewHeaderFooterView+extension.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//	LearningOptionsViewController.swift
+//	LearningModesViewController.swift
 //	Vocabulary
 //
 //	Created by Alexander Baraley on 3/24/18.
@@ -9,14 +9,14 @@
 import UIKit
 import CoreData.NSManagedObjectID
 
-class LearningOptionsViewController: UIViewController, SegueHandlerType {
+class LearningModesViewController: UIViewController, SegueHandlerType {
 
 	// MARK: - Properties -
 
 	var vocabularyStore: VocabularyStore!
 	var currentWordCollectionInfoProvider: CurrentWordCollectionInfoProvider!
 
-	@IBOutlet private var learningOptionsView: LearningOptionsView!
+	@IBOutlet private var learningModesView: LearningModesView!
 
 	private var currentWordCollectionID: NSManagedObjectID? {
 		currentWordCollectionInfoProvider.wordCollectionInfo?.objectID
@@ -34,7 +34,7 @@ class LearningOptionsViewController: UIViewController, SegueHandlerType {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		updateLearningOptionsView()
+		updateLearningModesView()
 	}
 	
 	// MARK: - Navigation
@@ -70,19 +70,19 @@ class LearningOptionsViewController: UIViewController, SegueHandlerType {
 }
 
 // MARK: - Private -
-private extension LearningOptionsViewController {
+private extension LearningModesViewController {
 
 	// MARK: - Methods
 	
 	func setupNotifications() {
 		let enterForeground = UIApplication.willEnterForegroundNotification
 		NotificationCenter.default.addObserver(
-			self, selector: #selector(updateLearningOptionsView), name: enterForeground, object: nil
+			self, selector: #selector(updateLearningModesView), name: enterForeground, object: nil
 		)
 	}
 	
 	@objc
-	func updateLearningOptionsView() {
+	func updateLearningModesView() {
 
 		let rememberWordsNumber = vocabularyStore.numberOfWordsFrom(
 			FetchRequestFactory.fetchRequest(for: .remembering, wordCollectionID: currentWordCollectionID)
@@ -94,7 +94,7 @@ private extension LearningOptionsViewController {
 			FetchRequestFactory.fetchRequest(for: .reminding, wordCollectionID: currentWordCollectionID)
 		)
 
-		learningOptionsView.viewData = LearningOptionsView.ViewData(
+		learningModesView.viewData = LearningModesView.ViewData(
 			rememberWordsNumber: rememberWordsNumber,
 			repeatWordsNumber: repeatWordsNumber,
 			remindWordsNumber: remindWordsNumber
@@ -102,11 +102,11 @@ private extension LearningOptionsViewController {
 	}
 }
 
-extension LearningOptionsViewController: CurrentWordCollectionInfoObserver {
+extension LearningModesViewController: CurrentWordCollectionInfoObserver {
 
 	func currentWordCollectionDidChange(_ wordCollectionInfo: WordCollectionInfo?) {
 		navigationItem.title = "\(wordCollectionInfo?.name ?? "Vocabulary")"
-		updateLearningOptionsView()
+		updateLearningModesView()
 	}
 }
 

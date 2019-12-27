@@ -18,7 +18,6 @@ class AppRootViewController: UITabBarController, SegueHandlerType {
 
 		view.backgroundColor = .white
 		setupViewControllers()
-//		selectedIndex = 2
 	}
 
 	// MARK: - Navigation
@@ -52,7 +51,7 @@ private extension AppRootViewController {
 				title: "Collections", style: .plain, target: self, action: #selector(showWordCollections)
 			)
 
-			if let learningTabVC = navVC.viewControllers.first as? LearningOptionsViewController {
+			if let learningTabVC = navVC.viewControllers.first as? LearningModesViewController {
 				learningTabVC.vocabularyStore = vocabularyStore
 				learningTabVC.currentWordCollectionInfoProvider = currentWordCollectionModelController
 			}

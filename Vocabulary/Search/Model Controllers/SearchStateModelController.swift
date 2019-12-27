@@ -48,6 +48,7 @@ class SearchStateModelController: NSObject {
 	}
 }
 
+// MARK: - Private
 private extension SearchStateModelController {
 
 	func stateDidChange() {
@@ -118,6 +119,7 @@ extension SearchStateModelController: UITableViewDelegate {
 	}
 }
 
+// MARK: - UISearchBarDelegate
 extension SearchStateModelController: UISearchBarDelegate {
 
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

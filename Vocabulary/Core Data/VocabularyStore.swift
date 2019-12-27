@@ -25,28 +25,6 @@ class VocabularyStore: NSPersistentContainer {
 		})
 		viewContext.mergePolicy = NSOverwriteMergePolicy
 	}
-
-	static var isPersistentStoreEmpty: Bool {
-		let location = NSPersistentContainer.defaultDirectoryURL()
-		let content = try? FileManager.default.contentsOfDirectory(at: location, includingPropertiesForKeys: nil)
-
-		return content?.isEmpty == true
-	}
-
-	static func loadDefaultVocabulary() {
-		let location = NSPersistentContainer.defaultDirectoryURL()
-
-		let fm = FileManager.default
-
-		let fileExtensions = ["sqlite", "sqlite-shm", "sqlite-wal"]
-
-		for fileExtension in fileExtensions {
-			if let source = Bundle.main.url(forResource: modelFileName, withExtension: fileExtension) {
-				let destination = location.appendingPathComponent(source.lastPathComponent)
-				try? fm.copyItem(at: source, to: destination)
-			}
-		}
-	}
 	
 	func saveChanges() {
 		guard viewContext.hasChanges else { return }
@@ -75,6 +53,32 @@ class VocabularyStore: NSPersistentContainer {
 			return try viewContext.fetch(fetchRequest)
 		} catch let error {
 			fatalError("Unable to fetch words with error: \(error.localizedDescription)")
+		}
+	}
+}
+
+// MARK: - Default data
+extension VocabularyStore {
+
+	static var isPersistentStoreEmpty: Bool {
+		let location = NSPersistentContainer.defaultDirectoryURL()
+		let content = try? FileManager.default.contentsOfDirectory(at: location, includingPropertiesForKeys: nil)
+
+		return content?.isEmpty == true
+	}
+
+	static func loadDefaultVocabulary() {
+		let location = NSPersistentContainer.defaultDirectoryURL()
+
+		let fm = FileManager.default
+
+		let fileExtensions = ["sqlite", "sqlite-shm", "sqlite-wal"]
+
+		for fileExtension in fileExtensions {
+			if let source = Bundle.main.url(forResource: modelFileName, withExtension: fileExtension) {
+				let destination = location.appendingPathComponent(source.lastPathComponent)
+				try? fm.copyItem(at: source, to: destination)
+			}
 		}
 	}
 }

@@ -14,7 +14,7 @@ class CardCollectionViewFlowLayout: UICollectionViewFlowLayout {
 		
 		guard let safeAreaSize = collectionView?.safeAreaLayoutGuide.layoutFrame.size else { return }
 		
-		itemSize = CGSize(width: safeAreaSize.width * 0.85, height: safeAreaSize.height * 0.85)
+		itemSize = CGSize(width: safeAreaSize.width * 0.85, height: safeAreaSize.height * 0.9)
 		
 		let horizontalInset = (safeAreaSize.width - itemSize.width) / 2
 		
