@@ -27,6 +27,7 @@ extension WordCollection {
 	
 	@NSManaged public var name: String
 	@NSManaged public var dateCreated: Date
+	@NSManaged public var lastSelectedDate: Date
 	@NSManaged public var words: NSSet?
 	
 }

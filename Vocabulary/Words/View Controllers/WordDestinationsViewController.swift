@@ -9,12 +9,24 @@
 import UIKit
 
 class WordDestinationsViewController: UITableViewController {
+
+	// MARK: - Initialization
+
+	private let vocabularyStore: VocabularyStore
+	private let destinationHandler: ((Destination) -> Void)
+
+	init?(coder: NSCoder, vocabularyStore: VocabularyStore, destinationHandler: @escaping ((Destination) -> Void)) {
+
+		self.vocabularyStore = vocabularyStore
+		self.destinationHandler = destinationHandler
+		super.init(coder: coder)
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 	
-	// MARK: - Public properties
-	
-	var vocabularyStore: VocabularyStore!
-	
-	var destinationHandler: ((Destination) -> Void)?
+	// MARK: - Outlets
 	
 	@IBOutlet private weak var saveButton: UIBarButtonItem!
 	
@@ -23,9 +35,10 @@ class WordDestinationsViewController: UITableViewController {
 	private lazy var wordCollections: [WordCollection] = {
 		let wordCollectionsFetchRequest = WordCollection.createFetchRequest()
 		wordCollectionsFetchRequest.sortDescriptors = [
-			NSSortDescriptor(key: #keyPath(WordCollection.dateCreated), ascending: false)
+			NSSortDescriptor(key: #keyPath(WordCollection.lastSelectedDate), ascending: false),
+			NSSortDescriptor(key: #keyPath(WordCollection.dateCreated), ascending: true)
 		]
-		return (try? vocabularyStore.context.fetch(wordCollectionsFetchRequest)) ?? []
+		return (try? vocabularyStore.viewContext.fetch(wordCollectionsFetchRequest)) ?? []
 	}()
 	
 	private lazy var viewData = ViewData(wordCollections: wordCollections)
@@ -38,11 +51,11 @@ class WordDestinationsViewController: UITableViewController {
 		switch ViewData.Section(at: indexPath) {
 		case .learningStages:
 			let stage = Word.LearningStage(rawValue: Int16(indexPath.row))!
-			destinationHandler?(.learningStage(stage))
+			destinationHandler(.learningStage(stage))
 			
 		case .wordCollections:
 			let wordCollection = wordCollections[indexPath.row]
-			destinationHandler?(.wordCollection(wordCollection))
+			destinationHandler(.wordCollection(wordCollection))
 		}
 		
 		dismiss(animated: true, completion: nil)
@@ -138,7 +151,7 @@ extension WordDestinationsViewController {
 		func sectionTitle(for section: Int) -> String {
 			switch Section(section) {
 			case .learningStages:	return "Learning stages"
-			case .wordCollections:	return "Sets of words"
+			case .wordCollections:	return "Word collections"
 			}
 		}
 		

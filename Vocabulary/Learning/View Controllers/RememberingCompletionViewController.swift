@@ -59,7 +59,7 @@ class RememberingCompletionViewController: UICollectionViewController {
 		let number = learnedWords.count
 		
 		view.titleText = "Well done!"
-		view.messageText = "You remembered \(number) new word"
+		view.messageText = "You have remembered \(number) new word"
 		
 		if number > 1 {
 			view.messageText.append("s")

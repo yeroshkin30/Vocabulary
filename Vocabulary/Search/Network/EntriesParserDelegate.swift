@@ -45,10 +45,12 @@ class EntriesParserDelegate: NSObject {
 	var anExample = ""
 	
 	func parseEntriesFrom(_ data: Data) -> EntriesParsingResult? {
-		let parcer = XMLParser(data: data)
-		parcer.delegate = self
+		let parser = XMLParser(data: data)
+		parser.delegate = self
 		
-		guard parcer.parse() else { return nil }
+		guard parser.parse() else {
+			return nil
+		}
 		
 		if let entries = entries, !entries.isEmpty {
 			return .entries(entries)
@@ -178,7 +180,7 @@ extension EntriesParserDelegate: XMLParserDelegate {
 			aDefinition.examples = examples
 		case .vi:
 			if !anExample.isEmpty {
-				let example = "- " + anExample.capitalizingFirstLetter()
+				let example = anExample.capitalizingFirstLetter()
 				examples.append(example)
 			}
 		case .it:

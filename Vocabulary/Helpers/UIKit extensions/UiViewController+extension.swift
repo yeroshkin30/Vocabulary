@@ -13,7 +13,7 @@ extension UIViewController {
 	
 	static var speechSynthesizer: AVSpeechSynthesizer = {
 		let audioSession = AVAudioSession.sharedInstance()
-		try? audioSession.setCategory(AVAudioSession.Category.ambient, options: [.duckOthers])
+		try? audioSession.setCategory(.ambient, mode: .spokenAudio, options: [.duckOthers])
 		return AVSpeechSynthesizer()
 	}()
 	
@@ -31,7 +31,7 @@ extension UIViewController {
 		}
 	}
 	
-	// MARK: - Chaild view controllers -
+	// MARK: - Child view controllers -
 	
 	func add(_ child: UIViewController) {
 		addChild(child)

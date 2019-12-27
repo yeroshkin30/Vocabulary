@@ -10,24 +10,25 @@ import UIKit
 
 extension UIStoryboard {
 	
-	enum Storyboard: String {
-		case home = "Home"
+	enum StoryboardName: String {
+		case main = "Main"
 		case learning = "Learning"
-		case wordsCollection = "Words"
+		case search = "Search"
+		case words = "Words"
 	}
 	
-	convenience init(storyboard: Storyboard, bundle: Bundle? = nil) {
+	convenience init(storyboard: StoryboardName, bundle: Bundle? = nil) {
 		self.init(name: storyboard.rawValue, bundle: bundle)
 	}
 	
-	class func storyboard(storyboard: Storyboard, bundle: Bundle? = nil) -> UIStoryboard {
+	class func storyboard(storyboard: StoryboardName, bundle: Bundle? = nil) -> UIStoryboard {
 		return UIStoryboard(name: storyboard.rawValue, bundle: bundle)
 	}
 
 	func instantiateViewController<T: UIViewController>() -> T {
-		let idenrifier = T.stringIdentifier
-		guard let viewController = instantiateViewController(withIdentifier: idenrifier) as? T else {
-			fatalError("Could not find view controller with name \(idenrifier)")
+		let identifier = T.stringIdentifier
+		guard let viewController = instantiateViewController(withIdentifier: identifier) as? T else {
+			fatalError("Could not find view controller with name \(identifier)")
 		}
 		return viewController
 	}

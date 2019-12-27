@@ -7,65 +7,66 @@
 //
 
 import UIKit
+import CoreData.NSManagedObjectID
 
-class EntryCollectionViewController: UICollectionViewController, DefinitionsRequestProvider, SegueHandlerType {
-	
-	var entry: Entry!
-	var vocabularyStore: VocabularyStore!
-	
-	// MARK: - DefinitionsRequestProvider -
-	
-	var wordToRequest: String?
-	
-	// MARK: - Outlets -
-	
+class EntryCollectionViewController: UICollectionViewController, SegueHandlerType {
+
+	// MARK: - Initialization
+
+	private let vocabularyStore: VocabularyStore
+	private let entry: Entry
+	private let wordCollectionID: NSManagedObjectID?
+	private let definitionDidRequestHandler: ((String) -> Void)
+
+	init?(
+		coder: NSCoder,
+		vocabularyStore: VocabularyStore,
+		entry: Entry,
+		wordCollectionID: NSManagedObjectID?,
+		definitionDidRequestHandler: @escaping ((String) -> Void)
+	) {
+
+		self.vocabularyStore = vocabularyStore
+		self.entry = entry
+		self.wordCollectionID = wordCollectionID
+		self.definitionDidRequestHandler = definitionDidRequestHandler
+		super.init(coder: coder)
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+		
+	// MARK: - Outlets
+
+	@IBOutlet private var layout: UICollectionViewFlowLayout!
 	@IBOutlet private var viewModeSegmentedControl: UISegmentedControl!
-	@IBOutlet private var addToLearningButton: UIBarButtonItem!
 	
 	// MARK: - Private properties
 	
 	private var viewMode: ViewMode = .definitions { didSet { viewModeDidChange() }}
-	
-	private lazy var dataSource = EntryCollectionViewDataSource(entry: entry, viewMode: viewMode)
-	
-	// MARK: - Actions
-	
-	@IBAction private func switchViewModeAction(_ sender: UISegmentedControl) {
-		viewMode = ViewMode(rawValue: sender.selectedSegmentIndex)!
+	private var viewData: ViewData {
+		switch viewMode {
+		case .definitions: return definitionsViewData
+		case .expressions: return expressionsViewData
+		}
 	}
+
+	private lazy var definitionsViewData = ViewData(entry: entry, viewMode: .definitions)
+	private lazy var expressionsViewData = ViewData(entry: entry, viewMode: .expressions)
 	
-	@IBAction private func pronounceButtonAction(_ sender: UIButton) {
-		pronounce(entry.headword)
-	}
-	
-	// MARK: - Life cicle
+	// MARK: - Life cycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		setupCollectionView()
-		setupSegmentControl()
-	}
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		
-		navigationController?.isToolbarHidden = false
-		navigationItem.title = entry.headword
+
+		initialSetup()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-		navigationController?.isToolbarHidden = true
+
 		stopPronouncing()
-	}
-	
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(animated)
-		
-		if let indexPath = collectionView?.indexPathsForSelectedItems?.first {
-			collectionView?.deselectItem(at: indexPath, animated: false)
-		}
 	}
 	
 	// MARK: - Navigation
@@ -73,125 +74,210 @@ class EntryCollectionViewController: UICollectionViewController, DefinitionsRequ
 	enum SegueIdentifier: String {
 		case addToLearning, requestDefinitions
 	}
-	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		
-		switch segueIdentifier(for: segue) {
-		case .requestDefinitions:
-			if let button = sender as? UIButton {
-				wordToRequest = button.title(for: .normal)
-			}
+
+	@IBSegueAction
+	private func makeEditWordViewController(coder: NSCoder, sender: Any?, segueIdentifier: String?) -> EditWordViewController? {
+		guard
+			let cell = sender as? UICollectionViewCell,
+			let indexPath = collectionView.indexPath(for: cell)
+		else {
+			return nil
+		}
+
+		let editWordContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		editWordContext.parent = vocabularyStore.viewContext
+
+		let word = Word(context: vocabularyStore.viewContext)
+		word.fill(with: entry, viewMode: viewMode, at: indexPath)
+
+		if let objectID = wordCollectionID {
+			word.wordCollection = editWordContext.object(with: objectID) as? WordCollection
+		}
+
+		let editedWord = editWordContext.object(with: word.objectID) as! Word
+
+		return EditWordViewController(coder: coder, context: editWordContext, word: editedWord, viewMode: .create) {
+			[unowned self] (action) in
 			
-		case .addToLearning:
-			let editWordNavController = segue.destination as! UINavigationController
-			let viewController = editWordNavController.viewControllers.first as! CollectWordDataViewController
-			
-			viewController.delegate = self
-			
-			if let indexPath = collectionView?.indexPathsForSelectedItems?.first {
-				viewController.viewData = wordDataForDefinition(at: indexPath)
-				collectionView.deselectItem(at: indexPath, animated: true)
-			}
-			
-			addToLearningButton.isEnabled = false
+			self.handleCreation(of: word, withResultAction: action)
 		}
 	}
-	
-	// MARK: - UICollectionViewDelegate -
-	override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-		if let cell = collectionView.cellForItem(at: indexPath), cell.isSelected {
-			collectionView.deselectItem(at: indexPath, animated: true)
-			addToLearningButton.isEnabled = false
-			return false
+}
+
+// MARK: - Actions
+private extension EntryCollectionViewController {
+
+	@IBAction
+	func switchViewModeAction(_ sender: UISegmentedControl) {
+		viewMode = ViewMode(rawValue: sender.selectedSegmentIndex)!
+	}
+
+	@IBAction
+	func pronounceButtonAction(_ sender: UIButton) {
+		pronounce(entry.headword)
+	}
+}
+
+// MARK: - UICollectionViewDataSource
+extension EntryCollectionViewController {
+
+	override func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return viewData.numberOfSections
+	}
+
+	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return viewData.numberOfItems(inSection: section)
+	}
+
+	override func collectionView(_ collectionView: UICollectionView,
+								 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+		let cell = collectionView.dequeueCell(indexPath: indexPath) as DefinitionCollectionViewCell
+		let definition = viewData.definitionData(for: indexPath)
+		cell.viewData = DefinitionCollectionViewCell.ViewData(definition: definition)
+		cell.seeAlsoButtonTapHandler = { [unowned self] in
+			self.definitionDidRequestHandler(definition.seeAlso)
 		}
-		addToLearningButton.isEnabled = true
-		return true
+		return cell
+	}
+
+	override func collectionView(_ collectionView: UICollectionView,
+								 viewForSupplementaryElementOfKind kind: String,
+								 at indexPath: IndexPath) -> UICollectionReusableView {
+
+		let view = collectionView.dequeueSupplementaryView(of: kind, at: indexPath) as EntryCollectionViewHeader
+		view.viewData = viewData.sectionViewData(for: indexPath.section)
+		view.subtitleButtonTapHandler = { [weak self] in
+			self?.requestDefinitionsForWordFromHeader(at: indexPath)
+		}
+		return view
 	}
 }
 
 // MARK: - Helpers
 private extension EntryCollectionViewController {
+
+	var headerSize: CGSize {
+		let height: CGFloat = viewMode == .definitions ? 25.0 : 50.0
+		return CGSize(width: collectionView.bounds.width, height: height)
+	}
+
+	func initialSetup() {
+		navigationItem.title = entry.headword
+		viewMode =  entry.definitions.isEmpty ? .expressions : .definitions
+
+		setupCollectionView()
+		setupSegmentControl()
+	}
 	
 	func setupCollectionView() {
-		collectionView?.dataSource = dataSource
-		
-		if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-			let width = UIScreen.main.bounds.size.width
-			layout.estimatedItemSize = CGSize(width: width, height: 100)
-		}
+		let width = collectionView.bounds.width * 0.9
+		layout.estimatedItemSize = CGSize(width: width, height: 150.0)
+		layout.itemSize = UICollectionViewFlowLayout.automaticSize
+		layout.headerReferenceSize = headerSize
 	}
-	
+
 	func setupSegmentControl() {
-		if entry.definitions.isEmpty {
-			viewMode = .expressions
-			viewModeSegmentedControl.selectedSegmentIndex = viewMode.rawValue
-			viewModeSegmentedControl.setEnabled(false, forSegmentAt: ViewMode.definitions.rawValue)
-		}
-		if entry.expressions.isEmpty {
-			viewMode = .definitions
-			viewModeSegmentedControl.selectedSegmentIndex = viewMode.rawValue
-			viewModeSegmentedControl.setEnabled(false, forSegmentAt: ViewMode.expressions.rawValue)
-		}
+		viewModeSegmentedControl.selectedSegmentIndex = viewMode.rawValue
+		viewModeSegmentedControl.setEnabled(!entry.definitions.isEmpty, forSegmentAt: ViewMode.definitions.rawValue)
+		viewModeSegmentedControl.setEnabled(!entry.expressions.isEmpty, forSegmentAt: ViewMode.expressions.rawValue)
 	}
-	
+
 	func viewModeDidChange() {
-		addToLearningButton.isEnabled = false
-		
-		dataSource = EntryCollectionViewDataSource(entry: entry, viewMode: viewMode)
-		
-		collectionView?.dataSource = dataSource
+		layout.headerReferenceSize = headerSize
 		collectionView?.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
 		collectionView?.reloadData()
 	}
-	
-	func wordDataForDefinition(at indexPath: IndexPath) -> CollectWordDataViewController.ViewData {
+
+	func handleCreation(of word: Word, withResultAction action: EditWordViewController.ResultAction) {
+		switch action {
+		case .save:
+			vocabularyStore.saveChanges()
+			navigationController?.popViewController(animated: true)
+		case .delete, .cancel:
+			vocabularyStore.deleteObject(word)
+		}
+	}
+
+	func requestDefinitionsForWordFromHeader(at indexPath: IndexPath) {
+		guard viewMode == .expressions else { return }
+
+		let expression = entry.expressions[indexPath.section]
+		definitionDidRequestHandler(expression.seeAlso)
+	}
+}
+
+// MARK: - Types
+private extension EntryCollectionViewController {
+
+	enum ViewMode: Int {
+		case definitions, expressions
+	}
+
+	struct ViewData {
+		typealias SectionIndex = Int
+		typealias HeaderViewData = EntryCollectionViewHeader.ViewData
+
+		private let sections: [HeaderViewData]
+		private let items: [SectionIndex: [Definition]]
+
+		init(entry: Entry, viewMode: EntryCollectionViewController.ViewMode) {
+
+			switch viewMode {
+			case .definitions:
+				sections = [HeaderViewData(entry: entry)]
+				items = [0: entry.definitions]
+
+			case .expressions:
+				var _sections: [HeaderViewData] = []
+				var _items: [SectionIndex: [Definition]] = [:]
+
+				entry.expressions.enumerated().forEach { (index, expression) in
+					_sections.append(HeaderViewData(expression: expression))
+					_items[index] = expression.definitions
+				}
+				sections = _sections
+				items = _items
+			}
+		}
+
+		var numberOfSections: Int { sections.count }
+
+		func numberOfItems(inSection section: Int) -> Int {
+			items[section]?.count ?? 0
+		}
+
+		func sectionViewData(for section: Int) -> HeaderViewData {
+			sections[section]
+		}
+
+		func definitionData(for indexPath: IndexPath) -> Definition {
+			items[indexPath.section]![indexPath.item]
+		}
+	}
+}
+
+// MARK: - EditWordViewController
+fileprivate extension Word {
+
+	func fill(with entry: Entry, viewMode: EntryCollectionViewController.ViewMode, at indexPath: IndexPath) {
 		let headword: String
 		let definition: Definition
-		
+
 		switch viewMode {
 		case .definitions:
 			headword = entry.headword
 			definition = entry.definitions[indexPath.item]
+
 		case .expressions:
 			let expression = entry.expressions[indexPath.section]
-			
 			headword = expression.text
 			definition = expression.definitions[indexPath.item]
 		}
-		
-		return CollectWordDataViewController.ViewData(headword: headword,
-													  sentencePart: entry.sentencePart,
-													  definition: definition.text,
-													  examples: definition.examples,
-													  mode: .create)
-	}
-}
 
-// MARK: - Types -
-extension EntryCollectionViewController {
-	enum ViewMode: Int {
-		case definitions, expressions
-	}
-}
-
-// MARK: - EditWordViewControllerDelegate -
-extension EntryCollectionViewController: CollectWordDataViewControllerDelegate {
-	
-	func collectWordDataViewController(_ viewController: CollectWordDataViewController,
-										didFinishWith action: CollectWordDataViewController.ResultAction) {
-		
-		switch action {
-		case .save:
-			let word = Word(context: vocabularyStore.context)
-			fill(word, with: viewController.viewData)
-			if let objectID = currentWordCollectionInfo?.objectID {
-				word.wordCollection = vocabularyStore.context.object(with: objectID) as? WordCollection
-			}
-			vocabularyStore.saveChanges()
-			navigationController?.popViewController(animated: true)
-			
-		default: break
-		}
-		viewController.dismiss(animated: true)
+		self.headword = headword
+		self.sentencePart = entry.sentencePart
+		self.definition	= definition.text
+		self.examples	= definition.examples
 	}
 }

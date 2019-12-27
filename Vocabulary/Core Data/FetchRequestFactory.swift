@@ -27,6 +27,12 @@ struct FetchRequestFactory {
 		
 		return fetchRequest
 	}
+
+	static func requestForWords(from wordCollection: WordCollection) -> NSFetchRequest<Word> {
+		let parameters: WordsRequestParameters = (nil, wordCollection.objectID, false)
+
+		return requestForWords(with: parameters)
+	}
 	
 	static func predicateForWords(with parameters: WordsRequestParameters) -> NSPredicate {
 		
@@ -47,15 +53,13 @@ struct FetchRequestFactory {
 		return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
 	}
 	
-	static func fetchRequest(for learningType: LearningType) -> NSFetchRequest<Word> {
+	static func fetchRequest(for learningType: LearningType, wordCollectionID: NSManagedObjectID?) -> NSFetchRequest<Word> {
 		let parameters: WordsRequestParameters
 		
-		let objectID = currentWordCollectionInfo?.objectID
-		
 		switch learningType {
-		case .remembering:		parameters = (.unknown, objectID, false)
-		case .repetition:		parameters = (.repeating, objectID, true)
-		case .reminding:		parameters = (.reminding, objectID, true)
+		case .remembering:		parameters = (.unknown, wordCollectionID, false)
+		case .repetition:		parameters = (.repeating, wordCollectionID, true)
+		case .reminding:		parameters = (.reminding, wordCollectionID, true)
 		}
 		
 		let fetchRequest = requestForWords(with: parameters)

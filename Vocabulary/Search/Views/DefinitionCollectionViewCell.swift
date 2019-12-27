@@ -18,40 +18,31 @@ class DefinitionCollectionViewCell: CardCollectionView {
 	@IBOutlet private var examplesLabel: UILabel!
 	@IBOutlet private var seeAlsoStackView: UIStackView!
 	@IBOutlet private var seeAlsoButton: UIButton!
-	@IBOutlet private var widthConstraint: NSLayoutConstraint!
-	
-	override var isSelected: Bool { didSet { updataSelection() } }
-	
+
 	var viewData: ViewData? { didSet { viewDataDidChanged() } }
-	
-	override func awakeFromNib() {
-		super.awakeFromNib()
-		
-		let screeWidth = UIScreen.main.bounds.size.width
-		widthConstraint.constant = screeWidth * widthMultiplier
-	}
-	
-	override func systemLayoutSizeFitting(_ targetSize: CGSize) -> CGSize {
-		return fittingSize
-	}
-	
+
+	var seeAlsoButtonTapHandler: (() -> Void)?
+
 	override func prepareForReuse() {
 		super.prepareForReuse()
-		updataSelection()
+
+		viewData = nil
+		seeAlsoButtonTapHandler = nil
 	}
-	
-	private var fittingSize: CGSize {
-		return contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+
+	override func preferredLayoutAttributesFitting(
+		_ layoutAttributes: UICollectionViewLayoutAttributes
+	) -> UICollectionViewLayoutAttributes {
+
+		setNeedsLayout()
+		layoutIfNeeded()
+		let size = contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+		var frame = layoutAttributes.frame
+		frame.size.height = size.height
+		layoutAttributes.frame = frame
+		return layoutAttributes
 	}
-	
-	private func updataSelection() {
-		if isSelected {
-			select(with: #colorLiteral(red: 0, green: 0.4793452024, blue: 0.9990863204, alpha: 1))
-		} else {
-			deselect()
-		}
-	}
-	
+
 	private func viewDataDidChanged() {
 		guard let viewData = viewData else { return }
 		
@@ -62,11 +53,17 @@ class DefinitionCollectionViewCell: CardCollectionView {
 		seeAlsoStackView.isHidden = viewData.seeAlso.isEmpty
 		seeAlsoButton.setTitle(viewData.seeAlso, for: .normal)
 		
-		setupShadowPath(for: fittingSize)
+		setupShadowPath(for: bounds.size)
+	}
+
+	@IBAction
+	private func seeAlsoButtonTapAction(_ sender: UIButton) {
+		seeAlsoButtonTapHandler?()
 	}
 }
 
 extension DefinitionCollectionViewCell {
+	
 	struct ViewData {
 		let category, definition, examples, seeAlso: String
 		
@@ -77,7 +74,7 @@ extension DefinitionCollectionViewCell {
 			
 			var examplesText = ""
 			if !definition.examples.isEmpty {
-				let examples = definition.examples.prefix(numberOfExamples)
+				let examples = definition.examples.prefix(numberOfExamples).map({ "- " + $0 })
 				examplesText = examples.joined(separator: "\n\n")
 			}
 			self.examples = examplesText

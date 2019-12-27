@@ -16,7 +16,7 @@ final class UnknownWordsViewController: BaseWordsLearningViewController, SegueHa
 	
 	private let maxNumberOfWordsToRemembering = 5
 	
-	// MARK: - Life cicle
+	// MARK: - Life cycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,7 +35,7 @@ final class UnknownWordsViewController: BaseWordsLearningViewController, SegueHa
 	// MARK: - BaseWordsLearningViewController -
 	
 	override func instantiateDataSource(with words: [Word]) -> WordsLearningCollectionViewDataSource {
-		let fetchRequest = FetchRequestFactory.fetchRequest(for: .remembering)
+		let fetchRequest = FetchRequestFactory.fetchRequest(for: .remembering, wordCollectionID: currentWordCollectionID)
 		let words = vocabularyStore.wordsFrom(fetchRequest)
 		return UnknownWordsCollectionViewDataSource(words: words)
 	}

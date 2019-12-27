@@ -7,7 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110306C623AE4C0200118BDC /* EditWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11640A7323ACB6C000D0E5AF /* EditWordViewController.swift */; };
 		11364EE923956FD900A0C334 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 11364EE823956FD900A0C334 /* README.md */; };
+		113F5EE2239AACB30084780B /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113F5EE1239AACB30084780B /* Search.storyboard */; };
+		114875B123A938C2003E5487 /* CurrentWordCollectionModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114875B023A938C2003E5487 /* CurrentWordCollectionModelController.swift */; };
+		114A845323B681F700E5D2AE /* Vocabulary.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 11845A8E23B407A800BCC82C /* Vocabulary.sqlite */; };
+		114A845423B681F700E5D2AE /* Vocabulary.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 11845A8F23B407A800BCC82C /* Vocabulary.sqlite-shm */; };
+		114A845523B681F700E5D2AE /* Vocabulary.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 11845A8D23B407A700BCC82C /* Vocabulary.sqlite-wal */; };
+		115AEB712399BE1500CA2A49 /* LearningModesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AEB702399BE1500CA2A49 /* LearningModesView.swift */; };
+		1168E16E23993DF6008CFA33 /* AppRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168E16D23993DF6008CFA33 /* AppRootViewController.swift */; };
+		1170EB6A23AEB7DA003D1555 /* DismissActionSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170EB6923AEB7DA003D1555 /* DismissActionSheetPresenter.swift */; };
+		1195370E23B1EF5D00808E20 /* WordCollectionsModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1195370D23B1EF5D00808E20 /* WordCollectionsModelController.swift */; };
+		119FA71B239CEA6E001EE177 /* SearchStateModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119FA71A239CEA6E001EE177 /* SearchStateModelController.swift */; };
+		119FA71D239CEA8D001EE177 /* SearchPromptsModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119FA71C239CEA8D001EE177 /* SearchPromptsModelController.swift */; };
+		11A0C2CC23A26CFD00CEE1B0 /* IndexPath+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C2CB23A26CFD00CEE1B0 /* IndexPath+extensions.swift */; };
+		11BE9C2623B2BFCF00688B8B /* ListOfWordsModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BE9C2523B2BFCE00688B8B /* ListOfWordsModelController.swift */; };
+		11F8247623A4141B00A44DA5 /* WordsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F8247523A4141B00A44DA5 /* WordsTabViewController.swift */; };
 		3D04AFC3204C69E200E89E10 /* UiViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D04AFC2204C69E200E89E10 /* UiViewController+extension.swift */; };
 		3D0B98EA20EE73E000D8ABD1 /* FetchRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0B98E920EE73E000D8ABD1 /* FetchRequestFactory.swift */; };
 		3D0C96732286F2E500E9F64E /* Vocabulary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D0C96702286F2E500E9F64E /* Vocabulary.xcdatamodeld */; };
@@ -16,7 +31,7 @@
 		3D11A704207265130004D465 /* LetterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D11A703207265130004D465 /* LetterCollectionViewCell.swift */; };
 		3D14D19B20C821BA005947AF /* LearningKeyboardAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D14D19A20C821BA005947AF /* LearningKeyboardAccessoryView.swift */; };
 		3D16A417210DC0BA00EACBFF /* LearningCardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D16A416210DC0BA00EACBFF /* LearningCardTextField.swift */; };
-		3D17E4002064F3800083DD45 /* LearningTypeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E3FF2064F3800083DD45 /* LearningTypeTitleView.swift */; };
+		3D17E4002064F3800083DD45 /* LearningModeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E3FF2064F3800083DD45 /* LearningModeTitleView.swift */; };
 		3D1B9F1A228D2386003F9679 /* UndoAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1B9F19228D2386003F9679 /* UndoAlertPresenter.swift */; };
 		3D24CF8C20711B8D006EF57B /* SelectHeadwordInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D24CF8B20711B8D006EF57B /* SelectHeadwordInputView.swift */; };
 		3D24CF8E20713229006EF57B /* SelectHeadwordInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D24CF8D20713229006EF57B /* SelectHeadwordInputView.xib */; };
@@ -24,21 +39,17 @@
 		3D264564223295A3007B6728 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D264563223295A3007B6728 /* NibLoadableView.swift */; };
 		3D27AA01209C17DC009C5B95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D27AA00209C17DB009C5B95 /* Assets.xcassets */; };
 		3D2CF0FD20876FF600F955CA /* WordCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2CF0F920876FF600F955CA /* WordCollection.swift */; };
-		3D2D824E21E71F19005E365E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D824D21E71F18005E365E /* HomeViewController.swift */; };
-		3D2EE31321F0A2B800E7AB52 /* SearchDefinitionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EE31221F0A2B800E7AB52 /* SearchDefinitionsTableViewController.swift */; };
+		3D2EE31321F0A2B800E7AB52 /* SearchTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EE31221F0A2B800E7AB52 /* SearchTabViewController.swift */; };
 		3D2EE31521F0A3DD00E7AB52 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EE31421F0A3DD00E7AB52 /* MessageView.swift */; };
 		3D2EE31721F0A3F700E7AB52 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D2EE31621F0A3F700E7AB52 /* MessageView.xib */; };
 		3D2EE31921F0A52F00E7AB52 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D2EE31821F0A52F00E7AB52 /* LoadingView.xib */; };
 		3D2EE31B21F0A54D00E7AB52 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EE31A21F0A54D00E7AB52 /* LoadingView.swift */; };
-		3D2EE32321F0CF5D00E7AB52 /* SearchPromptsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EE32121F0CF5C00E7AB52 /* SearchPromptsDataSource.swift */; };
-		3D2EE32421F0CF5D00E7AB52 /* SearchResultsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EE32221F0CF5D00E7AB52 /* SearchResultsDataSource.swift */; };
+		3D2EE32421F0CF5D00E7AB52 /* SearchResultsModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EE32221F0CF5D00E7AB52 /* SearchResultsModelController.swift */; };
 		3D4100B82271E48200B7EE76 /* InputViewsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4100B72271E48200B7EE76 /* InputViewsConfigurator.swift */; };
-		3D4620E120800C87006C3694 /* CollectWordDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4620E020800C87006C3694 /* CollectWordDataViewController.swift */; };
-		3D4620E320806B73006C3694 /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4620E220806B72006C3694 /* EditTextViewController.swift */; };
-		3D48A05821FCA477002BA8AC /* EntryCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D48A05721FCA477002BA8AC /* EntryCollectionViewDataSource.swift */; };
+		3D4620E320806B73006C3694 /* InputTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4620E220806B72006C3694 /* InputTextViewController.swift */; };
 		3D508A03226F804E00BAFC4A /* LearningProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D508A02226F804E00BAFC4A /* LearningProcessViewController.swift */; };
 		3D516C582042882000B6A715 /* SegueHandlerType+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D516C572042881F00B6A715 /* SegueHandlerType+Protocol.swift */; };
-		3D516C5A2042883400B6A715 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D516C592042883400B6A715 /* HistoryManager.swift */; };
+		3D516C5A2042883400B6A715 /* HistoryModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D516C592042883400B6A715 /* HistoryModelController.swift */; };
 		3D516C6120452F1800B6A715 /* DefinitionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D516C5E20452F1700B6A715 /* DefinitionCollectionViewCell.swift */; };
 		3D516C6A20452F9900B6A715 /* EntriesParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D516C6520452F9800B6A715 /* EntriesParserDelegate.swift */; };
 		3D516C6C20452F9900B6A715 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D516C6720452F9800B6A715 /* Entry.swift */; };
@@ -50,13 +61,7 @@
 		3D5E21D92272044600EE6D34 /* BaseWordsLearningCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E21D82272044600EE6D34 /* BaseWordsLearningCollectionViewDataSource.swift */; };
 		3D5E21DC22721E6700EE6D34 /* AnswersReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E21DB22721E6700EE6D34 /* AnswersReceiver.swift */; };
 		3D6A33E0229C22E600695A0F /* Learning.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D6A33DF229C22E600695A0F /* Learning.storyboard */; };
-		3D6AD8D820EB9B1A004716DF /* WordCollectionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6AD8D720EB9B1A004716DF /* WordCollectionsTableViewController.swift */; };
-		3D71552D2293BCAC00F3E949 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D71552C2293BCAC00F3E949 /* RootViewController.swift */; };
-		3D80F1912281270300B1C66A /* FetchedResultsTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D80F1902281270300B1C66A /* FetchedResultsTableViewControllerDelegate.swift */; };
-		3D80F19322812C5E00B1C66A /* WordCollectionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D80F19222812C5E00B1C66A /* WordCollectionsDataSource.swift */; };
-		3D80F19E2281790A00B1C66A /* Vocabulary.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3D80F19B2281790A00B1C66A /* Vocabulary.sqlite */; };
-		3D80F19F2281790A00B1C66A /* Vocabulary.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 3D80F19C2281790A00B1C66A /* Vocabulary.sqlite-shm */; };
-		3D80F1A02281790A00B1C66A /* Vocabulary.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 3D80F19D2281790A00B1C66A /* Vocabulary.sqlite-wal */; };
+		3D6AD8D820EB9B1A004716DF /* WordCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6AD8D720EB9B1A004716DF /* WordCollectionsViewController.swift */; };
 		3D818941204EF7C5006ECE30 /* ListOfWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D818940204EF7C5006ECE30 /* ListOfWordsViewController.swift */; };
 		3D834C0E227085EC000F6CB7 /* FullCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D834C0D227085EC000F6CB7 /* FullCardCollectionViewCell.swift */; };
 		3D834C102270BDAE000F6CB7 /* BaseWordsLearningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D834C0F2270BDAE000F6CB7 /* BaseWordsLearningViewController.swift */; };
@@ -69,8 +74,7 @@
 		3D9238C921380597002A3598 /* CardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9238C821380597002A3598 /* CardCollectionViewFlowLayout.swift */; };
 		3D976F03221C713E00DB5796 /* UnknownWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D976F02221C713D00DB5796 /* UnknownWordsViewController.swift */; };
 		3DA370E52091E5C70087746C /* VocabularyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA370E42091E5C70087746C /* VocabularyStore.swift */; };
-		3DA538AA205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA538A9205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift */; };
-		3DA61BF5227A55630056EAFA /* DefaultDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA61BF4227A55630056EAFA /* DefaultDataProvider.swift */; };
+		3DA538AA205CBA8A00927D8C /* EntryCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA538A9205CBA8A00927D8C /* EntryCollectionViewHeader.swift */; };
 		3DA9DFB32031D6910098A162 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA9DFB22031D6910098A162 /* AppDelegate.swift */; };
 		3DA9DFC02031D6910098A162 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DA9DFBE2031D6910098A162 /* LaunchScreen.storyboard */; };
 		3DAE5688207A80E800AED999 /* RemindWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAE5687207A80E800AED999 /* RemindWordsViewController.swift */; };
@@ -78,22 +82,36 @@
 		3DAEB0BB20A9A7F80017083F /* CardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAEB0BA20A9A7F80017083F /* CardCollectionView.swift */; };
 		3DB4A0842069F53C00B7DDED /* UIStoryboard+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB4A0832069F53C00B7DDED /* UIStoryboard+extension.swift */; };
 		3DC9E2E12086ECEA0010BE8D /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC9E2E02086ECEA0010BE8D /* Word.swift */; };
-		3DCAEC57227E6EC600535062 /* ChooseLearningStageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCAEC56227E6EC600535062 /* ChooseLearningStageViewController.swift */; };
 		3DCD3E232271FA8C000E7AC8 /* RememberWordsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD3E222271FA8C000E7AC8 /* RememberWordsCollectionViewDataSource.swift */; };
 		3DCF6D1020650BFC00635743 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCF6D0F20650BFC00635743 /* UIView+extension.swift */; };
-		3DCF6D122065DDC300635743 /* LearningTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCF6D112065DDC300635743 /* LearningTypesViewController.swift */; };
-		3DD51A3C215E18ED0099BADB /* ListOfWordsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD51A3B215E18ED0099BADB /* ListOfWordsDataSource.swift */; };
-		3DD6DA8921D96A0500F76B61 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD6DA8821D96A0500F76B61 /* Home.storyboard */; };
+		3DCF6D122065DDC300635743 /* LearningModesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCF6D112065DDC300635743 /* LearningModesViewController.swift */; };
+		3DD6DA8921D96A0500F76B61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD6DA8821D96A0500F76B61 /* Main.storyboard */; };
 		3DDBEE1C20E88240009FADC2 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DDBEE1B20E88240009FADC2 /* Words.storyboard */; };
 		3DDC4885205350290023FDD9 /* UITableView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDC4884205350290023FDD9 /* UITableView+extension.swift */; };
 		3DDC4887205350420023FDD9 /* UICollectionView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDC4886205350420023FDD9 /* UICollectionView+extension.swift */; };
-		3DE8D82E2280B729001A3096 /* Swift+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE8D82D2280B729001A3096 /* Swift+extension.swift */; };
+		3DE8D82E2280B729001A3096 /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE8D82D2280B729001A3096 /* String+extensions.swift */; };
 		3DEB988D227341B6003912FF /* RepeatWordsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB988C227341B6003912FF /* RepeatWordsCollectionViewDataSource.swift */; };
 		3DF8E959206635CE00983E07 /* LearningCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8E958206635CE00983E07 /* LearningCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		11364EE823956FD900A0C334 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		113F5EE1239AACB30084780B /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		114875B023A938C2003E5487 /* CurrentWordCollectionModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWordCollectionModelController.swift; sourceTree = "<group>"; };
+		115AEB702399BE1500CA2A49 /* LearningModesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningModesView.swift; sourceTree = "<group>"; };
+		11640A7323ACB6C000D0E5AF /* EditWordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWordViewController.swift; sourceTree = "<group>"; };
+		1168E16D23993DF6008CFA33 /* AppRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootViewController.swift; sourceTree = "<group>"; };
+		1170EB6923AEB7DA003D1555 /* DismissActionSheetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissActionSheetPresenter.swift; sourceTree = "<group>"; };
+		11845A8D23B407A700BCC82C /* Vocabulary.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vocabulary.sqlite-wal"; sourceTree = "<group>"; };
+		11845A8E23B407A800BCC82C /* Vocabulary.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vocabulary.sqlite; sourceTree = "<group>"; };
+		11845A8F23B407A800BCC82C /* Vocabulary.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vocabulary.sqlite-shm"; sourceTree = "<group>"; };
+		1195370D23B1EF5D00808E20 /* WordCollectionsModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCollectionsModelController.swift; sourceTree = "<group>"; };
+		1195370F23B264B200808E20 /* Vocabulary 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vocabulary 3.xcdatamodel"; sourceTree = "<group>"; };
+		119FA71A239CEA6E001EE177 /* SearchStateModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStateModelController.swift; sourceTree = "<group>"; };
+		119FA71C239CEA8D001EE177 /* SearchPromptsModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPromptsModelController.swift; sourceTree = "<group>"; };
+		11A0C2CB23A26CFD00CEE1B0 /* IndexPath+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexPath+extensions.swift"; sourceTree = "<group>"; };
+		11BE9C2523B2BFCE00688B8B /* ListOfWordsModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfWordsModelController.swift; sourceTree = "<group>"; };
+		11F8247523A4141B00A44DA5 /* WordsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTabViewController.swift; sourceTree = "<group>"; };
 		3D04AFC2204C69E200E89E10 /* UiViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiViewController+extension.swift"; sourceTree = "<group>"; };
 		3D0B98E920EE73E000D8ABD1 /* FetchRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestFactory.swift; sourceTree = "<group>"; };
 		3D0C96712286F2E500E9F64E /* Vocabulary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vocabulary.xcdatamodel; sourceTree = "<group>"; };
@@ -103,7 +121,7 @@
 		3D11A703207265130004D465 /* LetterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterCollectionViewCell.swift; sourceTree = "<group>"; };
 		3D14D19A20C821BA005947AF /* LearningKeyboardAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningKeyboardAccessoryView.swift; sourceTree = "<group>"; };
 		3D16A416210DC0BA00EACBFF /* LearningCardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningCardTextField.swift; sourceTree = "<group>"; };
-		3D17E3FF2064F3800083DD45 /* LearningTypeTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningTypeTitleView.swift; sourceTree = "<group>"; };
+		3D17E3FF2064F3800083DD45 /* LearningModeTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningModeTitleView.swift; sourceTree = "<group>"; };
 		3D1B9F19228D2386003F9679 /* UndoAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoAlertPresenter.swift; sourceTree = "<group>"; };
 		3D24CF8B20711B8D006EF57B /* SelectHeadwordInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHeadwordInputView.swift; sourceTree = "<group>"; };
 		3D24CF8D20713229006EF57B /* SelectHeadwordInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectHeadwordInputView.xib; sourceTree = "<group>"; };
@@ -111,21 +129,17 @@
 		3D264563223295A3007B6728 /* NibLoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
 		3D27AA00209C17DB009C5B95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D2CF0F920876FF600F955CA /* WordCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCollection.swift; sourceTree = "<group>"; };
-		3D2D824D21E71F18005E365E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		3D2EE31221F0A2B800E7AB52 /* SearchDefinitionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDefinitionsTableViewController.swift; sourceTree = "<group>"; };
+		3D2EE31221F0A2B800E7AB52 /* SearchTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTabViewController.swift; sourceTree = "<group>"; };
 		3D2EE31421F0A3DD00E7AB52 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		3D2EE31621F0A3F700E7AB52 /* MessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		3D2EE31821F0A52F00E7AB52 /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		3D2EE31A21F0A54D00E7AB52 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		3D2EE32121F0CF5C00E7AB52 /* SearchPromptsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPromptsDataSource.swift; sourceTree = "<group>"; };
-		3D2EE32221F0CF5D00E7AB52 /* SearchResultsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsDataSource.swift; sourceTree = "<group>"; };
+		3D2EE32221F0CF5D00E7AB52 /* SearchResultsModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsModelController.swift; sourceTree = "<group>"; };
 		3D4100B72271E48200B7EE76 /* InputViewsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewsConfigurator.swift; sourceTree = "<group>"; };
-		3D4620E020800C87006C3694 /* CollectWordDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectWordDataViewController.swift; sourceTree = "<group>"; };
-		3D4620E220806B72006C3694 /* EditTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
-		3D48A05721FCA477002BA8AC /* EntryCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		3D4620E220806B72006C3694 /* InputTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTextViewController.swift; sourceTree = "<group>"; };
 		3D508A02226F804E00BAFC4A /* LearningProcessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningProcessViewController.swift; sourceTree = "<group>"; };
 		3D516C572042881F00B6A715 /* SegueHandlerType+Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SegueHandlerType+Protocol.swift"; sourceTree = "<group>"; };
-		3D516C592042883400B6A715 /* HistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
+		3D516C592042883400B6A715 /* HistoryModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryModelController.swift; sourceTree = "<group>"; };
 		3D516C5E20452F1700B6A715 /* DefinitionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionCollectionViewCell.swift; sourceTree = "<group>"; };
 		3D516C6520452F9800B6A715 /* EntriesParserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntriesParserDelegate.swift; sourceTree = "<group>"; };
 		3D516C6720452F9800B6A715 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
@@ -137,13 +151,7 @@
 		3D5E21D82272044600EE6D34 /* BaseWordsLearningCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWordsLearningCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		3D5E21DB22721E6700EE6D34 /* AnswersReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersReceiver.swift; sourceTree = "<group>"; };
 		3D6A33DF229C22E600695A0F /* Learning.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Learning.storyboard; sourceTree = "<group>"; };
-		3D6AD8D720EB9B1A004716DF /* WordCollectionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCollectionsTableViewController.swift; sourceTree = "<group>"; };
-		3D71552C2293BCAC00F3E949 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		3D80F1902281270300B1C66A /* FetchedResultsTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultsTableViewControllerDelegate.swift; sourceTree = "<group>"; };
-		3D80F19222812C5E00B1C66A /* WordCollectionsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCollectionsDataSource.swift; sourceTree = "<group>"; };
-		3D80F19B2281790A00B1C66A /* Vocabulary.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vocabulary.sqlite; sourceTree = "<group>"; };
-		3D80F19C2281790A00B1C66A /* Vocabulary.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vocabulary.sqlite-shm"; sourceTree = "<group>"; };
-		3D80F19D2281790A00B1C66A /* Vocabulary.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vocabulary.sqlite-wal"; sourceTree = "<group>"; };
+		3D6AD8D720EB9B1A004716DF /* WordCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCollectionsViewController.swift; sourceTree = "<group>"; };
 		3D818940204EF7C5006ECE30 /* ListOfWordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfWordsViewController.swift; sourceTree = "<group>"; };
 		3D834C0D227085EC000F6CB7 /* FullCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		3D834C0F2270BDAE000F6CB7 /* BaseWordsLearningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWordsLearningViewController.swift; sourceTree = "<group>"; };
@@ -156,8 +164,7 @@
 		3D9238C821380597002A3598 /* CardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		3D976F02221C713D00DB5796 /* UnknownWordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownWordsViewController.swift; sourceTree = "<group>"; };
 		3DA370E42091E5C70087746C /* VocabularyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyStore.swift; sourceTree = "<group>"; };
-		3DA538A9205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsCollectionViewHeader.swift; sourceTree = "<group>"; };
-		3DA61BF4227A55630056EAFA /* DefaultDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDataProvider.swift; sourceTree = "<group>"; };
+		3DA538A9205CBA8A00927D8C /* EntryCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCollectionViewHeader.swift; sourceTree = "<group>"; };
 		3DA9DFAF2031D6910098A162 /* Vocabulary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vocabulary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DA9DFB22031D6910098A162 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DA9DFBF2031D6910098A162 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -167,16 +174,14 @@
 		3DAEB0BA20A9A7F80017083F /* CardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionView.swift; sourceTree = "<group>"; };
 		3DB4A0832069F53C00B7DDED /* UIStoryboard+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+extension.swift"; sourceTree = "<group>"; };
 		3DC9E2E02086ECEA0010BE8D /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
-		3DCAEC56227E6EC600535062 /* ChooseLearningStageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLearningStageViewController.swift; sourceTree = "<group>"; };
 		3DCD3E222271FA8C000E7AC8 /* RememberWordsCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberWordsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		3DCF6D0F20650BFC00635743 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
-		3DCF6D112065DDC300635743 /* LearningTypesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningTypesViewController.swift; sourceTree = "<group>"; };
-		3DD51A3B215E18ED0099BADB /* ListOfWordsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfWordsDataSource.swift; sourceTree = "<group>"; };
-		3DD6DA8821D96A0500F76B61 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		3DCF6D112065DDC300635743 /* LearningModesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningModesViewController.swift; sourceTree = "<group>"; };
+		3DD6DA8821D96A0500F76B61 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3DDBEE1B20E88240009FADC2 /* Words.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
 		3DDC4884205350290023FDD9 /* UITableView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+extension.swift"; sourceTree = "<group>"; };
 		3DDC4886205350420023FDD9 /* UICollectionView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+extension.swift"; sourceTree = "<group>"; };
-		3DE8D82D2280B729001A3096 /* Swift+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+extension.swift"; sourceTree = "<group>"; };
+		3DE8D82D2280B729001A3096 /* String+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extensions.swift"; sourceTree = "<group>"; };
 		3DEB988C227341B6003912FF /* RepeatWordsCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatWordsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		3DF8E958206635CE00983E07 /* LearningCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +197,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		114875B223A938CC003E5487 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				114875B023A938C2003E5487 /* CurrentWordCollectionModelController.swift */,
+				1195370D23B1EF5D00808E20 /* WordCollectionsModelController.swift */,
+			);
+			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		1151AF1323A36BA200364533 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3D516C592042883400B6A715 /* HistoryModelController.swift */,
+				119FA71C239CEA8D001EE177 /* SearchPromptsModelController.swift */,
+				3D2EE32221F0CF5D00E7AB52 /* SearchResultsModelController.swift */,
+				119FA71A239CEA6E001EE177 /* SearchStateModelController.swift */,
+			);
+			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		11BE9C2723B2C3CA00688B8B /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				11BE9C2523B2BFCE00688B8B /* ListOfWordsModelController.swift */,
+			);
+			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
 		3D14D19920C7E557005947AF /* Input Answer Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,13 +236,15 @@
 			path = "Input Answer Controllers";
 			sourceTree = "<group>";
 		};
-		3D150FBA229418250060A531 /* Common */ = {
+		3D150FBA229418250060A531 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				3D9143E92297E211008637E5 /* Models */,
+				114875B223A938CC003E5487 /* Model Controllers */,
 				3D150FBB2294182C0060A531 /* View */,
 				3D150FBC229418320060A531 /* View Controllers */,
 			);
-			path = Common;
+			path = General;
 			sourceTree = "<group>";
 		};
 		3D150FBB2294182C0060A531 /* View */ = {
@@ -225,8 +260,10 @@
 		3D150FBC229418320060A531 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D4620E020800C87006C3694 /* CollectWordDataViewController.swift */,
-				3D4620E220806B72006C3694 /* EditTextViewController.swift */,
+				1168E16D23993DF6008CFA33 /* AppRootViewController.swift */,
+				3D6AD8D720EB9B1A004716DF /* WordCollectionsViewController.swift */,
+				11640A7323ACB6C000D0E5AF /* EditWordViewController.swift */,
+				3D4620E220806B72006C3694 /* InputTextViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -246,22 +283,13 @@
 		3D516C72204531E600B6A715 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				3DA61BF4227A55630056EAFA /* DefaultDataProvider.swift */,
-				3DE8D82D2280B729001A3096 /* Swift+extension.swift */,
+				3DE8D82D2280B729001A3096 /* String+extensions.swift */,
+				11A0C2CB23A26CFD00CEE1B0 /* IndexPath+extensions.swift */,
+				1170EB6923AEB7DA003D1555 /* DismissActionSheetPresenter.swift */,
 				3DB2188A2160CCA000F6367A /* Protocols */,
 				3DB218892160CC8700F6367A /* UIKit extensions */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		3D516C74204531EA00B6A715 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				3D9143E92297E211008637E5 /* Models */,
-				3DB218882160CBE400F6367A /* View Controllers */,
-				3D80F19422813A0A00B1C66A /* Data Sources */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		3D516C752045320600B6A715 /* Network */ = {
@@ -289,8 +317,9 @@
 		3D5F383C229BE640006FD548 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				3DD6DA8821D96A0500F76B61 /* Home.storyboard */,
+				3DD6DA8821D96A0500F76B61 /* Main.storyboard */,
 				3D6A33DF229C22E600695A0F /* Learning.storyboard */,
+				113F5EE1239AACB30084780B /* Search.storyboard */,
 				3DDBEE1B20E88240009FADC2 /* Words.storyboard */,
 				3DA9DFBE2031D6910098A162 /* LaunchScreen.storyboard */,
 			);
@@ -305,14 +334,6 @@
 				3DA9DFC12031D6910098A162 /* Info.plist */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		3D80F19422813A0A00B1C66A /* Data Sources */ = {
-			isa = PBXGroup;
-			children = (
-				3D80F19222812C5E00B1C66A /* WordCollectionsDataSource.swift */,
-			);
-			path = "Data Sources";
 			sourceTree = "<group>";
 		};
 		3D81893F204EF785006ECE30 /* Core Data */ = {
@@ -338,9 +359,9 @@
 		3DA61BF3227A54FA0056EAFA /* Default data */ = {
 			isa = PBXGroup;
 			children = (
-				3D80F19B2281790A00B1C66A /* Vocabulary.sqlite */,
-				3D80F19C2281790A00B1C66A /* Vocabulary.sqlite-shm */,
-				3D80F19D2281790A00B1C66A /* Vocabulary.sqlite-wal */,
+				11845A8E23B407A800BCC82C /* Vocabulary.sqlite */,
+				11845A8F23B407A800BCC82C /* Vocabulary.sqlite-shm */,
+				11845A8D23B407A700BCC82C /* Vocabulary.sqlite-wal */,
 			);
 			path = "Default data";
 			sourceTree = "<group>";
@@ -367,11 +388,10 @@
 			children = (
 				3DA9DFB22031D6910098A162 /* AppDelegate.swift */,
 				3D81893F204EF785006ECE30 /* Core Data */,
-				3D516C74204531EA00B6A715 /* Home */,
+				3D150FBA229418250060A531 /* General */,
 				3DD3177F2064A8C300D11F44 /* Learning */,
 				3DD3177E2064A8AA00D11F44 /* Search */,
 				3DD317802064A8D100D11F44 /* Words */,
-				3D150FBA229418250060A531 /* Common */,
 				3D5F383C229BE640006FD548 /* Storyboards */,
 				3D516C72204531E600B6A715 /* Helpers */,
 				3D5F383D229BE7AB006FD548 /* Resources */,
@@ -398,21 +418,10 @@
 			path = "Remember and Repeat";
 			sourceTree = "<group>";
 		};
-		3DB218802160CB0E00F6367A /* Data Sources */ = {
-			isa = PBXGroup;
-			children = (
-				3D516C592042883400B6A715 /* HistoryManager.swift */,
-				3D2EE32121F0CF5C00E7AB52 /* SearchPromptsDataSource.swift */,
-				3D2EE32221F0CF5D00E7AB52 /* SearchResultsDataSource.swift */,
-				3D48A05721FCA477002BA8AC /* EntryCollectionViewDataSource.swift */,
-			);
-			path = "Data Sources";
-			sourceTree = "<group>";
-		};
 		3DB218812160CB1200F6367A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D2EE31221F0A2B800E7AB52 /* SearchDefinitionsTableViewController.swift */,
+				3D2EE31221F0A2B800E7AB52 /* SearchTabViewController.swift */,
 				3D56381F21D1F8D900281C07 /* EntryCollectionViewController.swift */,
 			);
 			path = "View Controllers";
@@ -421,7 +430,7 @@
 		3DB218822160CB1400F6367A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3DA538A9205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift */,
+				3DA538A9205CBA8A00927D8C /* EntryCollectionViewHeader.swift */,
 				3D516C5E20452F1700B6A715 /* DefinitionCollectionViewCell.swift */,
 				3D2EE31A21F0A54D00E7AB52 /* LoadingView.swift */,
 				3D2EE31821F0A52F00E7AB52 /* LoadingView.xib */,
@@ -429,30 +438,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		3DB218832160CBAC00F6367A /* Data Sources */ = {
-			isa = PBXGroup;
-			children = (
-				3DD51A3B215E18ED0099BADB /* ListOfWordsDataSource.swift */,
-			);
-			path = "Data Sources";
-			sourceTree = "<group>";
-		};
 		3DB218842160CBAE00F6367A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				11F8247523A4141B00A44DA5 /* WordsTabViewController.swift */,
 				3D818940204EF7C5006ECE30 /* ListOfWordsViewController.swift */,
-				3DCAEC56227E6EC600535062 /* ChooseLearningStageViewController.swift */,
 				3D52FB032083BE1200CDD6A1 /* WordDestinationsViewController.swift */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		3DB218882160CBE400F6367A /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				3D71552C2293BCAC00F3E949 /* RootViewController.swift */,
-				3D2D824D21E71F18005E365E /* HomeViewController.swift */,
-				3D6AD8D720EB9B1A004716DF /* WordCollectionsTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -476,7 +467,6 @@
 				3D516C572042881F00B6A715 /* SegueHandlerType+Protocol.swift */,
 				3D516C6F20452FCC00B6A715 /* IdentifiableByString+protocol.swift */,
 				3D264563223295A3007B6728 /* NibLoadableView.swift */,
-				3D80F1902281270300B1C66A /* FetchedResultsTableViewControllerDelegate.swift */,
 				3D1B9F19228D2386003F9679 /* UndoAlertPresenter.swift */,
 			);
 			path = Protocols;
@@ -485,9 +475,9 @@
 		3DD3177E2064A8AA00D11F44 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				1151AF1323A36BA200364533 /* Model Controllers */,
 				3DB218822160CB1400F6367A /* Views */,
 				3DB218812160CB1200F6367A /* View Controllers */,
-				3DB218802160CB0E00F6367A /* Data Sources */,
 				3D516C752045320600B6A715 /* Network */,
 			);
 			path = Search;
@@ -507,8 +497,8 @@
 		3DD317802064A8D100D11F44 /* Words */ = {
 			isa = PBXGroup;
 			children = (
+				11BE9C2723B2C3CA00688B8B /* Model Controllers */,
 				3DB218842160CBAE00F6367A /* View Controllers */,
-				3DB218832160CBAC00F6367A /* Data Sources */,
 			);
 			path = Words;
 			sourceTree = "<group>";
@@ -516,7 +506,7 @@
 		3DDF4C082160C88F00FA9CD6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3DCF6D112065DDC300635743 /* LearningTypesViewController.swift */,
+				3DCF6D112065DDC300635743 /* LearningModesViewController.swift */,
 				3D834C0F2270BDAE000F6CB7 /* BaseWordsLearningViewController.swift */,
 				3D976F02221C713D00DB5796 /* UnknownWordsViewController.swift */,
 				3D508A02226F804E00BAFC4A /* LearningProcessViewController.swift */,
@@ -529,7 +519,8 @@
 		3DDF4C092160C89D00FA9CD6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3D17E3FF2064F3800083DD45 /* LearningTypeTitleView.swift */,
+				115AEB702399BE1500CA2A49 /* LearningModesView.swift */,
+				3D17E3FF2064F3800083DD45 /* LearningModeTitleView.swift */,
 				3D834C0D227085EC000F6CB7 /* FullCardCollectionViewCell.swift */,
 				3DAE5689207ACA8200AED999 /* RemindWordCollectionViewCell.swift */,
 				3DB218782160C97800F6367A /* Remember and Repeat */,
@@ -600,16 +591,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D2EE31721F0A3F700E7AB52 /* MessageView.xib in Resources */,
-				3D80F19E2281790A00B1C66A /* Vocabulary.sqlite in Resources */,
-				3D80F1A02281790A00B1C66A /* Vocabulary.sqlite-wal in Resources */,
 				3DDBEE1C20E88240009FADC2 /* Words.storyboard in Resources */,
+				113F5EE2239AACB30084780B /* Search.storyboard in Resources */,
 				11364EE923956FD900A0C334 /* README.md in Resources */,
-				3D80F19F2281790A00B1C66A /* Vocabulary.sqlite-shm in Resources */,
 				3DA9DFC02031D6910098A162 /* LaunchScreen.storyboard in Resources */,
 				3D24CF8E20713229006EF57B /* SelectHeadwordInputView.xib in Resources */,
-				3DD6DA8921D96A0500F76B61 /* Home.storyboard in Resources */,
+				114A845523B681F700E5D2AE /* Vocabulary.sqlite-wal in Resources */,
+				3DD6DA8921D96A0500F76B61 /* Main.storyboard in Resources */,
+				114A845423B681F700E5D2AE /* Vocabulary.sqlite-shm in Resources */,
 				3D2EE31921F0A52F00E7AB52 /* LoadingView.xib in Resources */,
 				3D11A702207263FC0004D465 /* LetterCollectionViewCell.xib in Resources */,
+				114A845323B681F700E5D2AE /* Vocabulary.sqlite in Resources */,
 				3D27AA01209C17DC009C5B95 /* Assets.xcassets in Resources */,
 				3D6A33E0229C22E600695A0F /* Learning.storyboard in Resources */,
 			);
@@ -624,72 +616,73 @@
 			files = (
 				3D9238C921380597002A3598 /* CardCollectionViewFlowLayout.swift in Sources */,
 				3D16A417210DC0BA00EACBFF /* LearningCardTextField.swift in Sources */,
-				3D2D824E21E71F19005E365E /* HomeViewController.swift in Sources */,
 				3DA370E52091E5C70087746C /* VocabularyStore.swift in Sources */,
 				3D11A704207265130004D465 /* LetterCollectionViewCell.swift in Sources */,
 				3D508A03226F804E00BAFC4A /* LearningProcessViewController.swift in Sources */,
+				11F8247623A4141B00A44DA5 /* WordsTabViewController.swift in Sources */,
 				3D87C184207EBB5700BBEAE6 /* MessageCollectionViewHeader.swift in Sources */,
 				3D5E21DC22721E6700EE6D34 /* AnswersReceiver.swift in Sources */,
 				3D11A7002072545B0004D465 /* ConstructHeadwordController.swift in Sources */,
 				3D516C582042882000B6A715 /* SegueHandlerType+Protocol.swift in Sources */,
-				3D71552D2293BCAC00F3E949 /* RootViewController.swift in Sources */,
+				110306C623AE4C0200118BDC /* EditWordViewController.swift in Sources */,
+				119FA71B239CEA6E001EE177 /* SearchStateModelController.swift in Sources */,
 				3D834C102270BDAE000F6CB7 /* BaseWordsLearningViewController.swift in Sources */,
-				3DD51A3C215E18ED0099BADB /* ListOfWordsDataSource.swift in Sources */,
-				3DA538AA205CBA8A00927D8C /* DefinitionsCollectionViewHeader.swift in Sources */,
-				3D17E4002064F3800083DD45 /* LearningTypeTitleView.swift in Sources */,
+				3DA538AA205CBA8A00927D8C /* EntryCollectionViewHeader.swift in Sources */,
+				3D17E4002064F3800083DD45 /* LearningModeTitleView.swift in Sources */,
 				3D834C142270DF80000F6CB7 /* RemindWordsCollectionViewDataSource.swift in Sources */,
-				3DA61BF5227A55630056EAFA /* DefaultDataProvider.swift in Sources */,
 				3D56382021D1F8D900281C07 /* EntryCollectionViewController.swift in Sources */,
+				115AEB712399BE1500CA2A49 /* LearningModesView.swift in Sources */,
+				114875B123A938C2003E5487 /* CurrentWordCollectionModelController.swift in Sources */,
 				3D834C122270D83B000F6CB7 /* UnknownWordsCollectionViewDataSource.swift in Sources */,
-				3D2EE31321F0A2B800E7AB52 /* SearchDefinitionsTableViewController.swift in Sources */,
+				3D2EE31321F0A2B800E7AB52 /* SearchTabViewController.swift in Sources */,
 				3D52FB042083BE1200CDD6A1 /* WordDestinationsViewController.swift in Sources */,
 				3D516C6C20452F9900B6A715 /* Entry.swift in Sources */,
-				3D48A05821FCA477002BA8AC /* EntryCollectionViewDataSource.swift in Sources */,
 				3DC9E2E12086ECEA0010BE8D /* Word.swift in Sources */,
+				1195370E23B1EF5D00808E20 /* WordCollectionsModelController.swift in Sources */,
 				3D04AFC3204C69E200E89E10 /* UiViewController+extension.swift in Sources */,
+				11A0C2CC23A26CFD00CEE1B0 /* IndexPath+extensions.swift in Sources */,
 				3D24CF8C20711B8D006EF57B /* SelectHeadwordInputView.swift in Sources */,
 				3DCF6D1020650BFC00635743 /* UIView+extension.swift in Sources */,
-				3DCAEC57227E6EC600535062 /* ChooseLearningStageViewController.swift in Sources */,
 				3DDC4887205350420023FDD9 /* UICollectionView+extension.swift in Sources */,
-				3D4620E320806B73006C3694 /* EditTextViewController.swift in Sources */,
+				3D4620E320806B73006C3694 /* InputTextViewController.swift in Sources */,
 				3D976F03221C713E00DB5796 /* UnknownWordsViewController.swift in Sources */,
 				3DB4A0842069F53C00B7DDED /* UIStoryboard+extension.swift in Sources */,
 				3DEB988D227341B6003912FF /* RepeatWordsCollectionViewDataSource.swift in Sources */,
 				3D834C0E227085EC000F6CB7 /* FullCardCollectionViewCell.swift in Sources */,
-				3D80F1912281270300B1C66A /* FetchedResultsTableViewControllerDelegate.swift in Sources */,
 				3D264564223295A3007B6728 /* NibLoadableView.swift in Sources */,
 				3D87C180207EB61900BBEAE6 /* RememberingCompletionCollectionViewCell.swift in Sources */,
 				3D2EE31521F0A3DD00E7AB52 /* MessageView.swift in Sources */,
 				3D2CF0FD20876FF600F955CA /* WordCollection.swift in Sources */,
-				3D516C5A2042883400B6A715 /* HistoryManager.swift in Sources */,
+				3D516C5A2042883400B6A715 /* HistoryModelController.swift in Sources */,
 				3DF8E959206635CE00983E07 /* LearningCollectionViewCell.swift in Sources */,
 				3D516C6E20452F9900B6A715 /* EntriesLoader.swift in Sources */,
 				3D0B98EA20EE73E000D8ABD1 /* FetchRequestFactory.swift in Sources */,
-				3DE8D82E2280B729001A3096 /* Swift+extension.swift in Sources */,
-				3D80F19322812C5E00B1C66A /* WordCollectionsDataSource.swift in Sources */,
+				3DE8D82E2280B729001A3096 /* String+extensions.swift in Sources */,
 				3DAEB0BB20A9A7F80017083F /* CardCollectionView.swift in Sources */,
+				1168E16E23993DF6008CFA33 /* AppRootViewController.swift in Sources */,
 				3D87C188207EBCBD00BBEAE6 /* RememberingCompletionViewController.swift in Sources */,
 				3D14D19B20C821BA005947AF /* LearningKeyboardAccessoryView.swift in Sources */,
-				3D2EE32321F0CF5D00E7AB52 /* SearchPromptsDataSource.swift in Sources */,
+				119FA71D239CEA8D001EE177 /* SearchPromptsModelController.swift in Sources */,
 				3DAE568A207ACA8200AED999 /* RemindWordCollectionViewCell.swift in Sources */,
+				1170EB6A23AEB7DA003D1555 /* DismissActionSheetPresenter.swift in Sources */,
 				3D1B9F1A228D2386003F9679 /* UndoAlertPresenter.swift in Sources */,
-				3DCF6D122065DDC300635743 /* LearningTypesViewController.swift in Sources */,
+				3DCF6D122065DDC300635743 /* LearningModesViewController.swift in Sources */,
 				3D2EE31B21F0A54D00E7AB52 /* LoadingView.swift in Sources */,
 				3DDC4885205350290023FDD9 /* UITableView+extension.swift in Sources */,
 				3D52418121897DF7000FB1F7 /* UITableViewHeaderFooterView+extension.swift in Sources */,
 				3D516C6120452F1800B6A715 /* DefinitionCollectionViewCell.swift in Sources */,
 				3D5E21D92272044600EE6D34 /* BaseWordsLearningCollectionViewDataSource.swift in Sources */,
 				3D0C96732286F2E500E9F64E /* Vocabulary.xcdatamodeld in Sources */,
-				3D4620E120800C87006C3694 /* CollectWordDataViewController.swift in Sources */,
 				3DAE5688207A80E800AED999 /* RemindWordsViewController.swift in Sources */,
 				3D516C7020452FCC00B6A715 /* IdentifiableByString+protocol.swift in Sources */,
 				3D516C6A20452F9900B6A715 /* EntriesParserDelegate.swift in Sources */,
 				3DCD3E232271FA8C000E7AC8 /* RememberWordsCollectionViewDataSource.swift in Sources */,
+				11BE9C2623B2BFCF00688B8B /* ListOfWordsModelController.swift in Sources */,
 				3DA9DFB32031D6910098A162 /* AppDelegate.swift in Sources */,
 				3D4100B82271E48200B7EE76 /* InputViewsConfigurator.swift in Sources */,
-				3D2EE32421F0CF5D00E7AB52 /* SearchResultsDataSource.swift in Sources */,
+				3D2EE32421F0CF5D00E7AB52 /* SearchResultsModelController.swift in Sources */,
 				3D818941204EF7C5006ECE30 /* ListOfWordsViewController.swift in Sources */,
-				3D6AD8D820EB9B1A004716DF /* WordCollectionsTableViewController.swift in Sources */,
+				3D6AD8D820EB9B1A004716DF /* WordCollectionsViewController.swift in Sources */,
 				3D9143EB2297E21D008637E5 /* WordCollectionInfo.swift in Sources */,
 				3D24CF9120715E61006EF57B /* SelectHeadwordViewProvider.swift in Sources */,
 			);
@@ -759,7 +752,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -812,7 +805,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -827,7 +820,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A76X2FNZ47;
 				INFOPLIST_FILE = "$(SRCROOT)/Vocabulary/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = my.app.Vocabulary;
@@ -844,7 +837,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A76X2FNZ47;
 				INFOPLIST_FILE = "$(SRCROOT)/Vocabulary/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = my.app.Vocabulary;
@@ -881,10 +874,11 @@
 		3D0C96702286F2E500E9F64E /* Vocabulary.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				1195370F23B264B200808E20 /* Vocabulary 3.xcdatamodel */,
 				3D0C96712286F2E500E9F64E /* Vocabulary.xcdatamodel */,
 				3D0C96722286F2E500E9F64E /* Vocabulary 2.xcdatamodel */,
 			);
-			currentVersion = 3D0C96722286F2E500E9F64E /* Vocabulary 2.xcdatamodel */;
+			currentVersion = 1195370F23B264B200808E20 /* Vocabulary 3.xcdatamodel */;
 			path = Vocabulary.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

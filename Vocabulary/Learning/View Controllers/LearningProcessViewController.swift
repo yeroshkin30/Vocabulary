@@ -23,7 +23,7 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 	
 	// MARK: - Private properties
 	
-	private lazy var textFieldConfigurator = InputViewsConfigurator(context: vocabularyStore.context)
+	private lazy var textFieldConfigurator = InputViewsConfigurator(context: vocabularyStore.viewContext)
 	
 	private lazy var answersHandler: AnswersReceiver = {
 		let handler = AnswersReceiver(textFieldConfigurator: textFieldConfigurator)
@@ -31,12 +31,12 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 		return handler
 	}()
 	
-	private var currentAnswerCorrenctness: AnswerCorrectness?
+	private var currentAnswerCorrectness: AnswerCorrectness?
 	
 	private lazy var endRepetitionMessageView: MessageView = {
 		let view: MessageView = MessageView.instantiate()
 		view.message = MessageView.Message(
-			title: "Great work!", text: "You repeated all available words.", actionTitle: "Back",
+			title: "Great work!", text: "You have repeated all available words.", actionTitle: "Back",
 			actionClosure: { [weak self] in
 				self?.navigationController?.popViewController(animated: true)
 		})
@@ -49,7 +49,7 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 		showCloseButtonActionSheet()
 	}
 	
-	// MARK: - Life cicle
+	// MARK: - Life cycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -61,7 +61,6 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 		super.viewWillDisappear(animated)
 		
 		currentCell?.answerTextField.resignFirstResponder()
-		NotificationCenter.default.removeObserver(self)
 	}
 	
 	override var textInputContextIdentifier: String? {
@@ -95,8 +94,9 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
 		guard segueIdentifier(for: segue) == .completeRemembering,
-			case .remembering(let words) = learningMode
-			else { return }
+			case .remembering(let words) = learningMode	else {
+				return
+		}
 		
 		let viewController = segue.destination as! RememberingCompletionViewController
 		viewController.learnedWords = words
@@ -128,8 +128,12 @@ private extension LearningProcessViewController {
 		
 		let requiredInset = view.frame.height - endFrame.origin.y
 		
-		if additionalSafeAreaInsets.bottom != requiredInset {
+		if requiredInset != 0,
+			additionalSafeAreaInsets.bottom != requiredInset {
+			
 			additionalSafeAreaInsets.bottom = requiredInset
+			collectionView.setNeedsLayout()
+			collectionView.layoutIfNeeded()
 		}
 	}
 	
@@ -204,7 +208,7 @@ extension LearningProcessViewController: LearningWordsAnswersHandlerDelegate {
 	func answersReceiver(_ handler: AnswersReceiver,
 						didAcceptAnswer answer: AnswerCorrectness) {
 		
-		currentAnswerCorrenctness = answer
+		currentAnswerCorrectness = answer
 		currentCell?.selectToAnswer(answer)
 		
 		if autoPronounceButton.isSelected {
@@ -221,7 +225,7 @@ extension LearningProcessViewController: LearningWordsAnswersHandlerDelegate {
 	}
 	
 	func answersReceiverReadyForNextQuestion(_ handler: AnswersReceiver) {
-		guard let answer = currentAnswerCorrenctness else { return }
+		guard let answer = currentAnswerCorrectness else { return }
 		
 		switch answer {
 		case .correct:
