@@ -159,6 +159,7 @@ private extension LearningProcessViewController {
 			
 		case .repetition(_):
 			collectionView.backgroundView = endRepetitionMessageView
+			additionalSafeAreaInsets.bottom = 0
 		}
 	}
 	

@@ -149,9 +149,9 @@ private extension WordCollectionsViewController {
 		let wordCollection = wordCollectionsModelController.wordCollectionAt(indexPath)
 		
 		let title = "Delete \"\(wordCollection.name)\" collection?"
-		
+
 		let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-		
+
 		alert.addAction(UIAlertAction(title: "Collection and Words", style: .destructive) { (_) in
 			self.wordCollectionsModelController.deleteWordCollection(at: indexPath)
 		})
