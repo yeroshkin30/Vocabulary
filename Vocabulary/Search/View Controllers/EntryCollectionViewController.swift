@@ -91,7 +91,7 @@ class EntryCollectionViewController: UICollectionViewController, SegueHandlerTyp
 		word.fill(with: entry, viewMode: viewMode, at: indexPath)
 
 		if let objectID = wordCollectionID {
-			word.wordCollection = editWordContext.object(with: objectID) as? WordCollection
+			word.wordCollection = vocabularyStore.viewContext.object(with: objectID) as? WordCollection
 		}
 
 		let editedWord = editWordContext.object(with: word.objectID) as! Word
