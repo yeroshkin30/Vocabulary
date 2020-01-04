@@ -42,6 +42,7 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	
 	private let searchController = UISearchController(searchResultsController: nil)
 
+	private var isNeedToPresentToolBar = true
 	private var isAllCellsSelected = false
 
 	// MARK: - Life Cycle -
@@ -160,6 +161,9 @@ private extension ListOfWordsViewController {
 		listOfWordsModelController.dataChangesHandler = { [unowned self] changes in
 			self.tableView.handleChanges(changes)
 		}
+
+        tableView.allowsMultipleSelection = false
+        tableView.allowsMultipleSelectionDuringEditing = true
 		tableView.dataSource = listOfWordsModelController
 
 		configureNavigationBar()
@@ -191,7 +195,9 @@ private extension ListOfWordsViewController {
 		deleteButton.isEnabled = hasSelectedRows
 		selectAllButton.title = isAllCellsSelected ? "Deselect All" : "Select All"
 
-		navigationController?.setToolbarHidden(!isEditing, animated: true)
+		if isNeedToPresentToolBar {
+			navigationController?.setToolbarHidden(!isEditing, animated: true)
+		}
 	}
 
 	// MARK: - Cells Selection -
@@ -249,8 +255,14 @@ extension ListOfWordsViewController {
 
 	// Default implementation of showing swipe actions will turn tableView in editing state.
 	// In order to prevent it you need to override willBeginEditingRowAt/didEndEditingRowAt delegate's methods
-	override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) { }
-	override func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) { }
+	override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+		isNeedToPresentToolBar = false
+		super.tableView(tableView, willBeginEditingRowAt: indexPath)
+	}
+	override func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+		isNeedToPresentToolBar = true
+		super.tableView(tableView, didEndEditingRowAt: indexPath)
+	}
 	
 	override func tableView(
 		_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
@@ -265,8 +277,19 @@ extension ListOfWordsViewController {
 			self.listOfWordsModelController.deleteWords(at: [indexPath])
 			handler(true)
 		}
-		
+
 		return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+	}
+
+	override func tableView(
+		_ tableView: UITableView,
+		shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath
+	) -> Bool {
+		return true
+	}
+
+	override func tableView(_ tableView: UITableView, didBeginMultipleSelectionInteractionAt indexPath: IndexPath) {
+        self.setEditing(true, animated: true)
 	}
 }
 

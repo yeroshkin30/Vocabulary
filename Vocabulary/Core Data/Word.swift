@@ -22,7 +22,8 @@ public class Word: NSManagedObject {
 		get { return LearningStage(rawValue: learningStageValue)! }
 		set { assignLearningStage(newValue)	}
 	}
-	
+
+	//Additional property to determine stages of repeating learning stage
 	var learningStageDetail: LearningStageDetail {
 		get {
 			switch learningStage {
@@ -59,25 +60,26 @@ extension Word {
 	@NSManaged public var wordCollection: WordCollection?
 }
 
+// MARK: - Types
 extension Word {
-	
+
 	enum LearningStage: Int16, CaseIterable {
-		
+
 		case unknown, repeating, reminding, learned
-		
+
 		static let count = 4
-		
+
 		static var names: [String] {
 			return ["Unknown", "Repeating", "Reminding", "Learned"]
 		}
-		
+
 		var name: String { return LearningStage.names[Int(self.rawValue)] }
 	}
-	
+
 	enum LearningStageDetail {
-		
+
 		case none, select, construct, input, numberOfReminders(Int)
-		
+
 		fileprivate init(value: Int16) {
 			switch value {
 			case 0:		self = .select
@@ -86,7 +88,7 @@ extension Word {
 			default:	self = .none
 			}
 		}
-		
+
 		fileprivate var value: Int16 {
 			switch self {
 			case .none, .select:	return 0
@@ -97,7 +99,44 @@ extension Word {
 			}
 		}
 	}
-	
+}
+
+// MARK: - Public methods
+extension Word {
+
+	func increaseLearningStage() {
+		switch (learningStage, learningStageDetail) {
+		case (.unknown, _):				assignLearningStage(.repeating)
+		case (.repeating, .select):		learningStageDetail = .construct
+		case (.repeating, .construct):	learningStageDetail = .input
+		case (.repeating, .input):		assignLearningStage(.reminding)
+
+		case (.reminding, .numberOfReminders(let number)):
+			learningStageDetail = .numberOfReminders(number + 1)
+
+		default:
+			break
+		}
+	}
+
+	func decreaseLearningStage() {
+
+		switch (learningStage, learningStageDetail) {
+		case (.repeating, .construct):		learningStageDetail = .select
+		case (.repeating, .input):			learningStageDetail = .construct
+
+		case (.reminding, .numberOfReminders(let number)) where number > 0:
+			learningStageDetail = .numberOfReminders(0)
+
+		default:
+			assignLearningStage(.unknown)
+		}
+	}
+}
+
+// MARK: - Private methods
+private extension Word {
+
 	private func assignLearningStage(_ stage: Word.LearningStage) {
 		switch stage {
 		case .unknown, .learned:	learningStageDetail = .none
@@ -106,35 +145,6 @@ extension Word {
 		}
 		learningStageValue = stage.rawValue
 		updateNextTrainingDate()
-	}
-	
-	func increaseLearningStage() {
-		switch (learningStage, learningStageDetail) {
-		case (.unknown, _):				assignLearningStage(.repeating)
-		case (.repeating, .select):		learningStageDetail = .construct
-		case (.repeating, .construct):	learningStageDetail = .input
-		case (.repeating, .input):		assignLearningStage(.reminding)
-			
-		case (.reminding, .numberOfReminders(let number)):
-			learningStageDetail = .numberOfReminders(number + 1)
-			
-		default:
-			break
-		}
-	}
-	
-	func decreaseLearningStage() {
-		
-		switch (learningStage, learningStageDetail) {
-		case (.repeating, .construct):		learningStageDetail = .select
-		case (.repeating, .input):			learningStageDetail = .construct
-			
-		case (.reminding, .numberOfReminders(let number)) where number > 0:
-			learningStageDetail = .numberOfReminders(0)
-			
-		default:
-			assignLearningStage(.unknown)
-		}
 	}
 	
 	private func updateNextTrainingDate() {
@@ -153,9 +163,7 @@ extension Word {
 		case .learned:				return
 		}
 		
-		let dateComponents = DateComponents(calendar: calendar,
-											day: numberOfDays,
-											second: shuffleFactor)
+		let dateComponents = DateComponents(calendar: calendar, day: numberOfDays, second: shuffleFactor)
 		
 		nextTrainingDate = calendar.date(byAdding: dateComponents, to: Date())
 	}
