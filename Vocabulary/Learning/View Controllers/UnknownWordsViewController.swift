@@ -35,7 +35,7 @@ final class UnknownWordsViewController: BaseWordsLearningViewController, SegueHa
 	// MARK: - BaseWordsLearningViewController -
 	
 	override func instantiateDataSource(with words: [Word]) -> WordsLearningCollectionViewDataSource {
-		let fetchRequest = FetchRequestFactory.fetchRequest(for: .remembering, wordCollectionID: currentWordCollectionID)
+		let fetchRequest = WordFetchRequestFactory.fetchRequest(for: .remembering, wordCollectionID: currentWordCollectionID)
 		let words = vocabularyStore.wordsFrom(fetchRequest)
 		return UnknownWordsCollectionViewDataSource(words: words)
 	}

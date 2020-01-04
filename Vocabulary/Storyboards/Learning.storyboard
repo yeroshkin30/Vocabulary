@@ -129,7 +129,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <segue destination="jhV-t9-YKw" kind="show" identifier="remindWord" id="BzY-wa-tRf"/>
+                                                            <segue destination="jhV-t9-YKw" kind="show" identifier="reminding" id="BzY-wa-tRf"/>
                                                         </connections>
                                                     </button>
                                                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wig-jR-hvF">

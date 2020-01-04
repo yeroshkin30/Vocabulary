@@ -31,7 +31,7 @@ final class RemindWordsViewController: BaseWordsLearningViewController {
 	// MARK: - BaseWordsLearningViewController -
 	
 	override func instantiateDataSource(with words: [Word]) -> WordsLearningCollectionViewDataSource {
-		let fetchRequest = FetchRequestFactory.fetchRequest(for: .reminding, wordCollectionID: currentWordCollectionID)
+		let fetchRequest = WordFetchRequestFactory.fetchRequest(for: .reminding, wordCollectionID: currentWordCollectionID)
 		let words = vocabularyStore.wordsFrom(fetchRequest)
 		return RemindWordsCollectionViewDataSource(words: words)
 	}

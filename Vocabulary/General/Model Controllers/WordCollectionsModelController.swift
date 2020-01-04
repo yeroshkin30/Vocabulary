@@ -121,10 +121,10 @@ extension WordCollectionsModelController: UITableViewDataSource {
 	}
 
 	private func configureCell(_ cell: UITableViewCell, for wordCollection: WordCollection) {
-		let allWordsFetchRequest = FetchRequestFactory.requestForWords(from: wordCollection)
+		let allWordsFetchRequest = WordFetchRequestFactory.requestForWords(from: wordCollection)
 
 		let parameters: WordsRequestParameters = (.unknown, wordCollection.objectID, false)
-		let unknownFetchRequest = FetchRequestFactory.requestForWords(with: parameters)
+		let unknownFetchRequest = WordFetchRequestFactory.requestForWords(with: parameters)
 
 
 		let allWordsNumber 		= vocabularyStore.numberOfWordsFrom(allWordsFetchRequest)

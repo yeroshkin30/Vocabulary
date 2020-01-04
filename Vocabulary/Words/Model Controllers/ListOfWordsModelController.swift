@@ -61,7 +61,7 @@ class ListOfWordsModelController: NSObject {
 	func filterWordsBy(searchQuery query: String?) {
 		let parameters: WordsRequestParameters = (learningStage, currentWordCollectionID, false)
 
-		var predicate = FetchRequestFactory.predicateForWords(with: parameters)
+		var predicate = WordFetchRequestFactory.predicateForWords(with: parameters)
 
 		if let query = query {
 			let format = "\(#keyPath(Word.headword)) BEGINSWITH[cd] %@"
@@ -79,7 +79,7 @@ class ListOfWordsModelController: NSObject {
 private extension ListOfWordsModelController {
 
 	func initializeFetchedResultsController() -> NSFetchedResultsController<Word> {
-		let request = FetchRequestFactory.requestForWords(with: (learningStage, currentWordCollectionID, false))
+		let request = WordFetchRequestFactory.requestForWords(with: (learningStage, currentWordCollectionID, false))
 		request.sortDescriptors = [
 			NSSortDescriptor(key: #keyPath(Word.dateCreated), ascending: false)
 		]

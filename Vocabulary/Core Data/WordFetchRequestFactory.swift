@@ -1,5 +1,5 @@
 //
-//	FetchRequestFactory.swift
+//	WordFetchRequestFactory.swift
 //	Vocabulary
 //
 //	Created by Alexander Baraley on 7/5/18.
@@ -12,11 +12,7 @@ typealias WordsRequestParameters = (
 	learningStage: Word.LearningStage?, wordCollectionID: NSManagedObjectID?, regardNextTrainingDate: Bool
 )
 
-struct FetchRequestFactory {
-	
-	enum LearningType {
-		case remembering, repetition, reminding
-	}
+struct WordFetchRequestFactory {
 	
 	static func requestForWords(with parameters: WordsRequestParameters) -> NSFetchRequest<Word> {
 		let fetchRequest = Word.createFetchRequest()
@@ -53,7 +49,11 @@ struct FetchRequestFactory {
 		return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
 	}
 	
-	static func fetchRequest(for learningType: LearningType, wordCollectionID: NSManagedObjectID?) -> NSFetchRequest<Word> {
+	static func fetchRequest(
+		for learningType: LearningMode,
+		wordCollectionID: NSManagedObjectID?
+	) -> NSFetchRequest<Word> {
+		
 		let parameters: WordsRequestParameters
 		
 		switch learningType {

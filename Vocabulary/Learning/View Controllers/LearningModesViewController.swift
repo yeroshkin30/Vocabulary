@@ -40,7 +40,7 @@ class LearningModesViewController: UIViewController, SegueHandlerType {
 	// MARK: - Navigation
 	
 	enum SegueIdentifier: String {
-		case remembering, repetition, remindWord
+		case remembering, repetition, reminding
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -56,12 +56,12 @@ class LearningModesViewController: UIViewController, SegueHandlerType {
 			viewController.vocabularyStore = vocabularyStore
 			viewController.currentWordCollectionID = currentWordCollectionID
 			
-			let fetchRequest = FetchRequestFactory.fetchRequest(for: .repetition, wordCollectionID: currentWordCollectionID)
+			let fetchRequest = WordFetchRequestFactory.fetchRequest(for: .repetition, wordCollectionID: currentWordCollectionID)
 			let words = vocabularyStore.wordsFrom(fetchRequest)
 			
 			viewController.learningMode = .repetition(words)
 			
-		case .remindWord:
+		case .reminding:
 			let viewController = segue.destination as! RemindWordsViewController
 			viewController.vocabularyStore = vocabularyStore
 			viewController.currentWordCollectionID = currentWordCollectionID
@@ -85,13 +85,13 @@ private extension LearningModesViewController {
 	func updateLearningModesView() {
 
 		let rememberWordsNumber = vocabularyStore.numberOfWordsFrom(
-			FetchRequestFactory.fetchRequest(for: .remembering, wordCollectionID: currentWordCollectionID)
+			WordFetchRequestFactory.fetchRequest(for: .remembering, wordCollectionID: currentWordCollectionID)
 		)
 		let repeatWordsNumber = vocabularyStore.numberOfWordsFrom(
-			FetchRequestFactory.fetchRequest(for: .repetition, wordCollectionID: currentWordCollectionID)
+			WordFetchRequestFactory.fetchRequest(for: .repetition, wordCollectionID: currentWordCollectionID)
 		)
 		let remindWordsNumber = vocabularyStore.numberOfWordsFrom(
-			FetchRequestFactory.fetchRequest(for: .reminding, wordCollectionID: currentWordCollectionID)
+			WordFetchRequestFactory.fetchRequest(for: .reminding, wordCollectionID: currentWordCollectionID)
 		)
 
 		learningModesView.viewData = LearningModesView.ViewData(

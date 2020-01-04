@@ -122,7 +122,7 @@ private extension WordsTabViewController {
 		let parameters: WordsRequestParameters = (
 			learningStage, currentWordCollectionInfoProvider.wordCollectionInfo?.objectID, false
 		)
-		let request = FetchRequestFactory.requestForWords(with: parameters)
+		let request = WordFetchRequestFactory.requestForWords(with: parameters)
 		return vocabularyStore.numberOfWordsFrom(request)
 	}
 
