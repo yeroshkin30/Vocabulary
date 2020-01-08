@@ -16,13 +16,9 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	let vocabularyStore: VocabularyStore
 	private let listOfWordsModelController: ListOfWordsModelController
 
-	init?(
-		coder: NSCoder,
-		vocabularyStore: VocabularyStore,
-		listOfWordsModelController: ListOfWordsModelController
-	) {
+	init?(coder: NSCoder, vocabularyStore: VocabularyStore, modelController: ListOfWordsModelController) {
 		self.vocabularyStore = vocabularyStore
-		self.listOfWordsModelController = listOfWordsModelController
+		self.listOfWordsModelController = modelController
 		super.init(coder: coder)
 	}
 

@@ -36,6 +36,12 @@ class SearchStateModelController: NSObject {
 		self.searchPromptsModelController = SearchPromptsModelController(historyManager: historyManager)
 	}
 
+	func reloadData() {
+		guard state == .prompts else { return }
+		
+		searchPromptsModelController.reloadData()
+	}
+
 	func requestEntries(for word: String) {
 		state = .loading(definitionsFor: word)
 		entriesLoader.requestEntriesFor(word, with: { [weak self] (requestResult) in

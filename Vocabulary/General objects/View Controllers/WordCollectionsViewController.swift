@@ -14,15 +14,11 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 	// MARK: - Initialization
 
 	let vocabularyStore: VocabularyStore
-	private let wordCollectionsModelController: WordCollectionsModelController
+	private let modelController: WordCollectionsModelController
 
-	init?(
-		coder: NSCoder,
-		vocabularyStore: VocabularyStore,
-		wordCollectionsModelController: WordCollectionsModelController
-	) {
+	init?(coder: NSCoder, vocabularyStore: VocabularyStore, modelController: WordCollectionsModelController) {
 		self.vocabularyStore = vocabularyStore
-		self.wordCollectionsModelController = wordCollectionsModelController
+		self.modelController = modelController
 
 		super.init(coder: coder)
 	}
@@ -43,11 +39,11 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		wordCollectionsModelController.dataChangesHandler = { [unowned self] changes in
+		modelController.dataChangesHandler = { [unowned self] changes in
 			self.tableView.handleChanges(changes)
 		}
 		
-		tableView.dataSource = wordCollectionsModelController
+		tableView.dataSource = modelController
 		vocabularyStore.viewContext.undoManager = UndoManager()
 	}
 	
@@ -79,7 +75,7 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 			return InputTextViewController(coder: coder, title: "New word collection", charactersCapacity: .verySmall) {
 				[unowned self] (name) in
 
-				self.wordCollectionsModelController.createWordCollection(withName: name)
+				self.modelController.createWordCollection(withName: name)
 			}
 		case .renameCollection:
 			guard
@@ -88,7 +84,7 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 					return nil
 			}
 
-			let initialText = wordCollectionsModelController.wordCollectionAt(indexPath).name
+			let initialText = modelController.wordCollectionAt(indexPath).name
 
 			return InputTextViewController(
 				coder: coder,
@@ -97,7 +93,7 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 				charactersCapacity: .verySmall
 			) { [unowned self] (newName) in
 
-				self.wordCollectionsModelController.renameWordCollection(at: indexPath, with: newName)
+				self.modelController.renameWordCollection(at: indexPath, with: newName)
 			}
 		}
 	}
@@ -105,7 +101,7 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 	// MARK: - UITableViewDelegate
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		wordCollectionsModelController.selectWordCollection(at: indexPath)
+		modelController.selectWordCollection(at: indexPath)
 
 		dismiss(animated: true)
 	}
@@ -124,13 +120,13 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 		let deleteAction = UIContextualAction(
 			style: .destructive,
 			title: "Delete") { (_, _, handler) in
-				let wordCollectionToDelete = self.wordCollectionsModelController.wordCollectionAt(indexPath)
+				let wordCollectionToDelete = self.modelController.wordCollectionAt(indexPath)
 
 				let fetchRequest = WordFetchRequestFactory.requestForWords(from: wordCollectionToDelete)
 				let numberOfWordsToDelete = self.vocabularyStore.numberOfWordsFrom(fetchRequest)
 
 				if numberOfWordsToDelete == 0 {
-					self.wordCollectionsModelController.deleteWordCollection(at: indexPath)
+					self.modelController.deleteWordCollection(at: indexPath)
 					handler(true)
 				} else {
 					self.showDeleteWordCollectionAlert(at: indexPath)
@@ -146,17 +142,17 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 private extension WordCollectionsViewController {
 	
 	func showDeleteWordCollectionAlert(at indexPath: IndexPath) {
-		let wordCollection = wordCollectionsModelController.wordCollectionAt(indexPath)
+		let wordCollection = modelController.wordCollectionAt(indexPath)
 		
 		let title = "Delete \"\(wordCollection.name)\" collection?"
 
 		let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
 
 		alert.addAction(UIAlertAction(title: "Collection and Words", style: .destructive) { (_) in
-			self.wordCollectionsModelController.deleteWordCollection(at: indexPath)
+			self.modelController.deleteWordCollection(at: indexPath)
 		})
 		alert.addAction(UIAlertAction(title: "Only Collection", style: .destructive) { (_) in
-			self.wordCollectionsModelController.deleteWordCollection(at: indexPath, withWords: false)
+			self.modelController.deleteWordCollection(at: indexPath, withWords: false)
 		})
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 		

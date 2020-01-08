@@ -35,6 +35,10 @@ class SearchPromptsModelController: NSObject {
 
 	// MARK: - Public methods
 
+	func reloadData() {
+		updateSectionsData()
+	}
+
 	func promptAt(_ indexPath: IndexPath) -> String {
 		let prompt: String
 

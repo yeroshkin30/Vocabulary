@@ -35,7 +35,7 @@ class AppRootViewController: UITabBarController, SegueHandlerType {
 		return WordCollectionsViewController(
 			coder: coder,
 			vocabularyStore: vocabularyStore,
-			wordCollectionsModelController: modelController
+			modelController: modelController
 		)
 	}
 }

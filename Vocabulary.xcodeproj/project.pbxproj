@@ -246,7 +246,7 @@
 			path = "Input Answer Controllers";
 			sourceTree = "<group>";
 		};
-		3D150FBA229418250060A531 /* General */ = {
+		3D150FBA229418250060A531 /* General objects */ = {
 			isa = PBXGroup;
 			children = (
 				3D9143E92297E211008637E5 /* Models */,
@@ -254,7 +254,7 @@
 				3D150FBB2294182C0060A531 /* View */,
 				3D150FBC229418320060A531 /* View Controllers */,
 			);
-			path = General;
+			path = "General objects";
 			sourceTree = "<group>";
 		};
 		3D150FBB2294182C0060A531 /* View */ = {
@@ -398,10 +398,10 @@
 			children = (
 				3DA9DFB22031D6910098A162 /* AppDelegate.swift */,
 				3D81893F204EF785006ECE30 /* Core Data */,
-				3D150FBA229418250060A531 /* General */,
-				3DD3177F2064A8C300D11F44 /* Learning */,
-				3DD3177E2064A8AA00D11F44 /* Search */,
-				3DD317802064A8D100D11F44 /* Words */,
+				3D150FBA229418250060A531 /* General objects */,
+				3DD3177F2064A8C300D11F44 /* Learning Tab */,
+				3DD3177E2064A8AA00D11F44 /* Search Tab */,
+				3DD317802064A8D100D11F44 /* Words Tab */,
 				3D5F383C229BE640006FD548 /* Storyboards */,
 				3D516C72204531E600B6A715 /* Helpers */,
 				3D5F383D229BE7AB006FD548 /* Resources */,
@@ -482,7 +482,7 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		3DD3177E2064A8AA00D11F44 /* Search */ = {
+		3DD3177E2064A8AA00D11F44 /* Search Tab */ = {
 			isa = PBXGroup;
 			children = (
 				1151AF1323A36BA200364533 /* Model Controllers */,
@@ -490,10 +490,10 @@
 				3DB218812160CB1200F6367A /* View Controllers */,
 				3D516C752045320600B6A715 /* Network */,
 			);
-			path = Search;
+			path = "Search Tab";
 			sourceTree = "<group>";
 		};
-		3DD3177F2064A8C300D11F44 /* Learning */ = {
+		3DD3177F2064A8C300D11F44 /* Learning Tab */ = {
 			isa = PBXGroup;
 			children = (
 				1168287B23C10B4300C6EBEE /* Models */,
@@ -502,16 +502,16 @@
 				3D5E21DA227204D600EE6D34 /* Data Sources */,
 				3D14D19920C7E557005947AF /* Input Answer Controllers */,
 			);
-			path = Learning;
+			path = "Learning Tab";
 			sourceTree = "<group>";
 		};
-		3DD317802064A8D100D11F44 /* Words */ = {
+		3DD317802064A8D100D11F44 /* Words Tab */ = {
 			isa = PBXGroup;
 			children = (
 				11BE9C2723B2C3CA00688B8B /* Model Controllers */,
 				3DB218842160CBAE00F6367A /* View Controllers */,
 			);
-			path = Words;
+			path = "Words Tab";
 			sourceTree = "<group>";
 		};
 		3DDF4C082160C88F00FA9CD6 /* View Controllers */ = {

@@ -38,6 +38,8 @@ class SearchTabViewController: UITableViewController, SegueHandlerType {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
+		searchStateModelController.reloadData()
+		tableView.reloadData()
 		tabBarController?.delegate = self
 	}
 	

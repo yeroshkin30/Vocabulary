@@ -15,6 +15,12 @@ class WordsTabViewController: UITableViewController, SegueHandlerType {
 	var vocabularyStore: VocabularyStore!
 	var currentWordCollectionInfoProvider: CurrentWordCollectionInfoProvider!
 
+	private var viewData: ViewData = .init(sections: []) {
+		didSet {
+			tableView.reloadData()
+		}
+	}
+
 	// MARK: - Life cycle
 
 	override func viewDidLoad() {
@@ -26,7 +32,7 @@ class WordsTabViewController: UITableViewController, SegueHandlerType {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-		tableView.reloadData()
+		updateViewData()
 	}
 
 	// MARK: - Navigation
@@ -36,7 +42,12 @@ class WordsTabViewController: UITableViewController, SegueHandlerType {
 	}
 
 	@IBSegueAction
-	func makeListOfWordsViewController(coder: NSCoder, sender: Any?, segueIdentifier: String?) -> ListOfWordsViewController? {
+	func makeListOfWordsViewController(
+		coder: NSCoder,
+		sender: Any?,
+		segueIdentifier: String?
+	) -> ListOfWordsViewController? {
+
 		guard let indexPath = tableView.indexPathForSelectedRow else {
 			return nil
 		}
@@ -49,34 +60,90 @@ class WordsTabViewController: UITableViewController, SegueHandlerType {
 			learningStage: learningStage,
 			currentWordCollectionID: currentWordCollectionID
 		)
-		return ListOfWordsViewController(
-			coder: coder,
-			vocabularyStore: vocabularyStore,
-			listOfWordsModelController: modelController
-		)
+		return ListOfWordsViewController(coder: coder,vocabularyStore: vocabularyStore, modelController: modelController)
 	}
 
 	// MARK: - UITableViewDataSource
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return Section.count
+		return viewData.sections.count
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return Section(section).numberOfItems
+		return viewData.sections[section].count
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
 
-		cell.textLabel?.text = Section(at: indexPath).textOfItem(at: indexPath.row)
-		cell.detailTextLabel?.text = detailedTextForCell(at: indexPath)
+		configureCell(cell, at: indexPath)
 
 		return cell
 	}
 
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		return Section(section).title
+	}
+
+	// MARK: - UITableViewDelegate
+
+	override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+		let cellData = viewData.sections[indexPath.section][indexPath.row]
+
+		return cellData.numberOfWords != 0
+	}
+}
+
+// MARK: - Private
+private extension WordsTabViewController {
+
+	func updateViewData() {
+		var sections: [ViewData.SectionData] = []
+
+		Section.allCases.enumerated().forEach { (sectionIndex, section) in
+
+			var cells: [ViewData.CellData] = []
+
+			for row in 0..<section.numberOfRows {
+				let indexPath = IndexPath(row: row, section: sectionIndex)
+				let text = section.textAt(row)
+				let numberOfWords = numberOfWordsForCell(at: indexPath)
+
+				cells.append((text, numberOfWords))
+			}
+
+			sections.append(cells)
+		}
+
+		viewData = .init(sections: sections)
+	}
+
+	func numberOfWordsForCell(at indexPath: IndexPath) -> Int {
+		let stage: Word.LearningStage?
+
+		switch Section(at: indexPath) {
+		case .allWords: 		stage = nil
+		case .learningStages: 	stage = Word.LearningStage(rawValue: Int16(indexPath.row))
+		}
+
+		let parameters: WordsRequestParameters = (
+			stage, currentWordCollectionInfoProvider.wordCollectionInfo?.objectID, false
+		)
+		let request = WordFetchRequestFactory.requestForWords(with: parameters)
+
+		return vocabularyStore.numberOfWordsFrom(request)
+	}
+
+	func configureCell(_ cell: UITableViewCell, at indexPath: IndexPath) {
+		let cellData = viewData.sections[indexPath.section][indexPath.row]
+		let haveNoWords = cellData.numberOfWords == 0
+		let textColor: UIColor = haveNoWords ? .lightGray 	: .black
+
+		cell.textLabel?.text 			= cellData.text
+		cell.detailTextLabel?.text 		= "\(cellData.numberOfWords)"
+		cell.textLabel?.textColor 		= textColor
+		cell.detailTextLabel?.textColor = textColor
+		cell.accessoryType 				= haveNoWords ? .none : .disclosureIndicator
 	}
 }
 
@@ -103,40 +170,26 @@ private extension WordsTabViewController {
 			}
 		}
 
-		var numberOfItems: Int {
+		var numberOfRows: Int {
 			switch self {
 			case .allWords:			return 1
 			case .learningStages:	return Word.LearningStage.count
 			}
 		}
 
-		func textOfItem(at index: Int) -> String {
+		func textAt(_ row: Int) -> String {
 			switch self {
 			case .allWords:			return "All words"
-			case .learningStages:	return Word.LearningStage.names[index]
+			case .learningStages:	return Word.LearningStage.names[row]
 			}
 		}
 	}
 
-	func numberOfWords(at learningStage: Word.LearningStage?) -> Int {
-		let parameters: WordsRequestParameters = (
-			learningStage, currentWordCollectionInfoProvider.wordCollectionInfo?.objectID, false
-		)
-		let request = WordFetchRequestFactory.requestForWords(with: parameters)
-		return vocabularyStore.numberOfWordsFrom(request)
-	}
+	struct ViewData {
+		typealias SectionData = [CellData]
+		typealias CellData = (text: String, numberOfWords: Int)
 
-	func detailedTextForCell(at indexPath: IndexPath) -> String {
-		let stage: Word.LearningStage?
-
-		switch Section(at: indexPath) {
-		case .allWords: 		stage = nil
-		case .learningStages: 	stage = Word.LearningStage(rawValue: Int16(indexPath.row))
-		}
-
-		let number = numberOfWords(at: stage)
-
-		return "\(number)"
+		let sections: [SectionData]
 	}
 }
 
@@ -144,6 +197,6 @@ extension WordsTabViewController: CurrentWordCollectionInfoObserver {
 
 	func currentWordCollectionDidChange(_ wordCollectionInfo: WordCollectionInfo?) {
 		navigationItem.title = "\(wordCollectionInfo?.name ?? "Vocabulary")"
-		tableView.reloadData()
+		updateViewData()
 	}
 }

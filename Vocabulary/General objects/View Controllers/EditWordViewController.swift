@@ -265,12 +265,6 @@ extension EditWordViewController {
 	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return Section(section) == .examples ? examplesHeaderView : nil
 	}
-
-	override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-		if let footerView = view as? UITableViewHeaderFooterView {
-			footerView.textLabel?.textColor = .red
-		}
-	}
 }
 
 // MARK: - UITableViewDelegate
@@ -303,6 +297,12 @@ extension EditWordViewController {
 			return proposedDestinationIndexPath
 		default:
 			return IndexPath(row: 0, section: Section.examples.rawValue)
+		}
+	}
+
+	override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+		if let footerView = view as? UITableViewHeaderFooterView {
+			footerView.textLabel?.textColor = .red
 		}
 	}
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 enum CharactersNumberPreset: Int {
-	case verySmall = 15, small = 50, medium = 100, large = 200
+	case verySmall = 20, small = 50, medium = 100, large = 200
 }
 
 class InputTextViewController: UIViewController {
