@@ -124,11 +124,12 @@ private extension InputTextViewController {
 	}
 
 	func showDismissAlert() {
-		let presenter = DismissActionSheetPresenter(discardHandler: {
+		let presenter: DismissActionSheetPresenter = .init(discardHandler: { (_) in
 			self.cancelAction(nil)
-		}, saveHandler: {
+		}, saveHandler: saveButton.isEnabled ? { (_) in
 			self.saveAction(nil)
-		}, cancelHandler: {
+		} : nil,
+		   cancelHandler: { (_) in
 			self.textView.becomeFirstResponder()
 		})
 

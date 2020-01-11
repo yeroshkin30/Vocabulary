@@ -121,9 +121,9 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 	}
 
 	private func showDismissAlert() {
-		let presenter = DismissActionSheetPresenter(discardHandler: {
+		let presenter = DismissActionSheetPresenter(discardHandler: { (_) in
 			self.cancelButtonAction(nil)
-		}, saveHandler: {
+		}, saveHandler: { (_) in
 			self.saveButtonAction(nil)
 		})
 

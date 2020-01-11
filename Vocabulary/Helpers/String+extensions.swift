@@ -54,4 +54,20 @@ extension String {
 		)
 		return text
 	}
+
+	func removingBooksAppExcerpt() -> String {
+		if let keyRange: Range<String.Index> = range(of: "”\n\nExcerpt From") {
+			let stringToDelete = self[keyRange.lowerBound..<endIndex]
+
+			if let rangeToDelete = range(of: stringToDelete) {
+				var result = self
+				
+				result.removeSubrange(rangeToDelete)
+				result.removeFirst()
+
+				return result
+			}
+		}
+		return self
+	}
 }

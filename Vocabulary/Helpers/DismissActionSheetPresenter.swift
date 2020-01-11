@@ -10,11 +10,15 @@ import UIKit
 
 struct DismissActionSheetPresenter {
 
-	let discardHandler: (() -> Void)?
-	let saveHandler: (() -> Void)?
-	let cancelHandler: (() -> Void)?
+	let discardHandler: ((UIAlertAction) -> Void)?
+	let saveHandler: ((UIAlertAction) -> Void)?
+	let cancelHandler: ((UIAlertAction) -> Void)?
 
-	init(discardHandler: (() -> Void)? = nil, saveHandler: (() -> Void)? = nil,  cancelHandler: (() -> Void)? = nil) {
+	init(
+		discardHandler: ((UIAlertAction) -> Void)? = nil,
+		saveHandler: ((UIAlertAction) -> Void)? = nil,
+		cancelHandler: ((UIAlertAction) -> Void)? = nil
+	) {
 		self.discardHandler = discardHandler
 		self.saveHandler = saveHandler
 		self.cancelHandler = cancelHandler
@@ -23,15 +27,11 @@ struct DismissActionSheetPresenter {
 	func present(in viewController: UIViewController) {
 		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-		alert.addAction(UIAlertAction(title: "Discard Changes", style: .destructive) { (_) in
-			self.discardHandler?()
-		})
-		alert.addAction(UIAlertAction(title: "Save Changes", style: .default) { (_) in
-			self.saveHandler?()
-		})
-		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-			self.cancelHandler?()
-		})
+		alert.addAction(UIAlertAction(title: "Discard Changes", style: .destructive, handler: discardHandler))
+		if saveHandler != nil {
+			alert.addAction(UIAlertAction(title: "Save Changes", style: .default, handler: saveHandler))
+		}
+		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: cancelHandler))
 
 		viewController.present(alert, animated: true)
 	}
