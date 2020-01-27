@@ -150,7 +150,6 @@ extension SearchTabViewController: UITabBarControllerDelegate {
 	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
 		if viewController == navigationController {
 			searchController.searchBar.becomeFirstResponder()
-			searchController.searchBar.searchTextField.selectAll(nil)
 		}
 	}
 }

@@ -128,6 +128,12 @@ extension SearchStateModelController: UITableViewDelegate {
 // MARK: - UISearchBarDelegate
 extension SearchStateModelController: UISearchBarDelegate {
 
+	func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+		if searchBar.searchTextField.hasText {
+			searchBar.searchTextField.selectAll(nil)
+		}
+	}
+
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		if searchText == "" , state != .prompts {
 			state = .prompts

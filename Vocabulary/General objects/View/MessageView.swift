@@ -15,17 +15,17 @@ class MessageView: UIView {
 	@IBOutlet private var messageTitleLabel: UILabel!
 	@IBOutlet private var messageTextLabel: UILabel!
 	
-	@IBOutlet private var messageResponsButton: UIButton!
+	@IBOutlet private var messageActionButton: UIButton!
 	
-	@IBAction private func messageResponsButtonAction(_ sender: UIButton) {
+	@IBAction private func messageResponseButtonAction(_ sender: UIButton) {
 		message?.actionClosure?()
 	}
 	
 	private func messageDidChange() {
 		messageTitleLabel.text = message?.title
 		messageTextLabel.text = message?.text
-		messageResponsButton.setTitle(message?.actionTitle, for: .normal)
-		messageResponsButton.isHidden = message?.actionClosure == nil
+		messageActionButton.setTitle(message?.actionTitle, for: .normal)
+		messageActionButton.isHidden = message?.actionClosure == nil
 	}
 }
 

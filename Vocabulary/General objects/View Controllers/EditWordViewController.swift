@@ -324,7 +324,7 @@ extension EditWordViewController: UIAdaptivePresentationControllerDelegate {
 }
 
 // MARK: - Types -
-extension EditWordViewController {
+private extension EditWordViewController {
 	
 	enum Section: Int {
 		case headword, sentencePart, definition, examples, deletion
