@@ -90,18 +90,19 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 		let viewMode: EditWordViewController.ViewMode
 
 		if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
-			word = listOfWordsModelController.wordAt(indexPath)
+			let objectID = listOfWordsModelController.wordAt(indexPath).objectID
+			word = editWordContext.object(with: objectID) as! Word
 			viewMode = .edit
 		} else {
-			word = Word(context: vocabularyStore.viewContext)
+			word = Word(context: editWordContext)
 			viewMode = .create
 		}
 
 		let editedWord = editWordContext.object(with: word.objectID) as! Word
 
-		return EditWordViewController(coder: coder, context: editWordContext, word: editedWord, viewMode: viewMode) {
+		return EditWordViewController(coder: coder, word: editedWord, viewMode: viewMode) {
 			[unowned self] (action) in
-			self.handleEditing(of: word, withResultAction: action)
+			self.handleEditingOf(word, in: editWordContext, withResultAction: action)
 		}
 	}
 
@@ -227,14 +228,19 @@ private extension ListOfWordsViewController {
 		setEditing(false, animated: true)
 	}
 
-	func handleEditing(of word: Word, withResultAction action: EditWordViewController.ResultAction) {
+	func handleEditingOf(
+		_ word: Word,
+		in context: NSManagedObjectContext,
+		withResultAction action: EditWordViewController.ResultAction
+	) {
 		switch action {
-		case .save, .delete:
-			vocabularyStore.saveChanges()
-
-		case .cancel:
-			vocabularyStore.viewContext.refresh(word, mergeChanges: false)
+		case .save: 	break
+		case .delete: 	context.delete(word)
+		case .cancel: 	return
 		}
+
+		try? context.save()
+		vocabularyStore.saveChanges()
 	}
 }
 

@@ -87,19 +87,17 @@ class EntryCollectionViewController: UICollectionViewController, SegueHandlerTyp
 		let editWordContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		editWordContext.parent = vocabularyStore.viewContext
 
-		let word = Word(context: vocabularyStore.viewContext)
+		let word = Word(context: editWordContext)
 		word.fill(with: entry, viewMode: viewMode, at: indexPath)
 
 		if let objectID = wordCollectionID {
-			word.wordCollection = vocabularyStore.viewContext.object(with: objectID) as? WordCollection
+			word.wordCollection = editWordContext.object(with: objectID) as? WordCollection
 		}
 
-		let editedWord = editWordContext.object(with: word.objectID) as! Word
-
-		return EditWordViewController(coder: coder, context: editWordContext, word: editedWord, viewMode: .create) {
+		return EditWordViewController(coder: coder, word: word, viewMode: .create) {
 			[unowned self] (action) in
 			
-			self.handleCreation(of: word, withResultAction: action)
+			self.handleCreationOf(word, in: editWordContext, withResultAction: action)
 		}
 	}
 }
@@ -189,13 +187,19 @@ private extension EntryCollectionViewController {
 		collectionView?.reloadData()
 	}
 
-	func handleCreation(of word: Word, withResultAction action: EditWordViewController.ResultAction) {
+	func handleCreationOf(
+		_ word: Word,
+		in context: NSManagedObjectContext,
+		withResultAction action: EditWordViewController.ResultAction
+	) {
+
 		switch action {
 		case .save:
+			try? context.save()
 			vocabularyStore.saveChanges()
 			navigationController?.popViewController(animated: true)
 		case .delete, .cancel:
-			vocabularyStore.deleteObject(word)
+			break
 		}
 	}
 

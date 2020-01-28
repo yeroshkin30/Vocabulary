@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData.NSManagedObjectContext
 
 class EditWordViewController: UITableViewController, SegueHandlerType {
 
@@ -22,19 +21,16 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 
 	// MARK: - Initialization
 
-	private let context: NSManagedObjectContext
 	private let word: Word
 	private let viewMode: ViewMode
 	private let wordEditingDidFinishHandler: ((ResultAction) -> Void)
 
 	init?(
 		coder: NSCoder,
-		context: NSManagedObjectContext,
 		word: Word,
 		viewMode: ViewMode,
 		wordEditingDidFinishHandler: @escaping ((ResultAction) -> Void)
 	) {
-		self.context = context
 		self.word = word
 		self.viewMode = viewMode
 		self.wordEditingDidFinishHandler = wordEditingDidFinishHandler
@@ -54,7 +50,6 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 	// MARK: - Actions
 	
 	@IBAction private func saveButtonAction(_ sender: UIBarButtonItem?) {
-		try? context.save()
 		dismiss(animated: true) {
 			self.wordEditingDidFinishHandler(.save)
 		}
@@ -84,13 +79,10 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 	}
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-		if let indexPath = tableView.indexPathForSelectedRow,
+		if	let cell = sender as? UITableViewCell,
+			let indexPath = tableView.indexPath(for: cell),
 			Section(at: indexPath) == .deletion {
-			context.delete(word)
-			try? context.save()
-			dismiss(animated: true) {
-				self.wordEditingDidFinishHandler(.delete)
-			}
+
 			return false
 		}
 		return true
@@ -272,6 +264,12 @@ extension EditWordViewController {
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
+
+		if Section(at: indexPath) == .deletion {
+			dismiss(animated: true) {
+				self.wordEditingDidFinishHandler(.delete)
+			}
+		}
 	}
 	
 	override func tableView(_ tableView: UITableView,
@@ -311,7 +309,7 @@ extension EditWordViewController {
 extension EditWordViewController: UIAdaptivePresentationControllerDelegate {
 
 	func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
-		return !word.hasChanges
+		return !word.hasChanges || word.isInserted
 	}
 
 	func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
