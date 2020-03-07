@@ -107,18 +107,18 @@ private extension InputTextViewController {
 	}
 
 	func textDidChange() {
-		let currentNumber = textView.text.count
-		let remainingNumber = charactersCapacity.rawValue - currentNumber
+		let currentNumber: Int = textView.text.count
+		let remainingNumber: Int = charactersCapacity.rawValue - currentNumber
 
 		limitOfCharactersLabel.text = String(remainingNumber)
 
-		limitOfCharactersLabel.textColor = remainingNumber >= 0 ? .darkGray : .red
+		limitOfCharactersLabel.textColor = remainingNumber >= 0 ? .label : .systemRed
 		saveButton.isEnabled = remainingNumber < charactersCapacity.rawValue && remainingNumber >= 0
 	}
 
 	@objc
 	func keyboardDidShow(_ notification: Notification) {
-		if let endFrame = notification.userInfo!["UIKeyboardFrameEndUserInfoKey"] as? CGRect {
+		if let endFrame: CGRect = notification.userInfo!["UIKeyboardFrameEndUserInfoKey"] as? CGRect {
 			textViewBottomConstraint.constant = endFrame.size.height
 		}
 	}
@@ -148,10 +148,9 @@ extension InputTextViewController: UITextViewDelegate {
 extension InputTextViewController: UIAdaptivePresentationControllerDelegate {
 
 	func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
-		let hasEditedText = textView.hasText
-		let textIsDifferent = textView.text != initialText
+		let textIsDifferent: Bool = textView.text != initialText
 
-		return !(hasEditedText && textIsDifferent)
+		return !(textView.hasText && textIsDifferent)
 	}
 
 	func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {

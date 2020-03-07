@@ -122,7 +122,7 @@ extension SearchPromptsModelController: UITableViewDataSource {
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
+		let cell: UITableViewCell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
 		cell.textLabel?.text = text(for: indexPath)
 		cell.detailTextLabel?.text = nil
 		cell.accessoryType = .none

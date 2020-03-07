@@ -48,7 +48,7 @@ class WordsTabViewController: UITableViewController, SegueHandlerType {
 		segueIdentifier: String?
 	) -> ListOfWordsViewController? {
 
-		guard let indexPath = tableView.indexPathForSelectedRow else {
+		guard let indexPath: IndexPath = tableView.indexPathForSelectedRow else {
 			return nil
 		}
 
@@ -74,7 +74,7 @@ class WordsTabViewController: UITableViewController, SegueHandlerType {
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
+		let cell: UITableViewCell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
 
 		configureCell(cell, at: indexPath)
 
@@ -105,7 +105,7 @@ private extension WordsTabViewController {
 			var cells: [ViewData.CellData] = []
 
 			for row in 0..<section.numberOfRows {
-				let indexPath = IndexPath(row: row, section: sectionIndex)
+				let indexPath: IndexPath = IndexPath(row: row, section: sectionIndex)
 				let text = section.textAt(row)
 				let numberOfWords = numberOfWordsForCell(at: indexPath)
 
@@ -137,7 +137,7 @@ private extension WordsTabViewController {
 	func configureCell(_ cell: UITableViewCell, at indexPath: IndexPath) {
 		let cellData = viewData.sections[indexPath.section][indexPath.row]
 		let haveNoWords = cellData.numberOfWords == 0
-		let textColor: UIColor = haveNoWords ? .lightGray 	: .black
+		let textColor: UIColor = haveNoWords ? .secondaryLabel 	: .label
 
 		cell.textLabel?.text 			= cellData.text
 		cell.detailTextLabel?.text 		= "\(cellData.numberOfWords)"

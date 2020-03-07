@@ -42,7 +42,7 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 		modelController.dataChangesHandler = { [unowned self] changes in
 			self.tableView.handleChanges(changes)
 		}
-		
+
 		tableView.dataSource = modelController
 		vocabularyStore.viewContext.undoManager = UndoManager()
 	}
@@ -65,8 +65,8 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 	) -> InputTextViewController? {
 
 		guard
-			let identifier = segueIdentifier,
-			let segue = SegueIdentifier(rawValue: identifier) else {
+			let identifier: String = segueIdentifier,
+			let segue: SegueIdentifier = SegueIdentifier(rawValue: identifier) else {
 				return nil
 		}
 
@@ -79,12 +79,12 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 			}
 		case .renameCollection:
 			guard
-				let cell = sender as? UITableViewCell,
-				let indexPath = tableView.indexPath(for: cell) else {
+				let cell: UITableViewCell = sender as? UITableViewCell,
+				let indexPath: IndexPath = tableView.indexPath(for: cell) else {
 					return nil
 			}
 
-			let initialText = modelController.wordCollectionAt(indexPath).name
+			let initialText: String = modelController.wordCollectionAt(indexPath).name
 
 			return InputTextViewController(
 				coder: coder,
@@ -110,20 +110,20 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 							trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
 	) -> UISwipeActionsConfiguration? {
 
-		let renameAction = UIContextualAction(
+		let renameAction: UIContextualAction = .init(
 			style: .normal,
 			title: "Rename") { (_, _, handler) in
 				self.performSegue(with: .renameCollection, sender: tableView.cellForRow(at: indexPath))
 				handler(true)
 		}
 
-		let deleteAction = UIContextualAction(
+		let deleteAction: UIContextualAction = .init(
 			style: .destructive,
 			title: "Delete") { (_, _, handler) in
-				let wordCollectionToDelete = self.modelController.wordCollectionAt(indexPath)
+				let wordCollectionToDelete: WordCollection = self.modelController.wordCollectionAt(indexPath)
 
-				let fetchRequest = WordFetchRequestFactory.requestForWords(from: wordCollectionToDelete)
-				let numberOfWordsToDelete = self.vocabularyStore.numberOfWordsFrom(fetchRequest)
+				let fetchRequest: NSFetchRequest<Word> = WordFetchRequestFactory.requestForWords(from: wordCollectionToDelete)
+				let numberOfWordsToDelete: Int = self.vocabularyStore.numberOfWordsFrom(fetchRequest)
 
 				if numberOfWordsToDelete == 0 {
 					self.modelController.deleteWordCollection(at: indexPath)
@@ -142,11 +142,11 @@ class WordCollectionsViewController: UITableViewController, SegueHandlerType {
 private extension WordCollectionsViewController {
 	
 	func showDeleteWordCollectionAlert(at indexPath: IndexPath) {
-		let wordCollection = modelController.wordCollectionAt(indexPath)
+		let wordCollection: WordCollection = modelController.wordCollectionAt(indexPath)
 		
-		let title = "Delete \"\(wordCollection.name)\" collection?"
+		let title: String = "Delete \"\(wordCollection.name)\" collection?"
 
-		let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+		let alert: UIAlertController = .init(title: title, message: nil, preferredStyle: .alert)
 
 		alert.addAction(UIAlertAction(title: "Collection and Words", style: .destructive) { (_) in
 			self.modelController.deleteWordCollection(at: indexPath)

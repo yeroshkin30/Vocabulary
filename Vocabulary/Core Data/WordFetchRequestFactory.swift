@@ -15,7 +15,7 @@ typealias WordsRequestParameters = (
 struct WordFetchRequestFactory {
 	
 	static func requestForWords(with parameters: WordsRequestParameters) -> NSFetchRequest<Word> {
-		let fetchRequest = Word.createFetchRequest()
+		let fetchRequest: NSFetchRequest<Word> = Word.createFetchRequest()
 		fetchRequest.fetchBatchSize = 10
 		fetchRequest.returnsObjectsAsFaults = false
 		
@@ -34,12 +34,12 @@ struct WordFetchRequestFactory {
 		
 		var predicates: [NSPredicate] = []
 		
-		if let stage = parameters.learningStage {
-			let stageFormat = "\(#keyPath(Word.learningStageValue)) == \(String(stage.rawValue))"
+		if let stage: Word.LearningStage = parameters.learningStage {
+			let stageFormat: String = "\(#keyPath(Word.learningStageValue)) == \(String(stage.rawValue))"
 			predicates.append(NSPredicate(format: stageFormat))
 		}
-		if let wordCollectionID = parameters.wordCollectionID {
-			let format = "\(#keyPath(Word.wordCollection)) == %@"
+		if let wordCollectionID: NSManagedObjectID = parameters.wordCollectionID {
+			let format: String = "\(#keyPath(Word.wordCollection)) == %@"
 			predicates.append(NSPredicate(format: format, wordCollectionID))
 		}
 		if parameters.regardNextTrainingDate {
@@ -62,7 +62,7 @@ struct WordFetchRequestFactory {
 		case .reminding:		parameters = (.reminding, wordCollectionID, true)
 		}
 		
-		let fetchRequest = requestForWords(with: parameters)
+		let fetchRequest: NSFetchRequest<Word> = requestForWords(with: parameters)
 		fetchRequest.sortDescriptors = [
 			NSSortDescriptor(key: #keyPath(Word.nextTrainingDate), ascending: true)
 		]

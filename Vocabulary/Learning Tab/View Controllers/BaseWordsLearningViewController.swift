@@ -57,8 +57,8 @@ class BaseWordsLearningViewController: UIViewController {
 	}
 	
 	func updateProgressView() {
-		let currentProgress = initialProgressValue - numberOfWords
-		let newProgress = Float(currentProgress) / Float(initialProgressValue)
+		let currentProgress: Int = initialProgressValue - numberOfWords
+		let newProgress: Float = Float(currentProgress) / Float(initialProgressValue)
 		progressView.setProgress(newProgress, animated: true)
 	}
 	
@@ -77,7 +77,7 @@ extension BaseWordsLearningViewController: UICollectionViewDelegate {
 						willDisplay cell: UICollectionViewCell,
 						forItemAt indexPath: IndexPath) {
 		
-		if autoPronounceButton.isSelected, let word = dataSource.currentWord {
+		if autoPronounceButton.isSelected, let word: Word = dataSource.currentWord {
 			pronounce(word.headword)
 		}
 	}

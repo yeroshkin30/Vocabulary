@@ -47,22 +47,22 @@ class LearningModesViewController: UIViewController, SegueHandlerType {
 		
 		switch segueIdentifier(for: segue) {
 		case .remembering:
-			let viewController = segue.destination as! UnknownWordsViewController
+			let viewController: UnknownWordsViewController = segue.destination as! UnknownWordsViewController
 			viewController.vocabularyStore = vocabularyStore
 			viewController.currentWordCollectionID = currentWordCollectionID
 			
 		case .repetition:
-			let viewController = segue.destination as! LearningProcessViewController
+			let viewController: LearningProcessViewController = segue.destination as! LearningProcessViewController
 			viewController.vocabularyStore = vocabularyStore
 			viewController.currentWordCollectionID = currentWordCollectionID
 			
-			let fetchRequest = WordFetchRequestFactory.fetchRequest(for: .repetition, wordCollectionID: currentWordCollectionID)
-			let words = vocabularyStore.wordsFrom(fetchRequest)
+			let fetchRequest: NSFetchRequest<Word> = WordFetchRequestFactory.fetchRequest(for: .repetition, wordCollectionID: currentWordCollectionID)
+			let words: [Word] = vocabularyStore.wordsFrom(fetchRequest)
 			
 			viewController.learningMode = .repetition(words)
 			
 		case .reminding:
-			let viewController = segue.destination as! RemindWordsViewController
+			let viewController: RemindWordsViewController = segue.destination as! RemindWordsViewController
 			viewController.vocabularyStore = vocabularyStore
 			viewController.currentWordCollectionID = currentWordCollectionID
 		}
@@ -75,7 +75,7 @@ private extension LearningModesViewController {
 	// MARK: - Methods
 	
 	func setupNotifications() {
-		let enterForeground = UIApplication.willEnterForegroundNotification
+		let enterForeground: NSNotification.Name = UIApplication.willEnterForegroundNotification
 		NotificationCenter.default.addObserver(
 			self, selector: #selector(updateLearningModesView), name: enterForeground, object: nil
 		)
@@ -84,13 +84,13 @@ private extension LearningModesViewController {
 	@objc
 	func updateLearningModesView() {
 
-		let rememberWordsNumber = vocabularyStore.numberOfWordsFrom(
+		let rememberWordsNumber: Int = vocabularyStore.numberOfWordsFrom(
 			WordFetchRequestFactory.fetchRequest(for: .remembering, wordCollectionID: currentWordCollectionID)
 		)
-		let repeatWordsNumber = vocabularyStore.numberOfWordsFrom(
+		let repeatWordsNumber: Int = vocabularyStore.numberOfWordsFrom(
 			WordFetchRequestFactory.fetchRequest(for: .repetition, wordCollectionID: currentWordCollectionID)
 		)
-		let remindWordsNumber = vocabularyStore.numberOfWordsFrom(
+		let remindWordsNumber: Int = vocabularyStore.numberOfWordsFrom(
 			WordFetchRequestFactory.fetchRequest(for: .reminding, wordCollectionID: currentWordCollectionID)
 		)
 

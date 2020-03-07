@@ -27,7 +27,7 @@ class SelectHeadwordInputView: UIInputView {
 	
 	private weak var selectedOptionButton: UIButton? {
 		didSet {
-			if let button = selectedOptionButton {
+			if let button: UIButton = selectedOptionButton {
 				isUserInteractionEnabled = false
 				button.select(with: #colorLiteral(red: 0, green: 0.4793452024, blue: 0.9990863204, alpha: 1))
 			} else {
@@ -40,13 +40,13 @@ class SelectHeadwordInputView: UIInputView {
 	@IBAction private func optionButtonTapped(_ sender: UIButton) {
 		selectedOptionButton = sender
 		
-		if let selectedOptionIndex = optionsButtons.firstIndex(of: sender) {
+		if let selectedOptionIndex: Int = optionsButtons.firstIndex(of: sender) {
 			optionSelectedAction?(selectedOptionIndex)
 		}
 	}
 	
 	private func viewDataDidChanged() {
-		guard let viewData = viewData else { return }
+		guard let viewData: ViewData = viewData else { return }
 		
 		selectedOptionButton = nil
 		

@@ -25,7 +25,7 @@ class RememberingCompletionViewController: UICollectionViewController {
 		
 		navigationItem.setHidesBackButton(true, animated: false)
 		
-		if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+		if let layout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
 			layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
 		}
 	}
@@ -40,9 +40,10 @@ class RememberingCompletionViewController: UICollectionViewController {
 	override func collectionView(_ collectionView: UICollectionView,
 								cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
-		let cell = collectionView.dequeueCell(indexPath: indexPath) as RememberingCompletionCollectionViewCell
+		let cell: RememberingCompletionCollectionViewCell = collectionView
+			.dequeueCell(indexPath: indexPath) as RememberingCompletionCollectionViewCell
 		
-		let word = learnedWords[indexPath.row]
+		let word: Word = learnedWords[indexPath.row]
 		
 		cell.viewData = RememberingCompletionCollectionViewCell.ViewData(word: word)
 		
@@ -53,10 +54,10 @@ class RememberingCompletionViewController: UICollectionViewController {
 								viewForSupplementaryElementOfKind kind: String,
 								at indexPath: IndexPath) -> UICollectionReusableView {
 		
-		let view = collectionView
+		let view: MessageCollectionViewHeader = collectionView
 			.dequeueSupplementaryView(of: kind, at: indexPath) as MessageCollectionViewHeader
 		
-		let number = learnedWords.count
+		let number: Int = learnedWords.count
 		
 		view.titleText = "Well done!"
 		view.messageText = "You have remembered \(number) new word"

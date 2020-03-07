@@ -67,7 +67,7 @@ extension Word {
 
 		case unknown, repeating, reminding, learned
 
-		static let count = 4
+		static let count: Int = 4
 
 		static var names: [String] {
 			return ["Unknown", "Repeating", "Reminding", "Learned"]
@@ -151,9 +151,9 @@ private extension Word {
 //		No time interval, for tests
 //		nextTrainingDate = Date(); return
 		
-		let calendar = Calendar.current
+		let calendar: Calendar = Calendar.current
 		
-		let shuffleFactor = Int.random(in: 0...600)
+		let shuffleFactor: Int = Int.random(in: 0...600)
 		let numberOfDays: Int
 		
 		switch learningStage {
@@ -163,7 +163,7 @@ private extension Word {
 		case .learned:				return
 		}
 		
-		let dateComponents = DateComponents(calendar: calendar, day: numberOfDays, second: shuffleFactor)
+		let dateComponents: DateComponents = DateComponents(calendar: calendar, day: numberOfDays, second: shuffleFactor)
 		
 		nextTrainingDate = calendar.date(byAdding: dateComponents, to: Date())
 	}

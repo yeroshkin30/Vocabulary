@@ -22,9 +22,9 @@ class RemindWordsCollectionViewDataSource: BaseWordsLearningCollectionViewDataSo
 	override func collectionView(_ collectionView: UICollectionView,
 								cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
-		let cell = collectionView.dequeueCell(indexPath: indexPath) as RemindWordCollectionViewCell
+		let cell: RemindWordCollectionViewCell = collectionView.dequeueCell(indexPath: indexPath) as RemindWordCollectionViewCell
 		
-		let word = words[indexPath.item]
+		let word: Word = words[indexPath.item]
 		cell.viewData = FullCardCollectionViewCell.ViewData(word: word)
 		cell.optionsMode = .twoOption
 		return cell

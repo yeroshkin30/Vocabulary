@@ -26,7 +26,7 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 	private lazy var textFieldConfigurator = InputViewsConfigurator(context: vocabularyStore.viewContext)
 	
 	private lazy var answersHandler: AnswersReceiver = {
-		let handler = AnswersReceiver(textFieldConfigurator: textFieldConfigurator)
+		let handler: AnswersReceiver = AnswersReceiver(textFieldConfigurator: textFieldConfigurator)
 		handler.delegate = self
 		return handler
 	}()
@@ -79,7 +79,7 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 	override func autoPronounceButtonTapped() {
 		if autoPronounceButton.isSelected {
 			stopPronouncing()
-		} else if answersHandler.state == .finish, let word = dataSource.currentWord {
+		} else if answersHandler.state == .finish, let word: Word = dataSource.currentWord {
 			pronounce(word.headword)
 		}
 		autoPronounceButton.isSelected.toggle()
@@ -98,7 +98,7 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 				return
 		}
 		
-		let viewController = segue.destination as! RememberingCompletionViewController
+		let viewController: RememberingCompletionViewController = segue.destination as! RememberingCompletionViewController
 		viewController.learnedWords = words
 	}
 }
@@ -114,19 +114,17 @@ private extension LearningProcessViewController {
 			navigationItem.leftBarButtonItem = navigationItem.backBarButtonItem
 		}
 		
-		let name = UIResponder.keyboardWillChangeFrameNotification
 		NotificationCenter.default.addObserver(
-			self, selector: #selector(keyboardDidShow), name: name, object: nil
+			self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil
 		)
 		
 		additionalSafeAreaInsets.bottom = UIScreen.main.bounds.height / 2
 	}
 	
 	@objc func keyboardDidShow(_ notification: Notification) {
-		let key = UIResponder.keyboardFrameEndUserInfoKey
-		guard let endFrame = notification.userInfo![key] as? CGRect else { return }
+		guard let endFrame: CGRect = notification.userInfo![ UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
 		
-		let requiredInset = view.frame.height - endFrame.origin.y
+		let requiredInset: CGFloat = view.frame.height - endFrame.origin.y
 		
 		if requiredInset != 0,
 			additionalSafeAreaInsets.bottom != requiredInset {
@@ -142,7 +140,7 @@ private extension LearningProcessViewController {
 	}
 	
 	func prepareForQuestion(_ cell: LearningCollectionViewCell) {
-		guard let textField = cell.answerTextField, let word = dataSource.currentWord else {
+		guard let textField: UITextField = cell.answerTextField, let word: Word = dataSource.currentWord else {
 			return
 		}
 		answersHandler.handle(textField, with: word)
@@ -164,8 +162,8 @@ private extension LearningProcessViewController {
 	}
 	
 	func showCloseButtonActionSheet() {
-		let message = "Are you sure you want to stop remembering?"
-		let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+		let message: String = "Are you sure you want to stop remembering?"
+		let alert: UIAlertController = .init(title: nil, message: message, preferredStyle: .alert)
 		
 		alert.addAction(UIAlertAction(title: "Stop", style: .destructive) { (_) in
 			self.dismiss(animated: true)
@@ -186,7 +184,7 @@ extension LearningProcessViewController {
 						forItemAt indexPath: IndexPath) {
 		
 		if dataSource.questionsNumber == 0,
-			let cell = cell as? LearningCollectionViewCell {
+			let cell: LearningCollectionViewCell = cell as? LearningCollectionViewCell {
 			
 			cell.answerTextField.resignFirstResponder()
 			completeLearning()
@@ -197,7 +195,7 @@ extension LearningProcessViewController {
 								willDisplay cell: UICollectionViewCell,
 								forItemAt indexPath: IndexPath) {
 		
-		if let cell = cell as? LearningCollectionViewCell {
+		if let cell: LearningCollectionViewCell = cell as? LearningCollectionViewCell {
 			prepareForQuestion(cell)
 		}
 	}
@@ -226,7 +224,7 @@ extension LearningProcessViewController: LearningWordsAnswersHandlerDelegate {
 	}
 	
 	func answersReceiverReadyForNextQuestion(_ handler: AnswersReceiver) {
-		guard let answer = currentAnswerCorrectness else { return }
+		guard let answer: AnswerCorrectness = currentAnswerCorrectness else { return }
 		
 		switch answer {
 		case .correct:

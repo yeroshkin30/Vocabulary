@@ -29,7 +29,7 @@ class RepeatWordsCollectionViewDataSource: BaseWordsLearningCollectionViewDataSo
 	}
 	
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueCell(indexPath: indexPath) as LearningCollectionViewCell
+		let cell: LearningCollectionViewCell = collectionView.dequeueCell(indexPath: indexPath) as LearningCollectionViewCell
 		cell.viewData = LearningCollectionViewCell.ViewData(word: words[indexPath.item])
 		return cell
 	}

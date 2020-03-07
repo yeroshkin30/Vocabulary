@@ -8,7 +8,7 @@
 
 import Foundation
 
-private let savedWordsLimitNumber = 10
+private let savedWordsLimitNumber: Int = 10
 
 class HistoryModelController {
 	

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData.NSFetchRequest
 
 final class UnknownWordsViewController: BaseWordsLearningViewController, SegueHandlerType {
 	
@@ -14,7 +15,7 @@ final class UnknownWordsViewController: BaseWordsLearningViewController, SegueHa
 	
 	private var wordsToRemember: [Word] = []
 	
-	private let maxNumberOfWordsToRemembering = 5
+	private let maxNumberOfWordsToRemembering: Int = 5
 	
 	// MARK: - Life cycle
 	
@@ -35,14 +36,14 @@ final class UnknownWordsViewController: BaseWordsLearningViewController, SegueHa
 	// MARK: - BaseWordsLearningViewController -
 	
 	override func instantiateDataSource(with words: [Word]) -> WordsLearningCollectionViewDataSource {
-		let fetchRequest = WordFetchRequestFactory.fetchRequest(for: .remembering, wordCollectionID: currentWordCollectionID)
-		let words = vocabularyStore.wordsFrom(fetchRequest)
+		let fetchRequest: NSFetchRequest<Word> = WordFetchRequestFactory.fetchRequest(for: .remembering, wordCollectionID: currentWordCollectionID)
+		let words: [Word] = vocabularyStore.wordsFrom(fetchRequest)
 		return UnknownWordsCollectionViewDataSource(words: words)
 	}
 	
 	override func updateProgressView() {
 		
-		let newProgress = Float(wordsToRemember.count) / Float(initialProgressValue)
+		let newProgress: Float = Float(wordsToRemember.count) / Float(initialProgressValue)
 		progressView.setProgress(newProgress, animated: true)
 	}
 	
@@ -51,7 +52,7 @@ final class UnknownWordsViewController: BaseWordsLearningViewController, SegueHa
 								forItemAt indexPath: IndexPath) {
 		super.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
 		
-		if let cell = cell as? FullCardCollectionViewCell {
+		if let cell: FullCardCollectionViewCell = cell as? FullCardCollectionViewCell {
 			cell.cellActionHandler = { [weak self] action in
 				self?.handleCellAction(action)
 			}
@@ -70,8 +71,8 @@ final class UnknownWordsViewController: BaseWordsLearningViewController, SegueHa
 		switch segueIdentifier(for: segue) {
 		case .startRemembering:
 			
-			let navVC = segue.destination as! UINavigationController
-			let viewController = navVC.viewControllers.first as! LearningProcessViewController
+			let navVC: UINavigationController = segue.destination as! UINavigationController
+			let viewController: LearningProcessViewController = navVC.viewControllers.first as! LearningProcessViewController
 			viewController.vocabularyStore = vocabularyStore
 			viewController.learningMode = .remembering(wordsToRemember)
 		}
@@ -88,7 +89,7 @@ private extension UnknownWordsViewController {
 	}
 	
 	func handleCellAction(_ action: FullCardCollectionViewCell.Action) {
-		guard let word = dataSource.currentWord else { return }
+		guard let word: Word = dataSource.currentWord else { return }
 		
 		switch action {
 		case .negative:

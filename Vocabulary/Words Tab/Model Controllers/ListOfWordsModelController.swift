@@ -38,7 +38,7 @@ class ListOfWordsModelController: NSObject {
 
 	func deleteWords(at indexPaths: [IndexPath]) {
 		indexPaths.forEach {
-			let word = fetchedResultsController.object(at: $0)
+			let word: Word = fetchedResultsController.object(at: $0)
 			vocabularyStore.viewContext.delete(word)
 		}
 		vocabularyStore.saveChanges()
@@ -48,7 +48,7 @@ class ListOfWordsModelController: NSObject {
 		switch destination {
 		case .learningStage(let stage):
 			indexPaths.forEach {
-				let word = fetchedResultsController.object(at: $0)
+				let word: Word = fetchedResultsController.object(at: $0)
 				word.learningStage = stage
 			}
 		case .wordCollection(let wordCollection):
@@ -109,8 +109,8 @@ extension ListOfWordsModelController: UITableViewDataSource {
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
-		let word = fetchedResultsController.object(at: indexPath)
+		let cell: UITableViewCell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
+		let word: Word = fetchedResultsController.object(at: indexPath)
 
 		cell.textLabel?.text = word.headword
 		cell.detailTextLabel?.text = word.sentencePart

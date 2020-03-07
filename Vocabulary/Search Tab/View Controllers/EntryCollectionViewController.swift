@@ -79,7 +79,7 @@ class EntryCollectionViewController: UICollectionViewController, SegueHandlerTyp
 	private func makeEditWordViewController(coder: NSCoder, sender: Any?, segueIdentifier: String?) -> EditWordViewController? {
 		guard
 			let cell = sender as? UICollectionViewCell,
-			let indexPath = collectionView.indexPath(for: cell)
+			let indexPath: IndexPath = collectionView.indexPath(for: cell)
 		else {
 			return nil
 		}
@@ -87,7 +87,7 @@ class EntryCollectionViewController: UICollectionViewController, SegueHandlerTyp
 		let editWordContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		editWordContext.parent = vocabularyStore.viewContext
 
-		let word = Word(context: editWordContext)
+		let word: Word = Word(context: editWordContext)
 		word.fill(with: entry, viewMode: viewMode, at: indexPath)
 
 		if let objectID = wordCollectionID {

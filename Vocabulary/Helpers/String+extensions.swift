@@ -29,7 +29,7 @@ extension String {
 		
 		enumerateSubstrings(in: startIndex..<endIndex, options: [.byWords]) { (optionalWord, _, _, stop) in
 			
-			if let word = optionalWord,
+			if let word: String = optionalWord,
 				word.rangeOfCharacter(from: forbiddenCharactersSet) == nil {
 				if word.count > 2 {
 					words.append(word)

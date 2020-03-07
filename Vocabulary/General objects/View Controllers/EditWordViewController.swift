@@ -79,8 +79,8 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 	}
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-		if	let cell = sender as? UITableViewCell,
-			let indexPath = tableView.indexPath(for: cell),
+		if	let cell: UITableViewCell = sender as? UITableViewCell,
+			let indexPath: IndexPath = tableView.indexPath(for: cell),
 			Section(at: indexPath) == .deletion {
 
 			return false
@@ -94,18 +94,18 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 		sender: Any?,
 		segueIdentifier: String?
 	) -> InputTextViewController? {
-		if let indexPath = tableView.indexPathForSelectedRow {
+		if let indexPath: IndexPath = tableView.indexPathForSelectedRow {
 
-			let section = Section(at: indexPath)
-			let title = section.titleForInputTextViewController()
-			let text = textForCell(at: indexPath)
-			let capacity = section.charactersCapacity
+			let section: Section = Section(at: indexPath)
+			let title: String = section.titleForInputTextViewController()
+			let text: String? = textForCell(at: indexPath)
+			let capacity: CharactersNumberPreset = section.charactersCapacity
 
 			return InputTextViewController(coder: coder, title: title, initialText: text, charactersCapacity: capacity) {
 				self.saveInputedText($0, at: indexPath)
 			}
 		} else {
-			let title = "Enter new example"
+			let title: String = "Enter new example"
 			return InputTextViewController(coder: coder, title: title, charactersCapacity: .large) { (text) in
 				self.saveInputedText(text, at: nil)
 			}
@@ -113,7 +113,7 @@ class EditWordViewController: UITableViewController, SegueHandlerType {
 	}
 
 	private func showDismissAlert() {
-		let presenter = DismissActionSheetPresenter(discardHandler: { (_) in
+		let presenter: DismissActionSheetPresenter = .init(discardHandler: { (_) in
 			self.cancelButtonAction(nil)
 		}, saveHandler: { (_) in
 			self.saveButtonAction(nil)
@@ -128,20 +128,16 @@ private extension EditWordViewController {
 
 	func updateSaveButton() {
 
-		let isHeadwordEmpty	= word.headword.isEmpty
-		let isSentencePartEmpty = word.sentencePart.isEmpty
-		let isDefinitionEmpty	= word.definition.isEmpty
-
-		let hasEmptyField = isHeadwordEmpty || isSentencePartEmpty || isDefinitionEmpty
+		let hasEmptyField: Bool = word.headword.isEmpty || word.sentencePart.isEmpty || word.definition.isEmpty
 
 		saveButton.isEnabled = hasEmptyField == false
 	}
 
 	func saveInputedText(_ InputedText: String, at indexPath: IndexPath?) {
 
-		let text = InputedText.trimmingCharacters(in: .whitespacesAndNewlines)
+		let text: String = InputedText.trimmingCharacters(in: .whitespacesAndNewlines)
 
-		if let indexPath = indexPath {
+		if let indexPath: IndexPath = indexPath {
 			updateText(at: indexPath, with: text)
 			if Section(at: indexPath) == .examples {
 				tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -166,7 +162,7 @@ private extension EditWordViewController {
 
 	func addNewExample(with text: String) {
 		word.examples.insert(text, at: 0)
-		let newExampleIndexPath = IndexPath(row: 0, section: Section.examples.rawValue)
+		let newExampleIndexPath: IndexPath = IndexPath(row: 0, section: Section.examples.rawValue)
 		tableView.insertRows(at: [newExampleIndexPath], with: .automatic)
 	}
 }
@@ -175,7 +171,7 @@ private extension EditWordViewController {
 extension EditWordViewController {
 
 	private var examplesHeaderView: UITableViewHeaderFooterView {
-		let headerView = UITableViewHeaderFooterView(frame: .zero)
+		let headerView: UITableViewHeaderFooterView = .init(frame: .zero)
 		headerView.addTrailingButton(addNewExampleButton)
 		return headerView
 	}
@@ -200,10 +196,10 @@ extension EditWordViewController {
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let cell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
+		let cell: UITableViewCell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
 		
 		cell.textLabel?.text = textForCell(at: indexPath)
-		cell.textLabel?.textColor = Section(at: indexPath) == .deletion ? .red : .black
+		cell.textLabel?.textColor = Section(at: indexPath) == .deletion ? .systemRed : .label
 		cell.textLabel?.textAlignment = Section(at: indexPath) == .deletion ? .center : .left
 		
 		return cell
@@ -214,7 +210,7 @@ extension EditWordViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-		let currentSection = Section(section)
+		let currentSection: Section = Section(section)
 		switch currentSection {
 		case .headword:
 			if word.headword.isEmpty {
@@ -299,8 +295,8 @@ extension EditWordViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-		if let footerView = view as? UITableViewHeaderFooterView {
-			footerView.textLabel?.textColor = .red
+		if let footerView: UITableViewHeaderFooterView = view as? UITableViewHeaderFooterView {
+			footerView.textLabel?.textColor = .systemRed
 		}
 	}
 }
@@ -327,7 +323,7 @@ private extension EditWordViewController {
 	enum Section: Int {
 		case headword, sentencePart, definition, examples, deletion
 		
-		static let count = 5
+		static let count: Int = 5
 		
 		init(at indexPath: IndexPath) {
 			self = Section.init(rawValue: indexPath.section)!

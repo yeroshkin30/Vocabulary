@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g6H-Xg-LGg">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g6H-Xg-LGg">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,20 +13,20 @@
             <objects>
                 <viewController storyboardIdentifier="LearningTabViewController" id="g6H-Xg-LGg" customClass="LearningModesViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Maf-44-xIT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxA-sI-Qkj" customClass="LearningModesView" customModule="Vocabulary" customModuleProvider="target">
-                                <rect key="frame" x="20" y="20" width="335" height="578"/>
+                                <rect key="frame" x="20" y="64" width="374" height="729"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="hO8-0F-HLN">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="578"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="729"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMU-yJ-Zv3" userLabel="Remembering Title View" customClass="LearningModeTitleView" customModule="Vocabulary" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="226.5"/>
                                                 <subviews>
                                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDZ-Ci-Rbl">
-                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="226.5"/>
                                                         <color key="backgroundColor" red="0.9137254901960784" green="0.46666666666666667" blue="0.41568627450980394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                         <state key="normal" title="Remember">
@@ -42,7 +42,7 @@
                                                         </connections>
                                                     </button>
                                                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ge1-Fj-60h">
-                                                        <rect key="frame" x="309.5" y="13" width="12.5" height="24"/>
+                                                        <rect key="frame" x="348.5" y="13" width="12.5" height="24"/>
                                                         <color key="backgroundColor" red="0.91394579410552979" green="0.46850448846817017" blue="0.41584432125091553" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -70,10 +70,10 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mgp-cV-bOJ" userLabel="Select Title View" customClass="LearningModeTitleView" customModule="Vocabulary" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="201" width="335" height="176"/>
+                                                <rect key="frame" x="0.0" y="251.5" width="374" height="226"/>
                                                 <subviews>
                                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kr3-8i-GXQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="226"/>
                                                         <color key="backgroundColor" red="0.55686274509803924" green="0.75294117647058822" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                         <state key="normal" title="Repeat">
@@ -89,7 +89,7 @@
                                                         </connections>
                                                     </button>
                                                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDZ-ad-TXu">
-                                                        <rect key="frame" x="309.5" y="13" width="12.5" height="24"/>
+                                                        <rect key="frame" x="348.5" y="13" width="12.5" height="24"/>
                                                         <color key="backgroundColor" red="0.55567562580108643" green="0.75428664684295654" blue="0.3850540816783905" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -116,10 +116,10 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lK3-xf-Zo7" userLabel="Remind Word Title View" customClass="LearningModeTitleView" customModule="Vocabulary" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="402" width="335" height="176"/>
+                                                <rect key="frame" x="0.0" y="502.5" width="374" height="226.5"/>
                                                 <subviews>
                                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0P-DW-gca">
-                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="176"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="226.5"/>
                                                         <color key="backgroundColor" red="0.42352941176470588" green="0.55686274509803924" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                         <state key="normal" title="Remind">
@@ -133,7 +133,7 @@
                                                         </connections>
                                                     </button>
                                                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wig-jR-hvF">
-                                                        <rect key="frame" x="309.5" y="13" width="12.5" height="24"/>
+                                                        <rect key="frame" x="348.5" y="13" width="12.5" height="24"/>
                                                         <color key="backgroundColor" red="0.42513942718505859" green="0.55710518360137939" blue="0.8890194296836853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -201,11 +201,11 @@
             <objects>
                 <viewController storyboardIdentifier="LearningWordsViewController" modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="cYq-TG-4ba" customClass="LearningProcessViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RXr-mY-3fB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" verticalCompressionResistancePriority="752" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGZ-f6-Z9d">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="460-lE-NR9" customClass="CardCollectionViewFlowLayout" customModule="Vocabulary" customModuleProvider="target">
                                     <size key="itemSize" width="300" height="400"/>
@@ -229,14 +229,14 @@
                                                             <subviews>
                                                                 <label userInteractionEnabled="NO" contentMode="left" text="Keep" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="sVK-cF-xDt">
                                                                     <rect key="frame" x="0.0" y="0.0" width="255" height="33.5"/>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <textField contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Keep" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="d0t-1h-UqH" customClass="LearningCardTextField" customModule="Vocabulary" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="41.5" width="255" height="31.5"/>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="25"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
@@ -245,13 +245,13 @@
                                                         </stackView>
                                                         <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="To produce something, such as a journal or record by putting information in a book, document, etc., over a period of time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="jIP-bf-m9Y">
                                                             <rect key="frame" x="8" y="127.5" width="284" height="86.5"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="dSp-zj-L6Z" firstAttribute="centerY" secondItem="mgb-cJ-8QG" secondAttribute="centerY" multiplier="0.45" id="2QG-eP-RPo"/>
                                                         <constraint firstItem="dSp-zj-L6Z" firstAttribute="width" secondItem="mgb-cJ-8QG" secondAttribute="width" multiplier="0.85" id="2rm-dH-q3F"/>
@@ -303,7 +303,7 @@
                                 </connections>
                             </collectionView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QWp-Br-WEK">
-                                <rect key="frame" x="0.0" y="44" width="375" height="2.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="2.5"/>
                             </progressView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -326,7 +326,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="eg0-nw-OgT">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4VZ-Lo-8kk">
-                                <rect key="frame" x="299" y="0.0" width="60" height="44"/>
+                                <rect key="frame" x="334" y="0.0" width="60" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Speaker"/>
                                 <connections>
@@ -352,9 +352,9 @@
             <objects>
                 <collectionViewController id="WdM-hF-EXq" customClass="RememberingCompletionViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" id="xTN-Mj-wFq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="FyU-zx-6YX">
                             <size key="itemSize" width="340" height="160"/>
                             <size key="headerReferenceSize" width="50" height="120"/>
@@ -363,7 +363,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RememberingCompletionCollectionViewCell" id="8m3-Q0-V2c" customClass="RememberingCompletionCollectionViewCell" customModule="Vocabulary" customModuleProvider="target">
-                                <rect key="frame" x="17.5" y="140" width="340" height="160"/>
+                                <rect key="frame" x="37" y="140" width="340" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="340" height="160"/>
@@ -377,22 +377,22 @@
                                                     <subviews>
                                                         <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Keep" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3GK-1L-bgt">
                                                             <rect key="frame" x="0.0" y="0.0" width="310" height="26.5"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To produce something, such as a journal or record by putting information in a book, document, etc., over a period of time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smm-cM-BWl">
                                                             <rect key="frame" x="0.0" y="34.5" width="310" height="86.5"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="9Af-GD-dRx"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lFs-U2-5U4" secondAttribute="bottom" constant="15" id="HUQ-fz-abf"/>
@@ -416,32 +416,32 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outlet property="definitionLable" destination="Smm-cM-BWl" id="kHb-My-dXY"/>
-                                    <outlet property="headwordLable" destination="3GK-1L-bgt" id="EAf-R8-pd1"/>
+                                    <outlet property="definitionLabel" destination="Smm-cM-BWl" id="kHb-My-dXY"/>
+                                    <outlet property="headwordLabel" destination="3GK-1L-bgt" id="EAf-R8-pd1"/>
                                     <outlet property="widthConstraint" destination="mzh-2v-m4b" id="ZxN-44-UoO"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="MessageCollectionViewHeader" id="SJ4-cA-u1W" customClass="MessageCollectionViewHeader" customModule="Vocabulary" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zua-ad-EZp">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hnL-cW-yPs">
-                                            <rect key="frame" x="28" y="16" width="319" height="96"/>
+                                            <rect key="frame" x="28" y="44" width="358" height="68"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Well done!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="sVz-hH-lpp">
-                                                    <rect key="frame" x="96.5" y="0.0" width="126.5" height="33.5"/>
+                                                    <rect key="frame" x="116" y="0.0" width="126.5" height="33.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have remembered 5 new words" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6Ir-us-Zd6">
-                                                    <rect key="frame" x="42" y="41.5" width="235" height="54.5"/>
+                                                    <rect key="frame" x="10.5" y="41.5" width="337.5" height="26.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -455,6 +455,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="Zua-ad-EZp" secondAttribute="bottom" id="8j2-3W-wTw"/>
                                 <constraint firstItem="Zua-ad-EZp" firstAttribute="leading" secondItem="SJ4-cA-u1W" secondAttribute="leading" id="AAE-Ik-zOt"/>
@@ -489,12 +490,12 @@
             <objects>
                 <viewController storyboardIdentifier="RemindWordViewController" modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="jhV-t9-YKw" customClass="RemindWordsViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cMe-WN-60Y">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ynk-wr-FxM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.93709164860000005" green="0.93694382909999996" blue="0.95754462480000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0hg-RX-gNm" customClass="CardCollectionViewFlowLayout" customModule="Vocabulary" customModuleProvider="target">
                                     <size key="itemSize" width="305" height="500"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -503,7 +504,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RemindWordCollectionViewCell" id="VNe-8I-9XH" customClass="RemindWordCollectionViewCell" customModule="Vocabulary" customModuleProvider="target">
-                                        <rect key="frame" x="35" y="61.5" width="305" height="500"/>
+                                        <rect key="frame" x="35" y="137" width="305" height="500"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="305" height="500"/>
@@ -526,14 +527,14 @@
                                                                                     <subviews>
                                                                                         <label userInteractionEnabled="NO" contentMode="left" text="Sentence part" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wwY-Yh-7dX">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="97" height="18"/>
-                                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <label userInteractionEnabled="NO" contentMode="left" text="Headword" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="Uf5-34-p35">
                                                                                             <rect key="frame" x="0.0" y="18" width="162.5" height="41"/>
-                                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -542,6 +543,7 @@
                                                                                 </stackView>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxl-fQ-0bQ">
                                                                                     <rect key="frame" x="249" y="17.5" width="30" height="25"/>
+                                                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="30" id="Wa5-TN-slz"/>
                                                                                         <constraint firstAttribute="height" constant="25" id="YsB-VV-tBG"/>
@@ -554,7 +556,7 @@
                                                                             </subviews>
                                                                         </stackView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailingMargin" secondItem="seh-B2-xoW" secondAttribute="trailing" id="Vz8-GV-Db1"/>
                                                                         <constraint firstItem="seh-B2-xoW" firstAttribute="leading" secondItem="jLR-9h-O0n" secondAttribute="leadingMargin" id="Xvz-Cw-6EP"/>
@@ -574,13 +576,13 @@
                                                                         </view>
                                                                         <label userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" verticalCompressionResistancePriority="752" text="to produce (something, such as a journal or record) by putting information in a book, document, etc., over a period of time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5OI-T1-UQz" userLabel="Definitions label">
                                                                             <rect key="frame" x="8" y="8" width="279" height="134"/>
-                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstItem="PJ0-PA-fqE" firstAttribute="top" secondItem="SCf-g6-D1s" secondAttribute="top" id="DFa-RE-ToY"/>
                                                                         <constraint firstItem="5OI-T1-UQz" firstAttribute="top" secondItem="SCf-g6-D1s" secondAttribute="topMargin" id="HhB-01-gAi"/>
@@ -606,16 +608,16 @@
                                                                             <subviews>
                                                                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEf-9c-DQd">
                                                                                     <rect key="frame" x="16" y="8" width="263" height="99.5"/>
-                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                                     <string key="text">- She kept a diary/journal.
 He keeps a detailed record of all his purchases.
 She keeps a list of books for future reading.</string>
                                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>
-                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="bottomMargin" secondItem="hEf-9c-DQd" secondAttribute="bottom" constant="8" id="8yv-EN-j9K"/>
                                                                                 <constraint firstItem="hEf-9c-DQd" firstAttribute="leading" secondItem="PPL-ih-EKP" secondAttribute="leadingMargin" constant="8" id="NQp-h0-InI"/>
@@ -624,6 +626,7 @@ She keeps a list of books for future reading.</string>
                                                                             </constraints>
                                                                         </view>
                                                                     </subviews>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstItem="PPL-ih-EKP" firstAttribute="width" secondItem="FaG-Mn-I6D" secondAttribute="width" id="8rW-pm-mgb"/>
                                                                         <constraint firstAttribute="bottom" secondItem="PPL-ih-EKP" secondAttribute="bottom" id="PWc-lo-FGi"/>
@@ -644,6 +647,7 @@ She keeps a list of books for future reading.</string>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fj5-2U-3vp">
                                                                             <rect key="frame" x="0.0" y="0.0" width="143.5" height="44"/>
+                                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                                             <state key="normal" title="Later">
                                                                                 <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -659,6 +663,7 @@ She keeps a list of books for future reading.</string>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Erm-Oc-6B6">
                                                                             <rect key="frame" x="151.5" y="0.0" width="143.5" height="44"/>
+                                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                             <state key="normal" title="Now"/>
                                                                             <userDefinedRuntimeAttributes>
@@ -678,7 +683,7 @@ She keeps a list of books for future reading.</string>
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="jLR-9h-O0n" firstAttribute="height" secondItem="2lM-yn-4Kz" secondAttribute="height" multiplier="0.15" id="37z-I4-FOE"/>
                                                         <constraint firstAttribute="bottom" secondItem="9AG-tv-Pak" secondAttribute="bottom" id="98c-Fk-3CT"/>
@@ -721,7 +726,7 @@ She keeps a list of books for future reading.</string>
                                 </connections>
                             </collectionView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QWG-or-xEN">
-                                <rect key="frame" x="0.0" y="44" width="375" height="2.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="2.5"/>
                             </progressView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -740,7 +745,7 @@ She keeps a list of books for future reading.</string>
                     <navigationItem key="navigationItem" title="Remind words" largeTitleDisplayMode="never" id="K9X-X9-H2j">
                         <barButtonItem key="rightBarButtonItem" id="oma-zX-9lk">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PwE-Jw-X53">
-                                <rect key="frame" x="299" y="0.0" width="60" height="44"/>
+                                <rect key="frame" x="334" y="0.0" width="60" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Speaker"/>
                                 <connections>
@@ -767,7 +772,7 @@ She keeps a list of books for future reading.</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="iyz-Bb-tbU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bRY-vz-bM6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -784,12 +789,12 @@ She keeps a list of books for future reading.</string>
             <objects>
                 <viewController storyboardIdentifier="UnknownWordsCollectionViewController" modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="2tA-eO-ztS" customClass="UnknownWordsViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eHe-WN-5Ax">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qw4-6A-Apz">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.93709164860000005" green="0.93694382909999996" blue="0.95754462480000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FxJ-nn-eb6" customClass="CardCollectionViewFlowLayout" customModule="Vocabulary" customModuleProvider="target">
                                     <size key="itemSize" width="300" height="500"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -798,7 +803,7 @@ She keeps a list of books for future reading.</string>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FullCardCollectionViewCell" id="Vhu-Fo-jae" customClass="FullCardCollectionViewCell" customModule="Vocabulary" customModuleProvider="target">
-                                        <rect key="frame" x="35" y="61.5" width="300" height="500"/>
+                                        <rect key="frame" x="35" y="137" width="300" height="500"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="500"/>
@@ -821,14 +826,14 @@ She keeps a list of books for future reading.</string>
                                                                                     <subviews>
                                                                                         <label userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="Sentence part" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8dI-PG-iTX">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="97" height="18"/>
-                                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <label userInteractionEnabled="NO" contentMode="left" text="Headword" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="lPO-AC-3S3">
                                                                                             <rect key="frame" x="0.0" y="18" width="162.5" height="41"/>
-                                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -837,6 +842,7 @@ She keeps a list of books for future reading.</string>
                                                                                 </stackView>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agS-Z3-2yP">
                                                                                     <rect key="frame" x="244" y="17.5" width="30" height="25"/>
+                                                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="25" id="IrG-8o-aHi"/>
                                                                                         <constraint firstAttribute="width" constant="30" id="M6f-Gw-482"/>
@@ -849,7 +855,7 @@ She keeps a list of books for future reading.</string>
                                                                             </subviews>
                                                                         </stackView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailingMargin" secondItem="sIJ-LJ-NOy" secondAttribute="trailing" id="U0r-Qj-hbu"/>
                                                                         <constraint firstItem="sIJ-LJ-NOy" firstAttribute="leading" secondItem="zHH-wF-BDy" secondAttribute="leadingMargin" id="g3q-ry-EnQ"/>
@@ -869,13 +875,13 @@ She keeps a list of books for future reading.</string>
                                                                         </view>
                                                                         <label userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" verticalCompressionResistancePriority="752" text="to produce (something, such as a journal or record) by putting information in a book, document, etc., over a period of time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEN-XP-Umo" userLabel="Definitions label">
                                                                             <rect key="frame" x="8" y="8" width="274" height="134"/>
-                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstItem="haj-kO-7rf" firstAttribute="top" secondItem="jFf-7G-I32" secondAttribute="top" id="66E-vj-S4e"/>
                                                                         <constraint firstItem="haj-kO-7rf" firstAttribute="leading" secondItem="jFf-7G-I32" secondAttribute="leading" id="7a5-tf-D3W"/>
@@ -901,16 +907,16 @@ She keeps a list of books for future reading.</string>
                                                                             <subviews>
                                                                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AwP-8K-EXp">
                                                                                     <rect key="frame" x="16" y="8" width="258" height="99.5"/>
-                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                                     <string key="text">- She kept a diary/journal.
 He keeps a detailed record of all his purchases.
 She keeps a list of books for future reading.</string>
                                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>
-                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="trailingMargin" secondItem="AwP-8K-EXp" secondAttribute="trailing" constant="8" id="BXU-br-UKS"/>
                                                                                 <constraint firstItem="AwP-8K-EXp" firstAttribute="top" secondItem="hnS-dA-pVO" secondAttribute="topMargin" id="mh5-6B-qkm"/>
@@ -919,6 +925,7 @@ She keeps a list of books for future reading.</string>
                                                                             </constraints>
                                                                         </view>
                                                                     </subviews>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="hnS-dA-pVO" secondAttribute="trailing" id="2U3-Se-CsS"/>
                                                                         <constraint firstItem="hnS-dA-pVO" firstAttribute="top" secondItem="W2h-Fd-f3I" secondAttribute="top" id="Cya-5E-hbD"/>
@@ -939,10 +946,9 @@ She keeps a list of books for future reading.</string>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sjc-AH-0Lo">
                                                                             <rect key="frame" x="0.0" y="0.0" width="141" height="44"/>
+                                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                                            <state key="normal" title="Later">
-                                                                                <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            </state>
+                                                                            <state key="normal" title="Later"/>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="10"/>
@@ -954,6 +960,7 @@ She keeps a list of books for future reading.</string>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQS-WG-1Qx">
                                                                             <rect key="frame" x="149" y="0.0" width="141" height="44"/>
+                                                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                             <state key="normal" title="Now"/>
                                                                             <userDefinedRuntimeAttributes>
@@ -973,7 +980,7 @@ She keeps a list of books for future reading.</string>
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="zHH-wF-BDy" firstAttribute="height" relation="lessThanOrEqual" secondItem="lWh-yh-g30" secondAttribute="height" multiplier="0.15" id="BLk-3t-Pxp"/>
                                                         <constraint firstItem="jFf-7G-I32" firstAttribute="height" secondItem="lWh-yh-g30" secondAttribute="height" multiplier="0.3" id="IKv-Dj-ARg"/>
@@ -1016,7 +1023,7 @@ She keeps a list of books for future reading.</string>
                                 </connections>
                             </collectionView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-mR-zyG">
-                                <rect key="frame" x="0.0" y="44" width="383" height="2.5"/>
+                                <rect key="frame" x="0.0" y="88" width="422" height="2.5"/>
                             </progressView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -1035,8 +1042,9 @@ She keeps a list of books for future reading.</string>
                     <navigationItem key="navigationItem" title="Unknown words" largeTitleDisplayMode="never" id="wsx-1T-kaj">
                         <barButtonItem key="rightBarButtonItem" id="gB2-ee-fsq">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Y6W-0S-x3G">
-                                <rect key="frame" x="299" y="0.0" width="60" height="44"/>
+                                <rect key="frame" x="334" y="0.0" width="60" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="Speaker"/>
                                 <connections>
                                     <action selector="autoPronounceButtonAction:" destination="2tA-eO-ztS" eventType="touchUpInside" id="aci-jk-rRZ"/>

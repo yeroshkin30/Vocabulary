@@ -141,8 +141,8 @@ extension SearchStateModelController: UISearchBarDelegate {
 	}
 
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-		guard let word = searchBar.text, word != ""	else { return }
-		requestEntries(for: word)
+		guard let text: String = searchBar.text, !text.isEmpty else { return }
+		requestEntries(for: text)
 	}
 
 	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

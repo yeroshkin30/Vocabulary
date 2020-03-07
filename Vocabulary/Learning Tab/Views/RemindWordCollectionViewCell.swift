@@ -10,7 +10,7 @@ import UIKit
 
 class RemindWordCollectionViewCell: FullCardCollectionViewCell {
 	
-	// MARK: - Overriden -
+	// MARK: - Overridden -
 	
 	override func prepareForReuse() {
 		super.prepareForReuse()
@@ -20,7 +20,7 @@ class RemindWordCollectionViewCell: FullCardCollectionViewCell {
 	}
 	
 	override func optionsModeDidChange() {
-		guard let viewData = viewData else { return }
+		guard let viewData: ViewData = viewData else { return }
 		
 		switch optionsMode {
 		case .oneOption:

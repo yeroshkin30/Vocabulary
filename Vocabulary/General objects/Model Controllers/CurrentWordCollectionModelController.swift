@@ -30,19 +30,19 @@ class CurrentWordCollectionModelController: CurrentWordCollectionInfoProvider {
 	private var observations: [ObjectIdentifier: Observation] = [:]
 
 	func addObserver(_ observer: CurrentWordCollectionInfoObserver) {
-		let id = ObjectIdentifier(observer)
+		let id: ObjectIdentifier = ObjectIdentifier(observer)
 		observations[id] = Observation(observer: observer)
 		observer.currentWordCollectionDidChange(wordCollectionInfo)
 	}
 
 	func removeObserver(_ observer: CurrentWordCollectionInfoObserver) {
-		let id = ObjectIdentifier(observer)
+		let id: ObjectIdentifier = ObjectIdentifier(observer)
 		observations.removeValue(forKey: id)
 	}
 
 	private func notifyObservers() {
 		observations.forEach { (id, observation) in
-			if let observer = observation.observer {
+			if let observer: CurrentWordCollectionInfoObserver = observation.observer {
 				observer.currentWordCollectionDidChange(wordCollectionInfo)
 
 			} else {

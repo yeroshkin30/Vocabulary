@@ -46,7 +46,7 @@ class WordDestinationsViewController: UITableViewController {
 	// MARK: - Actions
 	
 	@IBAction private func saveButtonAction(_ sender: UIBarButtonItem) {
-		guard let indexPath = tableView.indexPathForSelectedRow else { return }
+		guard let indexPath: IndexPath = tableView.indexPathForSelectedRow else { return }
 		
 		switch ViewData.Section(at: indexPath) {
 		case .learningStages:
@@ -84,7 +84,7 @@ class WordDestinationsViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
+		let cell: UITableViewCell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
 		cell.textLabel?.text = viewData.textOfCell(at: indexPath)
 		return cell
 	}
@@ -96,14 +96,14 @@ class WordDestinationsViewController: UITableViewController {
 	// MARK: - UITableViewDelegate
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let cell = tableView.cellForRow(at: indexPath)
+		let cell: UITableViewCell? = tableView.cellForRow(at: indexPath)
 		cell?.accessoryType = .checkmark
 		
 		saveButton.isEnabled = true
 	}
 	
 	override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-		let cell = tableView.cellForRow(at: indexPath)
+		let cell: UITableViewCell? = tableView.cellForRow(at: indexPath)
 		cell?.accessoryType = .none
 	}
 }

@@ -14,7 +14,7 @@ final class UnknownWordsCollectionViewDataSource: BaseWordsLearningCollectionVie
 								reactToAnswerImpact impact: AnswerImpact) {
 		guard !words.isEmpty else { return }
 		
-		let word = words.removeFirst()
+		let word: Word = words.removeFirst()
 		
 		switch impact {
 		case .negative:
@@ -35,9 +35,9 @@ final class UnknownWordsCollectionViewDataSource: BaseWordsLearningCollectionVie
 	override func collectionView(_ collectionView: UICollectionView,
 						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
-		let cell = collectionView.dequeueCell(indexPath: indexPath) as FullCardCollectionViewCell
+		let cell: FullCardCollectionViewCell = collectionView.dequeueCell(indexPath: indexPath) as FullCardCollectionViewCell
 		
-		let word = words[indexPath.item]
+		let word: Word = words[indexPath.item]
 		cell.viewData = FullCardCollectionViewCell.ViewData(word: word)
 		
 		if words.count == 1 { cell.optionsMode = .oneOption }

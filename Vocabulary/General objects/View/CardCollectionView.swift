@@ -36,7 +36,7 @@ class CardCollectionView: UICollectionViewCell {
 	}
 	
 	func setupShadowPath(for size: CGSize) {
-		let rect = CGRect(origin: CGPoint.zero, size: size)
+		let rect: CGRect = CGRect(origin: CGPoint.zero, size: size)
 		layer.shadowPath = UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).cgPath
 	}
 }

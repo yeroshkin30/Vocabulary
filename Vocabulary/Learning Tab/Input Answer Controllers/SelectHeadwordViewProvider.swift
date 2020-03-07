@@ -40,7 +40,7 @@ class SelectHeadwordViewProvider: HeadwordInputViewProvider {
 	]
 	
 	private lazy var savedHeadwordsFetchRequest: NSFetchRequest<NSFetchRequestResult> = {
-		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Word")
+		let fetchRequest: NSFetchRequest<NSFetchRequestResult> = .init(entityName: "Word")
 		fetchRequest.propertiesToFetch = [#keyPath(Word.headword)]
 		fetchRequest.resultType = .dictionaryResultType
 		fetchRequest.returnsDistinctResults = true
@@ -53,7 +53,7 @@ class SelectHeadwordViewProvider: HeadwordInputViewProvider {
 	}
 	
 	private lazy var savedHeadwords: [String] = {
-		let fetchedDictionary = (try? context.fetch(savedHeadwordsFetchRequest)) as? [[String:String]]
+		let fetchedDictionary: [[String : String]]? = (try? context.fetch(savedHeadwordsFetchRequest)) as? [[String:String]]
 		
 		return fetchedDictionary?.compactMap({ $0[#keyPath(Word.headword)] }) ?? []
 	}()
@@ -68,7 +68,7 @@ class SelectHeadwordViewProvider: HeadwordInputViewProvider {
 	
 	private var currentOptions: [String] = [] {
 		didSet {
-			let viewData = SelectHeadwordInputView.ViewData(headwords: currentOptions)
+			let viewData: SelectHeadwordInputView.ViewData = .init(headwords: currentOptions)
 			selectHeadwordInputView.viewData = viewData
 		}
 	}
@@ -76,13 +76,13 @@ class SelectHeadwordViewProvider: HeadwordInputViewProvider {
 	// MARK: - Helpers
 	
 	private func initializeSelectHeadwordInputView() -> SelectHeadwordInputView {
-		let nib = UINib(nibName: SelectHeadwordInputView.stringIdentifier, bundle: nil)
-		let selectHeadwordInputView = nib
+		let nib: UINib = UINib(nibName: SelectHeadwordInputView.stringIdentifier, bundle: nil)
+		let selectHeadwordInputView: SelectHeadwordInputView = nib
 			.instantiate(withOwner: nil, options: nil).first as! SelectHeadwordInputView
 		
 		selectHeadwordInputView.optionSelectedAction = { [weak self] (selectedOptionIndex) in
 			guard let self = self else { return }
-			let option = self.currentOptions[selectedOptionIndex]
+			let option: String = self.currentOptions[selectedOptionIndex]
 			self.delegate?.selectHeadwordViewProvider(self, didSelect: option)
 		}
 		
@@ -90,15 +90,15 @@ class SelectHeadwordViewProvider: HeadwordInputViewProvider {
 	}
 	
 	private func updateCurrentOptions() {
-		guard let headword = headword else { return }
+		guard let headword: String = headword else { return }
 		
-		let optionsNumber = selectHeadwordInputView.optionsNumber
+		let optionsNumber: Int = selectHeadwordInputView.optionsNumber
 		
 		var optionHeadwords: [String] = [headword]
 		
 		while optionHeadwords.count < optionsNumber {
-			let optioIndex = Int.random(in: 0..<sourceHeadwords.count)
-			let option = sourceHeadwords[optioIndex]
+			let optionIndex: Int = Int.random(in: 0..<sourceHeadwords.count)
+			let option: String = sourceHeadwords[optionIndex]
 			
 			if !optionHeadwords.contains(option) {
 				optionHeadwords.append(option)

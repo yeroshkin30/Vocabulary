@@ -35,13 +35,13 @@ class ConstructHeadwordController: NSObject, HeadwordInputViewProvider {
 	private var headwordLetters: [String: Int] = [:]
 	private var numberOfShownItems = 0
 	
-	private let maxSectionsNumber = 3
-	private let maxItemsInSectionNumber = 5
+	private let maxSectionsNumber: Int = 3
+	private let maxItemsInSectionNumber: Int = 5
 	
 	private let itemSpacing: CGFloat = 0
 	
 	private lazy var itemSide: CGFloat = {
-		let sectionWidth = UIScreen.main.bounds.width * 0.9
+		let sectionWidth: CGFloat = UIScreen.main.bounds.width * 0.9
 		let entireInteritemSpacing: CGFloat = itemSpacing * CGFloat(maxItemsInSectionNumber - 1)
 		let spaceForAllItems: CGFloat = sectionWidth - entireInteritemSpacing
 		return spaceForAllItems / CGFloat(maxItemsInSectionNumber)
@@ -59,16 +59,16 @@ private extension ConstructHeadwordController {
 	}
 	
 	func initializeCollectionView() -> UICollectionView {
-		let layout = UICollectionViewFlowLayout()
+		let layout: UICollectionViewFlowLayout = .init()
 		layout.minimumLineSpacing = itemSpacing
 		layout.minimumInteritemSpacing = itemSpacing
 		layout.itemSize = CGSize(width: itemSide, height: itemSide)
 		
-		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+		let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
 		collectionView.autoresizingMask = [.flexibleHeight]
 		collectionView.delegate = self
 		collectionView.dataSource = self
-		collectionView.backgroundColor = .clear
+		collectionView.backgroundColor = .systemFill
 		
 		collectionView.registerNibForCell(LetterCollectionViewCell.self)
 		
@@ -76,13 +76,13 @@ private extension ConstructHeadwordController {
 	}
 	
 	func parseHeadword() {
-		guard let headword = headword else {
+		guard let headword: String = headword else {
 			headwordLetters = [:]
 			return
 		}
 		
 		for letter in headword.lowercased() {
-			if let count = headwordLetters["\(letter)"] {
+			if let count: Int = headwordLetters["\(letter)"] {
 				headwordLetters["\(letter)"] = count + 1
 			} else {
 				headwordLetters["\(letter)"] = 1
@@ -91,8 +91,8 @@ private extension ConstructHeadwordController {
 	}
 	
 	func dataForFirstItem() -> LetterCollectionViewCell.LetterItemData {
-		let letter = String(headword!.first!).lowercased()
-		let lettersNumber = headwordLetters[letter]
+		let letter: String = String(headword!.first!).lowercased()
+		let lettersNumber: Int? = headwordLetters[letter]
 		
 		headwordLetters.removeValue(forKey: letter)
 		
@@ -104,10 +104,10 @@ private extension ConstructHeadwordController {
 			return nil
 		}
 		
-		let randomIndex = Int.random(in: 0..<headwordLetters.count)
+		let randomIndex: Int = Int.random(in: 0..<headwordLetters.count)
 		
-		let letter = Array(headwordLetters.keys)[randomIndex]
-		let lettersNumber = headwordLetters[letter]
+		let letter: String = Array(headwordLetters.keys)[randomIndex]
+		let lettersNumber: Int? = headwordLetters[letter]
 		
 		headwordLetters.removeValue(forKey: letter)
 		
@@ -119,14 +119,14 @@ private extension ConstructHeadwordController {
 extension ConstructHeadwordController: UICollectionViewDataSource {
 	
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
-		let currentNumberOfLetters = headwordLetters.count
-		let maxItemsNumber = maxSectionsNumber * maxItemsInSectionNumber
+		let currentNumberOfLetters: Int = headwordLetters.count
+		let maxItemsNumber: Int = maxSectionsNumber * maxItemsInSectionNumber
 		
 		if currentNumberOfLetters > maxItemsNumber {
 			return maxSectionsNumber
 			
 		} else {
-			let difference = maxItemsNumber - currentNumberOfLetters
+			let difference: Int = maxItemsNumber - currentNumberOfLetters
 			return maxSectionsNumber - (difference / maxItemsInSectionNumber)
 		}
 	}
@@ -134,15 +134,15 @@ extension ConstructHeadwordController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView,
 						numberOfItemsInSection section: Int) -> Int {
 		
-		let availableItemsNumber = maxItemsInSectionNumber * (section + 1)
-		let difference = availableItemsNumber - headwordLetters.count
+		let availableItemsNumber: Int = maxItemsInSectionNumber * (section + 1)
+		let difference: Int = availableItemsNumber - headwordLetters.count
 		return difference < 0 ? maxItemsInSectionNumber : maxItemsInSectionNumber - difference
 	}
 	
 	func collectionView(_ collectionView: UICollectionView,
 						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
-		let cell = collectionView.dequeueCell(indexPath: indexPath) as LetterCollectionViewCell
+		let cell: LetterCollectionViewCell = collectionView.dequeueCell(indexPath: indexPath) as LetterCollectionViewCell
 		
 		cell.isHidden = false
 		
@@ -163,7 +163,7 @@ extension ConstructHeadwordController: UICollectionViewDelegate {
 						willDisplay cell: UICollectionViewCell,
 						forItemAt indexPath: IndexPath) {
 		
-		if let cell = cell as? LetterCollectionViewCell {
+		if let cell: LetterCollectionViewCell = cell as? LetterCollectionViewCell {
 			cell.updateCornerRadius()
 		}
 	}
@@ -171,7 +171,7 @@ extension ConstructHeadwordController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView,
 						shouldSelectItemAt indexPath: IndexPath) -> Bool {
 		
-		if let cell = collectionView.cellForItem(at: indexPath) {
+		if let cell: UICollectionViewCell = collectionView.cellForItem(at: indexPath) {
 			return !cell.isHidden
 		}
 		return false
@@ -181,22 +181,22 @@ extension ConstructHeadwordController: UICollectionViewDelegate {
 						didUnhighlightItemAt indexPath: IndexPath) {
 		
 		guard
-			let cell = collectionView.cellForItem(at: indexPath) as? LetterCollectionViewCell,
-			let itemData = cell.letterItemData else {
+			let cell: LetterCollectionViewCell = collectionView.cellForItem(at: indexPath) as? LetterCollectionViewCell,
+			let itemData: LetterCollectionViewCell.LetterItemData = cell.letterItemData else {
 				return
 			}
 		
 		delegate?.constructHeadwordController(self, didSelectLetter: itemData.letter)
 		
 		if itemData.number == 1 {
-			if let newItemData = randomDataForItem() {
+			if let newItemData: LetterCollectionViewCell.LetterItemData = randomDataForItem() {
 				cell.letterItemData = newItemData
 			} else {
 				cell.isHidden = true
 				numberOfShownItems -= 1
 			}
 		} else {
-			let newItemData = (itemData.letter, itemData.number - 1)
+			let newItemData: LetterCollectionViewCell.LetterItemData = (itemData.letter, itemData.number - 1)
 			cell.letterItemData = newItemData
 		}
 		

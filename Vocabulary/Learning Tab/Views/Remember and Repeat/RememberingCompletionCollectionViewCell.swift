@@ -12,8 +12,8 @@ private let widthMultiplier: CGFloat = 0.9
 
 class RememberingCompletionCollectionViewCell: CardCollectionView {
 	
-	@IBOutlet private var headwordLable: UILabel!
-	@IBOutlet private var definitionLable: UILabel!
+	@IBOutlet private var headwordLabel: UILabel!
+	@IBOutlet private var definitionLabel: UILabel!
 	
 	@IBOutlet private var widthConstraint: NSLayoutConstraint!
 	
@@ -22,7 +22,7 @@ class RememberingCompletionCollectionViewCell: CardCollectionView {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		let screenWidth = UIScreen.main.bounds.width
+		let screenWidth: CGFloat = UIScreen.main.bounds.width
 		widthConstraint.constant = screenWidth * 0.9
 	}
 	
@@ -35,10 +35,10 @@ class RememberingCompletionCollectionViewCell: CardCollectionView {
 	}
 	
 	private func viewDataDidChanged() {
-		guard let viewData = viewData else { return }
+		guard let viewData: ViewData = viewData else { return }
 		
-		headwordLable.text = viewData.headword
-		definitionLable.text = viewData.definition
+		headwordLabel.text = viewData.headword
+		definitionLabel.text = viewData.definition
 		
 		setupShadowPath(for: fittingSize)
 	}

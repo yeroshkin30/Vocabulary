@@ -10,13 +10,13 @@ import UIKit
 
 class RememberWordsCollectionViewDataSource: NSObject {
 	
-	private let rememberingStagesNumber = 3
+	private let rememberingStagesNumber: Int = 3
 	
 	private var wordSections: [[Word]] = []
 	
 	init(words: [Word]) {
 		for _ in 1...rememberingStagesNumber {
-			let sectionWords = words.shuffled()
+			let sectionWords: [Word] = words.shuffled()
 			wordSections.append(sectionWords)
 		}
 	}
@@ -30,11 +30,11 @@ extension RememberWordsCollectionViewDataSource: WordsLearningCollectionViewData
 	}
 	
 	var currentWord: Word? {
-		guard let word = wordSections.first?.first else {
+		guard let word: Word = wordSections.first?.first else {
 			return nil
 		}
 		
-		let sectionsNumber = wordSections.count
+		let sectionsNumber: Int = wordSections.count
 		
 		if sectionsNumber == 3 {
 			word.learningStageDetail = .select
@@ -71,9 +71,9 @@ extension RememberWordsCollectionViewDataSource: WordsLearningCollectionViewData
 	func collectionView(_ collectionView: UICollectionView,
 						cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
-		let cell = collectionView.dequeueCell(indexPath: indexPath) as LearningCollectionViewCell
+		let cell: LearningCollectionViewCell = collectionView.dequeueCell(indexPath: indexPath) as LearningCollectionViewCell
 		
-		let word = wordSections.flatMap{ $0 }[indexPath.item]
+		let word: Word = wordSections.flatMap{ $0 }[indexPath.item]
 		cell.viewData = LearningCollectionViewCell.ViewData(word: word)
 		
 		return cell
@@ -106,11 +106,11 @@ private extension RememberWordsCollectionViewDataSource {
 		if currentWordSection.count == 1 {
 			collectionView.reloadItems(at: [IndexPath.first])
 		} else {
-			let word = currentWordSection.removeFirst()
+			let word: Word = currentWordSection.removeFirst()
 			currentWordSection.append(word)
 			wordSections[0] = currentWordSection
 			
-			let indexPath = IndexPath(item: currentWordSection.count - 1, section: 0)
+			let indexPath: IndexPath = IndexPath(item: currentWordSection.count - 1, section: 0)
 			
 			collectionView.performBatchUpdates({
 				collectionView.deleteItems(at: [IndexPath.first])

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 	func applicationWillEnterForeground(_ application: UIApplication) {
-		if let newPasteBoardString = UIPasteboard.general.string?.removingBooksAppExcerpt() {
+		if let newPasteBoardString: String = UIPasteboard.general.string?.removingBooksAppExcerpt() {
 			UIPasteboard.general.string = newPasteBoardString
 		}
 	}

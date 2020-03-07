@@ -8,18 +8,18 @@
 
 import CoreData
 
-private let modelFileName = "Vocabulary"
+private let modelFileName: String = "Vocabulary"
 
 class VocabularyStore: NSPersistentContainer {
 
 	init(name: String = modelFileName) {
-		guard let model = NSManagedObjectModel.mergedModel(from: nil) else {
+		guard let model: NSManagedObjectModel = NSManagedObjectModel.mergedModel(from: nil) else {
 			fatalError("Can't load managed object models from bundle")
 		}
 		super.init(name: name, managedObjectModel: model)
 
 		loadPersistentStores(completionHandler: { (_, error) in
-			if let error = error as NSError? {
+			if let error: NSError = error as NSError? {
 				fatalError("Unresolved error \(error), \(error.userInfo)")
 			}
 		})
@@ -61,23 +61,21 @@ class VocabularyStore: NSPersistentContainer {
 extension VocabularyStore {
 
 	static var isPersistentStoreEmpty: Bool {
-		let location = NSPersistentContainer.defaultDirectoryURL()
-		let content = try? FileManager.default.contentsOfDirectory(at: location, includingPropertiesForKeys: nil)
+		let location: URL = NSPersistentContainer.defaultDirectoryURL()
+		let content: [URL]? = try? FileManager.default.contentsOfDirectory(at: location, includingPropertiesForKeys: nil)
 
 		return content?.isEmpty == true
 	}
 
 	static func loadDefaultVocabulary() {
-		let location = NSPersistentContainer.defaultDirectoryURL()
+		let location: URL = NSPersistentContainer.defaultDirectoryURL()
 
-		let fm = FileManager.default
-
-		let fileExtensions = ["sqlite", "sqlite-shm", "sqlite-wal"]
+		let fileExtensions: [String] = ["sqlite", "sqlite-shm", "sqlite-wal"]
 
 		for fileExtension in fileExtensions {
-			if let source = Bundle.main.url(forResource: modelFileName, withExtension: fileExtension) {
-				let destination = location.appendingPathComponent(source.lastPathComponent)
-				try? fm.copyItem(at: source, to: destination)
+			if let source: URL = Bundle.main.url(forResource: modelFileName, withExtension: fileExtension) {
+				let destination: URL = location.appendingPathComponent(source.lastPathComponent)
+				try? FileManager.default.copyItem(at: source, to: destination)
 			}
 		}
 	}

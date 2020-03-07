@@ -53,7 +53,7 @@ extension SearchResultsModelController: UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
+		let cell: UITableViewCell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
 		configureCell(cell, at: indexPath)
 		return cell
 	}

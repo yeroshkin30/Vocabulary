@@ -89,7 +89,7 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 		let word: Word
 		let viewMode: EditWordViewController.ViewMode
 
-		if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+		if let cell: UITableViewCell = sender as? UITableViewCell, let indexPath: IndexPath = tableView.indexPath(for: cell) {
 			let objectID = listOfWordsModelController.wordAt(indexPath).objectID
 			word = editWordContext.object(with: objectID) as! Word
 			viewMode = .edit
@@ -137,9 +137,9 @@ private extension ListOfWordsViewController {
 	}
 	
 	@IBAction func pronounceButtonAction(_ sender: UIButton) {
-		guard let indexPath = tableView.indexPathForRow(with: sender) else { return }
-		let word = listOfWordsModelController.wordAt(indexPath).headword
-		pronounce(word)
+		guard let indexPath: IndexPath = tableView.indexPathForRow(with: sender) else { return }
+		let headword: String = listOfWordsModelController.wordAt(indexPath).headword
+		pronounce(headword)
 	}
 }
 
@@ -186,7 +186,7 @@ private extension ListOfWordsViewController {
 	func updateToolBar() {
 		let hasSelectedRows = (tableView.indexPathForSelectedRow?.count ?? 0) > 0
 
-		let wordsNumber = tableView.numberOfRows(inSection: 0)
+		let wordsNumber: Int = tableView.numberOfRows(inSection: 0)
 		selectAllButton.isEnabled = wordsNumber > 0
 		moveButton.isEnabled = hasSelectedRows
 		deleteButton.isEnabled = hasSelectedRows
@@ -200,10 +200,10 @@ private extension ListOfWordsViewController {
 	// MARK: - Cells Selection -
 
 	func selectAllCells() {
-		let wordsNumber = tableView.numberOfRows(inSection: 0)
+		let wordsNumber: Int = tableView.numberOfRows(inSection: 0)
 
 		for index in 0..<wordsNumber {
-			let indexPath = IndexPath(row: index, section: 0)
+			let indexPath: IndexPath = IndexPath(row: index, section: 0)
 			tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
 		}
 

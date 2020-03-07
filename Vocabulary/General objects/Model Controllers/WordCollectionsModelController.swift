@@ -38,7 +38,7 @@ class WordCollectionsModelController: NSObject {
 	}
 
 	func selectWordCollection(at indexPath: IndexPath) {
-		let wordCollection = fetchedResultsController.object(at: indexPath)
+		let wordCollection: WordCollection = fetchedResultsController.object(at: indexPath)
 		wordCollection.lastSelectedDate = Date()
 
 		if wordCollection.objectID == currentWordCollectionID {
@@ -50,9 +50,9 @@ class WordCollectionsModelController: NSObject {
 	}
 
 	func deleteWordCollection(at indexPath: IndexPath, withWords deleteWords: Bool = true) {
-		let wordCollection = fetchedResultsController.object(at: indexPath)
+		let wordCollection: WordCollection = fetchedResultsController.object(at: indexPath)
 
-		if deleteWords, let words = wordCollection.words as? Set<Word> {
+		if deleteWords, let words: Set<Word> = wordCollection.words as? Set<Word> {
 			words.forEach { vocabularyStore.viewContext.delete($0) }
 		}
 		if wordCollection.objectID == currentWordCollectionModelController.wordCollectionInfo?.objectID {
@@ -62,7 +62,7 @@ class WordCollectionsModelController: NSObject {
 	}
 
 	func renameWordCollection(at indexPath: IndexPath, with newName: String) {
-		let wordCollection = fetchedResultsController.object(at: indexPath)
+		let wordCollection: WordCollection = fetchedResultsController.object(at: indexPath)
 
 		wordCollection.name = newName
 		if wordCollection.objectID == currentWordCollectionModelController.wordCollectionInfo?.objectID {
@@ -72,7 +72,7 @@ class WordCollectionsModelController: NSObject {
 	}
 
 	func createWordCollection(withName name: String) {
-		let wordCollection = WordCollection(context: vocabularyStore.viewContext)
+		let wordCollection: WordCollection = WordCollection(context: vocabularyStore.viewContext)
 		wordCollection.name = name
 
 		vocabularyStore.saveChanges()
@@ -83,12 +83,12 @@ class WordCollectionsModelController: NSObject {
 private extension WordCollectionsModelController {
 
 	func initializeFetchedResultsController() -> NSFetchedResultsController<WordCollection> {
-		let wordCollectionRequest = WordCollection.createFetchRequest()
+		let wordCollectionRequest: NSFetchRequest<WordCollection> = WordCollection.createFetchRequest()
 		wordCollectionRequest.sortDescriptors = [
 			NSSortDescriptor(key: #keyPath(WordCollection.lastSelectedDate), ascending: false),
 			NSSortDescriptor(key: #keyPath(WordCollection.dateCreated), ascending: true)
 		]
-		let controller = NSFetchedResultsController(
+		let controller: NSFetchedResultsController<WordCollection> = NSFetchedResultsController(
 			fetchRequest: wordCollectionRequest,
 			managedObjectContext: vocabularyStore.viewContext,
 			sectionNameKeyPath: nil,
@@ -110,8 +110,8 @@ extension WordCollectionsModelController: UITableViewDataSource {
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
-		let wordCollection = fetchedResultsController.object(at: indexPath)
+		let cell: UITableViewCell = tableView.dequeueCell(indexPath: indexPath) as UITableViewCell
+		let wordCollection: WordCollection = fetchedResultsController.object(at: indexPath)
 		configureCell(cell, for: wordCollection)
 		return cell
 	}
@@ -121,14 +121,14 @@ extension WordCollectionsModelController: UITableViewDataSource {
 	}
 
 	private func configureCell(_ cell: UITableViewCell, for wordCollection: WordCollection) {
-		let allWordsFetchRequest = WordFetchRequestFactory.requestForWords(from: wordCollection)
+		let allWordsFetchRequest: NSFetchRequest<Word> = WordFetchRequestFactory.requestForWords(from: wordCollection)
 
 		let parameters: WordsRequestParameters = (.unknown, wordCollection.objectID, false)
-		let unknownFetchRequest = WordFetchRequestFactory.requestForWords(with: parameters)
+		let unknownFetchRequest: NSFetchRequest<Word> = WordFetchRequestFactory.requestForWords(with: parameters)
 
 
-		let allWordsNumber 		= vocabularyStore.numberOfWordsFrom(allWordsFetchRequest)
-		let unknownWordsNumber 	= vocabularyStore.numberOfWordsFrom(unknownFetchRequest)
+		let allWordsNumber: Int 	= vocabularyStore.numberOfWordsFrom(allWordsFetchRequest)
+		let unknownWordsNumber: Int = vocabularyStore.numberOfWordsFrom(unknownFetchRequest)
 
 		cell.textLabel?.text = wordCollection.name
 		cell.detailTextLabel?.text = cellDetailTextFor(

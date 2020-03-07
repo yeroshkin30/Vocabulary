@@ -66,7 +66,7 @@ class FullCardCollectionViewCell: CardCollectionView {
 	// MARK: - Private
 	
 	private func viewDataDidChanged() {
-		guard let viewData = viewData else { return }
+		guard let viewData: ViewData = viewData else { return }
 		
 		headwordLabel.text = viewData.headword
 		sentencePartLabel.text = viewData.sentencePart
@@ -80,7 +80,7 @@ class FullCardCollectionViewCell: CardCollectionView {
 	}
 	
 	func optionsModeDidChange() {
-		guard let viewData = viewData else { return }
+		guard let viewData: ViewData = viewData else { return }
 		
 		switch optionsMode {
 		case .oneOption:
@@ -95,7 +95,7 @@ class FullCardCollectionViewCell: CardCollectionView {
 	}
 	
 	private func scrollToTop() {
-		let visibleRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+		let visibleRect: CGRect = CGRect(x: 0, y: 0, width: 1, height: 1)
 		examplesScrollView.scrollRectToVisible(visibleRect, animated: false)
 	}
 	

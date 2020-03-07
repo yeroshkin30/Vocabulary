@@ -10,13 +10,13 @@ import UIKit
 
 class AppRootViewController: UITabBarController, SegueHandlerType {
 
-	private lazy var vocabularyStore = VocabularyStore()
-	private let currentWordCollectionModelController = CurrentWordCollectionModelController()
+	private lazy var vocabularyStore: VocabularyStore = .init()
+	private let currentWordCollectionModelController: CurrentWordCollectionModelController = .init()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		view.backgroundColor = .white
+		view.backgroundColor = .systemBackground
 		setupViewControllers()
 	}
 
@@ -28,7 +28,7 @@ class AppRootViewController: UITabBarController, SegueHandlerType {
 
 	@IBSegueAction
 	private func makeWordCollectionsController(coder: NSCoder) -> WordCollectionsViewController? {
-		let modelController = WordCollectionsModelController(
+		let modelController: WordCollectionsModelController = .init(
 			vocabularyStore: vocabularyStore,
 			currentWordCollectionModelController: currentWordCollectionModelController
 		)
@@ -45,22 +45,22 @@ private extension AppRootViewController {
 
 	func setupViewControllers() {
 		viewControllers?.forEach {
-			guard let navVC = $0 as? UINavigationController else { return }
+			guard let navVC: UINavigationController = $0 as? UINavigationController else { return }
 
 			navVC.viewControllers.first?.navigationItem.leftBarButtonItem = UIBarButtonItem(
 				title: "Collections", style: .plain, target: self, action: #selector(showWordCollections)
 			)
 
-			if let learningTabVC = navVC.viewControllers.first as? LearningModesViewController {
+			if let learningTabVC: LearningModesViewController = navVC.viewControllers.first as? LearningModesViewController {
 				learningTabVC.vocabularyStore = vocabularyStore
 				learningTabVC.currentWordCollectionInfoProvider = currentWordCollectionModelController
 			}
-			if let searchTabVC = navVC.viewControllers.first as? SearchTabViewController {
+			if let searchTabVC: SearchTabViewController = navVC.viewControllers.first as? SearchTabViewController {
 				searchTabVC.vocabularyStore = vocabularyStore
 				searchTabVC.searchStateModelController = SearchStateModelController()
 				searchTabVC.currentWordCollectionInfoProvider = currentWordCollectionModelController
 			}
-			if let wordsTabVC = navVC.viewControllers.first as? WordsTabViewController {
+			if let wordsTabVC: WordsTabViewController = navVC.viewControllers.first as? WordsTabViewController {
 				wordsTabVC.vocabularyStore = vocabularyStore
 				wordsTabVC.currentWordCollectionInfoProvider = currentWordCollectionModelController
 			}

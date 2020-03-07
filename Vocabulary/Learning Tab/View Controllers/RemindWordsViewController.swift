@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import CoreData.NSFetchRequest
 
 final class RemindWordsViewController: BaseWordsLearningViewController {
 	
 	// MARK: - Private properties
 	
-	private let recommendedRemindingNumber = 5
+	private let recommendedRemindingNumber: Int = 5
 	
 	private var currentCell: RemindWordCollectionViewCell? {
 		return collectionView.cellForItem(at: IndexPath.first) as? RemindWordCollectionViewCell
@@ -31,8 +32,8 @@ final class RemindWordsViewController: BaseWordsLearningViewController {
 	// MARK: - BaseWordsLearningViewController -
 	
 	override func instantiateDataSource(with words: [Word]) -> WordsLearningCollectionViewDataSource {
-		let fetchRequest = WordFetchRequestFactory.fetchRequest(for: .reminding, wordCollectionID: currentWordCollectionID)
-		let words = vocabularyStore.wordsFrom(fetchRequest)
+		let fetchRequest: NSFetchRequest<Word> = WordFetchRequestFactory.fetchRequest(for: .reminding, wordCollectionID: currentWordCollectionID)
+		let words: [Word] = vocabularyStore.wordsFrom(fetchRequest)
 		return RemindWordsCollectionViewDataSource(words: words)
 	}
 	
@@ -41,7 +42,7 @@ final class RemindWordsViewController: BaseWordsLearningViewController {
 						forItemAt indexPath: IndexPath) {
 		super.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
 		
-		if let cell = cell as? FullCardCollectionViewCell {
+		if let cell: FullCardCollectionViewCell = cell as? FullCardCollectionViewCell {
 			cell.cellActionHandler = { [weak self] action in
 				self?.handleCellAction(action)
 			}
@@ -68,7 +69,7 @@ private extension RemindWordsViewController {
 	}
 	
 	func handleCellAction(_ action: FullCardCollectionViewCell.Action) {
-		guard let word = dataSource.currentWord else { return }
+		guard let word: Word = dataSource.currentWord else { return }
 		
 		switch action {
 		case .single:		completeWordReminding()
@@ -77,14 +78,14 @@ private extension RemindWordsViewController {
 		case .negative:
 			word.decreaseLearningStage()
 			
-			if let cell = currentCell {
+			if let cell: RemindWordCollectionViewCell = currentCell {
 				cell.optionsMode = .oneOption
 			}
 		}
 	}
 	
 	func handlePositiveAction() {
-		guard let word = dataSource.currentWord else { return }
+		guard let word: Word = dataSource.currentWord else { return }
 		
 		if case .numberOfReminders(let number) = word.learningStageDetail,
 			number >= recommendedRemindingNumber {
@@ -99,12 +100,12 @@ private extension RemindWordsViewController {
 	
 	func showStopRemindingSuggestion(for word: Word, withRemindsNumber number: Int) {
 		
-		let title = "Mark as learned?"
-		let message = """
+		let title: String = "Mark as learned?"
+		let message: String = """
 		You were reminded \"\(word.headword)\" \(number) times.
 		Do you want to mark it as learned or you want to keep on reminding?
 		"""
-		let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+		let alert: UIAlertController = .init(title: title, message: message, preferredStyle: .alert)
 		
 		alert.addAction(UIAlertAction(title: "Remind", style: .cancel, handler: { (_) in
 			word.increaseLearningStage()

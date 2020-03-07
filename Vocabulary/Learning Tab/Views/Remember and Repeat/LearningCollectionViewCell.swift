@@ -14,25 +14,25 @@ class LearningCollectionViewCell: CardCollectionView {
 	@IBOutlet private var definitionLabel: UILabel!
 	@IBOutlet var answerTextField: UITextField!
 	
-	private let correctAnswerColor = #colorLiteral(red: 0.1607843137, green: 0.8039215686, blue: 0.2588235294, alpha: 1)
-	private let incorrectAnswerColor = #colorLiteral(red: 0.9982287288, green: 0.3754529953, blue: 0.3474243283, alpha: 1)
+	private let correctAnswerColor: UIColor = #colorLiteral(red: 0.1607843137, green: 0.8039215686, blue: 0.2588235294, alpha: 1)
+	private let incorrectAnswerColor: UIColor = #colorLiteral(red: 0.9982287288, green: 0.3754529953, blue: 0.3474243283, alpha: 1)
 	
 	var viewData: ViewData? { didSet { viewDataDidChanged() } }
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		defaultAnswerTextFieldAttributs = convertFromNSAttributedStringKeyDictionary(answerTextField.defaultTextAttributes)
+		defaultAnswerTextFieldAttributes = convertFromNSAttributedStringKeyDictionary(answerTextField.defaultTextAttributes)
 	}
 	
 	private func viewDataDidChanged() {
-		guard let viewData = viewData else { return }
+		guard let viewData: ViewData = viewData else { return }
 		
 		deselect()
 		
 		headwordLabel.text = viewData.headword
 		headwordLabel.isHidden = true
 		
-		answerTextField.defaultTextAttributes = convertToNSAttributedStringKeyDictionary(defaultAnswerTextFieldAttributs)
+		answerTextField.defaultTextAttributes = convertToNSAttributedStringKeyDictionary(defaultAnswerTextFieldAttributes)
 		answerTextField.text = ""
 		answerTextField.isHidden = false
 		
@@ -48,14 +48,14 @@ class LearningCollectionViewCell: CardCollectionView {
 		case .incorrect:
 			headwordLabel.isHidden = false
 			answerTextField.isHidden = answerTextField.text?.isEmpty ?? true ? true : false
-			let incorrectText = answerTextField.text?.strikethroughText(with: incorrectAnswerColor)
+			let incorrectText: NSAttributedString? = answerTextField.text?.strikethroughText(with: incorrectAnswerColor)
 			answerTextField.attributedText = incorrectText
 			
 			select(with: incorrectAnswerColor)
 		}
 	}
 	
-	private var defaultAnswerTextFieldAttributs: [String: Any] = [:]
+	private var defaultAnswerTextFieldAttributes: [String: Any] = [:]
 }
 
 extension LearningCollectionViewCell {
