@@ -76,17 +76,16 @@ class SelectHeadwordViewProvider: HeadwordInputViewProvider {
 	// MARK: - Helpers
 	
 	private func initializeSelectHeadwordInputView() -> SelectHeadwordInputView {
-		let nib: UINib = UINib(nibName: SelectHeadwordInputView.stringIdentifier, bundle: nil)
-		let selectHeadwordInputView: SelectHeadwordInputView = nib
-			.instantiate(withOwner: nil, options: nil).first as! SelectHeadwordInputView
-		
-		selectHeadwordInputView.optionSelectedAction = { [weak self] (selectedOptionIndex) in
+
+        let view: SelectHeadwordInputView = SelectHeadwordInputView.instantiate()
+
+		view.optionSelectedAction = { [weak self] (selectedOptionIndex) in
 			guard let self = self else { return }
 			let option: String = self.currentOptions[selectedOptionIndex]
 			self.delegate?.selectHeadwordViewProvider(self, didSelect: option)
 		}
 		
-		return selectHeadwordInputView
+		return view
 	}
 	
 	private func updateCurrentOptions() {

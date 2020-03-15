@@ -12,12 +12,14 @@ import CoreData.NSFetchedResultsController
 // MARK: - Reusability
 extension UITableView {
 	func registerNibForCell<T: UITableViewCell>(_: T.Type) {
-		let nib = UINib(nibName: T.stringIdentifier, bundle: nil)
-		register(nib, forCellReuseIdentifier: T.stringIdentifier)
+
+        let identifier = String(describing: T.self)
+
+		register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
 	}
 	
 	func dequeueCell<T: UITableViewCell>(indexPath: IndexPath) -> T {
-		let identifier = T.stringIdentifier
+		let identifier = String(describing: T.self)
 		guard let cell = dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? T else {
 			fatalError("Could not dequeue cell with \(identifier)")
 		}

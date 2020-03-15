@@ -10,6 +10,16 @@ import UIKit
 
 //@IBDesignable
 extension UIView {
+
+    static func instantiate<T: UIView>() -> T {
+        
+        let identifier = String(describing: T.self)
+        let nib = UINib.init(nibName: identifier, bundle: nil)
+        guard let view = nib.instantiate(withOwner: nil, options: nil).first as? T else {
+            fatalError("Could not instantiate \(identifier)")
+        }
+        return view
+    }
 	
 	@IBInspectable var cornerRadius: CGFloat {
 		get {

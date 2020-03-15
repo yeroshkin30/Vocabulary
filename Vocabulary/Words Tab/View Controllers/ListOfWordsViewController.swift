@@ -57,8 +57,9 @@ class ListOfWordsViewController: UITableViewController, SegueHandlerType {
 	}
 	
 	override var textInputContextIdentifier: String? {
-		return ListOfWordsViewController.stringIdentifier
-	}
+
+        return String(describing: ListOfWordsViewController.self)
+    }
 	
 	override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
 		showUndoAlert()

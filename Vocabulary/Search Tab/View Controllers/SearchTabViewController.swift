@@ -51,7 +51,7 @@ class SearchTabViewController: UITableViewController, SegueHandlerType {
 	}
 	
 	override var textInputContextIdentifier: String? {
-		return SearchTabViewController.stringIdentifier
+		return String(describing: SearchTabViewController.self)
 	}
 	
 	// MARK: - Navigation -

@@ -64,7 +64,7 @@ final class LearningProcessViewController: BaseWordsLearningViewController, Segu
 	}
 	
 	override var textInputContextIdentifier: String? {
-		return LearningProcessViewController.stringIdentifier
+		return String(describing: LearningProcessViewController.self)
 	}
 	
 	// MARK: - BaseWordsLearningViewController -

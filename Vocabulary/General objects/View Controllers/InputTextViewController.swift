@@ -73,7 +73,7 @@ class InputTextViewController: UIViewController {
 	}
 	
 	override var textInputContextIdentifier: String? {
-		return InputTextViewController.stringIdentifier
+		return String(describing: InputTextViewController.self)
 	}
 }
 

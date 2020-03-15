@@ -26,7 +26,7 @@ extension UIStoryboard {
 	}
 
 	func instantiateViewController<T: UIViewController>() -> T {
-		let identifier = T.stringIdentifier
+		let identifier = String(describing: T.self)
 		guard let viewController = instantiateViewController(withIdentifier: identifier) as? T else {
 			fatalError("Could not find view controller with name \(identifier)")
 		}

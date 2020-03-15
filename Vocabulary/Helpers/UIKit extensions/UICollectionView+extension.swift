@@ -11,17 +11,17 @@ import UIKit
 extension UICollectionView {
 	
 	func registerNibForCell<T: UICollectionViewCell>(_: T.Type) {
-		let nib = UINib(nibName: T.stringIdentifier, bundle: nil)
-		register(nib, forCellWithReuseIdentifier: T.stringIdentifier)
+		let nib = UINib(nibName: String(describing: T.self), bundle: nil)
+		register(nib, forCellWithReuseIdentifier: String(describing: T.self))
 	}
 	
 	func registerNibForSupplementaryView<T: UICollectionReusableView>(_: T.Type, ofKind kind: String) {
-		let nib = UINib(nibName: T.stringIdentifier, bundle: nil)
-		register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: T.stringIdentifier)
+		let nib = UINib(nibName: String(describing: T.self), bundle: nil)
+		register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: String(describing: T.self))
 	}
 	
 	func dequeueCell<T:UICollectionViewCell>(indexPath: IndexPath) -> T {
-		let identifier = T.stringIdentifier
+		let identifier = String(describing: T.self)
 		
 		let bareCell = dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
 		guard let cell = bareCell as? T else {
@@ -32,7 +32,7 @@ extension UICollectionView {
 	
 	func dequeueSupplementaryView<T:UICollectionReusableView>(of kind: String,
 																at indexPath: IndexPath) -> T {
-		let identifier = T.stringIdentifier
+		let identifier = String(describing: T.self)
 		
 		let bareView = dequeueReusableSupplementaryView(
 			ofKind: kind, withReuseIdentifier: identifier, for: indexPath
