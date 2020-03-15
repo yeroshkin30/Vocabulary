@@ -20,7 +20,7 @@ class LetterCollectionViewCell: UICollectionViewCell {
 			guard let itemData: LetterItemData = letterItemData else { return }
 			letterLabel.text = itemData.letter.uppercased()
 			numberLabel.text = "\(itemData.number)"
-			numberLabel.isHidden = itemData.number > 1 ? false : true
+			numberLabel.isHidden = !(itemData.number > 1)
 		}
 	}
 	

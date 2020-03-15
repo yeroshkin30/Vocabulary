@@ -100,7 +100,7 @@ extension EntriesParserDelegate: XMLParserDelegate {
 			aDefinition = Definition()
 			examples = []
 		case .un:
-			acceptingUsageNote = usageNote.isEmpty ? true : false
+			acceptingUsageNote = usageNote.isEmpty
 		case .vi:
 			anExample = ""
 		case .it:

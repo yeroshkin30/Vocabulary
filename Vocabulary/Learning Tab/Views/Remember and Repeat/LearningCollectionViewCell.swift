@@ -47,7 +47,7 @@ class LearningCollectionViewCell: CardCollectionView {
 			select(with: correctAnswerColor)
 		case .incorrect:
 			headwordLabel.isHidden = false
-			answerTextField.isHidden = answerTextField.text?.isEmpty ?? true ? true : false
+			answerTextField.isHidden = !answerTextField.hasText
 			let incorrectText: NSAttributedString? = answerTextField.text?.strikethroughText(with: incorrectAnswerColor)
 			answerTextField.attributedText = incorrectText
 			

@@ -29,7 +29,7 @@ class BaseWordsLearningCollectionViewDataSource: NSObject, WordsLearningCollecti
 	}
 	
 	var questionsNumber: Int {
-		return words.isEmpty ? 0 : words.count
+		return words.count
 	}
 	
 	var currentWord: Word? {

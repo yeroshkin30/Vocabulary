@@ -30,7 +30,7 @@ class LearningModesView: UIView {
 
 	private func configureTitleView(_ view: LearningModeTitleView, with number: Int) {
 		view.wordsNumberLabel.text = "\(number)"
-		view.titleButton.isEnabled = number == 0 ? false : true
+		view.titleButton.isEnabled = number > 0
 		view.alpha = number == 0 ? 0.5 : 1.0
 	}
 }

@@ -23,7 +23,7 @@ final class UnknownWordsCollectionViewDataSource: BaseWordsLearningCollectionVie
 			collectionView.performBatchUpdates({
 				collectionView.deleteItems(at: [IndexPath.first])
 				collectionView.insertItems(at: [IndexPath(item: words.count - 1, section: 0)])
-			}, completion: nil)
+			})
 						
 		case .positive:
 			collectionView.deleteItems(at: [IndexPath.first])
