@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wCE-El-xpk">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Learning-->
+        <scene sceneID="0TX-LG-Qie">
+            <objects>
+                <navigationController id="Xfy-4c-Cns" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Learning" image="Learinig Icon" id="HLz-83-U1m"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="vQV-gk-lKp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vHN-AP-LYv" kind="relationship" relationship="rootViewController" id="s8J-kL-m5Y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F4h-S2-yTS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4991" y="2183"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="HW3-dw-lvm">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Search" id="xeU-Mc-VpK" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="MdC-C3-cpY"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yNG-uG-erc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4082" y="2608"/>
+        </scene>
+        <!--Collections-->
+        <scene sceneID="rhU-2C-6Rb">
+            <objects>
+                <tableViewController storyboardIdentifier="WordCollectionsViewController" clearsSelectionOnViewWillAppear="NO" id="wdb-Cg-3hj" customClass="WordCollectionsViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Bs9-VX-3bg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="dwx-99-L6a">
+                            <rect key="frame" x="0.0" y="122" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="UITableViewCell" textLabel="Ee3-rD-FIG" detailTextLabel="Sim-E2-PVI" rowHeight="66" style="IBUITableViewCellStyleSubtitle" id="Ix0-f9-Sav">
+                                <rect key="frame" x="0.0" y="28" width="375" height="66"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ix0-f9-Sav" id="Olr-yM-YCV">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ee3-rD-FIG">
+                                            <rect key="frame" x="16" y="9.5" width="51.5" height="24"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="50 of 100 is unknown" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sim-E2-PVI">
+                                            <rect key="frame" x="16" y="36" width="146.5" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wdb-Cg-3hj" id="DAj-co-eFT"/>
+                            <outlet property="delegate" destination="wdb-Cg-3hj" id="RvZ-yb-zQx"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="flexibleSpace" id="bdk-0Z-2zj"/>
+                        <barButtonItem systemItem="add" id="hSB-8K-gSU">
+                            <connections>
+                                <segue destination="MJN-Mz-a2o" kind="presentation" identifier="createCollection" id="2Ak-hZ-fYl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="e4d-VH-HL0"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Collections" largeTitleDisplayMode="always" id="Or3-jA-tpO">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Jgi-v4-02d">
+                            <connections>
+                                <action selector="doneButtonDidTap" destination="wdb-Cg-3hj" id="voz-bb-Gdo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="MJN-Mz-a2o" kind="presentation" identifier="renameCollection" id="hKu-fS-jdE"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9ew-bQ-pdS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2215.1999999999998" y="1342.5787106446778"/>
+        </scene>
+        <!--App Root View Controller-->
+        <scene sceneID="dw6-8L-3ZF">
+            <objects>
+                <tabBarController id="wCE-El-xpk" customClass="AppRootViewController" customModule="Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="b9j-It-Hp0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Xfy-4c-Cns" kind="relationship" relationship="viewControllers" id="0e3-qg-bMh"/>
+                        <segue destination="Wqz-Qu-hBC" kind="relationship" relationship="viewControllers" id="MKM-Q2-fgM"/>
+                        <segue destination="5HN-eb-coo" kind="relationship" relationship="viewControllers" id="Knd-Dy-sbg"/>
+                        <segue destination="dWu-Qv-W59" kind="presentation" identifier="showWordCollections" id="NGA-tT-7GE"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VHo-ug-KbR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4082" y="1344"/>
+        </scene>
+        <!--EditTextNavigationController-->
+        <scene sceneID="GAC-7z-BQo">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Words" referencedIdentifier="EditTextNavigationController" id="MJN-Mz-a2o" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="fdP-Nt-zm8"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="54y-iC-hhx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1592.8" y="1342.128935532234"/>
+        </scene>
+        <!--Words-->
+        <scene sceneID="yzA-2M-UFL">
+            <objects>
+                <navigationController id="5HN-eb-coo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Words" image="Words Icon" id="7nN-cF-jGf"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Ofn-Vb-Ywm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Ho8-vn-R8t" kind="relationship" relationship="rootViewController" id="WKG-Gl-T8e"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H8d-sb-2Ut" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3154" y="2183"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="iuv-is-YOE">
+            <objects>
+                <navigationController id="Wqz-Qu-hBC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" image="Search Icon" id="XYY-bv-VRY"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Zl3-av-vPS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="xeU-Mc-VpK" kind="relationship" relationship="rootViewController" id="aih-Qh-y4n"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7lq-DD-9zm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4082" y="2183"/>
+        </scene>
+        <!--Learning-->
+        <scene sceneID="2ES-Qa-fxU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Learning" id="vHN-AP-LYv" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="8ek-oF-iJU"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lhI-SN-QmL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4991" y="2608"/>
+        </scene>
+        <!--Words-->
+        <scene sceneID="i6I-66-UEQ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Words" id="Ho8-vn-R8t" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="BcA-Nq-f7M"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Up-lg-8M4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3154" y="2608"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="10h-lc-GwH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="dWu-Qv-W59" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cM3-cn-q3Z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7el-6G-8Wz">
+                        <rect key="frame" x="0.0" y="603" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="wdb-Cg-3hj" kind="relationship" relationship="rootViewController" destinationCreationSelector="makeWordCollectionsControllerWithCoder:" id="acb-bY-avS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xLA-Fx-aPF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3154.4000000000001" y="1342.5787106446778"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Learinig Icon" width="47" height="30"/>
+        <image name="Search Icon" width="30" height="30"/>
+        <image name="Words Icon" width="37" height="30"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="2Ak-hZ-fYl"/>
+    </inferredMetricsTieBreakers>
+</document>

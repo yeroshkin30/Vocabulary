@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Collection" representedClassName="WordCollection" elementID="collectionID" syncable="YES">
+        <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastSelectedDate" attributeType="Date" defaultDateTimeInterval="598893600" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="words" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Word" inverseName="wordCollection" inverseEntity="Word" elementID="wordsOfCollectionID"/>
+    </entity>
+    <entity name="Word" representedClassName="Word" syncable="YES">
+        <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="definition" attributeType="String"/>
+        <attribute name="examplesText" attributeType="String"/>
+        <attribute name="headword" attributeType="String"/>
+        <attribute name="learningStageDetailValue" attributeType="Integer 16" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="learningStageValue" attributeType="Integer 16" minValueString="0" maxValueString="4" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nextTrainingDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="sentencePart" attributeType="String"/>
+        <relationship name="wordCollection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Collection" inverseName="words" inverseEntity="Collection" elementID="collectionOfWordID"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="definition"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="Collection" positionX="160" positionY="192" width="128" height="103"/>
+        <element name="Word" positionX="-279" positionY="-27" width="128" height="180"/>
+    </elements>
+</model>
