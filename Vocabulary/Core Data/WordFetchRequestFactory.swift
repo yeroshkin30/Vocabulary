@@ -73,17 +73,15 @@ struct WordFetchRequestFactory {
 extension WordFetchRequestFactory {
     static func wordsForNotification() -> NSFetchRequest<Word> {
         let request: NSFetchRequest<Word> = Word.createFetchRequest()
-//        let predicate = NSPredicate(
-//            format: "\(#keyPath(Word.learningStageValue)) == \(Word.LearningStage.reminding.rawValue)")
-//
-//                "%K == %@ AND %K == %@",
-//            #keyPath(Word.learningStageValue),
-//            Word.LearningStage.reminding.rawValue,
-//            #keyPath(Word.learningStageValue),
-//            Word.LearningStage.repeating.rawValue
-//        )
-//
-//        request.predicate = predicate
+        let predicate = NSPredicate(
+            format: "%K == %@ AND %K == %@",
+            #keyPath(Word.learningStageValue),
+            String(Word.LearningStage.reminding.rawValue),
+            #keyPath(Word.learningStageValue),
+            String(Word.LearningStage.repeating.rawValue)
+        )
+
+        request.predicate = predicate
 
         return request
     }

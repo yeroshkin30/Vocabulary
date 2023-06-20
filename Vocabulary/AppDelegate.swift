@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	var window: UIWindow?
-    let notifScheduler = NotificationScheduler()
+    lazy var notificationScheduler = NotificationScheduler()
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions
 		launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -22,8 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		}
 
         UNUserNotificationCenter.current().delegate = self
-        notifScheduler.requestAuthorization()
-        notifScheduler.scheduleNotification()
+        notificationScheduler.setupNotifications()
 
 		return true
 	}
@@ -37,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        notifScheduler.handleActions(with: response.actionIdentifier)
+        notificationScheduler.handleActions(with: response.actionIdentifier)
         completionHandler()
     }
 }

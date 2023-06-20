@@ -11,34 +11,47 @@ import NotificationCenter
 
 class NotificationScheduler {
     let vocabularyStore: VocabularyStore = .init()
-    let currentCenter = UNUserNotificationCenter.current()
+    let notificationCenter = UNUserNotificationCenter.current()
 
-    func fetchWord() -> [Word] {
+    func setupNotifications() {
+        authorizeIfNeeded { granted in
+            guard granted else { return }
+            self.createNotificationCategory()
+            self.scheduleNotifications()
+        }
+    }
+
+    // MARK: - Authorization
+    private func authorizeIfNeeded(completion: @escaping (Bool) -> ()) {
+        notificationCenter.getNotificationSettings { (settings) in
+            switch settings.authorizationStatus {
+            case .authorized:
+                completion(true)
+            case .notDetermined:
+                self.notificationCenter.requestAuthorization(options: [.alert, .sound], completionHandler: { (granted, _) in
+                    completion(granted)
+                })
+            case .denied, .provisional, .ephemeral:
+                completion(false)
+            @unknown default:
+                completion(false)
+            }
+        }
+    }
+
+    func fetchWords() -> [Word] {
         let fetchRequest = WordFetchRequestFactory.wordsForNotification()
-        var words = vocabularyStore.wordsFrom(fetchRequest)
-
-
-        words.shuffle()
-
-        let randomWords = Array(words.prefix(15))
+        let words = vocabularyStore.wordsFrom(fetchRequest).shuffled()
+        let randomWords = Array(words.prefix(24))
 
         return randomWords
     }
 
-    func requestAuthorization() {
-        currentCenter.requestAuthorization(
-            options: [.badge, .sound, .alert],
-            completionHandler:  { granted, erorr in
-
-        })
-    }
-
-    func scheduleNotification() {
-        setupNotification()
-        let words = fetchWord()
+    func scheduleNotifications() {
+        let words = fetchWords()
 
         let baseTime = Date()
-        let notificationInterval = 60
+        let notificationInterval = 30
 
         for (index, word) in words.enumerated() {
             let notificationTime = baseTime.addingTimeInterval(TimeInterval(index * notificationInterval))
@@ -52,18 +65,17 @@ class NotificationScheduler {
             content.body = word.definition
             content.categoryIdentifier = WordNotification.categoryId
 
-
             let request = UNNotificationRequest(
-                identifier: WordNotification.categoryId,
+                identifier: UUID().uuidString,
                 content: content,
                 trigger: trigger
             )
 
-            currentCenter.add(request)
+            notificationCenter.add(request)
         }
     }
 
-    func setupNotification() {
+    func createNotificationCategory() {
         let rememberAction = UNNotificationAction(identifier: WordNotification.rememberId,
                                                   title: WordNotification.rememberId)
         let repeatAction = UNNotificationAction(identifier: WordNotification.repeatId,
@@ -75,7 +87,7 @@ class NotificationScheduler {
             intentIdentifiers: []
         )
 
-        currentCenter.setNotificationCategories([singleWordCategory])
+        notificationCenter.setNotificationCategories([singleWordCategory])
     }
 
 
@@ -96,3 +108,5 @@ enum WordNotification {
     static let rememberId = "Remember"
     static let repeatId = "Repeat"
 }
+
+
