@@ -12,15 +12,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	var window: UIWindow?
-	
+    let notifScheduler = NotificationScheduler()
+
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions
 		launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-		
+
 		if VocabularyStore.isPersistentStoreEmpty {
-			VocabularyStore.loadDefaultVocabulary()
+            VocabularyStore.loadDefaultVocabulary()
 		}
 
         UNUserNotificationCenter.current().delegate = self
+        notifScheduler.requestAuthorization()
+        notifScheduler.scheduleNotification()
 
 		return true
 	}
@@ -34,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
+        notifScheduler.handleActions(with: response.actionIdentifier)
         completionHandler()
     }
 }
