@@ -9,9 +9,13 @@
 import Foundation
 import NotificationCenter
 
-class NotificationScheduler {
-    let vocabularyStore: VocabularyStore = .init()
+class NotificationScheduler: NSObject {
     let notificationCenter = UNUserNotificationCenter.current()
+    let vocabularyStore: VocabularyStore
+
+    init(vocabularyStore: VocabularyStore) {
+        self.vocabularyStore = vocabularyStore
+    }
 
     func setupNotifications() {
         authorizeIfNeeded { granted in
@@ -39,19 +43,19 @@ class NotificationScheduler {
         }
     }
 
-    func fetchWords() -> [Word] {
+    private func fetchWords() -> [Word] {
         let fetchRequest = WordFetchRequestFactory.wordsForNotification()
         let words = vocabularyStore.wordsFrom(fetchRequest).shuffled()
-        let randomWords = Array(words.prefix(24))
+        let randomWords = Array(words.prefix(30))
 
         return randomWords
     }
 
-    func scheduleNotifications() {
+    private func scheduleNotifications() {
         let words = fetchWords()
 
         let baseTime = Date()
-        let notificationInterval = 30
+        let notificationInterval = 60 * 20
 
         for (index, word) in words.enumerated() {
             let notificationTime = baseTime.addingTimeInterval(TimeInterval(index * notificationInterval))
@@ -75,7 +79,8 @@ class NotificationScheduler {
         }
     }
 
-    func createNotificationCategory() {
+    private func createNotificationCategory() {
+        notificationCenter.delegate = self
         let rememberAction = UNNotificationAction(identifier: WordNotification.rememberId,
                                                   title: WordNotification.rememberId)
         let repeatAction = UNNotificationAction(identifier: WordNotification.repeatId,
@@ -91,7 +96,7 @@ class NotificationScheduler {
     }
 
 
-    func handleActions(with identifier: String) {
+    private func handleActions(with identifier: String) {
         switch identifier {
         case WordNotification.rememberId:
             print("remember")
@@ -100,6 +105,13 @@ class NotificationScheduler {
         default:
             break
         }
+    }
+}
+
+extension NotificationScheduler: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        handleActions(with: response.actionIdentifier)
+        completionHandler()
     }
 }
 

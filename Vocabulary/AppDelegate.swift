@@ -12,7 +12,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	var window: UIWindow?
-    lazy var notificationScheduler = NotificationScheduler()
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions
 		launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -20,9 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		if VocabularyStore.isPersistentStoreEmpty {
             VocabularyStore.loadDefaultVocabulary()
 		}
-
-        UNUserNotificationCenter.current().delegate = self
-        notificationScheduler.setupNotifications()
 
 		return true
 	}
@@ -32,11 +28,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			UIPasteboard.general.string = newPasteBoardString
 		}
 	}
-}
-
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        notificationScheduler.handleActions(with: response.actionIdentifier)
-        completionHandler()
-    }
 }

@@ -50,6 +50,9 @@ private extension AppRootViewController {
 			navVC.viewControllers.first?.navigationItem.leftBarButtonItem = UIBarButtonItem(
 				title: "Collections", style: .plain, target: self, action: #selector(showWordCollections)
 			)
+            navVC.viewControllers.first?.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                title: "Notifications", style: .plain, target: self, action: #selector(setupNotifications)
+            )
 
 			if let learningTabVC: LearningModesViewController = navVC.viewControllers.first as? LearningModesViewController {
 				learningTabVC.vocabularyStore = vocabularyStore
@@ -71,4 +74,10 @@ private extension AppRootViewController {
 	func showWordCollections() {
 		performSegue(with: .showWordCollections, sender: nil)
 	}
+
+    @objc
+    func setupNotifications() {
+        let notificationScheduler = NotificationScheduler(vocabularyStore: vocabularyStore)
+        notificationScheduler.setupNotifications()
+    }
 }
