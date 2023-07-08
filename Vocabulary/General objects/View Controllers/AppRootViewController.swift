@@ -50,9 +50,7 @@ private extension AppRootViewController {
 			navVC.viewControllers.first?.navigationItem.leftBarButtonItem = UIBarButtonItem(
 				title: "Collections", style: .plain, target: self, action: #selector(showWordCollections)
 			)
-            navVC.viewControllers.first?.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                title: "Notifications", style: .plain, target: self, action: #selector(setupNotifications)
-            )
+            navVC.viewControllers.first?.navigationItem.rightBarButtonItem = setupNotifications()
 
 			if let learningTabVC: LearningModesViewController = navVC.viewControllers.first as? LearningModesViewController {
 				learningTabVC.vocabularyStore = vocabularyStore
@@ -76,8 +74,32 @@ private extension AppRootViewController {
 	}
 
     @objc
-    func setupNotifications() {
+    func setupNotifications() -> UIBarButtonItem {
         let notificationScheduler = NotificationScheduler(vocabularyStore: vocabularyStore)
-        notificationScheduler.setupNotifications()
+
+        let repeatWords = UIAction(
+            title: "Repeat words",
+            handler: { _ in
+                notificationScheduler.setupNotifications(with: .repeating)
+            }
+        )
+
+        let remindWords = UIAction(
+            title: "Remind Words",
+            handler: { _ in
+                notificationScheduler.setupNotifications(with: .reminding)
+            }
+        )
+        let learnedWords = UIAction(
+            title: "Learned Words",
+            handler: { _ in
+                notificationScheduler.setupNotifications(with: .learned)
+            }
+        )
+
+        let menuItems = UIMenu(children: [repeatWords, remindWords, learnedWords])
+        let menuButton = UIBarButtonItem(title: "Notification", image: nil, target: nil, action: nil, menu: menuItems)
+
+        return menuButton
     }
 }

@@ -9,19 +9,20 @@
 import Foundation
 import NotificationCenter
 
-class NotificationScheduler: NSObject {
-    let notificationCenter = UNUserNotificationCenter.current()
-    let vocabularyStore: VocabularyStore
+final class NotificationScheduler: NSObject {
+    private let notificationCenter = UNUserNotificationCenter.current()
+    private let vocabularyStore: VocabularyStore
 
+    // MARK: - Inits
     init(vocabularyStore: VocabularyStore) {
         self.vocabularyStore = vocabularyStore
     }
 
-    func setupNotifications() {
+    func setupNotifications(with stage: Word.LearningStage) {
         authorizeIfNeeded { granted in
             guard granted else { return }
-            self.createNotificationCategory()
-            self.scheduleNotifications()
+            let words = self.fetchWords(with: stage)
+            self.scheduleNotifications(with: words)
         }
     }
 
@@ -43,17 +44,15 @@ class NotificationScheduler: NSObject {
         }
     }
 
-    private func fetchWords() -> [Word] {
-        let fetchRequest = WordFetchRequestFactory.wordsForNotification()
+    private func fetchWords(with stage: Word.LearningStage) -> [Word] {
+        let fetchRequest = WordFetchRequestFactory.wordsForNotification(with: stage)
         let words = vocabularyStore.wordsFrom(fetchRequest).shuffled()
         let randomWords = Array(words.prefix(30))
 
         return randomWords
     }
 
-    private func scheduleNotifications() {
-        let words = fetchWords()
-
+    private func scheduleNotifications(with words: [Word]) {
         let baseTime = Date()
         let notificationInterval = 60 * 20
 
